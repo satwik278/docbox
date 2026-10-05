@@ -926,6 +926,61 @@ textarea:disabled{background:#FAFBFC;color:var(--muted)}
 }
 
 
+
+/* ---------- batch upload ---------- */
+.bu-shared{display:grid;grid-template-columns:minmax(0,1.1fr) auto minmax(0,1.3fr);gap:16px;align-items:start;padding:14px 16px 2px;margin-bottom:14px;background:var(--sunk);border-radius:14px}
+.bu-shared .field{margin-bottom:12px}
+.bu-bar{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bu-sum{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.bu-sum .ico{width:15px;height:15px}
+.bu-sum b{color:var(--ink);font-weight:600}
+.bu-sum span{padding:2px 8px;border-radius:99px;background:var(--sunk);font-weight:600;font-size:12px}
+.bu-sum .ok{background:#E7F6EE;color:#0B7A4B}.bu-sum .bad{background:#FEF3F2;color:#B42318}
+.bu-list{display:grid;gap:8px}
+.bu-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 10px 12px 12px;border:1px solid var(--line);border-radius:14px;background:#fff;position:relative;overflow:hidden;animation:dlgIn .3s var(--ease);transition:border-color .2s,background .2s}
+.bu-row .glyph{width:32px;height:36px;margin-top:2px}
+.bu-fields{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:8px}
+.bu-fields .input{height:36px;font-size:13.5px}
+.bu-name{font-weight:600}
+.bu-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;margin-top:8px;font-size:12px;color:var(--muted)}
+.bu-meta .type{font-size:10.5px;padding:3px 6px}
+.bu-orig{color:var(--faint);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bu-src{display:inline-flex;align-items:center;gap:5px;color:#5B3FE6;font-weight:500}
+.bu-src .ico{width:13px;height:13px}
+.bu-tags{display:inline-flex;flex-wrap:wrap;gap:4px}
+.bu-tags .tag{display:inline-flex;align-items:center;gap:2px;padding:2px 4px 2px 8px;font-size:11.5px}
+.bu-tags .tag button{width:15px;height:15px;border-radius:50%;display:grid;place-items:center;color:var(--faint)}
+.bu-tags .tag button:hover{background:rgba(16,24,40,.08);color:var(--ink)}
+.bu-tags .tag .ico{width:10px;height:10px;stroke-width:2.6}
+.bu-warn,.bu-err{display:inline-flex;align-items:center;gap:5px;font-weight:500}
+.bu-warn{color:#A65F00}.bu-err{color:#B42318}
+.bu-warn .ico,.bu-err .ico{width:13px;height:13px}
+.bu-state{display:flex;align-items:center;gap:6px;min-height:36px}
+.bu-badge{display:inline-flex;align-items:center;gap:5px;font:600 11.5px var(--f-body);padding:4px 9px;border-radius:99px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.bu-badge .ico{width:12px;height:12px;stroke-width:2.4}
+.bu-badge.ok{background:#E7F6EE;color:#0B7A4B}.bu-badge.bad{background:#FEF3F2;color:#B42318}.bu-badge.up{background:var(--blue-soft);color:var(--blue)}
+.bu-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent}
+.bu-prog i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s var(--ease)}
+.bu-row.s-done .bu-prog i{width:100%!important;background:var(--green)}
+.bu-row.s-fail .bu-prog i{width:100%!important;background:var(--red)}
+.bu-row.s-done{border-color:#BFE7D1;background:#FBFEFC}
+.bu-row.s-fail{border-color:#FECDCA}
+.bu-row.s-skip{background:#FCFCFD}
+.bu-row.s-skip .bu-fields,.bu-row.s-skip .glyph{opacity:.5}
+.bu-row.s-reading .bu-fields{opacity:.6}
+.bu-row.s-reading .bu-badge .ico{animation:spin 1s linear infinite}
+.bu-row.s-up .bu-badge{animation:pulseLive 1.6s ease-in-out infinite}
+.dialog.bu-drag{box-shadow:0 0 0 3px var(--blue),var(--sh-3)}
+.is-locked{opacity:.55;pointer-events:none}
+@media (max-width:900px){.bu-shared{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.bu-shared .bu-tagf{grid-column:1/-1}}
+@media (max-width:760px){
+  .bu-shared{grid-template-columns:minmax(0,1fr);padding:12px 12px 0;gap:0}
+  .bu-row{grid-template-columns:28px minmax(0,1fr);padding:10px}
+  .bu-row .glyph{width:28px;height:32px}
+  .bu-state{grid-column:1/-1;justify-content:flex-end;min-height:0}
+  .bu-fields{grid-template-columns:minmax(0,1fr)}
+}
+
 /* =========================================================
    Responsive layer (phones, tablets, touch, short screens)
    ========================================================= */
@@ -3397,25 +3452,256 @@ function mountChips(root, tags) {
 }
 const tagsField = () => `<div class="field"><label for="tagIn">Tags</label><div class="chips-input" id="chips"><input id="tagIn" list="tagList" autocomplete="off" placeholder="Type a tag and press Enter"></div><datalist id="tagList">${allTags().map(([t]) => `<option value="${esc(t)}">`).join('')}</datalist><div class="suggest" id="tagSuggest" hidden></div></div>`;
 const wait = ms => new Promise(r => setTimeout(r, ms));
+/* =========================================================
+   Metadata readers: a name hint and a description from inside each file
+   ========================================================= */
+const clean160 = s => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 180);
+function codeComment(src) {
+  const s = src.replace(/^\uFEFF/, '').replace(/^#!.*\n/, '').replace(/^\s*(?:#\s*-\*-.*-\*-\s*\n)/, '');
+  let m = /^\s*(?:r|u)?("""|''')([\s\S]*?)\1/.exec(s);            // Python docstring
+  if (m) return m[2];
+  m = /^\s*\/\*+([\s\S]*?)\*\//.exec(s);                            // /* block */ (C, JS, Verilog, CSS)
+  if (m) return m[1].split('\n').map(l => l.replace(/^\s*\*\s?/, '')).join(' ');
+  const lines = s.split('\n'), out = [];                           // run of // or # or -- or ; comments
+  for (const l of lines) { const c = /^\s*(?:\/\/+|#+|--|;+|%+)\s?(.*)$/.exec(l); if (c) { if (c[1].trim()) out.push(c[1]); } else if (l.trim()) break; else if (out.length) break; }
+  return out.map(l => l.trim()).reduce((a, l) => a ? a + (/[.!?:;,]$/.test(a) ? ' ' : '. ') + l : l, '');
+}
 function readMeta(content, type) {
-  let title = '', desc = '', text = '';
+  let title = '', desc = '', text = '', descFrom = '';
   try {
     if (type === 'html') {
       const doc = new DOMParser().parseFromString(content, 'text/html');
       title = (doc.querySelector('title') || {}).textContent || (doc.querySelector('h1') || {}).textContent || '';
       desc = (doc.querySelector('meta[name=description]') || { getAttribute: () => '' }).getAttribute('content') || '';
-      if (!desc) { const p = [...doc.querySelectorAll('p')].find(x => x.textContent.trim().length > 30); desc = p ? p.textContent : ''; }
+      if (desc) descFrom = 'the page description';
+      if (!desc) { const p = [...doc.querySelectorAll('p,li')].find(x => x.textContent.trim().length > 30); desc = p ? p.textContent : ''; if (desc) descFrom = 'the first paragraph'; }
       text = doc.body ? doc.body.textContent : '';
-    } else if (type === 'md' || type === 'txt' || type === 'code') {
+    } else if (type === 'md') {
       text = content;
       const h = /^#\s+(.+)$/m.exec(content); title = h ? h[1] : '';
-      if (type === 'md') desc = (content.split(/\n\s*\n/).map(x => x.trim()).find(x => x && !/^[#>|`\-*]/.test(x)) || '');
+      const fm = /^---\n([\s\S]*?)\n---/.exec(content), fd = fm && /^description:\s*["']?(.+?)["']?\s*$/m.exec(fm[1]);
+      if (fd) { desc = fd[1]; descFrom = 'the front matter'; }
+      else { desc = (content.replace(/^---\n[\s\S]*?\n---/, '').split(/\n\s*\n/).map(x => x.trim()).find(x => x && !/^[#>|`\-*!\[<]/.test(x)) || ''); if (desc) descFrom = 'the first paragraph'; }
+      desc = desc.replace(/[*_`]/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+    } else if (type === 'txt') {
+      text = content;
+      desc = (content.split('\n').map(x => x.trim()).find(x => x.length > 3) || ''); if (desc) descFrom = 'the first line';
+    } else if (type === 'code') {
+      text = content;
+      desc = codeComment(content); if (desc.trim()) descFrom = 'the header comment';
+      const t = /^\s*(?:module|entity|class|def|function|interface)\s+([A-Za-z_][\w]*)/m.exec(content); title = t ? t[1] : '';
     }
   } catch (e) { /* metadata is optional */ }
   const low = ' ' + text.toLowerCase().replace(/\s+/g, ' ') + ' ';
   const tags = allTags().map(([t]) => t).filter(t => new RegExp('[^a-z0-9]' + reRx(t.toLowerCase()) + '[^a-z0-9]').test(low)).slice(0, 5);
-  return { title: title.trim(), desc: desc.replace(/\s+/g, ' ').trim().slice(0, 180), tags };
+  return { title: clean160(title), desc: clean160(desc), descFrom: desc.trim() ? descFrom : '', tags };
 }
+function pdfText(raw) {                     // decode a PDF string, literal or UTF-16
+  let s = raw.replace(/\\([nrtbf()\\]|[0-7]{1,3})/g, (m, c) => ({ n: '\n', r: '', t: ' ', b: '', f: '', '(': '(', ')': ')', '\\': '\\' }[c] ?? String.fromCharCode(parseInt(c, 8))));
+  if (s.charCodeAt(0) === 0xFE && s.charCodeAt(1) === 0xFF) { let o = ''; for (let i = 2; i + 1 < s.length; i += 2) o += String.fromCharCode((s.charCodeAt(i) << 8) | s.charCodeAt(i + 1)); s = o; }
+  return s.replace(/\0/g, '').trim();
+}
+const pdfHex = h => { const b = h.replace(/\s+/g, ''); let s = ''; for (let i = 0; i + 1 < b.length; i += 2) s += String.fromCharCode(parseInt(b.slice(i, i + 2), 16)); return pdfText(s); };
+async function pdfMeta(f) {
+  const dec = new TextDecoder('latin1');
+  const head = dec.decode(await f.slice(0, 262144).arrayBuffer());
+  const tail = f.size > 262144 ? dec.decode(await f.slice(Math.max(0, f.size - 262144)).arrayBuffer()) : '';
+  const txt = head + tail;
+  const grab = key => {
+    const lit = new RegExp('/' + key + '\\s*\\(((?:\\\\.|[^\\\\)])*)\\)').exec(txt); if (lit) return pdfText(lit[1]);
+    const hex = new RegExp('/' + key + '\\s*<([0-9A-Fa-f\\s]+)>').exec(txt); if (hex) return pdfHex(hex[1]);
+    const xmp = new RegExp('<dc:' + key.toLowerCase() + '>[\\s\\S]*?<rdf:li[^>]*>([^<]+)</rdf:li>').exec(txt); return xmp ? xmp[1] : '';
+  };
+  const junk = t => !t || /^(untitled|microsoft (word|powerpoint|excel)\s*-|document\d*$|slide\s*\d+$)/i.test(t.trim()) || /\.(docx?|pptx?|xlsx?|pdf|tex)$/i.test(t.trim());
+  const title = grab('Title'), subject = grab('Subject') || grab('Description');
+  if (!junk(subject)) return { title: junk(title) ? '' : clean160(title), desc: clean160(subject), descFrom: 'the PDF properties' };
+  if (!junk(title)) return { title: clean160(title), desc: clean160(title), descFrom: 'the PDF title' };
+  return { title: '', desc: '', descFrom: '' };
+}
+function imageMeta(f) {
+  return new Promise(res => {
+    const url = URL.createObjectURL(f), img = new Image();
+    const done = d => { URL.revokeObjectURL(url); res(d); };
+    img.onload = () => done(img.naturalWidth ? { desc: `Image, ${img.naturalWidth} × ${img.naturalHeight} px`, descFrom: 'the image size' } : { desc: '', descFrom: '' });
+    img.onerror = () => done({ desc: '', descFrom: '' });
+    setTimeout(() => done({ desc: '', descFrom: '' }), 4000);
+    img.src = url;
+  });
+}
+
+/* =========================================================
+   Batch upload: several files, each with its own name and description
+   ========================================================= */
+const MAX_BATCH = 50, BATCH_PARALLEL = 3;
+async function readItem(f) {
+  const ext = extOf(f.name), type = EXT[ext];
+  const it = { k: uid('f'), file: f, type, name: f.name, desc: '', descFrom: '', tags: [], content: null, status: 'ready', error: '' };
+  if (!type) return Object.assign(it, { status: 'skip', error: `Not a supported file type${ext ? ` (.${ext})` : ''}` });
+  if (f.size > MAX_FILE) return Object.assign(it, { status: 'skip', error: `Larger than the ${CFG.maxFileMB} MB limit (${fmtSize(f.size)})` });
+  if (!f.size) return Object.assign(it, { status: 'skip', error: 'The file is empty' });
+  try {
+    if (isText({ type })) { it.content = await f.text(); const m = readMeta(it.content, type); Object.assign(it, { desc: m.desc, descFrom: m.descFrom, tags: m.tags }); }
+    else if (type === 'pdf') Object.assign(it, await pdfMeta(f));
+    else if (type === 'image') Object.assign(it, await imageMeta(f));
+  } catch (e) { console.warn('metadata', f.name, e); }
+  return it;
+}
+function batchUploadModal(fileList, opts = {}) {
+  if (!state.sections.length) { toast('Create a section first, then add documents to it.', { type: 'info' }); sectionModal(); return; }
+  let incoming = [...fileList];
+  if (incoming.length > MAX_BATCH) { toast(`Up to ${MAX_BATCH} files at a time. The first ${MAX_BATCH} were added.`, { type: 'info', ms: 5000 }); incoming = incoming.slice(0, MAX_BATCH); }
+  let secId = opts.sectionId && secById(opts.sectionId) ? opts.sectionId : roots()[0].id;
+  let vis = opts.vis || (state.settings.defaultVisibility === 'public' ? 'public' : 'private');
+  const shared = [...(opts.tags || [])], items = [];
+  let busy = false, finished = false;
+  modal({
+    title: `Upload ${plural(incoming.length, 'file')}`, size: 'xwide',
+    sub: 'Each file keeps its own name and a description read from inside the document. Check or edit them, then upload everything in one go.',
+    body: `<div class="bu-shared">
+        <div class="field"><label for="buSec">Save all in</label><select class="select" id="buSec">${treeSelect(secId)}</select></div>
+        <div class="field"><span class="label" id="visLbl">Who can see them</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find them in Community.' : 'Only you can see them.'}</div></div>
+        <div class="field bu-tagf"><label for="tagIn">Tags for every file <span class="opt">Optional</span></label><div class="chips-input" id="chips"><input id="tagIn" list="tagList" autocomplete="off" placeholder="Type a tag and press Enter"></div><datalist id="tagList">${allTags().map(([t]) => `<option value="${esc(t)}">`).join('')}</datalist></div>
+      </div>
+      <div class="bu-bar"><span class="bu-sum" id="buSum">${ico('search')}Reading ${plural(incoming.length, 'file')}…</span><span class="grow"></span>
+        <label class="btn btn-sm" for="buMore" id="buMoreL">${ico('plus')}Add files</label><input type="file" id="buMore" multiple accept="${ACCEPT}" hidden></div>
+      <div class="bu-list" id="buList" role="list"></div>`,
+    foot: `<span class="left" id="buFoot"></span><button class="btn" data-close id="buCancel">Cancel</button><button class="btn btn-primary" id="buGo" disabled>${ico('upload')}Upload</button>`,
+    onMount(el, close) {
+      const list = el.querySelector('#buList'), go_ = el.querySelector('#buGo'), sum = el.querySelector('#buSum'), foot = el.querySelector('#buFoot');
+      mountChips(el, shared);
+      mountVisSeg(el, v => { vis = v; });
+      el.querySelector('#buSec').addEventListener('change', e => { secId = e.target.value; paintAll(); });
+      const inSection = () => new Set(live().filter(d => d.sectionId === secId).map(d => d.name.toLowerCase()));
+      const warnFor = it => {
+        if (it.status !== 'ready') return '';
+        const n = it.name.trim().toLowerCase();
+        if (!n) return 'Give this file a name';
+        if (items.some(o => o !== it && o.status !== 'skip' && o.name.trim().toLowerCase() === n)) return 'Same name as another file in this upload';
+        if (inSection().has(n)) return 'A document with this name is already in this section';
+        return '';
+      };
+      const badge = it => ({
+        reading: `<span class="bu-badge">${ico('restore')}Reading</span>`,
+        ready: `<button type="button" class="icon-btn sm" data-rm="${it.k}" aria-label="Remove ${esc(it.file.name)}" title="Remove">${ico('x')}</button>`,
+        skip: `<span class="bu-badge bad">Skipped</span><button type="button" class="icon-btn sm" data-rm="${it.k}" aria-label="Remove ${esc(it.file.name)}">${ico('x')}</button>`,
+        up: `<span class="bu-badge up">Uploading</span>`,
+        done: `<span class="bu-badge ok">${ico('check')}Uploaded</span>`,
+        fail: `<span class="bu-badge bad">Failed</span><button type="button" class="btn btn-sm" data-retry="${it.k}">${ico('restore')}Retry</button>`
+      }[it.status]);
+      const rowHTML = it => {
+        const d = { type: it.type || 'txt', name: it.file.name }, locked = it.status !== 'ready';
+        const w = warnFor(it);
+        return `<div class="bu-row s-${it.status}" data-k="${it.k}" role="listitem">
+          ${glyph(d)}
+          <div class="bu-main">
+            <div class="bu-fields">
+              <input class="input bu-name" data-f="name" value="${esc(it.name)}" maxlength="200" aria-label="Name for ${esc(it.file.name)}"${locked ? ' disabled' : ''}>
+              <input class="input bu-desc" data-f="desc" value="${esc(it.desc)}" maxlength="200" placeholder="${it.status === 'skip' ? '' : 'No description found. Add one?'}" aria-label="Description for ${esc(it.file.name)}"${locked ? ' disabled' : ''}>
+            </div>
+            <div class="bu-meta"><span>${fmtSize(it.file.size)}</span><span class="type" style="${typeVars(d)};margin:0">${esc(it.type ? typeLabel(d) : (extOf(it.file.name) || '?').toUpperCase())}</span>
+              ${it.name !== it.file.name ? `<span class="bu-orig" title="Original file name">${esc(it.file.name)}</span>` : ''}
+              ${it.descFrom && it.status === 'ready' ? `<span class="bu-src">${ico('ai')}Description read from ${esc(it.descFrom)}</span>` : ''}
+              ${it.tags.length && it.status === 'ready' ? `<span class="bu-tags">${it.tags.map(t => `<span class="tag">${esc(t)}<button type="button" data-untag="${it.k}" data-t="${esc(t)}" aria-label="Remove tag ${esc(t)}">${ico('x')}</button></span>`).join('')}</span>` : ''}
+              ${it.error ? `<span class="bu-err">${ico('alert')}${esc(it.error)}</span>` : w ? `<span class="bu-warn">${ico('info')}${esc(w)}</span>` : ''}
+              ${it.status === 'done' ? `<a class="txt-btn" href="#/doc/${it.docId}">Open</a>` : ''}
+            </div>
+            <div class="bu-prog" aria-hidden="true"><i></i></div>
+          </div>
+          <div class="bu-state">${badge(it)}</div>
+        </div>`;
+      };
+      const paintRow = it => { const r = list.querySelector(`[data-k="${it.k}"]`); if (!r) return; const fresh = document.createRange().createContextualFragment(rowHTML(it)).firstElementChild; const focusF = r.contains(document.activeElement) && document.activeElement.dataset.f; r.replaceWith(fresh); if (focusF) { const i = fresh.querySelector(`[data-f="${focusF}"]`); if (i && !i.disabled) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } } };
+      const paintSummary = () => {
+        const ready = items.filter(i => i.status === 'ready'), skip = items.filter(i => i.status === 'skip'), done = items.filter(i => i.status === 'done'), fail = items.filter(i => i.status === 'fail');
+        const reading = items.filter(i => i.status === 'reading').length;
+        const bytes = ready.reduce((a, i) => a + i.file.size, 0), over = usedBytes() + bytes > CAP, blank = ready.some(i => !i.name.trim());
+        sum.innerHTML = reading ? `${ico('search')}Reading ${plural(reading, 'file')}…` : `${ico('docs')}<b>${plural(items.length, 'file')}</b>${ready.length ? `<span>${ready.length} ready</span>` : ''}${done.length ? `<span class="ok">${done.length} uploaded</span>` : ''}${fail.length ? `<span class="bad">${fail.length} failed</span>` : ''}${skip.length ? `<span class="bad">${skip.length} skipped</span>` : ''}`;
+        foot.innerHTML = over ? `<span class="bu-err">${ico('alert')}Not enough storage: ${fmtSize(bytes)} selected, ${fmtSize(Math.max(0, CAP - usedBytes()))} free</span>` : ready.length ? `${fmtSize(bytes)} to upload` : '';
+        if (busy) { go_.disabled = true; return; }
+        if (fail.length && !ready.length) { go_.disabled = false; go_.innerHTML = `${ico('restore')}Retry ${plural(fail.length, 'failed file')}`; return; }
+        go_.disabled = reading > 0 || !ready.length || over || blank;
+        go_.innerHTML = `${ico('upload')}Upload ${ready.length ? plural(ready.length, 'file') : ''}`.trim();
+      };
+      const paintAll = () => { list.innerHTML = items.map(rowHTML).join(''); paintSummary(); };
+      async function addFiles(files) {
+        const room = MAX_BATCH - items.length; if (room <= 0) { toast(`Up to ${MAX_BATCH} files at a time.`, { type: 'info' }); return; }
+        const take = [...files].slice(0, room);
+        const placeholders = take.map(f => ({ k: uid('f'), file: f, type: EXT[extOf(f.name)], name: f.name, desc: '', descFrom: '', tags: [], status: 'reading', error: '' }));
+        items.push(...placeholders); paintAll();
+        await Promise.all(placeholders.map(async ph => { const it = await readItem(ph.file); Object.assign(ph, it, { k: ph.k }); paintRow(ph); paintSummary(); }));
+        items.filter(i => i.status === 'ready').forEach(paintRow);
+        el.querySelector('.dlg-title').textContent = `Upload ${plural(items.length, 'file')}`;
+      }
+      list.addEventListener('input', e => {
+        const r = e.target.closest('.bu-row'), f = e.target.dataset.f; if (!r || !f) return;
+        const it = items.find(i => i.k === r.dataset.k); if (!it) return;
+        it[f] = e.target.value; if (f === 'desc') it.descFrom = '';
+        if (f === 'name') { items.filter(i => i.status === 'ready' && i !== it).forEach(paintRow); const m = r.querySelector('.bu-warn,.bu-err'); const w = warnFor(it); if (m) m.remove(); if (w) r.querySelector('.bu-meta').insertAdjacentHTML('beforeend', `<span class="bu-warn">${ico('info')}${esc(w)}</span>`); }
+        paintSummary();
+      });
+      list.addEventListener('click', e => {
+        if (e.target.closest('a[href^="#/doc/"]')) { setTimeout(close, 0); return; }
+        const rm = e.target.closest('[data-rm]'), rt = e.target.closest('[data-retry]'), ut = e.target.closest('[data-untag]');
+        if (rm && !busy) { const i = items.findIndex(x => x.k === rm.dataset.rm); if (i >= 0) items.splice(i, 1); paintAll(); if (!items.length) close(); }
+        if (rt && !busy) { const it = items.find(x => x.k === rt.dataset.retry); if (it) run([it]); }
+        if (ut) { const it = items.find(x => x.k === ut.dataset.untag); if (it) { it.tags = it.tags.filter(t => t !== ut.dataset.t); paintRow(it); } }
+      });
+      el.querySelector('#buMore').addEventListener('change', e => { if (e.target.files.length) addFiles(e.target.files); e.target.value = ''; });
+      const dlg = el.querySelector('.dialog');
+      dlg.addEventListener('dragover', e => { if (!busy && hasFiles(e)) { e.preventDefault(); dlg.classList.add('bu-drag'); } });
+      dlg.addEventListener('dragleave', e => { if (!dlg.contains(e.relatedTarget)) dlg.classList.remove('bu-drag'); });
+      dlg.addEventListener('drop', e => { if (!hasFiles(e)) return; e.preventDefault(); e.stopPropagation(); dlg.classList.remove('bu-drag'); if (!busy) addFiles(e.dataTransfer.files); });
+      async function uploadItem(it) {
+        it.status = 'up'; it.error = ''; paintRow(it); paintSummary();
+        const row = () => list.querySelector(`[data-k="${it.k}"] .bu-prog i`);
+        let w = 8; const crawl = setInterval(() => { w += (92 - w) * .12; const b = row(); if (b) b.style.width = w + '%'; }, 280);
+        const id = newId(), t = now(), name = it.name.trim();
+        const mime = (it.file.type && it.file.type !== 'application/octet-stream') ? it.file.type : mimeFor(it.type, it.file.name);
+        const doc = { id, name, type: it.type, mime, visibility: vis, sectionId: secId, description: it.desc.trim(), tags: [...new Set([...shared, ...it.tags])].slice(0, 12), favorite: false, favAt: 0, size: it.file.size, path: storagePath(id, it.file.name), allowScripts: false, searchText: '', createdAt: t, updatedAt: t, openedAt: 0, deletedAt: 0, content: it.content, blob: isText({ type: it.type }) ? null : it.file };
+        doc.searchText = searchTextFor(doc);
+        try {
+          await api.upload(doc.path, it.file, mime);
+          try { await api.insDoc(doc); } catch (e) { api.remove([doc.path]).catch(() => {}); throw e; }
+          state.documents.unshift(doc); it.status = 'done'; it.docId = id;
+        } catch (e) { console.error(e); it.status = 'fail'; it.error = friendly(e) || 'Upload failed'; }
+        clearInterval(crawl); paintRow(it); paintSummary();
+      }
+      async function run(batch) {
+        if (!batch.length) return;
+        busy = true; setSync(1);
+        $$('#buSec,#tagIn,.vis-seg button,#buMoreL', el).forEach(x => { x.disabled = true; x.classList && x.classList.add('is-locked'); });
+        go_.classList.add('loading'); paintSummary();
+        const queue = batch.slice();
+        await Promise.all(Array.from({ length: Math.min(BATCH_PARALLEL, queue.length) }, async () => { while (queue.length) await uploadItem(queue.shift()); }));
+        busy = false; setSync(-1); go_.classList.remove('loading');
+        $$('#buSec,#tagIn,.vis-seg button,#buMoreL', el).forEach(x => { x.disabled = false; x.classList && x.classList.remove('is-locked'); });
+        const ok = batch.filter(i => i.status === 'done').length, bad = batch.filter(i => i.status === 'fail').length;
+        const s = secById(secId); if (s) s.updatedAt = now();
+        if (vis === 'public' && ok) community.at = 0;
+        if (ok) log(`Uploaded ${plural(ok, 'file')}${s ? ' to ' + s.name : ''}`, 'upload', secId);
+        renderSidebar();
+        if (!bad && !items.some(i => i.status === 'ready')) {
+          finished = true;
+          toast(`${plural(ok, 'file')} uploaded${vis === 'public' ? ' and shared in Community' : ''}`, { action: 'View', onAction: () => go('/section/' + encodeURIComponent(secId)) });
+          setTimeout(() => { close(); refresh(); }, 650);
+        } else {
+          if (ok) toast(`${plural(ok, 'file')} uploaded, ${plural(bad, 'file')} failed. You can retry the failed ones.`, { type: 'error', ms: 6000 });
+          else toast('Nothing was uploaded. Check your connection and retry.', { type: 'error', ms: 6000 });
+          paintSummary(); refresh();
+        }
+      }
+      go_.addEventListener('click', () => {
+        if (busy) return;
+        const ready = items.filter(i => i.status === 'ready');
+        if (ready.length) run(ready); else run(items.filter(i => i.status === 'fail'));
+      });
+      el.querySelector('#buCancel').addEventListener('click', () => { if (busy) toast('Uploads already started will finish in the background.', { type: 'info' }); });
+      addFiles(incoming);
+      void finished;
+    }
+  });
+}
+
 const TEMPLATES = {
   html: n => `<h1>${esc(n)}</h1>\n<p class="lead">One-line summary of what this document covers.</p>\n\n<h2>Overview</h2>\n<p>Start writing here. Headings become the outline on the right.</p>\n\n<h2>Specifications</h2>\n<table>\n  <tr><th>Parameter</th><th>Value</th></tr>\n  <tr><td>Supply</td><td>12 V</td></tr>\n</table>\n`,
   md: n => `# ${n}\n\nOne-line summary of what this document covers.\n\n## Overview\nStart writing here. Headings become the outline on the right.\n\n## Notes\n- First point\n- Second point\n`
@@ -3431,9 +3717,9 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
     title: 'Add document', sub: 'Upload a file or start writing a new one.', wide: true,
     body: `<div class="seg" role="tablist" aria-label="How to add" style="margin-bottom:16px"><button role="tab" data-tab="upload" aria-selected="${mode === 'upload'}">${ico('upload')}Upload file</button><button role="tab" data-tab="write" aria-selected="${mode === 'write'}">${ico('pen')}Write new</button></div>
       <div data-pane="upload"${mode !== 'upload' ? ' hidden' : ''}><div class="field" id="fFile">
-        <label class="drop" id="drop" tabindex="0" for="fileIn"><input type="file" id="fileIn" accept="${ACCEPT}" hidden>
+        <label class="drop" id="drop" tabindex="0" for="fileIn"><input type="file" id="fileIn" accept="${ACCEPT}" multiple hidden>
           <svg class="drop-ico" viewBox="0 0 52 52" aria-hidden="true"><rect x="9" y="6" width="34" height="40" rx="7" fill="#fff" stroke="#C8CFDA" stroke-width="1.5"/><path d="M16 38h20" stroke="#E4E7EC" stroke-width="3" stroke-linecap="round"/><g class="arrow"><circle cx="26" cy="22" r="10" fill="#EEF2FF"/><path d="M26 27V17M21.5 21.5 26 17l4.5 4.5" fill="none" stroke="#2E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
-          <strong>Drop document here</strong><span>or click to browse</span><span class="drop-types">HTML • PDF • MD • TXT • images • code, up to ${CFG.maxFileMB} MB</span></label>
+          <strong>Drop one or more files here</strong><span>or click to browse. Pick several to upload them together</span><span class="drop-types">HTML • PDF • MD • TXT • images • code, up to ${CFG.maxFileMB} MB</span></label>
         <div id="pickedBox"></div><div class="err-msg" hidden></div></div></div>
       <div data-pane="write"${mode !== 'write' ? ' hidden' : ''}><div class="field"><span class="label" id="fmtLbl">Format</span><div class="seg" role="radiogroup" aria-labelledby="fmtLbl"><button type="button" role="radio" data-fmt="html" aria-checked="true" aria-pressed="true">HTML</button><button type="button" role="radio" data-fmt="md" aria-checked="false" aria-pressed="false">Markdown</button></div></div></div>
       <div class="two" style="margin-top:0">
@@ -3494,7 +3780,8 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
         if (!descIn.value.trim() && meta.desc) descIn.value = meta.desc;
         showSuggest(meta.tags);
       }
-      fin.addEventListener('change', () => { if (fin.files[0]) handleFile(fin.files[0]); fin.value = ''; });
+      const toBatch = files => { const fs = [...files]; close(); setTimeout(() => batchUploadModal(fs, { sectionId: secSel.value, vis, tags: [...tags] }), 220); };
+      fin.addEventListener('change', () => { if (fin.files.length > 1) toBatch(fin.files); else if (fin.files[0]) handleFile(fin.files[0]); fin.value = ''; });
       drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fin.click(); } });
       let depth = 0;
       drop.addEventListener('dragenter', e => { e.preventDefault(); depth++; drop.classList.add('drag'); });
@@ -3503,7 +3790,7 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
       drop.addEventListener('drop', e => {
         e.preventDefault(); depth = 0; drop.classList.remove('drag');
         const fs = e.dataTransfer.files; if (!fs.length) return;
-        if (fs.length > 1) toast('One file at a time. Adding the first file.', { type: 'info' });
+        if (fs.length > 1) { toBatch(fs); return; }
         handleFile(fs[0]);
       });
       if (file) handleFile(file);
@@ -3839,14 +4126,16 @@ nav.addEventListener('dragend', () => { dragSid = null; clearDrop(); $$('.sec-ro
 /* ---------- drop a file anywhere ---------- */
 let fileDepth = 0;
 const hasFiles = e => e.dataTransfer && [...(e.dataTransfer.types || [])].includes('Files');
-addEventListener('dragenter', e => { if (!hasFiles(e) || $('#drop') || !session) return; fileDepth++; $('#dropGlobal').classList.add('on'); });
-addEventListener('dragleave', e => { if (!hasFiles(e) || $('#drop')) return; fileDepth = Math.max(0, fileDepth - 1); if (!fileDepth) $('#dropGlobal').classList.remove('on'); });
+addEventListener('dragenter', e => { if (!hasFiles(e) || $('#drop,#buList') || !session) return; fileDepth++; $('#dropGlobal').classList.add('on'); });
+addEventListener('dragleave', e => { if (!hasFiles(e) || $('#drop,#buList')) return; fileDepth = Math.max(0, fileDepth - 1); if (!fileDepth) $('#dropGlobal').classList.remove('on'); });
 addEventListener('dragover', e => { if (hasFiles(e)) e.preventDefault(); });
 addEventListener('drop', e => {
   if (!hasFiles(e)) return;
   e.preventDefault(); fileDepth = 0; $('#dropGlobal').classList.remove('on');
-  if ($('#drop') || !session) return;
-  const f = e.dataTransfer.files[0]; if (f) uploadModal({ sectionId: currentSectionId(), file: f });
+  if ($('#drop,#buList') || !session) return;
+  const fs = e.dataTransfer.files;
+  if (fs.length > 1) batchUploadModal(fs, { sectionId: currentSectionId() });
+  else if (fs[0]) uploadModal({ sectionId: currentSectionId(), file: fs[0] });
 });
 
 
