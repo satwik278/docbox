@@ -1352,6 +1352,11 @@ img,video,iframe{max-width:100%}
 .tree-node.opening>.tree-kids>.tk-in>.tree-node:nth-child(2){animation-delay:40ms}.tree-node.opening>.tree-kids>.tk-in>.tree-node:nth-child(3){animation-delay:80ms}.tree-node.opening>.tree-kids>.tk-in>.tree-node:nth-child(n+4){animation-delay:120ms}
 @keyframes kidIn{from{opacity:0;transform:translateX(-8px)}}
 .nav-new{color:var(--blue)}
+.sec-row .nav-item.active::before{display:none}
+.sec-row .nav-item.active{background:var(--soft);color:var(--ink);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 16%,transparent)}
+.sec-row .nav-item.active .lbl{font-weight:600}
+.tk-in>.tree-node.cur>.sec-row::before{border-color:var(--c)}
+.tree-node.cur>.tree-kids>.tk-in>.tree-node::before,.tree-node.cur>.tree-kids>.tk-in>.tree-node>.sec-row::before{border-color:color-mix(in srgb,var(--c) 35%,var(--line))}
 @media (max-width:1100px) and (min-width:761px){.tree-kids,.sec-row .tw,.sec-row .grow{display:none}.sec-row .nav-item{padding:0;justify-content:center}}
 
 /* rows that hold files */
@@ -4582,11 +4587,98 @@ async function readFileItem(f) {
   it.type = type;
   return it;
 }
-function pickFiles(opts = {}) {
+function pickFiles(opts = {}) { fileUploadModal(opts); }
+/* Add file: the same pop-up as Add document, for any work file */
+function fileUploadModal({ sectionId, file } = {}) {
   if (!state.sections.length) { toast('Create a section first, then add files to it.', { type: 'info' }); sectionModal(); return; }
-  const inp = document.createElement('input'); inp.type = 'file'; inp.multiple = true;
-  inp.addEventListener('change', () => { if (inp.files.length) batchUploadModal(inp.files, { ...opts, kind: 'file' }); });
-  inp.click();
+  const sel = sectionId && secById(sectionId) ? sectionId : roots()[0].id;
+  let vis = state.settings.defaultVisibility === 'public' ? 'public' : 'private', picked = null, nameAuto = true;
+  const tags = [];
+  modal({
+    title: 'Add file', sub: 'Store any file related to your work.', wide: true,
+    body: `<div class="field" id="fFile">
+        <label class="drop" id="drop" tabindex="0" for="fileIn"><input type="file" id="fileIn" multiple hidden>
+          <svg class="drop-ico" viewBox="0 0 52 52" aria-hidden="true"><rect x="9" y="6" width="34" height="40" rx="7" fill="#fff" stroke="#C8CFDA" stroke-width="1.5"/><path d="M16 38h20" stroke="#E4E7EC" stroke-width="3" stroke-linecap="round"/><g class="arrow"><circle cx="26" cy="22" r="10" fill="#E6F7FA"/><path d="M26 27V17M21.5 21.5 26 17l4.5 4.5" fill="none" stroke="#0B9DB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+          <strong>Drop one or more files here</strong><span>or click to browse. Pick several to upload them together</span></label>
+        <div id="pickedBox"></div><div class="err-msg" hidden></div></div>
+      <div class="two" style="margin-top:0">
+        <div class="field" id="fDocName"><label for="dName">File name</label><input class="input" id="dName" maxlength="120" placeholder="Filled in from the file"><div class="err-msg" hidden></div></div>
+        <div class="field"><span class="label" id="saveInLbl">Save in</span>${secPickerHTML({ id: 'dSec', value: sel, labelId: 'saveInLbl' })}</div>
+      </div>
+      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
+      <div class="field"><label for="dDesc">Description</label><input class="input" id="dDesc" maxlength="200" placeholder="One line on what this file is"></div>
+      ${tagsField()}
+      <div class="progress" id="upProg" hidden><i></i></div>`,
+    foot: `<span class="left hide-m">Tip: drop files anywhere on the page</span><button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="upGo">Upload</button>`,
+    onMount(el, close) {
+      const drop = el.querySelector('#drop'), fin = el.querySelector('#fileIn'), box = el.querySelector('#pickedBox');
+      const nameIn = el.querySelector('#dName'), descIn = el.querySelector('#dDesc'), secSel = el.querySelector('#dSec'), go_ = el.querySelector('#upGo');
+      const fField = el.querySelector('#fFile'), fErr = fField.querySelector('.err-msg');
+      const chips = mountChips(el, tags), sug = el.querySelector('#tagSuggest');
+      mountVisSeg(el, v => { vis = v; });
+      mountPicker(el, 'dSec');
+      nameIn.addEventListener('input', () => { nameAuto = false; el.querySelector('#fDocName').classList.remove('err'); el.querySelector('#fDocName .err-msg').hidden = true; });
+      const fail = msg => { fField.classList.add('err'); fErr.hidden = false; fErr.innerHTML = ico('info') + esc(msg); picked = null; box.innerHTML = ''; drop.hidden = false; };
+      sug.addEventListener('click', e => { const b = e.target.closest('[data-sug]'); if (b) { chips.add(b.dataset.sug); b.remove(); if (!sug.querySelector('button')) sug.hidden = true; } });
+      async function handleFile(f) {
+        fField.classList.remove('err'); fErr.hidden = true;
+        if (usedBytes() + f.size > CAP) return fail(`Not enough storage left: ${fmtSize(Math.max(0, CAP - usedBytes()))} free of ${CAP_LABEL}.`);
+        const ext = fileExt(f.name), cat = FILE_CATS[fileCat(ext)] || FILE_CATS.other;
+        drop.hidden = true;
+        box.innerHTML = `<div class="picked">${fileIcon({ kind: 'file', category: fileCat(ext), ext, name: f.name }, 'ft-ic')}<div class="p-main"><div class="p-name">${esc(f.name)}</div><div class="p-sub">${fmtSize(f.size)}, ${esc(cat.label)}</div>
+          <ol class="pipe" aria-label="Upload steps"><li data-s="1">${ico('check')}Checked</li><li data-s="2">${ico('check')}Read</li><li data-s="3">${ico('check')}Details</li></ol></div>
+          <button type="button" class="icon-btn sm" data-x aria-label="Remove file">${ico('x')}</button></div>`;
+        box.querySelector('[data-x]').addEventListener('click', () => { picked = null; box.innerHTML = ''; drop.hidden = false; sug.hidden = true; drop.focus(); });
+        const tick = n => { const li = box.querySelector(`[data-s="${n}"]`); if (li) li.classList.add('ok'); };
+        const it = await readFileItem(f);
+        if (it.status === 'skip') return fail(it.error + '.');
+        tick(1); await wait(effectsOn() ? 140 : 0); tick(2); await wait(effectsOn() ? 140 : 0); tick(3);
+        picked = it;
+        if (nameAuto || !nameIn.value.trim()) { nameIn.value = f.name; nameAuto = true; }
+        if (!descIn.value.trim() && it.desc) descIn.value = it.desc;
+        const s = it.tags.filter(t => !tags.some(x => x.toLowerCase() === t.toLowerCase()));
+        sug.hidden = !s.length; sug.innerHTML = s.length ? 'Suggested from content:' + s.map(t => `<button type="button" data-sug="${esc(t)}">${esc(t)}</button>`).join('') : '';
+      }
+      const toBatch = files => { const fs = [...files]; close(); setTimeout(() => batchUploadModal(fs, { kind: 'file', sectionId: secSel.value, vis, tags: [...tags] }), 220); };
+      fin.addEventListener('change', () => { if (fin.files.length > 1) toBatch(fin.files); else if (fin.files[0]) handleFile(fin.files[0]); fin.value = ''; });
+      drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fin.click(); } });
+      let depth = 0;
+      drop.addEventListener('dragenter', e => { e.preventDefault(); depth++; drop.classList.add('drag'); });
+      drop.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; });
+      drop.addEventListener('dragleave', () => { if (--depth <= 0) { depth = 0; drop.classList.remove('drag'); } });
+      drop.addEventListener('drop', e => { e.preventDefault(); depth = 0; drop.classList.remove('drag'); const fs = e.dataTransfer.files; if (!fs.length) return; if (fs.length > 1) toBatch(fs); else handleFile(fs[0]); });
+      if (file) handleFile(file);
+      const submit = async () => {
+        const name = nameIn.value.trim(); let ok = true;
+        if (!picked) { if (!fField.classList.contains('err')) fail('Choose a file to upload.'); ok = false; }
+        if (!name) { const f = el.querySelector('#fDocName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + 'Enter a file name.'; ok = false; }
+        else if (isBlockedName(name)) { const f = el.querySelector('#fDocName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + 'Program file names (such as .exe) are not allowed.'; ok = false; }
+        if (!ok) return;
+        if (el.querySelector('#tagIn').value.trim()) { chips.add(el.querySelector('#tagIn').value); el.querySelector('#tagIn').value = ''; }
+        go_.disabled = true; go_.classList.add('loading');
+        const prog = el.querySelector('#upProg'), bar = prog.firstElementChild;
+        prog.hidden = false; requestAnimationFrame(() => bar.style.width = '35%');
+        const crawl = setInterval(() => { const w = parseFloat(bar.style.width) || 0; if (w < 90) bar.style.width = (w + (90 - w) * .12) + '%'; }, 300);
+        const it = picked, secId = secSel.value, id = newId(), t = now(), mime = safeFileMime(it.file, it.ext);
+        const doc = { id, name, type: it.type, mime, visibility: vis, sectionId: secId, description: descIn.value.trim(), tags: [...tags], favorite: false, favAt: 0, size: it.file.size, path: storagePath(id, it.file.name), allowScripts: false, searchText: (it.content || '').replace(/\s+/g, ' ').trim().slice(0, 20000), createdAt: t, updatedAt: t, openedAt: 0, deletedAt: 0, content: it.content, blob: it.file, kind: 'file', category: it.category, ext: it.ext };
+        const res = await persist(async () => {
+          await api.upload(doc.path, it.file, mime);
+          try { await api.insDoc(doc); } catch (e) { api.remove([doc.path]).catch(() => {}); throw e; }
+        }, { error: 'Upload failed.', quiet: true });
+        clearInterval(crawl);
+        if (res === FAIL) { go_.disabled = false; go_.classList.remove('loading'); prog.hidden = true; bar.style.width = '0'; return; }
+        bar.style.width = '100%'; await wait(effectsOn() ? 220 : 0);
+        state.documents.unshift(doc);
+        const s = secById(secId); if (s) s.updatedAt = t;
+        if (vis === 'public') community.at = 0;
+        log(`Uploaded ${doc.name}`, 'upload', secId);
+        close(); toast(vis === 'public' ? 'Uploaded and shared in Community' : 'File uploaded', { action: 'Open', onAction: () => go('/file/' + doc.id) }); refresh();
+      };
+      go_.addEventListener('click', submit);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(); });
+      if (!file) setTimeout(() => drop.focus(), 40);
+    }
+  });
 }
 function batchUploadModal(fileList, opts = {}) {
   const isF = opts.kind === 'file', readOne = isF ? readFileItem : readItem;
@@ -4813,7 +4905,7 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
       <div data-pane="upload"${mode !== 'upload' ? ' hidden' : ''}><div class="field" id="fFile">
         <label class="drop" id="drop" tabindex="0" for="fileIn"><input type="file" id="fileIn" accept="${ACCEPT}" multiple hidden>
           <svg class="drop-ico" viewBox="0 0 52 52" aria-hidden="true"><rect x="9" y="6" width="34" height="40" rx="7" fill="#fff" stroke="#C8CFDA" stroke-width="1.5"/><path d="M16 38h20" stroke="#E4E7EC" stroke-width="3" stroke-linecap="round"/><g class="arrow"><circle cx="26" cy="22" r="10" fill="#EEF2FF"/><path d="M26 27V17M21.5 21.5 26 17l4.5 4.5" fill="none" stroke="#2E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
-          <strong>Drop one or more files here</strong><span>or click to browse. Pick several to upload them together</span><span class="drop-types">HTML • PDF • MD • TXT • images • code, up to ${CFG.maxFileMB} MB</span></label>
+          <strong>Drop one or more files here</strong><span>or click to browse. Pick several to upload them together</span></label>
         <div id="pickedBox"></div><div class="err-msg" hidden></div></div></div>
       <div data-pane="write"${mode !== 'write' ? ' hidden' : ''}><p class="wc-lead">Choose a format. You will name it and pick where it goes when you save.</p>${writeCards()}</div>
       <div class="up-fields"${mode === 'write' ? ' hidden' : ''}>
@@ -4857,7 +4949,7 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
           if (isBlockedName(f.name)) return fail(`Programs (.${ext}) cannot be stored in DocBox.`);
           fail(`${ext ? `.${ext} is` : 'This is'} not a document type. You can store it in Files instead.`);
           fErr.insertAdjacentHTML('beforeend', `<button type="button" class="txt-btn" id="toFilesBtn" style="margin-left:6px">Store in Files</button>`);
-          fErr.querySelector('#toFilesBtn').addEventListener('click', () => { close(); setTimeout(() => batchUploadModal([f], { kind: 'file', sectionId: secSel.value, vis, tags: [...tags] }), 240); });
+          fErr.querySelector('#toFilesBtn').addEventListener('click', () => { const s_ = secSel.value; close(); setTimeout(() => fileUploadModal({ sectionId: s_, file: f }), 240); });
           return;
         }
         if (f.size > MAX_FILE) return fail(`${f.name} is ${fmtSize(f.size)}. Each file can be up to ${CFG.maxFileMB} MB.`);
@@ -5256,7 +5348,7 @@ addEventListener('drop', e => {
   e.preventDefault(); fileDepth = 0; $('#dropGlobal').classList.remove('on');
   if ($('#drop,#buList') || !session) return;
   const fs = e.dataTransfer.files;
-  if (currentSpace() === 'files') { if (fs.length) batchUploadModal(fs, { kind: 'file', sectionId: currentSectionId() }); return; }
+  if (currentSpace() === 'files') { if (fs.length > 1) batchUploadModal(fs, { kind: 'file', sectionId: currentSectionId() }); else if (fs[0]) fileUploadModal({ sectionId: currentSectionId(), file: fs[0] }); return; }
   if (fs.length > 1) batchUploadModal(fs, { sectionId: currentSectionId() });
   else if (fs[0]) uploadModal({ sectionId: currentSectionId(), file: fs[0] });
 });
