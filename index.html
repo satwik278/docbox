@@ -726,14 +726,6 @@ textarea:disabled{background:#FAFBFC;color:var(--muted)}
 
 
 /* ---------- tree, sharing, community ---------- */
-.sec-row .nav-item{padding-left:calc(26px + var(--depth,0) * 14px)}
-.sec-row .tw{position:absolute;left:calc(4px + var(--depth,0) * 14px);top:9px;width:20px;height:20px;border-radius:5px;display:grid;place-items:center;color:var(--faint);z-index:1;transition:transform .2s var(--ease),background .15s,color .15s}
-.sec-row .tw .ico{width:13px;height:13px;stroke-width:2.2}
-.sec-row .tw.open{transform:rotate(90deg)}
-.sec-row .tw:hover{background:rgba(16,24,40,.06);color:var(--ink)}
-.sec-row:not([data-depth="0"])::before{content:"";position:absolute;left:calc(14px + (var(--depth) - 1) * 14px);top:0;bottom:0;width:1px;background:var(--line)}
-.sec-row:not([data-depth="0"]) .sec-dot{width:22px;height:22px;border-radius:6px}
-.sec-row:not([data-depth="0"]) .nav-item{height:34px;font-size:13.5px}
 .doc-top .type{margin-right:0}
 .vis-pill{display:inline-flex;align-items:center;gap:4px;font:600 11px/1 var(--f-body);padding:4px 7px;border-radius:6px;background:#E7F6EE;color:#0B7A4B;margin-left:6px;white-space:nowrap}
 .vis-pill .ico{width:12px;height:12px;stroke-width:2}
@@ -776,7 +768,6 @@ textarea:disabled{background:#FAFBFC;color:var(--muted)}
 .danger-card h2{color:#B42318}
 .del-list{margin:0 0 12px;padding-left:20px;color:var(--ink2);line-height:1.75}
 .notice .txt-btn{margin-left:auto;white-space:nowrap}
-@media (max-width:1100px) and (min-width:761px){.sec-row:not([data-depth="0"]),.sec-row .tw{display:none}.sec-row .nav-item{padding-left:0}}
 
 
 /* ---------- section icon picker + starter picker ---------- */
@@ -824,51 +815,8 @@ textarea:disabled{background:#FAFBFC;color:var(--muted)}
 .icon-name{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:12.5px;color:var(--muted)}
 .icon-name .ico{width:15px;height:15px;color:var(--c)}
 .icon-name span{font-weight:600;color:var(--ink2)}
-.sm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:26px;align-items:start}
-.sm-preview{position:sticky;top:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;box-shadow:var(--sh-1)}
-.smp-top{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--line2);background:#fff}
-.smp-live{display:inline-flex;align-items:center;gap:8px;font:600 12.5px var(--f-body);color:var(--ink)}
-.smp-live i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(14,159,94,.15);animation:pulseLive 2s ease-in-out infinite}
-.smp-hint{font-size:12px;color:var(--faint)}
-.smp-stage{position:relative;padding:16px 20px 22px;isolation:isolate;background:#F8F9FB}
-.smp-stage::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(circle,#D9DEE6 1px,transparent 1.3px);background-size:18px 18px;-webkit-mask-image:radial-gradient(ellipse at 60% 70%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse at 60% 70%,#000 30%,transparent 80%)}
-.smp-stage::after{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(420px 260px at 65% 72%,var(--soft),transparent 70%);transition:background .4s}
-.smp-cap{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--muted);margin:2px 0 8px}
-.smp-cap .ico{width:13px;height:13px;color:var(--faint)}
-.smp-side{background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px;box-shadow:var(--sh-1);margin-bottom:18px}
-.smp-row{display:flex;align-items:center;gap:10px;height:36px;padding:0 10px 0 calc(10px + var(--d,0) * 16px);border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink2);min-width:0}
-.smp-row .sec-dot{width:24px;height:24px;border-radius:7px;transition:background .3s,color .3s}
-.smp-row .sec-dot .ico{width:14px;height:14px}
-.smp-row.parent{color:var(--muted)}
-.smp-row.parent>.ico{width:14px;height:14px;margin-left:auto;opacity:.5}
-.smp-row.live{background:var(--soft);color:var(--ink);box-shadow:inset 3px 0 0 var(--c);transition:background .3s,box-shadow .3s}
-.r-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.r-name.is-empty{color:var(--faint);font-style:italic}
-.r-count{font-size:12px;font-weight:600;color:var(--c)}
-.g-dot{width:24px;height:24px;border-radius:7px;background:var(--sunk);flex:none}
-.g-bar{height:8px;border-radius:6px;background:var(--sunk)}
-.smp-tilt{transition:transform .6s var(--ease);transform-style:preserve-3d}
-.smp-card{cursor:default;border-color:color-mix(in srgb,var(--c) 30%,var(--line));box-shadow:0 18px 40px -22px color-mix(in srgb,var(--c) 55%,transparent),var(--sh-1);animation:smpFloat 6s ease-in-out infinite;transition:border-color .3s,box-shadow .3s}
-.smp-card:hover{transform:none}
-.smp-card.hot::after{opacity:1}
-@keyframes smpFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.smp-card .t-draw{animation:smpTrace 3.2s var(--ease) .3s infinite alternate}
-.smp-card .sec-trace circle{stroke:var(--c)}
-@keyframes smpTrace{from{stroke-dashoffset:160}to{stroke-dashoffset:0}}
-.smp-shine{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.7) 50%,transparent 62%);transform:translateX(-130%);animation:smpShine 5.5s ease-in-out 1.2s infinite}
-@keyframes smpShine{0%,70%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
-.smp-card .sec-ico{transition:background .3s,color .3s}
 .sec-ico.pop{animation:icoPop .6s var(--ease)}
 @keyframes icoPop{0%{transform:scale(.6) rotate(-14deg)}55%{transform:scale(1.14) rotate(4deg)}100%{transform:none}}
-.smp-new{font:600 11px var(--f-body);padding:4px 9px;border-radius:99px;background:var(--c);color:#fff;transition:background .3s;box-shadow:0 4px 10px -4px var(--c)}
-.smp-card .sec-name.is-empty,.smp-card .sec-desc.is-empty{color:var(--faint);font-style:italic}
-.smp-card .sec-name{word-break:break-word}
-.smp-when{margin-left:auto;color:var(--faint)}
-.smp-crumb{display:flex;align-items:center;flex-wrap:wrap;gap:4px;font-size:12.5px;color:var(--muted);margin-top:16px;min-height:0}
-.smp-crumb:empty{display:none}
-.smp-crumb .ico{width:12px;height:12px;color:var(--faint)}
-.smp-crumb b{color:var(--ink)}
-@media (max-width:880px){.sm-grid{grid-template-columns:minmax(0,1fr)}.sm-preview{position:relative}.icon-grid{grid-template-columns:repeat(8,minmax(0,1fr))}}
 @media (max-width:560px){.icon-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
 /* ---------- responsive ---------- */
@@ -1035,13 +983,6 @@ textarea:disabled{background:#FAFBFC;color:var(--muted)}
   .bu-l2 .bu-desc{margin-left:-8px}
 }
 /* ---------- Files space ---------- */
-.space-sw{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:3px;margin:2px 0 6px;background:var(--sunk);border-radius:11px}
-.space-sw button{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:7px;height:34px;border-radius:8px;font-weight:600;font-size:13px;color:var(--muted);transition:color .25s}
-.space-sw button .ico{width:16px;height:16px}
-.space-sw button[aria-selected=true]{color:var(--ink)}
-.space-sw button:hover{color:var(--ink)}
-.sw-thumb{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:8px;background:#fff;box-shadow:var(--sh-1);transition:transform .35s var(--ease)}
-.sw-thumb.r{transform:translateX(100%)}
 body.space-files .drop-global .dg-docs,body:not(.space-files) .drop-global .dg-files{display:none}
 .muted{color:var(--faint)}
 .muted-ico{display:inline-flex;align-items:center;gap:4px;color:var(--muted)}.muted-ico .ico{width:13px;height:13px}
@@ -1124,13 +1065,6 @@ body.space-files .drop-global .dg-docs,body:not(.space-files) .drop-global .dg-f
 .fe-art .fe-core .ico{width:28px;height:28px}
 @keyframes feOrbit{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04)}}
 /* section tabs */
-.sec-tabs{display:inline-flex;gap:4px;padding:4px;margin:-6px 0 18px;background:var(--sunk);border-radius:12px}
-.sec-tabs button{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:9px;font-weight:600;font-size:13.5px;color:var(--muted);transition:all .2s var(--ease)}
-.sec-tabs button .ico{width:16px;height:16px}
-.sec-tabs button span{font-size:11.5px;padding:1px 7px;border-radius:99px;background:rgba(16,24,40,.06);font-variant-numeric:tabular-nums}
-.sec-tabs button:hover{color:var(--ink)}
-.sec-tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:var(--sh-1)}
-.sec-tabs button[aria-selected=true] span{background:var(--blue-soft);color:var(--blue)}
 /* file page */
 .file-hero{display:flex;align-items:flex-start;gap:18px;padding:22px 24px;margin:4px 0 18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;position:relative;overflow:hidden;isolation:isolate}
 .file-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(420px 170px at 0% 0%,var(--fb),transparent 72%)}
@@ -1194,7 +1128,6 @@ body.space-files .drop-global .dg-docs,body:not(.space-files) .drop-global .dg-f
 .bu-tofiles{color:var(--blue);border-color:#C9D3FF;background:var(--blue-soft)}
 @media (max-width:1180px){.file-layout{grid-template-columns:minmax(0,1fr)}.file-info{position:static}}
 @media (max-width:1100px){.ft-head,.ft-row{grid-template-columns:minmax(0,1fr) 120px 84px 110px 118px}.ft-sec{display:none}.ftable.no-sec .ft-head,.ftable.no-sec .ft-row{grid-template-columns:minmax(0,1fr) 120px 84px 110px 118px}}
-@media (max-width:1100px) and (min-width:761px){.space-sw{grid-template-columns:1fr;gap:2px}.space-sw .lbl{display:none}.sw-thumb{width:auto;right:3px;height:calc(50% - 3px);bottom:auto}.sw-thumb.r{transform:translateY(100%)}}
 @media (max-width:760px){
   .ft-head{display:none}
   .ft-row,.ftable.no-sec .ft-row{grid-template-columns:minmax(0,1fr) auto;padding:10px 8px 10px 12px;min-height:60px}
@@ -1207,7 +1140,6 @@ body.space-files .drop-global .dg-docs,body:not(.space-files) .drop-global .dg-f
   .fc-acts{opacity:1;transform:none}
   .cat-chips{flex-wrap:nowrap;overflow-x:auto;margin:-4px -12px 12px;padding:2px 12px 6px;scrollbar-width:none}
   .cchip{flex:none}
-  .sec-tabs{display:flex;margin-top:-4px}.sec-tabs button{flex:1;justify-content:center}
   .file-hero{padding:16px;gap:12px}.fh-ic{width:50px;height:50px;border-radius:14px}.fh-ic .ico{width:22px;height:22px}.fh-text h1{font-size:19px}
   .fprev{min-height:300px}.fp-pdf{height:70vh}
   .fe-art{transform:scale(.85)}
@@ -1253,7 +1185,6 @@ img,video,iframe{max-width:100%}
   .auth-form .auth-brand{align-self:center}
   .auth-card{margin:24px auto 8px}
   .steps3{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-  .sm-grid{grid-template-columns:minmax(0,1fr)}
 }
 /* phones */
 @media (max-width:760px){
@@ -1315,7 +1246,6 @@ img,video,iframe{max-width:100%}
   .dlg-title{font-size:18px}
   .icon-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .starter-grid{grid-template-columns:minmax(0,1fr)}
-  .smp-stage{padding:12px 12px 16px}
   .two{grid-template-columns:minmax(0,1fr)}
   /* login */
   .auth-show{margin:0 10px 14px;padding:26px 14px 22px;border-radius:22px}
@@ -1351,6 +1281,227 @@ img,video,iframe{max-width:100%}
   .splash-mark{width:48px;height:48px}
   .editor{height:auto;min-height:0}
   .editor textarea{min-height:60vh}
+}
+
+/* =========================================================
+   v3: one Documents / Files switch, tree sidebar, pickers, write flow
+   ========================================================= */
+/* the switch */
+.mode-sw{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:12px;background:var(--sunk);box-shadow:inset 0 0 0 1px rgba(16,24,40,.04);flex:none;isolation:isolate;vertical-align:middle}
+.mode-sw button{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 14px;border-radius:9px;font-weight:600;font-size:13px;color:var(--muted);transition:color .3s;white-space:nowrap}
+.mode-sw button[data-mode=docs]{--mc:var(--blue)}.mode-sw button[data-mode=files]{--mc:#0B9DB5}
+.mode-sw button .ico{width:16px;height:16px;transition:color .3s}
+.mode-sw button:hover{color:var(--ink)}
+.mode-sw button[aria-selected=true]{color:var(--ink)}
+.mode-sw button[aria-selected=true] .ico{color:var(--mc);animation:msIco .55s var(--ease)}
+@keyframes msIco{0%{transform:scale(.7) rotate(-12deg)}60%{transform:scale(1.15) rotate(4deg)}100%{transform:none}}
+.ms-thumb{position:absolute;z-index:0;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:9px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.06),0 6px 14px -6px rgba(16,24,40,.18);transition:transform .5s cubic-bezier(.34,1.4,.5,1)}
+.ms-thumb.r{transform:translateX(100%)}
+.ms-n{font-size:11px;line-height:18px;padding:0 7px;border-radius:99px;background:rgba(16,24,40,.06);font-variant-numeric:tabular-nums;transition:background .3s,color .3s}
+.mode-sw button[aria-selected=true] .ms-n{background:color-mix(in srgb,var(--mc) 12%,#fff);color:var(--mc)}
+.hero-mode{position:absolute;top:-8px;left:4px;z-index:3}
+.hero-mode button{height:30px;padding:0 12px;font-size:12.5px}
+.page-actions .mode-sw{margin-left:4px}
+.crumb-bar{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap;margin:0 0 14px}
+.crumb-bar .crumbs{margin:0;min-width:0}
+/* switching between documents and files */
+.view.mode-in>*:not(.page-head):not(.hero):not(.crumb-bar){animation:modeIn .55s var(--ease) both}
+.view.mode-in>*:nth-child(2){animation-delay:40ms}.view.mode-in>*:nth-child(3){animation-delay:90ms}.view.mode-in>*:nth-child(4){animation-delay:140ms}.view.mode-in>*:nth-child(n+5){animation-delay:180ms}
+.view.mode-in .hero-title .ln span{animation:none}
+.view.mode-in .hero-copy{animation:copyIn .6s var(--ease) both}
+@keyframes modeIn{from{opacity:0;transform:translateY(10px);filter:blur(4px)}}
+@keyframes copyIn{from{opacity:0;filter:blur(5px);transform:translateY(4px)}}
+/* animated word swap */
+.morph{display:inline-block;position:relative;vertical-align:top;white-space:nowrap}
+.morph.run{transition:width .55s cubic-bezier(.3,1.25,.5,1)}
+.morph .mw{display:inline-block;white-space:nowrap}
+.morph .mw.out{position:absolute;left:0;top:0}
+.morph .mw i{display:inline-block;font-style:normal}
+.morph .mw.out i{animation:mwOut .36s var(--ease) both}
+.morph .mw.in i{animation:mwIn .55s cubic-bezier(.2,1.2,.3,1) both}
+@keyframes mwOut{to{opacity:0;transform:translateY(-60%);filter:blur(3px)}}
+@keyframes mwIn{from{opacity:0;transform:translateY(70%);filter:blur(3px)}}
+.up-morph>span{display:inline-flex;gap:.28em}
+.up-morph .morph{color:var(--blue)}
+.hero[data-mode=files] .up-morph .morph{color:#0B9DB5}
+
+/* sidebar tree: sections, modules and sub-modules */
+#secList{padding-bottom:6px}
+.tree-node{position:relative}
+.sec-row .nav-item{padding:0 8px 0 6px;gap:10px}
+.sec-row .sec-dot{width:26px;height:26px;border-radius:8px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 14%,transparent)}
+.sec-row .lbl{flex:0 1 auto;min-width:0}
+.sec-row .tw{width:20px;height:20px;margin-left:-5px;border-radius:6px;display:grid;place-items:center;color:var(--faint);flex:none;transition:transform .32s var(--ease),background .15s,color .15s}
+.sec-row .tw .ico{width:14px;height:14px;stroke-width:2.2}
+.tree-node.open>.sec-row .tw{transform:rotate(90deg)}
+.sec-row .tw:hover{background:rgba(16,24,40,.07);color:var(--ink)}
+.sec-row .count{min-width:22px;height:20px;padding:0 6px;border-radius:99px;display:grid;place-items:center;background:var(--sunk);font-size:11px;font-weight:600;color:var(--muted);margin-left:0}
+.sec-row .nav-item.active .count{background:#fff;color:var(--c)}
+.tree-kids{display:grid;grid-template-rows:0fr;transition:grid-template-rows .36s var(--ease)}
+.tree-node.open>.tree-kids{grid-template-rows:1fr}
+.tk-in{min-height:0;overflow:hidden;position:relative;margin-left:18px;padding-left:14px}
+.tk-in>.tree-node::before{content:"";position:absolute;left:-14px;top:0;bottom:0;border-left:1.5px solid var(--line)}
+.tk-in>.tree-node:last-child::before{display:none}
+.tk-in>.tree-node>.sec-row::before{content:"";position:absolute;left:-14px;top:0;width:10px;height:50%;border-left:1.5px solid var(--line);border-bottom:1.5px solid var(--line);border-bottom-left-radius:8px;transition:border-color .25s}
+.tk-in>.tree-node.cur>.sec-row::before,.tk-in>.tree-node>.sec-row:hover::before{border-color:var(--c)}
+.tk-in .sec-row .nav-item{height:34px;font-size:13.5px;gap:9px}
+.tk-in .sec-row .sec-dot{width:22px;height:22px;border-radius:7px}
+.tk-in .sec-row .sec-dot .ico{width:13px;height:13px}
+.tk-in .sec-row .more{top:3px}
+.tree-node.opening>.tree-kids>.tk-in>.tree-node{animation:kidIn .4s var(--ease) both}
+.tree-node.opening>.tree-kids>.tk-in>.tree-node:nth-child(2){animation-delay:40ms}.tree-node.opening>.tree-kids>.tk-in>.tree-node:nth-child(3){animation-delay:80ms}.tree-node.opening>.tree-kids>.tk-in>.tree-node:nth-child(n+4){animation-delay:120ms}
+@keyframes kidIn{from{opacity:0;transform:translateX(-8px)}}
+.nav-new{color:var(--blue)}
+@media (max-width:1100px) and (min-width:761px){.tree-kids,.sec-row .tw,.sec-row .grow{display:none}.sec-row .nav-item{padding:0;justify-content:center}}
+
+/* rows that hold files */
+.row .row-fic{width:32px;height:34px;border-radius:9px}
+.rows.compact .row-fic{width:28px;height:30px;border-radius:8px}
+.row .row-fic .ico{width:15px;height:15px;margin-top:-7px}
+.row .row-fic b{font-size:6.5px;bottom:3px}
+.row.is-file:hover .row-fic{transform:rotate(-4deg) scale(1.05)}
+.pf-ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--fb);color:var(--fc);margin-right:8px;flex:none}
+.pf-ic .ico{width:15px;height:15px}
+
+/* location picker */
+.pick{position:relative}
+.pick-btn{width:100%;min-height:46px;display:flex;align-items:center;gap:10px;padding:6px 10px 6px 8px;border:1px solid var(--line);border-radius:11px;background:#fff;text-align:left;transition:border-color .18s,box-shadow .18s,background .18s}
+.pick-btn:hover{border-color:#C9D0DB;background:#FCFCFD}
+.pick.open .pick-btn,.pick-btn:focus-visible{outline:none;border-color:#A9B9FF;box-shadow:0 0 0 4px rgba(46,91,255,.12)}
+.pick-face{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.pick-face .sec-dot,.po .sec-dot{width:30px;height:30px;border-radius:9px}
+.pick-face .sec-dot .ico,.po .sec-dot .ico{width:16px;height:16px}
+.sec-dot.root{--c:var(--ink2);--soft:var(--sunk);background:linear-gradient(135deg,#F4F6F9,#E9EDF3);color:var(--ink2)}
+.pf-t,.po-t{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.25}
+.pf-t b,.po-t b{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pf-t small,.po-t small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick-chev{margin-left:auto;color:var(--faint);display:grid;transition:color .2s}
+.pick-chev .ico{width:16px;height:16px}
+.pick.open .pick-chev{color:var(--blue)}
+.pick-btn.pop .sec-dot{animation:icoPop .5s var(--ease)}
+.pick-list{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;max-height:290px;overflow:auto;padding:6px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh-3);animation:pickIn .2s var(--ease);transform-origin:top center;scrollbar-width:thin}
+.pick-list.ported{position:fixed;right:auto;z-index:120}
+.pick-list.up{transform-origin:bottom center}
+@keyframes pickIn{from{opacity:0;transform:translateY(-4px) scale(.98)}}
+.po{position:relative;width:100%;display:flex;align-items:center;gap:10px;min-height:42px;padding:5px 10px 5px calc(8px + var(--depth,0) * 22px);border-radius:9px;text-align:left;transition:background .14s}
+.po+.po{margin-top:1px}
+.po:hover,.po:focus{background:var(--sunk);outline:none}
+.po .sec-dot{width:28px;height:28px;border-radius:8px}
+.po .sec-dot .ico{width:15px;height:15px}
+.po-t b{font-size:13.5px}
+.po-ok{display:grid;color:var(--blue);opacity:0;transform:scale(.5);transition:opacity .2s,transform .25s var(--ease)}
+.po-ok .ico{width:16px;height:16px;stroke-width:2.4}
+.po[aria-selected=true]{background:var(--blue-soft)}
+.po[aria-selected=true] .po-t b{color:var(--blue)}
+.po[aria-selected=true] .po-ok{opacity:1;transform:none}
+.po-elbow{position:absolute;left:calc(8px + (var(--depth) - 1) * 22px + 13px);top:-1px;width:9px;height:calc(50% + 1px);border-left:1.5px solid var(--line);border-bottom:1.5px solid var(--line);border-bottom-left-radius:7px}
+.po-sep{font-size:11px;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.07em;padding:10px 10px 5px;border-top:1px solid var(--line2);margin-top:5px}
+
+/* compact create-section dialog */
+.dialog.sm-dlg{width:min(480px,100%)}
+.sm-ident{display:flex;align-items:flex-end;gap:12px;margin-bottom:15px}
+.sm-ident .field{flex:1;margin-bottom:0;min-width:0}
+.sm-ident .input{height:46px;font-size:15px}
+.sm-ib{position:relative;width:46px;height:46px;flex:none;border-radius:13px;display:grid;place-items:center;background:var(--soft,#EEF2FF);color:var(--c,var(--blue));border:1px solid color-mix(in srgb,var(--c,#2E5BFF) 24%,transparent);transition:transform .2s var(--ease),box-shadow .25s,background .3s,color .3s}
+.sm-ib:hover{transform:translateY(-1px);box-shadow:0 10px 20px -12px var(--c)}
+.sm-ib.on{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--c)}
+.sm-ib-i{display:grid}
+.sm-ib-i .ico{width:22px;height:22px}
+.sm-ib-i.pop{animation:icoPop .6s var(--ease)}
+.sm-ib-b{position:absolute;right:-6px;bottom:-6px;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink2);box-shadow:0 1px 3px rgba(16,24,40,.2),0 0 0 1px rgba(16,24,40,.05);transition:transform .2s var(--ease)}
+.sm-ib-b .ico{width:11px;height:11px;stroke-width:2.2}
+.sm-ib:hover .sm-ib-b{transform:scale(1.12) rotate(-8deg)}
+.icon-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--ease),margin .38s var(--ease);margin:0}
+.icon-panel.open{grid-template-rows:1fr;margin:-3px 0 16px}
+.ip-in{min-height:0;overflow:hidden;border-radius:14px;background:#FAFBFC;box-shadow:inset 0 0 0 1px var(--line)}
+.ip-head{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:600;color:var(--ink2);padding:11px 14px 8px}
+.ip-name{color:var(--c);font-weight:600}
+.icon-panel .icon-grid{grid-template-columns:repeat(9,minmax(0,1fr));gap:6px;padding:0 12px 12px}
+.icon-panel .icon-opt{border-radius:10px}
+.icon-panel .icon-opt .ico{width:19px;height:19px}
+.icon-panel .icon-opt::after{display:none}
+.icon-panel.open .icon-opt{animation:ipIn .35s var(--ease) both;animation-delay:calc(var(--i,0) * 14ms)}
+@keyframes ipIn{from{opacity:0;transform:scale(.7)}}
+.st-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue)!important;font-weight:600;font-size:13px!important}
+.st-link .ico{width:15px;height:15px}
+@media (max-width:560px){.icon-panel .icon-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
+/* write new */
+.wc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wc-lead{font-size:13px;color:var(--muted);margin:-2px 0 12px}
+.wcard{position:relative;display:flex;flex-direction:column;gap:16px;padding:18px 16px 16px;border:1px solid var(--line);border-radius:16px;background:#fff;text-align:left;overflow:hidden;transition:transform .28s var(--ease),box-shadow .28s,border-color .2s}
+.wcard::before{content:"";position:absolute;inset:0;background:radial-gradient(260px 150px at 0% 0%,var(--soft),transparent 72%);pointer-events:none}
+.wcard:hover,.wcard:focus-visible{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 40%,var(--line));box-shadow:0 20px 36px -22px color-mix(in srgb,var(--c) 65%,transparent);outline:none}
+.wc-art{position:relative;width:52px;height:60px}
+.wc-pg{position:absolute;inset:0;border-radius:10px;background:#fff;border:1.5px solid color-mix(in srgb,var(--c) 30%,var(--line));padding:13px 9px 0;display:flex;flex-direction:column;gap:5px;transition:transform .4s var(--ease)}
+.wc-pg i{height:4px;border-radius:3px;background:color-mix(in srgb,var(--c) 18%,#EEF0F3);transform-origin:left}
+.wc-pg i:nth-child(2){width:78%}.wc-pg i:nth-child(3){width:56%}
+.wcard:hover .wc-pg,.wcard:focus-visible .wc-pg{transform:rotate(-5deg) translateY(-2px)}
+.wcard:hover .wc-pg i,.wcard:focus-visible .wc-pg i{animation:typeLn .9s var(--ease) both}
+.wcard:hover .wc-pg i:nth-child(2){animation-delay:.12s}.wcard:hover .wc-pg i:nth-child(3){animation-delay:.24s}
+@keyframes typeLn{from{transform:scaleX(0)}}
+.wc-art b{position:absolute;left:-7px;bottom:7px;padding:3px 7px;border-radius:6px;background:var(--c);color:#fff;font:700 10.5px var(--f-body);letter-spacing:.05em;box-shadow:0 6px 12px -6px var(--c)}
+.wc-t{position:relative;display:flex;flex-direction:column;gap:4px}
+.wc-t b{font:600 16px var(--f-head)}
+.wc-t span{font-size:13px;color:var(--muted);line-height:1.5}
+.wc-go{position:absolute;right:14px;top:16px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);color:var(--ink2);transition:all .28s var(--ease)}
+.wc-go .ico{width:16px;height:16px}
+.wcard:hover .wc-go,.wcard:focus-visible .wc-go{background:var(--c);color:#fff;transform:translateX(3px)}
+.editor.solo{grid-template-columns:minmax(0,1fr);max-width:980px;margin:0 auto}
+.ed-src{display:flex;flex-direction:column;min-height:0;height:100%;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.ed-src:focus-within{border-color:#A9B9FF;box-shadow:0 0 0 4px rgba(46,91,255,.1)}
+.editor .ed-src textarea{flex:1;height:auto;min-height:0;border:0;border-radius:0;box-shadow:none;padding:18px 20px;font:13.5px/1.75 var(--f-mono)}
+.editor .ed-src textarea:focus{box-shadow:none}
+.editor.solo .ed-src textarea{font:15px/1.8 var(--f-body);padding:26px 30px;color:var(--ink)}
+.md-tools{display:flex;align-items:center;gap:2px;padding:6px 8px;border-bottom:1px solid var(--line2);background:#FCFCFD;flex-wrap:wrap}
+.md-tools .icon-btn{color:var(--muted)}
+.md-tools .icon-btn:hover{color:var(--ink)}
+.mt-sep{width:1px;height:18px;background:var(--line);margin:0 4px}
+.ed-foot{display:flex;gap:16px;padding:8px 16px;border-top:1px solid var(--line2);font-size:12px;color:var(--muted);background:#FCFCFD;font-variant-numeric:tabular-nums}
+.editor.write .paper{position:relative}
+.prev-empty{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;color:var(--faint);font-size:13px;pointer-events:none;background:#fff;border-radius:inherit;animation:fadeIn .3s}
+.prev-empty .ico{width:28px;height:28px;stroke-width:1.5}
+.write-head .ed-status{color:var(--amber)}
+.name-ext{display:flex;align-items:stretch}
+.name-ext .input{border-top-right-radius:0;border-bottom-right-radius:0;min-width:0}
+.name-ext span{display:grid;place-items:center;padding:0 12px;border:1px solid var(--line);border-left:0;border-radius:0 10px 10px 0;background:var(--sunk);color:var(--muted);font:600 13px var(--f-mono)}
+.field.err .name-ext .input{border-color:var(--red)}
+
+/* account menu */
+.menu:focus{outline:none}
+.acct-menu{min-width:276px;padding:8px}
+.acct-menu .menu-head{padding:8px 8px 12px;gap:12px}
+.avatar.lg{width:44px;height:44px;font-size:15px;background:linear-gradient(135deg,#2E5BFF,#7357FF);box-shadow:0 8px 16px -8px rgba(46,91,255,.7)}
+.mh-t{min-width:0}
+.mh-t b{font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mh-t>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-head .mh-role{display:inline-block;margin-top:5px;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;background:var(--sunk);color:var(--ink2)}
+.mh-plan{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:6px 8px;margin:0 4px 8px;padding:10px 12px;border-radius:11px;background:var(--sunk);font-size:12px;color:var(--ink2)}
+.mh-plan .ico{width:15px;height:15px;color:var(--cyan)}
+.mh-plan i{grid-column:1/-1;height:5px;border-radius:5px;background:linear-gradient(90deg,var(--cyan),var(--blue)) 0 0/var(--p) 100% no-repeat,#E4E8EF}
+.acct-menu .m-item{height:38px}
+#avatarBtn{background:linear-gradient(135deg,#1F2937,#3B4558);transition:transform .2s var(--ease),box-shadow .2s}
+#avatarBtn:hover{transform:scale(1.06)}
+#avatarBtn[aria-expanded=true]{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--blue)}
+
+/* author chip on shared documents */
+.meta-strip .av{display:grid}
+.av.xs{width:22px;height:22px;border-radius:50%;font-size:9.5px;letter-spacing:0;line-height:1}
+.meta-strip .by-link{padding:3px 11px 3px 3px;border-radius:99px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh-1);gap:7px;transition:border-color .2s,box-shadow .2s}
+.meta-strip .by-link:hover{border-color:#C9D0DB;box-shadow:0 6px 14px -8px rgba(16,24,40,.25)}
+
+@media (max-width:760px){
+  .page-actions .mode-sw{order:-1;flex:1 1 100%;margin:0}
+  .crumb-bar .mode-sw{flex:1 1 100%;order:2}
+  .mode-sw button{height:36px}
+  .hero-mode{position:relative;top:0;left:0;display:grid;width:max-content;margin:6px 0 4px}
+  .editor.show-prev .ed-src,.editor.write:not(.show-prev) .paper{display:none}
+  .editor.solo .ed-src textarea{padding:18px}
+  .wc-grid{grid-template-columns:minmax(0,1fr)}
+  .wcard{flex-direction:row;align-items:center;gap:14px;padding:14px}
+  .wc-art{width:44px;height:52px;flex:none}
+  .wc-go{position:static;margin-left:auto;flex:none}
+  .icon-panel .icon-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
 }
 
 /* ---------- reduced motion ---------- */
@@ -1392,8 +1543,7 @@ html.reduce .rv{opacity:1;transform:none}
       <button class="btn btn-primary btn-sm hide-m magnet" data-act="upload"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12" /><path d="m17 8-5-5-5 5" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></svg>Upload</button>
       <button class="icon-btn only-m" data-act="upload" aria-label="Upload document"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12" /><path d="m17 8-5-5-5 5" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></svg></button>
       <button class="icon-btn" data-act="notifs" id="bellBtn" aria-label="Activity"><svg class="ico" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg><span class="badge-dot" id="bellDot" hidden></span></button>
-      <a class="icon-btn hide-m" href="#/settings" aria-label="Settings"><svg class="ico" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx="12" cy="12" r="3" /></svg></a>
-      <button class="avatar" data-act="user" id="avatarBtn" aria-label="Account menu">N</button>
+      <button class="avatar" data-act="user" id="avatarBtn" aria-label="Account menu" aria-haspopup="menu" aria-expanded="false">N</button>
     </div>
   </header>
   <main id="view" class="view" tabindex="-1"></main>
@@ -1466,6 +1616,16 @@ function downloadBlob(blob, name) {
    ========================================================= */
 /* Icons: Lucide (lucide.dev), ISC licence; see the licence notice in <head>. */
 const ICONS = {
+  bold: '<path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8" />',
+  italic: '<line x1="19" x2="10" y1="4" y2="4" /><line x1="14" x2="5" y1="20" y2="20" /><line x1="15" x2="9" y1="4" y2="20" />',
+  heading: '<path d="M6 12h12" /><path d="M6 20V4" /><path d="M18 20V4" />',
+  listUl: '<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />',
+  quote: '<path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" />',
+  chevUD: '<path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" />',
+  userCog: '<path d="m14.305 19.53.923-.382" /><path d="m15.228 16.852-.923-.383" /><path d="m16.852 15.228-.383-.923" /><path d="m16.852 20.772-.383.924" /><path d="m19.148 15.228.383-.923" /><path d="m19.53 21.696-.382-.924" /><path d="M2 21a8 8 0 0 1 10.434-7.62" /><path d="m20.772 16.852.924-.383" /><path d="m20.772 19.148.924.383" /><circle cx="10" cy="8" r="5" /><circle cx="18" cy="18" r="3" />',
+  notebookPen: '<path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /><path d="M2 6h4" /><path d="M2 10h4" /><path d="M2 14h4" /><path d="M2 18h4" /><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />',
+  letterText: '<path d="M15 5h6" /><path d="M15 12h6" /><path d="M3 19h18" /><path d="m3 12 3.553-7.724a.5.5 0 0 1 .894 0L11 12" /><path d="M3.92 10h6.16" />',
+  squarePen: '<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />',
   fileCode: '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 12.5 8 15l2 2.5" /><path d="m14 12.5 2 2.5-2 2.5" />',
   fileImage: '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><circle cx="10" cy="12" r="2" /><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />',
   fileText: '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" />',
@@ -1594,7 +1754,6 @@ const TYPES = {
   table: { label: 'CSV', c: '#0E9F5E', b: '#E7F6EE', mime: 'text/csv' },
   file: { label: 'FILE', c: '#475467', b: '#F0F2F5', mime: 'application/octet-stream' }
 };
-const DOC_TYPES = ['html', 'md', 'pdf', 'txt', 'code', 'image'];
 const EXT = {
   html: 'html', htm: 'html', md: 'md', markdown: 'md', txt: 'txt', log: 'txt', pdf: 'pdf',
   png: 'image', jpg: 'image', jpeg: 'image', gif: 'image', webp: 'image', svg: 'image',
@@ -1879,7 +2038,7 @@ async function ensureContent(d) {
 function friendly(e) {
   const m = String((e && (e.message || e.error_description || e.error)) || e || '');
   if (/failed to fetch|networkerror|load failed/i.test(m)) return 'Check your internet connection and try again.';
-  if (/row-level security|permission|unauthorized|not allowed|403/i.test(m)) return 'Permission denied. Sign out and in again, and check the storage policies.';
+  if (/row-level security|permission|unauthorized|not allowed|403/i.test(m)) return 'Permission denied. Log out and in again, and check the storage policies.';
   if (/payload too large|exceeded the maximum|413/i.test(m)) return `The file is larger than the ${CFG.maxFileMB} MB limit.`;
   if (/already exists|duplicate/i.test(m)) return 'A file with this name already exists.';
   if (/jwt|session|expired/i.test(m)) return 'Your session expired. Sign in again.';
@@ -2080,7 +2239,8 @@ function promptBox({ title, label, value = '', ok = 'Save', validate }) {
 /* =========================================================
    Menus (anchored dropdowns + right-click)
    ========================================================= */
-let openMenuEl = null, openMenuAnchor = null;
+let openMenuEl = null, openMenuAnchor = null, clickByKeys = false;
+document.addEventListener('click', e => { clickByKeys = e.detail === 0; }, true);
 function closeMenus() {
   if (openMenuEl) { openMenuEl.remove(); openMenuEl = null; }
   if (openMenuAnchor) { openMenuAnchor.setAttribute('aria-expanded', 'false'); openMenuAnchor = null; }
@@ -2102,7 +2262,7 @@ function openMenu(anchor, items, { html = '', cls = '' } = {}) {
   if (same) return;
   const m = document.createElement('div');
   m.className = 'menu ' + cls;
-  m.setAttribute('role', 'menu');
+  m.setAttribute('role', 'menu'); m.tabIndex = -1;
   m.innerHTML = html + items.map((it, i) => it === '-' ? '<hr>' : `<button class="m-item${it.danger ? ' danger' : ''}" role="menuitem" data-i="${i}">${ico(it.icon)}<span>${esc(it.label)}</span>${it.kbd ? `<span class="kbd">${esc(it.kbd)}</span>` : ''}</button>`).join('');
   $('#menuRoot').appendChild(m);
   placeMenu(m, anchor);
@@ -2115,11 +2275,13 @@ function openMenu(anchor, items, { html = '', cls = '' } = {}) {
   m.addEventListener('keydown', e => {
     const btns = $$('.m-item', m); const i = btns.indexOf(document.activeElement);
     if (e.key === 'ArrowDown') { e.preventDefault(); btns[(i + 1) % btns.length].focus(); }
-    if (e.key === 'ArrowUp') { e.preventDefault(); btns[(i - 1 + btns.length) % btns.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); btns[i < 0 ? btns.length - 1 : (i - 1 + btns.length) % btns.length].focus(); }
+    if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); btns[e.key === 'Home' ? 0 : btns.length - 1].focus(); }
     if (e.key === 'Escape') { const a = openMenuAnchor; closeMenus(); a && a.focus && a.focus(); }
     if (e.key === 'Tab') closeMenus();
   });
-  const first = m.querySelector('.m-item'); if (first && !(anchor && anchor.pointer)) first.focus({ preventScroll: true });
+  const first = m.querySelector('.m-item'), byPointer = (anchor && anchor.pointer) || !clickByKeys;
+  if (first && !byPointer) first.focus({ preventScroll: true }); else m.focus({ preventScroll: true });
   return m;
 }
 document.addEventListener('mousedown', e => {
@@ -2411,19 +2573,12 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
   </svg>`;
 }
 function heroData() {
-  if (state.settings.heroMode === 'storage') {
-    const used = usedBytes(), fill = used / CAP, pct = fill * 100;
-    const bands = roots().map(s => ({ s, v: deepAll(s.id).reduce((a, d) => a + d.size, 0) })).filter(b => b.v);
-    return { fill, bands: bands.map(b => ({ id: b.s.id, label: b.s.name, sub: fmtSize(b.v), v: b.v, c: colorOf(b.s)[0] })), big: (pct < 1 ? '<1' : Math.round(pct)) + '%', small: `${fmtSize(used)} of ${CAP_LABEL} stored` };
-  }
-  const goal = Math.max(1, Math.round(+state.settings.goal) || 50), n = live().length;
-  const bands = roots().map(s => ({ s, v: deepDocs(s.id).length })).filter(b => b.v);
-  return { fill: n / goal, bands: bands.map(b => ({ id: b.s.id, label: b.s.name, sub: String(b.v), v: b.v, c: colorOf(b.s)[0] })), big: Math.round(n / goal * 100) + '%', small: n >= goal ? `Goal of ${goal} documents reached` : `${n} of ${goal} documents` };
+  const sp = currentSpace(), mm = MODE[sp], goal = Math.max(1, Math.round(+state.settings.goal) || 50), n = modeList(sp).length;
+  const bands = roots().map(s => ({ s, v: modeDeep(s.id, sp).length })).filter(b => b.v);
+  return { fill: n / goal, bands: bands.map(b => ({ id: b.s.id, label: b.s.name, sub: String(b.v), v: b.v, c: colorOf(b.s)[0] })), big: Math.round(n / goal * 100) + '%', small: n >= goal ? `Goal of ${goal} ${mm.many} reached` : `${n} of ${goal} ${mm.many}` };
 }
 function heroArt() {
-  const m = state.settings.heroMode === 'storage' ? 'storage' : 'docs';
-  return `<div class="seg hero-mode" role="group" aria-label="Barrel shows"><button data-act="hero-mode" data-mode="docs" aria-pressed="${m === 'docs'}">Documents</button><button data-act="hero-mode" data-mode="storage" aria-pressed="${m === 'storage'}">Storage</button></div>
-  <div class="barrel-wrap" id="barrelWrap">${barrelSVG({ ...heroData(), k: 'hb' })}</div>`;
+  return `${modeSwitch({ cls: 'hero-mode' })}<div class="barrel-wrap" id="barrelWrap">${barrelSVG({ ...heroData(), k: 'hb' })}</div>`;
 }
 function mountTilt(host, sel) {
   if (!host || host.dataset.tilt) return; host.dataset.tilt = '1';
@@ -2492,16 +2647,17 @@ function docRow(d, i = 0, { when = 'updated', q = '', trash = false } = {}) {
   const acts = trash
     ? `<button class="btn btn-sm" data-act="restore" data-id="${d.id}">${ico('restore')}Restore</button><button class="icon-btn sm" data-act="purge" data-id="${d.id}" aria-label="Delete ${esc(d.name)} forever">${ico('trash')}</button>`
     : `<button class="icon-btn sm" data-act="download" data-id="${d.id}" aria-label="Download ${esc(d.name)}" title="Download">${ico('download')}</button>${starBtn(d)}<button class="icon-btn sm" data-act="doc-menu" data-id="${d.id}" aria-haspopup="menu" aria-expanded="false" aria-label="Options for ${esc(d.name)}">${ico('more')}</button>`;
-  return `<div class="row rv" style="${stagger(i)};${secVars(s)}" ${trash ? '' : `data-act="open-doc" data-id="${d.id}" data-ctx="doc" tabindex="0" role="link" aria-label="Open ${esc(d.name)}"`}>
-    ${glyph(d)}
+  return `<div class="row rv${isFile(d) ? ' is-file' : ''}" style="${stagger(i)};${secVars(s)}" ${trash ? '' : `data-act="open-doc" data-id="${d.id}" data-ctx="doc" tabindex="0" role="link" aria-label="Open ${esc(d.name)}"`}>
+    ${isFile(d) ? fileIcon(d, 'ft-ic row-fic') : glyph(d)}
     <div class="row-main"><div class="row-name">${hl(d.name, q)}</div><div class="row-sub"><span class="sec"><i></i>${esc(s ? pathLabel(s.id, 2) : 'Unsorted')}</span>${isPublic(d) ? `<span class="vis-inline">${ico('globe')}Public</span>` : ''}<span>${label}</span><span>${fmtSize(d.size)}</span></div></div>
     ${trash ? '' : `<div class="row-tags">${tagPills(d.tags, 2, q)}</div>`}
     <div class="row-act">${acts}</div>
   </div>`;
 }
 function secCard(s, i = 0, opts = {}) {
-  const docs = opts.docs || deepDocs(s.id), sub = opts.kids != null ? opts.kids : kids(s.id).length;
-  const types = [...new Set(docs.map(d => d.type))];
+  const sp = opts.space || currentSpace(), mm = MODE[sp];
+  const docs = opts.docs || modeDeep(s.id, sp), sub = opts.kids != null ? opts.kids : kids(s.id).length;
+  const types = [...new Map(docs.map(d => { const c = isFile(d) ? catOf(d) : (TYPES[d.type] || TYPES.txt); return [c.c, c.label]; })).entries()];
   const pub = opts.docs ? 0 : docs.filter(isPublic).length;
   const act = opts.href ? `data-act="go" data-href="${esc(opts.href)}"` : `data-act="open-section" data-id="${esc(s.id)}" data-ctx="sec"`;
   return `<article class="sec-card rv" style="${stagger(i)};${secVars(s)}" ${act} tabindex="0" role="link" aria-label="Open ${esc(s.name)}">
@@ -2509,8 +2665,8 @@ function secCard(s, i = 0, opts = {}) {
     <div class="sec-card-top"><span class="sec-ico">${ico(s.icon)}</span>${opts.readonly ? '' : `<button class="icon-btn sm" data-act="sec-menu" data-id="${esc(s.id)}" aria-haspopup="menu" aria-expanded="false" aria-label="Options for ${esc(s.name)}">${ico('more')}</button>`}</div>
     <h3 class="sec-name">${esc(s.name)}</h3>
     <p class="sec-desc">${esc(s.description || (opts.readonly ? 'Shared section' : 'No description yet.'))}</p>
-    <div class="sec-foot"><span><b>${docs.length}</b> ${docs.length === 1 ? 'doc' : 'docs'}</span>${sub ? `<span><b>${sub}</b> ${sub === 1 ? 'module' : 'modules'}</span>` : ''}${pub ? `<span class="vis-inline">${ico('globe')}${pub}</span>` : ''}
-    <span class="sec-types" aria-hidden="true">${types.map(t => `<i style="--tc:${TYPES[t].c}" title="${TYPES[t].label}"></i>`).join('')}</span></div>
+    <div class="sec-foot"><span><b>${docs.length}</b> ${docs.length === 1 ? mm.short : mm.shorts}</span>${sub ? `<span><b>${sub}</b> ${sub === 1 ? 'module' : 'modules'}</span>` : ''}${pub ? `<span class="vis-inline">${ico('globe')}${pub}</span>` : ''}
+    <span class="sec-types" aria-hidden="true">${types.slice(0, 6).map(([c, l]) => `<i style="--tc:${c}" title="${esc(l)}"></i>`).join('')}</span></div>
   </article>`;
 }
 
@@ -2518,49 +2674,87 @@ function secCard(s, i = 0, opts = {}) {
    Sidebar
    ========================================================= */
 const initials = n => (String(n || '').trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2) || '?').toUpperCase();
-const FILE_ROUTES = ['files', 'file'], DOC_ROUTES = ['home', 'documents', 'favorites', 'recent', 'doc', 'edit'];
-function currentSpace() {
-  const r = route;
+const FILE_ROUTES = ['files', 'file'], DOC_ROUTES = ['documents', 'doc', 'edit', 'write'];
+/* One switch decides what every screen shows: documents or files */
+const MODE = {
+  docs: { one: 'document', many: 'documents', One: 'Document', Many: 'Documents', short: 'doc', shorts: 'docs', icon: 'docs', all: '#/documents' },
+  files: { one: 'file', many: 'files', One: 'File', Many: 'Files', short: 'file', shorts: 'files', icon: 'folderOpen', all: '#/files' }
+};
+function routeSpace(r) {
   if (FILE_ROUTES.includes(r.name)) return 'files';
-  if (r.name === 'section') return r.q.tab === 'files' ? 'files' : 'docs';
   if (DOC_ROUTES.includes(r.name)) return 'docs';
-  return state.settings.space === 'files' ? 'files' : 'docs';
+  if (r.name === 'section' && (r.q.tab === 'files' || r.q.tab === 'docs')) return r.q.tab;
+  return null;
 }
-const secHref = (id, space) => `#/section/${encodeURIComponent(id)}${space === 'files' ? '?tab=files' : ''}`;
+const currentSpace = () => state.settings.space === 'files' ? 'files' : 'docs';
+const MM = () => MODE[currentSpace()];
+const ofMode = (d, sp = currentSpace()) => sp === 'files' ? isFile(d) : !isFile(d);
+const modeList = (sp = currentSpace()) => sp === 'files' ? liveFiles() : live();
+const modeDeep = (id, sp = currentSpace()) => sp === 'files' ? deepFiles(id) : deepDocs(id);
+const modeBytes = (sp = currentSpace()) => modeList(sp).reduce((a, d) => a + (d.size || 0), 0);
+let modeFrom = null, modeFromTimer = 0, modeNav = false;
+function modeSwitch({ counts = null, cls = '' } = {}) {
+  const sp = currentSpace(), from = modeFrom || sp;
+  const n = k => counts ? `<span class="ms-n">${counts[k]}</span>` : '';
+  return `<div class="mode-sw ${cls}" role="tablist" aria-label="Show documents or files" data-from="${from}" data-to="${sp}"><span class="ms-thumb${from === 'files' ? ' r' : ''}" aria-hidden="true"></span>`
+    + `<button role="tab" data-act="mode" data-mode="docs" aria-selected="${sp === 'docs'}" title="Show documents">${ico('docs')}<span class="ms-l">Documents</span>${n('docs')}</button>`
+    + `<button role="tab" data-act="mode" data-mode="files" aria-selected="${sp === 'files'}" title="Show files">${ico('folderOpen')}<span class="ms-l">Files</span>${n('files')}</button></div>`;
+}
+function animateModeSwitch(root = document) {
+  $$('.mode-sw', root).forEach(sw => {
+    if (sw.dataset.from === sw.dataset.to) return;
+    const th = sw.querySelector('.ms-thumb'); sw.dataset.from = sw.dataset.to;
+    requestAnimationFrame(() => requestAnimationFrame(() => th.classList.toggle('r', sw.dataset.to === 'files')));
+  });
+}
+function setMode(m) {
+  m = m === 'files' ? 'files' : 'docs';
+  if (m === currentSpace()) return;
+  modeFrom = currentSpace(); clearTimeout(modeFromTimer); modeFromTimer = setTimeout(() => { modeFrom = null; }, 900);
+  state.settings.space = m; save(); modeNav = true;
+  if (route.name === 'documents' || route.name === 'files') { go(m === 'files' ? '/files' : '/documents'); return; }
+  if (route.name === 'section') { go(secHref(route.id, m).slice(1)); return; }
+  const y = scrollY; render(false); scrollTo(0, y);
+}
+/* animated word swap: letters of the old word lift out, the new word rises in */
+function morphWords(root) {
+  $$('.morph[data-from]', root).forEach(el => {
+    const to = el.dataset.to || el.textContent, from = el.dataset.from; el.removeAttribute('data-from');
+    if (!effectsOn() || from === to) return;
+    const letters = (w, d0) => [...w].map((ch, i) => `<i style="animation-delay:${d0 + i * 22}ms">${ch === ' ' ? '&nbsp;' : esc(ch)}</i>`).join('');
+    el.innerHTML = `<span class="mw out">${letters(from, 0)}</span><span class="mw in">${letters(to, 90)}</span>`;
+    const wOut = el.firstChild.getBoundingClientRect().width, wIn = el.lastChild.getBoundingClientRect().width;
+    el.classList.add('run'); el.style.width = wOut + 'px'; void el.offsetWidth; el.style.width = wIn + 'px';
+    setTimeout(() => { if (!document.contains(el)) return; el.classList.remove('run'); el.style.width = ''; el.textContent = to; }, 120 + to.length * 22 + 520);
+  });
+}
+const morph = (k, extra = '') => { const now_ = MM()[k], from = modeFrom && modeFrom !== currentSpace() ? MODE[modeFrom][k] : ''; return `<span class="morph${extra}"${from ? ` data-from="${esc(from)}" data-to="${esc(now_)}"` : ''}>${esc(now_)}</span>`; };
+const secHref = (id, space) => `#/section/${encodeURIComponent(id)}${space === 'files' ? '?tab=files' : space === 'docs' ? '?tab=docs' : ''}`;
 function renderSidebar() {
-  const r = route, sp = currentSpace(), L = sp === 'files' ? liveFiles() : live();
-  const item = (href, icon, label, count, active) => `<a class="nav-item${active ? ' active' : ''}" href="${href}"${active ? ' aria-current="page"' : ''} title="${label}">${ico(icon)}<span class="lbl">${label}</span>${count ? `<span class="count">${count}</span>` : ''}</a>`;
+  const r = route, sp = currentSpace(), L = modeList(sp), mm = MODE[sp];
+  const item = (href, icon, label, count, active, extra = '') => `<a class="nav-item${active ? ' active' : ''}" href="${href}"${active ? ' aria-current="page"' : ''} title="${label}"${extra}>${ico(icon)}<span class="lbl">${label}</span>${count ? `<span class="count">${count}</span>` : ''}</a>`;
   const curSec = r.name === 'section' ? r.id : (r.name === 'doc' || r.name === 'edit' || r.name === 'file') ? (docById(r.id) || {}).sectionId : null;
   const openPath = new Set(curSec ? pathOf(curSec).map(x => x.id) : []);
   const open = state.settings.open || {};
-  const pubCount = L.filter(isPublic).length;
-  const fq = r.name === 'files' ? r.q : {};
-  let h = `<div class="space-sw" role="tablist" aria-label="Switch space"><span class="sw-thumb${sp === 'files' ? ' r' : ''}" aria-hidden="true"></span><button role="tab" data-act="space" data-space="docs" aria-selected="${sp === 'docs'}" title="Documents">${ico('docs')}<span class="lbl">Documents</span></button><button role="tab" data-act="space" data-space="files" aria-selected="${sp === 'files'}" title="Files">${ico('folderOpen')}<span class="lbl">Files</span></button></div>`;
-  if (sp === 'files') h += '<div class="nav-label">Files</div>' +
-    item('#/files', 'hardDrive', 'All files', L.length, r.name === 'files' && !fq.vis && !fq.fav && !fq.cat) +
-    item('#/files?fav=1', 'star', 'Favorite files', L.filter(d => d.favorite).length, r.name === 'files' && fq.fav === '1') +
-    item('#/files?vis=public', 'globe', 'Shared publicly', L.filter(isPublic).length, r.name === 'files' && fq.vis === 'public') +
-    item('#/trash', 'trash', 'Trash', trashed().length, r.name === 'trash');
-  else h += '<div class="nav-label">Library</div>' +
+  let h = '<div class="nav-label">Library</div>' +
     item('#/home', 'home', 'Home', 0, r.name === 'home') +
-    item('#/documents', 'docs', 'All documents', L.length, r.name === 'documents' && !r.q.vis) +
+    item(mm.all, mm.icon, 'All ' + mm.many, L.length, r.name === 'documents' || r.name === 'files', ' data-nav="all"') +
     item('#/favorites', 'star', 'Favorites', L.filter(d => d.favorite).length, r.name === 'favorites') +
     item('#/recent', 'clock', 'Recent', 0, r.name === 'recent') +
-    item('#/documents?vis=public', 'globe', 'Shared publicly', pubCount, r.name === 'documents' && r.q.vis === 'public') +
-    item('#/trash', 'trash', 'Trash', trashed().length, r.name === 'trash');
+    item('#/trash', 'trash', 'Trash', trashed().filter(d => ofMode(d, sp)).length, r.name === 'trash');
   h += '<div class="nav-divider"></div><div class="nav-label">Workspace</div>' + item('#/community', 'users', 'Community', 0, r.name === 'community' || r.name === 'pdoc');
-  h += `<div class="nav-divider"></div><div class="nav-label"><span>Sections</span><button class="icon-btn" data-act="add-section" aria-label="Add section" title="Add section (N)">${ico('plus')}</button></div><div id="secList" role="tree">`;
-  const row = (s, depth) => {
-    const ch = kids(s.id), a = curSec === s.id, isOpen = !!open[s.id] || (openPath.has(s.id) && curSec !== s.id);
-    let out = `<div class="sec-row" role="treeitem" aria-expanded="${ch.length ? isOpen : ''}" draggable="true" data-sid="${esc(s.id)}" data-pid="${esc(s.parentId || '')}" data-depth="${depth}" style="${secVars(s)};--depth:${depth}">
-      ${ch.length ? `<button class="tw${isOpen ? ' open' : ''}" data-act="toggle-node" data-id="${esc(s.id)}" aria-label="${isOpen ? 'Collapse' : 'Expand'} ${esc(s.name)}">${ico('chevR')}</button>` : ''}
-      <a class="nav-item${a ? ' active' : ''}" href="${secHref(s.id, sp)}" title="${esc(s.name)}" data-ctx="sec" data-id="${esc(s.id)}"${a ? ' aria-current="page"' : ''}><span class="sec-dot">${ico(s.icon)}</span><span class="lbl">${esc(s.name)}</span><span class="count">${(sp === 'files' ? deepFiles(s.id) : deepDocs(s.id)).length || ''}</span></a>
-      <button class="more" data-act="sec-menu" data-id="${esc(s.id)}" aria-haspopup="menu" aria-expanded="false" aria-label="Options for ${esc(s.name)}">${ico('more')}</button></div>`;
-    if (ch.length && isOpen) out += ch.map(c => row(c, depth + 1)).join('');
-    return out;
+  h += `<div class="nav-divider"></div><div class="nav-label"><span>Sections</span><button class="icon-btn" data-act="add-section" aria-label="Add section" title="Add section (N)">${ico('plus')}</button></div><div id="secList" role="tree" aria-label="Sections">`;
+  const node = (s, depth) => {
+    const ch = kids(s.id), a = curSec === s.id, n = modeDeep(s.id, sp).length;
+    const isOpen = ch.length > 0 && (open[s.id] === true || (open[s.id] !== false && openPath.has(s.id)));
+    return `<div class="tree-node${isOpen ? ' open' : ''}${ch.length ? ' has-kids' : ''}${a ? ' cur' : ''}" style="${secVars(s)}">
+      <div class="sec-row" role="treeitem" aria-level="${depth + 1}"${ch.length ? ` aria-expanded="${isOpen}"` : ''} draggable="true" data-sid="${esc(s.id)}" data-pid="${esc(s.parentId || '')}" data-depth="${depth}">
+        <a class="nav-item${a ? ' active' : ''}" href="#/section/${encodeURIComponent(s.id)}" title="${esc(s.name)}" data-ctx="sec" data-id="${esc(s.id)}"${a ? ' aria-current="page"' : ''}><span class="sec-dot">${ico(s.icon)}</span><span class="lbl">${esc(s.name)}</span>${ch.length ? `<span class="tw" data-act="toggle-node" data-id="${esc(s.id)}" role="button" aria-label="${isOpen ? 'Collapse' : 'Expand'} ${esc(s.name)}" title="${isOpen ? 'Collapse' : 'Expand'}">${ico('chevR')}</span>` : ''}<span class="grow"></span>${n ? `<span class="count">${n}</span>` : ''}</a>
+        <button class="more" data-act="sec-menu" data-id="${esc(s.id)}" aria-haspopup="menu" aria-expanded="false" aria-label="Options for ${esc(s.name)}">${ico('more')}</button>
+      </div>${ch.length ? `<div class="tree-kids" role="group"><div class="tk-in">${ch.map(c => node(c, depth + 1)).join('')}</div></div>` : ''}</div>`;
   };
-  h += roots().map(s => row(s, 0)).join('') + '</div>';
-  if (!state.sections.length) h += `<button class="nav-item" data-act="add-section" style="width:100%">${ico('plus')}<span class="lbl">Create a section</span></button>`;
+  h += roots().map(s => node(s, 0)).join('') + '</div>';
+  if (!state.sections.length) h += `<button class="nav-item nav-new" data-act="add-section" style="width:100%">${ico('plus')}<span class="lbl">Create a section</span></button>`;
   $('#nav').innerHTML = h;
   const used = usedBytes(), pct = Math.min(100, used / CAP * 100);
   $('#sbFoot').innerHTML = `<div class="sb-storage"><div style="display:flex;justify-content:space-between"><span>Storage</span><span>${pct < 1 ? '<1' : pct.toFixed(0)}%</span></div><div class="bar"><i style="width:${Math.max(1.5, pct).toFixed(1)}%"></i></div><span>${fmtSize(used)} of ${CAP_LABEL}</span></div>` + item('#/settings', 'settings', 'Settings', 0, r.name === 'settings');
@@ -2580,55 +2774,62 @@ function stat({ icon, c, label, val, unit = '', meta, extra = '' }) {
   return `<div class="stat" style="--c:${c}"><div class="stat-label">${ico(icon)}${label}</div><div class="stat-value"><span data-count="${val}" data-dec="${dec}" data-final="${val}">${effectsOn() ? 0 : val}</span>${unit ? `<small>${unit}</small>` : ''}</div><div class="stat-meta">${meta}</div>${extra}</div>`;
 }
 function homeFavs() {
-  const favs = live().filter(d => d.favorite).sort((a, b) => (b.favAt || 0) - (a.favAt || 0)).slice(0, 5);
+  const sp = currentSpace(), mm = MODE[sp];
+  const favs = modeList(sp).filter(d => d.favorite).sort((a, b) => (b.favAt || 0) - (a.favAt || 0)).slice(0, 5);
   return favs.length ? `<div class="rows compact">${favs.map((d, i) => docRow(d, i)).join('')}</div>`
-    : `<div class="empty" style="padding:30px 16px">${emptyArt('fav')}<h3>No favorites yet</h3><p>Star a document to keep it here.</p></div>`;
+    : `<div class="empty" style="padding:30px 16px">${emptyArt('fav')}<h3>No favorite ${mm.many} yet</h3><p>Star a ${mm.one} to keep it here.</p></div>`;
 }
+const HERO_COPY = {
+  docs: 'Upload engineering documents once and open them from any device, organised by section and searchable in seconds.',
+  files: 'Keep CAD models, PCB and Gerber files, firmware, office files and media together, organised by section and ready on any device.'
+};
 function viewHome() {
-  const L = live(), S = roots(), t = now();
+  const sp = currentSpace(), mm = MODE[sp], L = modeList(sp), S = roots(), t = now();
   const name = (state.settings.user || '').trim();
-  const docsMonth = L.filter(d => t - d.createdAt < 30 * DAY).length;
+  const addMonth = L.filter(d => t - d.createdAt < 30 * DAY).length;
   const secMonth = state.sections.filter(s => t - s.createdAt < 30 * DAY).length;
   const favs = L.filter(d => d.favorite), favWeek = favs.filter(d => t - (d.favAt || 0) < 7 * DAY).length;
-  const used = usedBytes(), pct = used / CAP * 100, [num, unit] = fmtSize(used).split(' ');
+  const used = modeBytes(sp), pct = used / CAP * 100, [num, unit] = fmtSize(used).split(' ');
   const circ = 2 * Math.PI * 18;
-  const comp = S.map(s => ({ s, n: deepDocs(s.id).length })).filter(x => x.n);
+  const comp = S.map(s => ({ s, n: modeDeep(s.id, sp).length })).filter(x => x.n);
   const recent = [...L].sort((a, b) => touched(b) - touched(a)).slice(0, 6);
+  const upAct = sp === 'files' ? 'upload-files' : 'upload';
+  const switching = modeFrom && modeFrom !== sp ? ' swap' : '';
   return `
-  <section class="hero rv" id="hero" aria-labelledby="heroTitle">
+  <section class="hero rv" id="hero" aria-labelledby="heroTitle" data-mode="${sp}">
     <div class="hero-text">
       <p class="hero-hi"><span class="live" aria-hidden="true"></span>Welcome back${name ? ', ' + esc(name) : ''}</p>
-      <h1 class="hero-title" id="heroTitle"><span class="ln"><span>Your documents,</span></span><span class="ln"><span>stored and ready</span></span></h1>
-      <p class="hero-copy">Upload engineering documents once and open them from any device, organised by section and searchable in seconds.</p>
+      <h1 class="hero-title" id="heroTitle"><span class="ln"><span>Your ${morph('many')},</span></span><span class="ln"><span>stored and ready</span></span></h1>
+      <p class="hero-copy${switching}">${HERO_COPY[sp]}</p>
       <div class="hero-cta">
         <button class="btn btn-primary btn-lg magnet" data-act="add-section">${ico('plus')}Add section</button>
-        <button class="btn btn-lg magnet" data-act="upload">${ico('upload')}Upload document</button>
+        <button class="btn btn-lg magnet up-morph" data-act="${upAct}">${ico('upload')}<span>Upload ${morph('one')}</span></button>
       </div>
       <p class="hero-hint"><kbd>/</kbd> search <kbd>U</kbd> upload <kbd>N</kbd> new section <kbd>?</kbd> all shortcuts</p>
     </div>
     <div class="hero-art" id="heroArt">${heroArt()}</div>
   </section>
 
-  <section class="stats rv" aria-label="Library statistics">
+  <section class="stats rv${switching}" aria-label="Library statistics">
     ${stat({ icon: 'folder', c: '#7357FF', label: 'Sections', val: state.sections.length, meta: secMonth ? `<b>+${secMonth}</b> this month` : 'No new sections this month' })}
-    ${stat({ icon: 'docs', c: '#2E5BFF', label: 'Documents', val: L.length, meta: docsMonth ? `<b>+${docsMonth}</b> this month` : 'Nothing added this month' })}
-    ${stat({ icon: 'star', c: '#D97F06', label: 'Favorites', val: favs.length, meta: favWeek ? `<b>+${favWeek}</b> this week` : 'Star documents you return to' }).replace('<span data-count', '<span data-stat="fav" data-count')}
-    ${stat({ icon: 'db', c: '#0B9DB5', label: 'Storage used', val: num, unit, meta: `${pct < 1 ? 'Under 1' : pct.toFixed(0)}% of ${CAP_LABEL} capacity`, extra: `<svg class="gauge" viewBox="0 0 46 46" aria-hidden="true"><circle class="g-bg" cx="23" cy="23" r="18"/><circle class="g-fg" cx="23" cy="23" r="18" stroke-dasharray="0 ${circ.toFixed(1)}" data-dash="${Math.max(1.5, circ * Math.min(1, pct / 100)).toFixed(1)} ${circ.toFixed(1)}"/></svg>` })}
-    ${comp.length ? `<div class="composition"><span class="comp-title">Library by section</span><div class="comp-bar" role="img" aria-label="Documents per section">${comp.map((x, i) => `<span style="${secVars(x.s)};flex:${x.n};animation-delay:${200 + i * 70}ms" title="${esc(x.s.name)}: ${plural(x.n, 'document')}"></span>`).join('')}</div>
+    ${stat({ icon: mm.icon, c: sp === 'files' ? '#0B9DB5' : '#2E5BFF', label: mm.Many, val: L.length, meta: addMonth ? `<b>+${addMonth}</b> this month` : 'Nothing added this month' })}
+    ${stat({ icon: 'star', c: '#D97F06', label: 'Favorites', val: favs.length, meta: favWeek ? `<b>+${favWeek}</b> this week` : `Star ${mm.many} you return to` }).replace('<span data-count', '<span data-stat="fav" data-count')}
+    ${stat({ icon: 'db', c: '#0B9DB5', label: 'Storage used', val: num, unit, meta: `${mm.Many} only, ${pct < 1 ? 'under 1' : pct.toFixed(0)}% of ${CAP_LABEL}`, extra: `<svg class="gauge" viewBox="0 0 46 46" aria-hidden="true"><circle class="g-bg" cx="23" cy="23" r="18"/><circle class="g-fg" cx="23" cy="23" r="18" stroke-dasharray="0 ${circ.toFixed(1)}" data-dash="${Math.max(1.5, circ * Math.min(1, pct / 100)).toFixed(1)} ${circ.toFixed(1)}"/></svg>` })}
+    ${comp.length ? `<div class="composition"><span class="comp-title">${mm.Many} by section</span><div class="comp-bar" role="img" aria-label="${mm.Many} per section">${comp.map((x, i) => `<span style="${secVars(x.s)};flex:${x.n};animation-delay:${200 + i * 70}ms" title="${esc(x.s.name)}: ${plural(x.n, mm.one)}"></span>`).join('')}</div>
       <div class="comp-legend">${comp.map(x => `<a href="#/section/${encodeURIComponent(x.s.id)}" style="${secVars(x.s)}"><i></i>${esc(x.s.name)} ${x.n}</a>`).join('')}</div></div>` : ''}
   </section>
 
   <section class="block" aria-labelledby="secHead">
-    <div class="block-head"><h2 class="block-title" id="secHead">Sections</h2>${S.length ? `<a class="link" href="#/documents">Browse all documents${ico('arrow')}</a>` : ''}</div>
+    <div class="block-head"><h2 class="block-title" id="secHead">Sections</h2>${S.length ? `<a class="link" href="${mm.all}">Browse all ${mm.many}${ico('arrow')}</a>` : ''}</div>
     ${S.length ? `<div class="grid grid-sections">${S.map((s, i) => secCard(s, i)).join('')}<button class="add-card rv" style="${stagger(S.length)}" data-act="add-section"><span class="plus">${ico('plus')}</span>New section</button></div>`
-      : empty({ kind: 'section', title: 'Set up your first sections', text: 'Sections group related documents, like Electronics, VLSI or Projects. Create your own, or start with a ready-made engineering set you can rename later.', actions: `<button class="btn" data-act="starter-sections">${ico('layers')}Use starter sections</button><button class="btn btn-primary" data-act="add-section">${ico('plus')}Add section</button>` })}
+      : empty({ kind: 'section', title: 'Set up your first sections', text: 'Sections group related documents and files, like Electronics, VLSI or Projects. Create your own, or start with a ready-made engineering set you can rename later.', actions: `<button class="btn" data-act="starter-sections">${ico('layers')}Use starter sections</button><button class="btn btn-primary" data-act="add-section">${ico('plus')}Add section</button>` })}
   </section>
 
-  <div class="split block">
+  <div class="split block${switching}">
     <section aria-labelledby="recHead">
-      <div class="block-head"><h2 class="block-title" id="recHead">Recent documents</h2>${recent.length ? `<a class="link" href="#/recent">View all${ico('arrow')}</a>` : ''}</div>
+      <div class="block-head"><h2 class="block-title" id="recHead">Recent ${mm.many}</h2>${recent.length ? `<a class="link" href="#/recent">View all${ico('arrow')}</a>` : ''}</div>
       ${recent.length ? `<div class="rows">${recent.map((d, i) => docRow(d, i, { when: 'opened' })).join('')}</div>`
-        : empty({ kind: 'doc', title: 'No documents yet', text: 'Upload your first document to store it online and open it from anywhere.', actions: S.length ? `<button class="btn btn-primary" data-act="upload">${ico('upload')}Upload document</button>` : '' })}
+        : empty({ kind: 'doc', title: `No ${mm.many} yet`, text: sp === 'files' ? 'Upload CAD models, PCB files, firmware or anything else your work needs.' : 'Upload your first document to store it online and open it from anywhere.', actions: S.length ? `<button class="btn btn-primary" data-act="${upAct}">${ico('upload')}Upload ${sp === 'files' ? 'files' : 'document'}</button>` : '' })}
     </section>
     <section aria-labelledby="favHead">
       <div class="block-head"><h2 class="block-title" id="favHead">Favorites</h2>${favs.length ? `<a class="link" href="#/favorites">View all${ico('arrow')}</a>` : ''}</div>
@@ -2657,12 +2858,11 @@ function viewDocuments(q) {
   filters = { q: q.q || '', type: q.type || '', section: q.section || '', tag: q.tag || '', date: q.date || '', fav: q.fav || '', vis: q.vis || '', sort: q.sort || 'updated' };
   const vm = state.settings.viewMode, opt = (v, l, cur) => `<option value="${esc(v)}"${v === cur ? ' selected' : ''}>${esc(l)}</option>`;
   const tagsAll = allTags(); if (filters.tag && !tagsAll.some(([t]) => t === filters.tag)) tagsAll.unshift([filters.tag, 0]);
-  return `<div class="page-head"><div><h1 class="page-title">${filters.vis === 'public' ? 'Shared publicly' : 'All documents'}</h1><p class="page-sub" id="docCount"></p></div>
-    <div class="page-actions"><div class="seg" role="group" aria-label="Layout"><button data-act="view-mode" data-mode="grid" aria-pressed="${vm === 'grid'}" aria-label="Grid layout">${ico('grid')}</button><button data-act="view-mode" data-mode="list" aria-pressed="${vm === 'list'}" aria-label="List layout">${ico('list')}</button></div>
-    <button class="btn" data-act="write">${ico('pen')}Write</button><button class="btn btn-primary" data-act="upload">${ico('upload')}Upload document</button></div></div>
+  return `<div class="page-head"><div><h1 class="page-title">All documents</h1><p class="page-sub" id="docCount"></p></div>
+    <div class="page-actions"><div class="seg" role="group" aria-label="Layout"><button data-act="view-mode" data-mode="grid" aria-pressed="${vm === 'grid'}" aria-label="Grid layout" title="Grid">${ico('grid')}</button><button data-act="view-mode" data-mode="list" aria-pressed="${vm === 'list'}" aria-label="List layout" title="List">${ico('list')}</button></div>
+    <button class="btn" data-act="write">${ico('pen')}Write</button><button class="btn btn-primary" data-act="upload">${ico('upload')}Upload document</button>${modeSwitch()}</div></div>
   <div class="filters" role="search" aria-label="Filter documents">
     <input class="input" id="fQ" type="search" placeholder="Filter by name, tag or text" value="${esc(filters.q)}" aria-label="Filter by text">
-    <select class="select" id="fType" aria-label="Type">${opt('', 'All types', filters.type)}${DOC_TYPES.map(k => [k, TYPES[k]]).map(([k, t]) => opt(k, k === 'code' ? 'Code' : k === 'image' ? 'Image' : t.label, filters.type)).join('')}</select>
     <select class="select" id="fSection" aria-label="Section">${treeSelect(filters.section, null, opt('', 'All sections', filters.section))}</select>
     <select class="select" id="fVis" aria-label="Visibility">${opt('', 'Private and public', filters.vis)}${opt('private', 'Private only', filters.vis)}${opt('public', 'Public only', filters.vis)}</select>
     <select class="select" id="fTag" aria-label="Tag">${opt('', 'All tags', filters.tag)}${tagsAll.map(([t]) => opt(t, t, filters.tag)).join('')}</select>
@@ -2694,7 +2894,7 @@ function renderDocList(anim) {
 function mountDocuments() {
   renderDocList(true);
   const bind = (id, key, ev = 'change') => { const el = $('#' + id); el.addEventListener(ev, () => { filters[key] = el.value; renderDocList(false); }); };
-  bind('fType', 'type'); bind('fSection', 'section'); bind('fVis', 'vis'); bind('fTag', 'tag'); bind('fDate', 'date'); bind('fSort', 'sort');
+  bind('fSection', 'section'); bind('fVis', 'vis'); bind('fTag', 'tag'); bind('fDate', 'date'); bind('fSort', 'sort');
   const fq = $('#fQ'); fq.addEventListener('input', debounce(() => { filters.q = fq.value.trim(); renderDocList(false); }, 160));
   $('#fFav').addEventListener('click', e => { filters.fav = filters.fav === '1' ? '' : '1'; e.currentTarget.setAttribute('aria-pressed', filters.fav === '1'); renderDocList(false); });
 }
@@ -2705,14 +2905,13 @@ function crumbs(items) {
 function viewSection(id) {
   const s = secById(id); if (!s) return notFound('section');
   const docs = secDocs(id).sort((a, b) => b.updatedAt - a.updatedAt), ch = kids(id), all = deepDocs(id);
-  const tab = route.q.tab === 'files' ? 'files' : 'docs', files = secFiles(id).sort((a, b) => b.updatedAt - a.updatedAt), allF = deepFiles(id);
+  const tab = currentSpace(), files = secFiles(id).sort((a, b) => b.updatedAt - a.updatedAt), allF = deepFiles(id);
   const depth = depthOf(id), canNest = depth < MAX_DEPTH - 1, vm = state.settings.viewMode;
   const pub = all.filter(isPublic).length + allF.filter(isPublic).length;
-  const head = crumbs([{ href: '#/home', label: 'Home' }, ...pathOf(id).map(p => ({ href: secHref(p.id, tab), label: p.name }))]);
+  const head = `<div class="crumb-bar">${crumbs([{ href: '#/home', label: 'Home' }, ...pathOf(id).map(p => ({ href: '#/section/' + encodeURIComponent(p.id), label: p.name }))])}${modeSwitch({ counts: { docs: all.length, files: allF.length } })}</div>`;
   return `${head}<header class="sec-hero rv" style="${secVars(s)}"><span class="sec-ico">${ico(s.icon)}</span><div><h1>${esc(s.name)}</h1><p>${esc(s.description || (depth ? 'Module' : 'No description yet.'))}</p>
       <p class="sec-stats"><span>${plural(ch.length, depth ? 'sub-module' : 'module')}</span><span>${plural(all.length, 'document')}</span><span>${plural(allF.length, 'file')}</span>${pub ? `<span class="vis-inline">${ico('globe')}${pub} public</span>` : ''}</p></div>
     <div class="page-actions">${canNest ? `<button class="btn" data-act="add-module" data-parent="${esc(s.id)}">${ico('tree')}Add ${depth ? 'sub-module' : 'module'}</button>` : ''}${tab === 'files' ? `<button class="btn btn-primary" data-act="upload-files" data-section="${esc(s.id)}">${ico('cloudUp')}Upload files</button>` : `<button class="btn" data-act="write" data-section="${esc(s.id)}">${ico('pen')}Write</button><button class="btn btn-primary" data-act="upload" data-section="${esc(s.id)}">${ico('upload')}Add document</button>`}<button class="icon-btn" data-act="sec-menu" data-id="${esc(s.id)}" aria-haspopup="menu" aria-expanded="false" aria-label="Section options">${ico('more')}</button></div></header>
-  <div class="sec-tabs rv" role="tablist" aria-label="Show"><button role="tab" data-act="file-tab" data-id="${esc(s.id)}" data-tab="docs" aria-selected="${tab === 'docs'}">${ico('docs')}Documents<span>${docs.length}</span></button><button role="tab" data-act="file-tab" data-id="${esc(s.id)}" data-tab="files" aria-selected="${tab === 'files'}">${ico('folderOpen')}Files<span>${files.length}</span></button></div>
   ${ch.length ? `<section class="block" style="margin-top:8px"><div class="block-head"><h2 class="block-title">${depth ? 'Sub-modules' : 'Modules'}</h2></div><div class="grid grid-sections">${ch.map((c, i) => secCard(c, i)).join('')}${canNest ? `<button class="add-card rv" style="${stagger(ch.length)}" data-act="add-module" data-parent="${esc(s.id)}"><span class="plus">${ico('plus')}</span>New ${depth ? 'sub-module' : 'module'}</button>` : ''}</div></section>` : ''}
 ${tab === 'files' ? `  <section class="block" style="margin-top:${ch.length ? 34 : 8}px"><div class="block-head"><h2 class="block-title">Files${files.length ? ` <span class="muted-count">${files.length}</span>` : ''}</h2>${files.length ? `<span class="muted-count">${fmtSize(files.reduce((a, d) => a + d.size, 0))}</span>` : ''}</div>
   ${files.length ? fileTable(files, { showSec: false }) : filesEmpty({ sectionId: s.id, here: true, kidsN: ch.length })}</section>` : `  <section class="block" style="margin-top:${ch.length ? 34 : 8}px"><div class="block-head"><h2 class="block-title">Documents${docs.length ? ` <span class="muted-count">${docs.length}</span>` : ''}</h2></div>
@@ -2720,14 +2919,17 @@ ${tab === 'files' ? `  <section class="block" style="margin-top:${ch.length ? 34
     : empty({ kind: 'doc', title: ch.length ? 'No documents directly in here' : 'This section is empty', text: ch.length ? 'Documents can live in any module. Open a module above, or add a document here.' : (canNest ? 'Add a document, or split this section into modules first.' : 'Add a document to begin.'), actions: `${canNest && !ch.length ? `<button class="btn" data-act="add-module" data-parent="${esc(s.id)}">${ico('tree')}Add ${depth ? 'sub-module' : 'module'}</button>` : ''}<button class="btn btn-primary" data-act="upload" data-section="${esc(s.id)}">${ico('upload')}Add document</button>` })}</section>`}`;
 }
 function viewFavorites() {
-  const favs = live().filter(d => d.favorite).sort((a, b) => (b.favAt || 0) - (a.favAt || 0));
-  return `<div class="page-head"><div><h1 class="page-title">Favorites</h1><p class="page-sub">${plural(favs.length, 'starred document')}</p></div></div>
-  ${favs.length ? `<div class="grid grid-docs">${favs.map((d, i) => docCard(d, i)).join('')}</div>`
-    : empty({ kind: 'fav', title: 'No favorites yet', text: 'Star the documents you return to often and they will collect here.', actions: `<a class="btn" href="#/documents">${ico('docs')}Browse documents</a>` })}`;
+  const sp = currentSpace(), mm = MODE[sp];
+  const favs = modeList(sp).filter(d => d.favorite).sort((a, b) => (b.favAt || 0) - (a.favAt || 0));
+  return `<div class="page-head"><div><h1 class="page-title">Favorites</h1><p class="page-sub">${plural(favs.length, 'starred ' + mm.one)}</p></div><div class="page-actions">${modeSwitch()}</div></div>
+  ${favs.length ? (sp === 'files' ? fileTable(favs) : `<div class="grid grid-docs">${favs.map((d, i) => docCard(d, i)).join('')}</div>`)
+    : empty({ kind: 'fav', title: `No favorite ${mm.many} yet`, text: `Star the ${mm.many} you return to often and they will collect here.`, actions: `<a class="btn" href="${mm.all}">${ico(mm.icon)}Browse ${mm.many}</a>` })}`;
 }
 function viewRecent() {
-  const list = [...live()].sort((a, b) => touched(b) - touched(a)).slice(0, 40);
-  if (!list.length) return `<div class="page-head"><div><h1 class="page-title">Recent</h1></div></div>` + empty({ kind: 'recent', title: 'Nothing here yet', text: 'Documents you open or edit will appear here.' });
+  const sp = currentSpace(), mm = MODE[sp];
+  const list = [...modeList(sp)].sort((a, b) => touched(b) - touched(a)).slice(0, 40);
+  const head = `<div class="page-head"><div><h1 class="page-title">Recent</h1><p class="page-sub">${mm.Many} you recently opened or changed</p></div><div class="page-actions">${modeSwitch()}</div></div>`;
+  if (!list.length) return head + empty({ kind: 'recent', title: 'Nothing here yet', text: `${mm.Many} you open or edit will appear here.` });
   const t0 = new Date(); t0.setHours(0, 0, 0, 0); const today = t0.getTime();
   const groups = [['Today', d => touched(d) >= today], ['Yesterday', d => touched(d) >= today - DAY], ['Earlier this week', d => touched(d) >= today - 6 * DAY], ['Earlier', () => true]];
   const seen = new Set(); let h = ''; let k = 0;
@@ -2735,13 +2937,14 @@ function viewRecent() {
     const g = list.filter(d => !seen.has(d.id) && test(d)); g.forEach(d => seen.add(d.id));
     if (g.length) h += `<h2 class="group-label">${label}</h2><div class="rows">${g.map(d => docRow(d, k++, { when: 'opened' })).join('')}</div>`;
   });
-  return `<div class="page-head"><div><h1 class="page-title">Recent</h1><p class="page-sub">Recently opened or modified</p></div></div>${h}`;
+  return head + h;
 }
 function viewTrash() {
-  const list = trashed().sort((a, b) => b.deletedAt - a.deletedAt);
-  return `<div class="page-head"><div><h1 class="page-title">Trash</h1><p class="page-sub">${plural(list.length, 'deleted document')}</p></div>${list.length ? `<div class="page-actions"><button class="btn" data-act="empty-trash" style="color:var(--red)">${ico('trash')}Empty trash</button></div>` : ''}</div>
-  ${list.length ? `<div class="notice info">${ico('info')}<span>Deleted documents stay here until you restore them or delete them forever.</span></div><div class="rows">${list.map((d, i) => docRow(d, i, { trash: true })).join('')}</div>`
-    : empty({ kind: 'trash', title: 'Trash is empty', text: 'Deleted documents show up here so you can restore them.' })}`;
+  const sp = currentSpace(), mm = MODE[sp];
+  const list = trashed().filter(d => ofMode(d, sp)).sort((a, b) => b.deletedAt - a.deletedAt);
+  return `<div class="page-head"><div><h1 class="page-title">Trash</h1><p class="page-sub">${plural(list.length, 'deleted ' + mm.one)}</p></div><div class="page-actions">${list.length ? `<button class="btn" data-act="empty-trash" style="color:var(--red)">${ico('trash')}Empty trash</button>` : ''}${modeSwitch()}</div></div>
+  ${list.length ? `<div class="notice info">${ico('info')}<span>Deleted ${mm.many} stay here until you restore them or delete them forever.</span></div><div class="rows">${list.map((d, i) => docRow(d, i, { trash: true })).join('')}</div>`
+    : empty({ kind: 'trash', title: 'Trash is empty', text: `Deleted ${mm.many} show up here so you can restore them.` })}`;
 }
 function notFound(kind, d) {
   if (d && d.deletedAt) return empty({ kind: 'trash', title: `This ${isFile(d) ? 'file' : 'document'} is in Trash`, text: `${esc(d.name)} was deleted ${ago(d.deletedAt)}. Restore it to open it again.`, actions: `<a class="btn" href="#/trash">Open trash</a><button class="btn btn-primary" data-act="restore" data-id="${d.id}">${ico('restore')}Restore</button>` });
@@ -2797,11 +3000,159 @@ function viewEdit(id) {
     <button class="icon-btn" data-act="back" aria-label="Back">${ico('back')}</button>
     <h1>${esc(d.name)}</h1><span class="type" style="${typeVars(d)};margin:0">${esc(typeLabel(d))}</span>
     <span class="ed-status" id="edStatus"><i></i>All changes saved</span><span class="grow"></span>
-    <div class="seg ed-tabs" role="tablist" aria-label="Editor panes"><button role="tab" aria-selected="true" data-act="ed-tab" data-tab="src">Source</button><button role="tab" aria-selected="false" data-act="ed-tab" data-tab="prev">Preview</button></div>
+    ${d.type === 'txt' ? '' : `<div class="seg ed-tabs" role="tablist" aria-label="Editor panes"><button role="tab" aria-selected="true" data-act="ed-tab" data-tab="src">Source</button><button role="tab" aria-selected="false" data-act="ed-tab" data-tab="prev">Preview</button></div>`}
     <button class="btn btn-sm" data-act="details" data-id="${d.id}">${ico('tag')}Details</button>
     <button class="btn btn-sm btn-primary" data-act="save-edit" id="saveBtn" disabled>${ico('check')}Save</button>
   </div>
-  <div class="editor" id="editor"><textarea id="edText" spellcheck="false" aria-label="Document source" disabled placeholder="Loading document…"></textarea><div class="paper"><iframe id="edPrev" title="Live preview" sandbox="allow-same-origin"></iframe></div></div>`;
+  <div class="editor${d.type === 'txt' ? ' solo' : ''}" id="editor"><textarea id="edText" spellcheck="${d.type === 'txt' || d.type === 'md'}" aria-label="Document source" disabled placeholder="Loading document…"></textarea>${d.type === 'txt' ? '' : '<div class="paper"><iframe id="edPrev" title="Live preview" sandbox="allow-same-origin"></iframe></div>'}</div>`;
+}
+
+/* ---------- Write new: MD or TXT, write first, name it when saving ---------- */
+let writeBack = '#/documents';
+const WRITE_FMT = {
+  md: { label: 'Markdown', ext: 'md', title: 'New Markdown document', ph: '# Title\n\nStart writing. Use **bold**, lists, tables and code blocks.\nThe preview on the right updates as you type.' },
+  txt: { label: 'Plain text', ext: 'txt', title: 'New text document', ph: 'Start writing your notes…' }
+};
+function viewWrite(q) {
+  const fmt = q.fmt === 'txt' ? 'txt' : 'md', F = WRITE_FMT[fmt];
+  const tool = (k, ic, label, key) => `<button type="button" class="icon-btn sm" data-md="${k}" aria-label="${label}" title="${label}${key ? ' (' + key + ')' : ''}">${ico(ic)}</button>`;
+  return `<div class="editor-head write-head">
+    <button class="icon-btn" data-act="write-cancel" aria-label="Back" title="Back">${ico('back')}</button>
+    <h1>${F.title}</h1><span class="type" style="${typeVars({ type: fmt })};margin:0">${fmt.toUpperCase()}</span>
+    <span class="ed-status dirty" id="edStatus"><i></i><span>Draft, not saved yet</span></span><span class="grow"></span>
+    ${fmt === 'md' ? `<div class="seg ed-tabs" role="tablist" aria-label="Editor panes"><button role="tab" aria-selected="true" data-act="ed-tab" data-tab="src">Write</button><button role="tab" aria-selected="false" data-act="ed-tab" data-tab="prev">Preview</button></div>` : ''}
+    <button class="btn btn-sm" data-act="write-cancel">Cancel</button>
+    <button class="btn btn-sm btn-primary" data-act="write-save" id="saveBtn">${ico('check')}Save</button>
+  </div>
+  <div class="editor write${fmt === 'txt' ? ' solo' : ''}" id="editor" data-fmt="${fmt}">
+    <div class="ed-src">
+      ${fmt === 'md' ? `<div class="md-tools" role="toolbar" aria-label="Formatting">${tool('h', 'heading', 'Heading')}${tool('b', 'bold', 'Bold', 'Ctrl B')}${tool('i', 'italic', 'Italic', 'Ctrl I')}<span class="mt-sep"></span>${tool('ul', 'listUl', 'Bullet list')}${tool('q', 'quote', 'Quote')}${tool('code', 'code', 'Code block')}${tool('link', 'link', 'Link')}${tool('table', 'table', 'Table')}</div>` : ''}
+      <textarea id="edText" spellcheck="true" aria-label="${F.label} text" placeholder="${F.ph}"></textarea>
+      <div class="ed-foot" id="edFoot"><span>0 words</span></div>
+    </div>
+    ${fmt === 'md' ? '<div class="paper"><iframe id="edPrev" title="Live preview" sandbox="allow-same-origin"></iframe><div class="prev-empty" id="prevEmpty">' + ico('eye') + '<span>Your preview appears here</span></div></div>' : ''}
+  </div>`;
+}
+function mountWrite(r) {
+  const fmt = r.q.fmt === 'txt' ? 'txt' : 'md', ta = $('#edText'), pf = $('#edPrev'), foot = $('#edFoot');
+  editorDirty = false;
+  const draftKey = 'docbox.draft.' + fmt;
+  try { const kept = sessionStorage.getItem(draftKey); if (kept) ta.value = kept; } catch (e) { /* noop */ }
+  const preview = () => {
+    if (!pf) return;
+    $('#prevEmpty').hidden = !!ta.value.trim();
+    let y = 0; try { y = pf.contentWindow.scrollY; } catch (e) { /* noop */ }
+    pf.addEventListener('load', () => { try { pf.contentWindow.scrollTo(0, y); } catch (e) { /* noop */ } }, { once: true });
+    pf.srcdoc = srcdocFor({ type: 'md', name: 'Preview', content: ta.value });
+  };
+  const status = () => {
+    const txt = ta.value, words = (txt.trim().match(/\S+/g) || []).length, lines = txt ? txt.split('\n').length : 0;
+    foot.innerHTML = `<span>${plural(words, 'word')}</span><span>${plural(lines, 'line')}</span><span>${fmtSize(new Blob([txt]).size)}</span>`;
+    editorDirty = !!txt.trim();
+    try { if (txt) sessionStorage.setItem(draftKey, txt); else sessionStorage.removeItem(draftKey); } catch (e) { /* noop */ }
+  };
+  const upd = debounce(preview, 260);
+  ta.addEventListener('input', () => { status(); upd(); });
+  ta.addEventListener('keydown', e => {
+    if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); ta.setRangeText('  ', ta.selectionStart, ta.selectionEnd, 'end'); ta.dispatchEvent(new Event('input')); }
+    if (fmt === 'md' && (e.ctrlKey || e.metaKey) && (e.key === 'b' || e.key === 'i')) { e.preventDefault(); mdTool(ta, e.key); }
+  });
+  const tools = $('.md-tools');
+  if (tools) tools.addEventListener('click', e => { const b = e.target.closest('[data-md]'); if (b) mdTool(ta, b.dataset.md); });
+  status(); preview();
+  setTimeout(() => ta.focus({ preventScroll: true }), 80);
+}
+function mdTool(ta, k) {
+  const s = ta.selectionStart, e = ta.selectionEnd, sel = ta.value.slice(s, e);
+  const lineStart = ta.value.lastIndexOf('\n', s - 1) + 1;
+  const wrap = (a, b, ph) => { const t = sel || ph; ta.setRangeText(a + t + b, s, e, 'end'); if (!sel) ta.setSelectionRange(s + a.length, s + a.length + t.length); };
+  const prefix = p => { const block = ta.value.slice(lineStart, e) || ''; const out = (block || '').split('\n').map(l => p + l).join('\n'); ta.setRangeText(out, lineStart, e, 'end'); };
+  if (k === 'b') wrap('**', '**', 'bold text');
+  else if (k === 'i') wrap('_', '_', 'italic text');
+  else if (k === 'h') prefix('## ');
+  else if (k === 'ul') prefix('- ');
+  else if (k === 'q') prefix('> ');
+  else if (k === 'code') wrap('\n```\n', '\n```\n', 'code');
+  else if (k === 'link') wrap('[', '](https://)', 'link text');
+  else if (k === 'table') ta.setRangeText('\n| Column | Value |\n| --- | --- |\n| Item | 0 |\n', s, e, 'end');
+  ta.focus(); ta.dispatchEvent(new Event('input'));
+}
+function startWrite(fmt, sectionId) {
+  if (!state.sections.length) { toast('Create a section first, then write documents in it.', { type: 'info' }); sectionModal(); return; }
+  if (route.name !== 'write') writeBack = location.hash && !/^#\/(write|edit)/.test(location.hash) ? location.hash : '#/documents';
+  go('/write?fmt=' + fmt + (sectionId ? '&section=' + encodeURIComponent(sectionId) : ''));
+}
+const writeCards = () => `<div class="wc-grid">
+  <button type="button" class="wcard" data-fmt="md" style="--c:#7357FF;--soft:#F2EFFF"><span class="wc-art"><span class="wc-pg"><i></i><i></i><i></i></span><b>MD</b></span><span class="wc-t"><b>Markdown</b><span>Headings, lists, tables and code, with a live preview beside your text.</span></span><span class="wc-go">${ico('arrow')}</span></button>
+  <button type="button" class="wcard" data-fmt="txt" style="--c:#475467;--soft:#F0F2F5"><span class="wc-art"><span class="wc-pg"><i></i><i></i><i></i></span><b>TXT</b></span><span class="wc-t"><b>Plain text</b><span>Simple notes with no formatting. A clean page to type on.</span></span><span class="wc-go">${ico('arrow')}</span></button>
+</div>`;
+function writeChooser(sectionId) {
+  if (!state.sections.length) { startWrite('md'); return; }
+  modal({
+    title: 'Write new', sub: 'Choose a format. You will name it and pick where it goes when you save.',
+    body: writeCards(),
+    onMount(el, close) {
+      el.querySelector('.wc-grid').addEventListener('click', e => { const b = e.target.closest('.wcard'); if (!b) return; close(); setTimeout(() => startWrite(b.dataset.fmt, sectionId), 160); });
+      setTimeout(() => el.querySelector('.wcard').focus(), 40);
+    }
+  });
+}
+function writeSaveModal() {
+  const fmt = route.q.fmt === 'txt' ? 'txt' : 'md', F = WRITE_FMT[fmt], ta = $('#edText'); if (!ta) return;
+  const text = ta.value;
+  if (!text.trim()) { toast('Write something first, then save it.', { type: 'info' }); ta.focus(); return; }
+  const meta = readMeta(text, fmt), first = (text.split('\n').map(x => x.replace(/^#+\s*/, '').trim()).find(Boolean) || '').slice(0, 60);
+  const sel = route.q.section && secById(route.q.section) ? route.q.section : (currentSectionId() || (roots()[0] || {}).id);
+  let vis = state.settings.defaultVisibility === 'public' ? 'public' : 'private';
+  const tags = [];
+  modal({
+    title: 'Save document', sub: `Name your ${F.label.toLowerCase()} document and choose where it lives.`,
+    body: `<div class="field" id="fDocName"><label for="dName">Document name</label><div class="name-ext"><input class="input" id="dName" maxlength="120" value="${esc((meta.title || first).replace(/[\\/:*?"<>|]+/g, ' ').trim())}" placeholder="e.g. Gate Driver Notes" autofocus><span>.${F.ext}</span></div><div class="err-msg" hidden></div></div>
+      <div class="field"><span class="label" id="saveInLbl">Save in</span>${secPickerHTML({ id: 'dSec', value: sel, labelId: 'saveInLbl' })}</div>
+      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
+      <div class="field"><label for="dDesc">Description <span class="opt">Optional</span></label><input class="input" id="dDesc" maxlength="200" value="${esc(meta.desc)}" placeholder="One line on what this covers"></div>
+      ${tagsField()}`,
+    foot: `<button class="btn" data-close>Back to editing</button><button class="btn btn-primary" id="wsGo">${ico('check')}Save document</button>`,
+    onMount(el, close) {
+      const chips = mountChips(el, tags), sug = el.querySelector('#tagSuggest');
+      meta.tags.forEach(t => chips.add(t)); void sug;
+      mountVisSeg(el, v => { vis = v; });
+      mountPicker(el, 'dSec');
+      const nameIn = el.querySelector('#dName');
+      nameIn.addEventListener('input', () => { el.querySelector('#fDocName').classList.remove('err'); el.querySelector('#fDocName .err-msg').hidden = true; });
+      setTimeout(() => { nameIn.focus(); nameIn.select(); }, 60);
+      const go_ = el.querySelector('#wsGo');
+      const submit = async () => {
+        let name = nameIn.value.trim().replace(new RegExp('\\.' + F.ext + '$', 'i'), '');
+        const secId = el.querySelector('#dSec').value;
+        const errOut = msg => { const f = el.querySelector('#fDocName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + esc(msg); nameIn.focus(); };
+        if (!name) return errOut('Enter a document name.');
+        name += '.' + F.ext;
+        if (live().some(x => x.sectionId === secId && x.name.toLowerCase() === name.toLowerCase())) return errOut('A document with this name already exists there.');
+        if (el.querySelector('#tagIn').value.trim()) { chips.add(el.querySelector('#tagIn').value); el.querySelector('#tagIn').value = ''; }
+        go_.disabled = true; go_.classList.add('loading');
+        const id = newId(), t = now(), body = new Blob([text], { type: mimeFor(fmt, name) });
+        const doc = { id, name, type: fmt, mime: body.type, visibility: vis, sectionId: secId, description: el.querySelector('#dDesc').value.trim(), tags: [...tags], favorite: false, favAt: 0, size: body.size, path: storagePath(id, name), allowScripts: false, searchText: '', createdAt: t, updatedAt: t, openedAt: t, deletedAt: 0, content: text, blob: null };
+        doc.searchText = searchTextFor(doc);
+        const res = await persist(async () => {
+          await api.upload(doc.path, body, body.type);
+          try { await api.insDoc(doc); } catch (e) { api.remove([doc.path]).catch(() => {}); throw e; }
+        }, { error: 'The document was not saved.', quiet: true });
+        if (res === FAIL) { go_.disabled = false; go_.classList.remove('loading'); return; }
+        state.documents.unshift(doc);
+        const s = secById(secId); if (s) s.updatedAt = t;
+        if (vis === 'public') community.at = 0;
+        log(`Created ${doc.name}`, 'plus', secId);
+        try { sessionStorage.removeItem('docbox.draft.' + fmt); } catch (e) { /* noop */ }
+        editorDirty = false; close();
+        toast(`${doc.name} saved${s ? ' in ' + s.name : ''}`, { action: 'Open', onAction: () => go('/doc/' + doc.id) });
+        state.settings.space = 'docs';
+        go(writeBack.replace(/^#/, '') || '/documents');
+      };
+      go_.addEventListener('click', submit);
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target === nameIn) { e.preventDefault(); submit(); } });
+    }
+  });
 }
 
 function kbTable() {
@@ -2815,7 +3166,7 @@ function viewSettings() {
   const tw = (key, title, text) => `<div class="set-row"><div class="s-main"><b id="lb-${key}">${title}</b><span>${text}</span></div><button class="switch" role="switch" aria-checked="${!!st[key]}" aria-labelledby="lb-${key}" data-act="set-toggle" data-key="${key}"></button></div>`;
   return `<div class="page-head"><div><h1 class="page-title">Settings</h1><p class="page-sub">Profile, interface and data for this browser.</p></div></div>
   <div class="settings">
-    ${session ? `<section class="card rv"><h2>Account</h2><p>Signed in as <b>${esc(session.email)}</b> with ${esc(PROVIDERS[session.provider] || session.provider)}. Your documents are stored in your private DocBox cloud folder.</p><div class="page-actions" style="margin-top:14px"><button class="btn" data-act="sign-out">${ico('logout')}Sign out</button></div></section>` : ''}
+    ${session ? `<section class="card rv"><h2>Account</h2><p>Signed in as <b>${esc(session.email)}</b> with ${esc(PROVIDERS[session.provider] || session.provider)}. Your documents are stored in your private DocBox cloud folder.</p><div class="page-actions" style="margin-top:14px"><button class="btn" data-act="sign-out">${ico('logout')}Log out</button></div></section>` : ''}
     <section class="card rv" style="--d:40ms"><h2>Profile</h2><p>Your name and job title appear next to anything you share in Community.</p>
       <div class="two"><div class="field"><label for="setUser">Your name</label><input class="input" id="setUser" value="${esc(prof.name || st.user)}" maxlength="60"></div>
       <div class="field"><label for="setTitle">Job title</label><input class="input" id="setTitle" value="${esc(prof.title)}" maxlength="80" placeholder="e.g. Embedded Engineer"></div>
@@ -2886,11 +3237,23 @@ function loadCommunity(force) {
   }).finally(() => { commLoading = null; });
   return commLoading;
 }
+/* Community narrowed to the current mode: authors and sections only appear when they share something of that kind */
+function commMode(c, sp = currentSpace()) {
+  const docs = c.docs.filter(d => ofMode(d, sp)), A = new Map();
+  docs.forEach(d => {
+    let a = A.get(d.userId);
+    if (!a) { const b = c.authors.find(x => x.id === d.userId) || { id: d.userId, name: 'DocBox user', title: '' }; a = { ...b, count: 0, last: 0 }; A.set(d.userId, a); }
+    a.count++; a.last = Math.max(a.last, d.updatedAt);
+  });
+  A.forEach(a => { a.sections = c.secs.filter(s => s.userId === a.id && isRoot(s, c.secs) && docs.some(d => subtreeIds(s.id, c.secs).includes(d.sectionId))).length; });
+  return { docs, secs: c.secs, authors: [...A.values()].sort((x, y) => y.last - x.last), sp };
+}
 const commPath = (secId, S) => { const p = pathOf(secId, S); return p.length ? p.map(s => s.name).join(' / ') : 'Not in a section'; };
 function pubCard(d, i, c, showAuthor) {
   const s = c.secs.find(x => x.id === d.sectionId), a = c.authors.find(x => x.id === d.userId);
-  return `<article class="doc-card rv" style="${stagger(i)};${secVars(s)}" data-act="go" data-href="#/pdoc/${d.id}" tabindex="0" role="link" aria-label="Open ${esc(d.name)}">
-    <div class="doc-top"><span class="type" style="${typeVars(d)}">${esc(typeLabel(d))}</span><span class="grow"></span><button class="icon-btn sm" data-act="pdownload" data-id="${d.id}" aria-label="Download ${esc(d.name)}" title="Download">${ico('download')}</button></div>
+  const tv = isFile(d) ? `--tc:${catOf(d).c};--tb:${catOf(d).b}` : typeVars(d);
+  return `<article class="doc-card rv${isFile(d) ? ' pub-file' : ''}" style="${stagger(i)};${secVars(s)}" data-act="go" data-href="#/pdoc/${d.id}" tabindex="0" role="link" aria-label="Open ${esc(d.name)}">
+    <div class="doc-top">${isFile(d) ? `<span class="pf-ic" style="--fc:${catOf(d).c};--fb:${catOf(d).b}">${ico(catOf(d).icon)}</span>` : ''}<span class="type" style="${tv}">${esc(typeLabel(d))}</span><span class="grow"></span><button class="icon-btn sm" data-act="pdownload" data-id="${d.id}" aria-label="Download ${esc(d.name)}" title="Download">${ico('download')}</button></div>
     <h3 class="doc-name">${esc(d.name)}</h3>
     <div class="doc-path"><i></i>${esc(commPath(d.sectionId, c.secs))}</div>
     ${d.description ? `<p class="doc-desc">${esc(d.description)}</p>` : ''}
@@ -2899,47 +3262,49 @@ function pubCard(d, i, c, showAuthor) {
   </article>`;
 }
 function authorCard(a, i) {
-  const me = session && a.id === session.uid;
+  const me = session && a.id === session.uid, mm = MM();
   return `<button class="author-card rv" style="${stagger(i)}" data-act="go" data-href="#/community/${a.id}">
     <span class="a-top">${avatar(a)}<span><b>${esc(a.name)}${me ? '<span class="you">You</span>' : ''}</b><span>${esc(a.title || 'DocBox member')}</span></span></span>
-    <span class="a-stats"><span><b>${a.count}</b> ${a.count === 1 ? 'document' : 'documents'}</span><span><b>${a.sections}</b> ${a.sections === 1 ? 'section' : 'sections'}</span><span>${ago(a.last)}</span></span>
+    <span class="a-stats"><span><b>${a.count}</b> ${a.count === 1 ? mm.one : mm.many}</span><span><b>${a.sections}</b> ${a.sections === 1 ? 'section' : 'sections'}</span><span>${ago(a.last)}</span></span>
   </button>`;
 }
 function viewCommunity() {
   return `<div id="commView"><div class="page-head"><div><div class="sk" style="height:30px;width:200px"></div><div class="sk sk-line" style="width:340px"></div></div></div><div class="author-grid">${'<div class="sk" style="height:132px;border-radius:16px"></div>'.repeat(3)}</div></div>`;
 }
-function communityHome(c) {
-  return `<div class="page-head"><div><h1 class="page-title">Community</h1><p class="page-sub">Documents your colleagues have chosen to share. Private documents never appear here.</p></div>
-    <div class="page-actions"><button class="btn" data-act="community-refresh">${ico('restore')}Refresh</button><a class="btn btn-primary" href="#/documents?vis=private">${ico('globe')}Share a document</a></div></div>
-  ${c.docs.length ? `<div class="comm-search">${ico('search')}<input class="input" id="commQ" type="search" placeholder="Search people and shared documents" aria-label="Search Community"></div><div id="commBody">${communityBody(c, '')}</div>`
-    : empty({ kind: 'search', title: 'Nothing shared yet', text: 'When anyone sets a document to Public, it shows up here under their name, organised by their sections and modules.', actions: `<a class="btn btn-primary" href="#/documents?vis=private">${ico('globe')}Share one of yours</a>` })}`;
+function communityHome(all) {
+  const c = commMode(all), mm = MODE[c.sp], share = c.sp === 'files' ? '#/files?vis=private' : '#/documents?vis=private';
+  return `<div class="page-head"><div><h1 class="page-title">Community</h1><p class="page-sub">${mm.Many} your colleagues have chosen to share. Private ${mm.many} never appear here.</p></div>
+    <div class="page-actions"><button class="btn" data-act="community-refresh">${ico('restore')}Refresh</button><a class="btn btn-primary" href="${share}">${ico('globe')}Share a ${mm.one}</a>${modeSwitch()}</div></div>
+  ${c.docs.length ? `<div class="comm-search">${ico('search')}<input class="input" id="commQ" type="search" placeholder="Search people and shared ${mm.many}" aria-label="Search Community"></div><div id="commBody">${communityBody(c, '')}</div>`
+    : empty({ kind: 'search', title: `No shared ${mm.many} yet`, text: `When anyone sets a ${mm.one} to Public, it shows up here under their name, organised by their sections and modules.`, actions: `<a class="btn btn-primary" href="${share}">${ico('globe')}Share one of yours</a>` })}`;
 }
 function communityBody(c, q) {
-  const ql = q.trim().toLowerCase();
+  const ql = q.trim().toLowerCase(), mm = MODE[c.sp];
   const people = ql ? c.authors.filter(a => (a.name + ' ' + a.title).toLowerCase().includes(ql)) : c.authors;
   const docs = ql ? c.docs.filter(d => (d.name + ' ' + d.description + ' ' + d.tags.join(' ') + ' ' + d.searchText).toLowerCase().includes(ql)) : c.docs;
-  if (ql && !people.length && !docs.length) return empty({ kind: 'search', title: 'No matches', text: 'Try a name, a tag, or part of a document title.' });
+  if (ql && !people.length && !docs.length) return empty({ kind: 'search', title: 'No matches', text: `Try a name, a tag, or part of a ${mm.one} title.` });
   return `${people.length ? `<section class="block" style="margin-top:0"><div class="block-head"><h2 class="block-title">People <span class="muted-count">${people.length}</span></h2></div><div class="author-grid">${people.map(authorCard).join('')}</div></section>` : ''}
-    ${docs.length ? `<section class="block"><div class="block-head"><h2 class="block-title">${ql ? 'Matching documents' : 'Recently shared'} <span class="muted-count">${docs.length}</span></h2></div><div class="grid grid-docs">${docs.slice(0, ql ? 60 : 9).map((d, i) => pubCard(d, i, c, true)).join('')}</div></section>` : ''}`;
+    ${docs.length ? `<section class="block"><div class="block-head"><h2 class="block-title">${ql ? 'Matching ' + mm.many : 'Recently shared'} <span class="muted-count">${docs.length}</span></h2></div><div class="grid grid-docs">${docs.slice(0, ql ? 60 : 9).map((d, i) => pubCard(d, i, c, true)).join('')}</div></section>` : ''}`;
 }
-function communityAuthor(c, uid, secId) {
+function communityAuthor(all, uid, secId) {
+  const c = commMode(all), mm = MODE[c.sp], base = all.authors.find(x => x.id === uid);
   const a = c.authors.find(x => x.id === uid);
-  if (!a) return empty({ kind: 'search', title: 'Nothing shared here', text: 'This person has no public documents right now. They may have made them private.', actions: `<a class="btn btn-primary" href="#/community">Back to Community</a>` });
+  if (!a) return `<div class="crumb-bar">${crumbs([{ href: '#/community', label: 'Community' }, ...(base ? [{ href: '#/community/' + uid, label: base.name }] : [])])}${modeSwitch()}</div>` + empty({ kind: 'search', title: 'Nothing shared here', text: base ? `${esc(base.name)} has no public ${mm.many} right now.${all.docs.some(d => d.userId === uid) ? ` Switch to ${c.sp === 'files' ? 'Documents' : 'Files'} to see what they share.` : ''}` : `This person has no public ${mm.many} right now. They may have made them private.`, actions: `<a class="btn btn-primary" href="#/community">Back to Community</a>` });
   const S = c.secs.filter(s => s.userId === uid), D = c.docs.filter(d => d.userId === uid);
   const node = secId ? S.find(s => s.id === secId) : null;
   if (secId && !node) return empty({ kind: 'search', title: 'This section is not shared', text: 'It has no public documents right now.', actions: `<a class="btn btn-primary" href="#/community/${uid}">Back to ${esc(a.name)}</a>` });
   const sorted = list => [...list].sort((x, y) => x.order - y.order || x.name.localeCompare(y.name));
-  const children = sorted(node ? S.filter(s => s.parentId === node.id) : S.filter(s => isRoot(s, S)));
-  const here = node ? D.filter(d => d.sectionId === node.id) : D.filter(d => !d.sectionId || !S.some(s => s.id === d.sectionId));
   const deep = id => { const set = new Set(subtreeIds(id, S)); return D.filter(d => set.has(d.sectionId)); };
+  const children = sorted(node ? S.filter(s => s.parentId === node.id) : S.filter(s => isRoot(s, S))).filter(s => deep(s.id).length);
+  const here = node ? D.filter(d => d.sectionId === node.id) : D.filter(d => !d.sectionId || !S.some(s => s.id === d.sectionId));
   const me = session && uid === session.uid;
   const trail = [{ href: '#/community', label: 'Community' }, { href: '#/community/' + uid, label: a.name }, ...(node ? pathOf(node.id, S).map(p => ({ href: `#/community/${uid}/${p.id}`, label: p.name })) : [])];
-  return `${crumbs(trail)}
+  return `<div class="crumb-bar">${crumbs(trail)}${modeSwitch()}</div>
   <header class="author-hero rv">${avatar(a, 'lg')}<div><h1>${esc(node ? node.name : a.name)}${!node && me ? '<span class="you">You</span>' : ''}</h1><p>${node ? `Shared by ${esc(a.name)}${node.description ? '. ' + esc(node.description) : ''}` : esc(a.title || 'DocBox member')}</p>
-    <p class="sec-stats"><span>${plural(node ? deep(node.id).length : a.count, 'public document')}</span>${node ? '' : `<span>${plural(a.sections, 'section')}</span>`}<span>Updated ${ago(node ? Math.max(0, ...deep(node.id).map(d => d.updatedAt)) : a.last)}</span></p></div>
-    ${me ? `<div class="page-actions"><a class="btn" href="#/documents?vis=public">${ico('globe')}Manage what I share</a></div>` : ''}</header>
-  ${children.length ? `<section class="block" style="margin-top:8px"><div class="block-head"><h2 class="block-title">${node ? 'Modules' : 'Sections'}</h2></div><div class="grid grid-sections">${children.map((s, i) => secCard(s, i, { docs: deep(s.id), kids: S.filter(x => x.parentId === s.id).length, readonly: true, href: `#/community/${uid}/${s.id}` })).join('')}</div></section>` : ''}
-  ${here.length ? `<section class="block" style="margin-top:${children.length ? 34 : 8}px"><div class="block-head"><h2 class="block-title">${node ? 'Documents' : 'Not in a section'} <span class="muted-count">${here.length}</span></h2></div><div class="grid grid-docs">${here.map((d, i) => pubCard(d, i, c, false)).join('')}</div></section>` : ''}`;
+    <p class="sec-stats"><span>${plural(node ? deep(node.id).length : a.count, 'public ' + mm.one)}</span>${node ? '' : `<span>${plural(a.sections, 'section')}</span>`}<span>Updated ${ago(node ? Math.max(0, ...deep(node.id).map(d => d.updatedAt)) : a.last)}</span></p></div>
+    ${me ? `<div class="page-actions"><a class="btn" href="${mm.all}?vis=public">${ico('globe')}Manage what I share</a></div>` : ''}</header>
+  ${children.length ? `<section class="block" style="margin-top:8px"><div class="block-head"><h2 class="block-title">${node ? 'Modules' : 'Sections'}</h2></div><div class="grid grid-sections">${children.map((s, i) => secCard(s, i, { docs: deep(s.id), space: c.sp, kids: S.filter(x => x.parentId === s.id && deep(x.id).length).length, readonly: true, href: `#/community/${uid}/${s.id}` })).join('')}</div></section>` : ''}
+  ${here.length ? `<section class="block" style="margin-top:${children.length ? 34 : 8}px"><div class="block-head"><h2 class="block-title">${node ? mm.Many : 'Not in a section'} <span class="muted-count">${here.length}</span></h2></div><div class="grid grid-docs">${here.map((d, i) => pubCard(d, i, c, false)).join('')}</div></section>` : ''}`;
 }
 async function mountCommunity(r, nav) {
   let c;
@@ -2954,9 +3319,9 @@ async function mountCommunity(r, nav) {
   if (route.name !== 'community' || route.id !== r.id || route.id2 !== r.id2) return;
   const v = $('#commView');
   v.innerHTML = r.id ? communityAuthor(c, r.id, r.id2) : communityHome(c);
-  observeReveal(v, !nav);
+  observeReveal(v, !nav); animateModeSwitch(v);
   const qi = $('#commQ');
-  if (qi) qi.addEventListener('input', debounce(() => { const b = $('#commBody'); b.innerHTML = communityBody(community, qi.value); observeReveal(b, true); }, 160));
+  if (qi) qi.addEventListener('input', debounce(() => { const b = $('#commBody'); b.innerHTML = communityBody(commMode(community), qi.value); observeReveal(b, true); }, 160));
 }
 
 /* ---------- read-only viewer for shared documents ---------- */
@@ -3067,10 +3432,10 @@ function filesEmpty({ sectionId, here, kidsN } = {}) {
 function viewFiles(q) {
   fileFilters = { q: q.q || '', cat: q.cat || '', section: q.section || '', vis: q.vis || '', fav: q.fav || '', sort: FILE_SORTS[q.sort] ? q.sort : 'updated', dir: q.dir === 'asc' ? 'asc' : (q.dir === 'desc' ? 'desc' : (q.sort === 'name' || q.sort === 'type' ? 'asc' : 'desc')) };
   const all = liveFiles(), vm = state.settings.fileView === 'grid' ? 'grid' : 'table', opt = (v, l, cur) => `<option value="${esc(v)}"${v === cur ? ' selected' : ''}>${esc(l)}</option>`;
-  const title = fileFilters.fav === '1' ? 'Favorite files' : fileFilters.vis === 'public' ? 'Shared publicly' : 'Files';
+  const title = fileFilters.fav === '1' ? 'Favorite files' : 'All files';
   return `<div class="page-head"><div><h1 class="page-title">${title}</h1><p class="page-sub" id="fileCount">${plural(all.length, 'file')} · ${fmtSize(all.reduce((a, d) => a + d.size, 0))}</p></div>
     <div class="page-actions"><div class="seg" role="group" aria-label="Layout"><button data-act="file-view" data-mode="table" aria-pressed="${vm === 'table'}" aria-label="Table layout" title="Table">${ico('list')}</button><button data-act="file-view" data-mode="grid" aria-pressed="${vm === 'grid'}" aria-label="Grid layout" title="Grid">${ico('grid')}</button></div>
-    <button class="btn btn-primary" data-act="upload-files">${ico('cloudUp')}Upload files</button></div></div>
+    <button class="btn btn-primary" data-act="upload-files">${ico('cloudUp')}Upload files</button>${modeSwitch()}</div></div>
   ${all.length ? `<div class="cat-chips rv" id="catChips" role="group" aria-label="Filter by type"></div>
   <div class="filters f-files" role="search" aria-label="Filter files">
     <input class="input" id="ffQ" type="search" placeholder="Search names, descriptions, tags or .ext" value="${esc(fileFilters.q)}" aria-label="Search files">
@@ -3264,18 +3629,19 @@ function go(h) { if (location.hash === '#' + h) render(true); else location.hash
 const VIEWS = {
   home: viewHome, documents: r => viewDocuments(r.q), favorites: viewFavorites, recent: viewRecent, trash: viewTrash,
   section: r => viewSection(r.id), doc: r => viewDoc(r.id), edit: r => viewEdit(r.id), settings: viewSettings,
-  community: viewCommunity, pdoc: viewPublicDoc, files: r => viewFiles(r.q), file: r => viewFile(r.id)
+  community: viewCommunity, pdoc: viewPublicDoc, files: r => viewFiles(r.q), file: r => viewFile(r.id), write: r => viewWrite(r.q)
 };
 const MOUNTS = {
   home: (r, nav) => {
     mountHero();
     setTimeout(() => { const g = $('.gauge .g-fg'); if (g) g.setAttribute('stroke-dasharray', g.dataset.dash); }, nav ? 350 : 0);
   },
-  documents: mountDocuments, doc: mountDoc, edit: mountEdit, settings: mountSettings, community: mountCommunity, pdoc: mountPdoc, files: mountFiles, file: mountFile
+  documents: mountDocuments, doc: mountDoc, edit: mountEdit, write: mountWrite, settings: mountSettings, community: mountCommunity, pdoc: mountPdoc, files: mountFiles, file: mountFile
 };
 function titleFor(r) {
   if (r.name === 'doc' || r.name === 'edit' || r.name === 'file') { const d = docById(r.id); return d ? d.name : r.name === 'file' ? 'File' : 'Document'; }
   if (r.name === 'section') { const s = secById(r.id); return s ? s.name : 'Section'; }
+  if (r.name === 'write') return WRITE_FMT[r.q.fmt === 'txt' ? 'txt' : 'md'].title;
   return { home: 'Home', documents: 'All documents', favorites: 'Favorites', recent: 'Recent', trash: 'Trash', settings: 'Settings', community: 'Community', pdoc: 'Shared document', files: 'Files' }[r.name] || 'Not found';
 }
 function render(nav = true) {
@@ -3284,24 +3650,29 @@ function render(nav = true) {
   cleanups.forEach(f => { try { f(); } catch (e) { /* ignore */ } }); cleanups = [];
   findMarks = []; findIdx = -1;
   route = parseHash();
+  const rs = routeSpace(route); if (rs && rs !== state.settings.space) { state.settings.space = rs; save(); }
   closeMenus(); closeResults(); document.body.classList.remove('drawer');
   const v = $('#view');
   let html;
   try { html = (VIEWS[route.name] || (() => notFound('page')))(route); }
   catch (e) { console.error(e); html = empty({ kind: 'search', title: 'This page could not be displayed', text: 'Something in the stored data could not be read. Your library is unchanged.', actions: `<a class="btn btn-primary" href="#/home">Go to Home</a>` }); }
   v.innerHTML = html;
-  const sp = currentSpace(); if (state.settings.space !== sp) { state.settings.space = sp; save(); }
-  document.body.classList.toggle('space-files', sp === 'files');
+  document.body.classList.toggle('space-files', currentSpace() === 'files');
   renderSidebar();
-  if (nav) { v.classList.remove('enter'); void v.offsetWidth; v.classList.add('enter'); scrollTo(0, 0); }
+  const swapMode = modeNav; modeNav = false;
+  v.classList.remove('mode-in');
+  if (swapMode) { void v.offsetWidth; v.classList.add('mode-in'); v.classList.remove('enter'); if (nav && route.name !== 'section') scrollTo(0, 0); }
+  else if (nav) { v.classList.remove('enter'); void v.offsetWidth; v.classList.add('enter'); scrollTo(0, 0); }
   observeReveal(v, !nav);
   try { MOUNTS[route.name] && MOUNTS[route.name](route, nav); } catch (e) { console.error(e); }
+  animateModeSwitch(v); morphWords(v);
   document.title = titleFor(route) + ' | DocBox';
 }
 function refresh() { const y = scrollY; render(false); scrollTo(0, y); }
 addEventListener('hashchange', () => {
   if (suppressHash) { suppressHash = false; return; }
   if (editorDirty && !confirm('You have unsaved changes. Leave without saving?')) { suppressHash = true; location.hash = lastHash; return; }
+  if (route.name === 'write') { try { sessionStorage.removeItem('docbox.draft.md'); sessionStorage.removeItem('docbox.draft.txt'); } catch (e) { /* noop */ } }
   editorDirty = false; lastHash = location.hash; navCount++; render(true);
 });
 addEventListener('beforeunload', e => { if (editorDirty) { e.preventDefault(); e.returnValue = ''; } });
@@ -3449,6 +3820,7 @@ async function mountEdit(r) {
   ta.value = d.content; ta.disabled = false; ta.placeholder = '';
   $('#saveBtn').disabled = false;
   const preview = () => {
+    if (!pf) return;
     let y = 0; try { y = pf.contentWindow.scrollY; } catch (e) { /* noop */ }
     pf.addEventListener('load', () => { try { pf.contentWindow.scrollTo(0, y); } catch (e) { /* noop */ } }, { once: true });
     pf.srcdoc = srcdocFor({ ...d, content: ta.value });
@@ -3503,7 +3875,7 @@ async function toggleFav(id, btn) {
     renderSidebar();
     if (route.name === 'favorites') refresh();
     else if (route.name === 'home') {
-      const favs = live().filter(x => x.favorite).length;
+      const favs = modeList().filter(x => x.favorite).length;
       const sv = $('[data-stat=fav]'); if (sv) { sv.textContent = favs; sv.dataset.final = favs; }
       const hf = $('#homeFavs'); if (hf) { hf.innerHTML = homeFavs(); observeReveal(hf, true); }
     }
@@ -3567,7 +3939,7 @@ async function restoreDoc(id) {
   }, { error: 'Unable to restore this document.' });
   if (ok === FAIL) return;
   d.deletedAt = 0; d.sectionId = target;
-  log(`Restored ${d.name}`, 'restore', d.sectionId); toast('Document restored' + note);
+  log(`Restored ${d.name}`, 'restore', d.sectionId); toast((isFile(d) ? 'File' : 'Document') + ' restored' + note);
   if (route.name === 'doc') render(false); else refresh();
 }
 async function purgeDoc(id) {
@@ -3576,14 +3948,15 @@ async function purgeDoc(id) {
   const ok = await persist(async () => { await api.remove([d.path]); await api.delDocs([id]); }, { error: 'Unable to delete this document.' });
   if (ok === FAIL) return;
   state.documents = state.documents.filter(x => x.id !== id);
-  toast('Document deleted forever'); refresh();
+  toast((isFile(d) ? 'File' : 'Document') + ' deleted forever'); refresh();
 }
 async function emptyTrash() {
-  const list = trashed(); if (!list.length) return;
-  if (!await confirmBox({ title: 'Empty trash?', text: `${plural(list.length, 'document')} will be permanently removed from storage. This cannot be undone.`, ok: 'Empty trash', danger: true })) return;
+  const mm = MM(), list = trashed().filter(d => ofMode(d)); if (!list.length) return;
+  if (!await confirmBox({ title: 'Empty trash?', text: `${plural(list.length, mm.one)} will be permanently removed from storage. This cannot be undone.`, ok: 'Empty trash', danger: true })) return;
   const ok = await persist(async () => { await api.remove(list.map(d => d.path)); await api.delDocs(list.map(d => d.id)); }, { error: 'Unable to empty the trash.' });
   if (ok === FAIL) return;
-  state.documents = liveAll(); log(`Emptied trash (${plural(list.length, 'document')})`, 'trash'); toast('Trash emptied'); refresh();
+  const gone = new Set(list.map(d => d.id));
+  state.documents = state.documents.filter(d => !gone.has(d.id)); log(`Emptied trash (${plural(list.length, mm.one)})`, 'trash'); toast('Trash emptied'); refresh();
 }
 async function downloadDoc(id, obj) {
   const d = obj || docById(id); if (!d) return;
@@ -3880,114 +4253,134 @@ function deleteAccountModal() {
 }
 
 /* =========================================================
+   Location picker: a tidy tree dropdown used wherever a section is chosen
+   ========================================================= */
+const ROOT_LABEL = 'Root';
+const pickFace = s => s
+  ? `<span class="pick-face" style="${secVars(s)}"><span class="sec-dot">${ico(s.icon)}</span><span class="pf-t"><b>${esc(s.name)}</b>${depthOf(s.id) ? `<small>in ${esc(pathLabel(s.parentId, 2))}</small>` : ''}</span></span>`
+  : `<span class="pick-face"><span class="sec-dot root">${ico('layers')}</span><span class="pf-t"><b>${ROOT_LABEL}</b><small>Top of your library</small></span></span>`;
+function secPickerHTML({ id, value = null, root = false, maxDepth = MAX_DEPTH, labelId = '' }) {
+  const opts = treeOptions().filter(o => o.depth < maxDepth), cur = value && secById(value);
+  return `<div class="pick" data-pick="${id}"><input type="hidden" id="${id}" value="${esc(cur ? cur.id : '')}">
+    <button type="button" class="pick-btn" aria-haspopup="listbox" aria-expanded="false"${labelId ? ` aria-labelledby="${labelId}"` : ''}>${pickFace(cur)}<span class="pick-chev">${ico('chevUD')}</span></button>
+    <div class="pick-list" role="listbox" hidden>
+      ${root ? `<button type="button" role="option" class="po po-root" data-v="" aria-selected="${!cur}"><span class="sec-dot root">${ico('layers')}</span><span class="po-t"><b>${ROOT_LABEL}</b><small>Top of your library</small></span><span class="po-ok">${ico('check')}</span></button>${opts.length ? '<div class="po-sep">Inside</div>' : ''}` : ''}
+      ${opts.map(({ s, depth }) => `<button type="button" role="option" class="po" data-v="${esc(s.id)}" aria-selected="${!!cur && cur.id === s.id}" style="${secVars(s)};--depth:${depth}">${depth ? '<span class="po-elbow" aria-hidden="true"></span>' : ''}<span class="sec-dot">${ico(s.icon)}</span><span class="po-t"><b>${esc(s.name)}</b></span><span class="po-ok">${ico('check')}</span></button>`).join('')}
+    </div></div>`;
+}
+function mountPicker(root, id, onChange) {
+  const box = root.querySelector(`[data-pick="${id}"]`); if (!box) return;
+  const btn = box.querySelector('.pick-btn'), list = box.querySelector('.pick-list'), inp = box.querySelector('input');
+  const opts = () => $$('.po', list);
+  /* the list floats above the dialog so it is never cut off by the dialog's scroll area */
+  const place = () => {
+    if (!document.contains(btn)) { open(false); return; }
+    const r = btn.getBoundingClientRect(), below = innerHeight - r.bottom, up = below < 300 && r.top > below;
+    list.style.left = r.left + 'px'; list.style.width = r.width + 'px';
+    list.style.top = up ? 'auto' : (r.bottom + 6) + 'px'; list.style.bottom = up ? (innerHeight - r.top + 6) + 'px' : 'auto';
+    list.style.maxHeight = Math.max(160, Math.min(320, (up ? r.top : below) - 16)) + 'px';
+    list.classList.toggle('up', up);
+  };
+  const onScroll = e => { if (!list.contains(e.target)) place(); };
+  const open = o => {
+    if (o === !list.hidden) return;
+    list.hidden = !o; btn.setAttribute('aria-expanded', o); box.classList.toggle('open', o);
+    if (o) {
+      document.body.appendChild(list); list.classList.add('ported'); place();
+      addEventListener('scroll', onScroll, true); addEventListener('resize', place);
+      const sel = list.querySelector('[aria-selected=true]') || opts()[0]; if (sel) { sel.focus({ preventScroll: true }); sel.scrollIntoView({ block: 'nearest' }); }
+    } else {
+      removeEventListener('scroll', onScroll, true); removeEventListener('resize', place);
+      list.classList.remove('ported'); box.appendChild(list);
+    }
+  };
+  const pick = b => {
+    inp.value = b.dataset.v; opts().forEach(x => x.setAttribute('aria-selected', x === b));
+    btn.querySelector('.pick-face').outerHTML = pickFace(secById(b.dataset.v));
+    open(false); btn.focus(); btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop');
+    if (onChange) onChange(b.dataset.v || null);
+  };
+  btn.addEventListener('click', () => open(list.hidden));
+  btn.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(true); } });
+  list.addEventListener('click', e => { const b = e.target.closest('.po'); if (b) pick(b); });
+  list.addEventListener('keydown', e => {
+    const o = opts(), i = o.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); o[Math.min(o.length - 1, i + 1)].focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); o[Math.max(0, i - 1)].focus(); }
+    else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); o[e.key === 'Home' ? 0 : o.length - 1].focus(); }
+    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); open(false); btn.focus(); }
+    else if (e.key === 'Tab') { e.preventDefault(); open(false); btn.focus(); }
+    else if (e.key === 'Enter' || e.key === ' ') { if (document.activeElement.classList.contains('po')) { e.preventDefault(); pick(document.activeElement); } }
+    else if (e.key.length === 1 && /\S/.test(e.key)) { const k = e.key.toLowerCase(), n = o.length; for (let j = 1; j <= n; j++) { const c = o[(i + j) % n]; if (c.textContent.trim().toLowerCase().startsWith(k)) { c.focus(); break; } } }
+  });
+  const onDown = e => { if (!list.hidden && !box.contains(e.target) && !list.contains(e.target)) open(false); };
+  document.addEventListener('mousedown', onDown, true);
+  new MutationObserver((_, ob) => { if (!document.contains(box)) { ob.disconnect(); document.removeEventListener('mousedown', onDown, true); if (!list.hidden) open(false); list.remove(); } }).observe($('#modalRoot'), { childList: true, subtree: true });
+}
+
+/* =========================================================
    Modals: section, upload / write, move, details
    ========================================================= */
 function sectionModal(sec, opts = {}) {
   const edit = !!sec, draft = opts.draft || {};
-  const parentOpts = treeOptions().filter(o => o.depth < MAX_DEPTH - 1);
   let parent = edit ? (isRoot(sec) ? null : sec.parentId) : ('parent' in draft ? draft.parent : (opts.parentId && secById(opts.parentId) ? opts.parentId : null));
   if (parent && !secById(parent)) parent = null;
   const kind = p => p ? (depthOf(p) ? 'sub-module' : 'module') : 'section';
   const Kind = p => kind(p)[0].toUpperCase() + kind(p).slice(1);
-  let icon = edit ? sec.icon : (draft.icon || 'project');
+  const CHOICES = [['folder', 'Folder'], ...SEC_ICON_SET];
+  let icon = edit ? sec.icon : (draft.icon || 'folder');
   let color = edit ? sec.color : (draft.color || (parent && secById(parent) ? secById(parent).color : ['blue', 'violet', 'cyan', 'green', 'amber', 'rose'][state.sections.length % 6]));
   const startName = edit ? sec.name : (draft.name || ''), startDesc = edit ? sec.description : (draft.desc || '');
-  const ghost = w => `<div class="smp-row ghost"><span class="g-dot"></span><span class="g-bar" style="width:${w}%"></span></div>`;
   modal({
-    title: edit ? `Customize ${kind(parent)}` : `Create new ${kind(parent)}`,
-    sub: edit ? 'Change the name, description, icon and color.' : 'Sections hold modules, and modules hold sub-modules, so DocBox can mirror how your team works.',
-    size: 'xwide',
-    body: `<div class="sm-grid"><div class="sm-form">
-      ${edit || parent ? '' : `<button type="button" class="starter-link" id="toStarters"><span class="sl-ico">${ico('layers')}</span><span><b>Use starter sections</b><span>VLSI, Embedded, PCB Designing, EMS, IoT, AI and more, in one click</span></span>${ico('arrow')}</button>`}
-      ${edit ? '' : `<div class="field"><label for="sParent">Create inside</label><select class="select" id="sParent"><option value="">Top level (new section)</option>${parentOpts.map(({ s: o, depth }) => `<option value="${esc(o.id)}"${o.id === parent ? ' selected' : ''}>${'\u00A0\u00A0\u00A0'.repeat(depth)}${depth ? '\u2514 ' : ''}${esc(o.name)}</option>`).join('')}</select></div>`}
-      <div class="field" id="fName"><label for="sName">Name <span class="cnt-hint" id="nmCount"></span></label><input class="input" id="sName" maxlength="60" value="${esc(startName)}" placeholder="e.g. Power Electronics" autofocus><div class="err-msg" hidden></div></div>
-      <div class="field"><label for="sDesc">Description <span class="opt">Optional</span></label><textarea class="textarea" id="sDesc" maxlength="140" rows="2" placeholder="What belongs here?">${esc(startDesc)}</textarea></div>
-      <div class="field"><span class="label" id="iconLbl">Icon</span><div class="icon-grid" role="radiogroup" aria-labelledby="iconLbl">${SEC_ICON_SET.map(([n, label]) => `<button type="button" class="icon-opt" role="radio" aria-checked="${n === icon}" data-icon="${n}" aria-label="${label}" data-tip="${label}">${ico(n)}</button>`).join('')}</div><div class="icon-name" id="iconName"></div></div>
-      <div class="field" style="margin-bottom:0"><span class="label" id="colLbl">Color</span><div class="swatches" role="radiogroup" aria-labelledby="colLbl">${Object.keys(COLORS).map(c => `<button type="button" class="swatch" role="radio" aria-checked="${c === color}" data-color="${c}" style="--c:${COLORS[c][0]}" aria-label="${c}" title="${c[0].toUpperCase() + c.slice(1)}"></button>`).join('')}</div></div>
-    </div>
-    <aside class="sm-preview" aria-label="Live preview">
-      <div class="smp-top"><span class="smp-live"><i></i>Live preview</span><span class="smp-hint">Updates as you type</span></div>
-      <div class="smp-stage" id="smpStage">
-        <div class="smp-cap">${ico('tree')}<span id="smpSideCap">Sidebar</span></div>
-        <div class="smp-side" id="smpSide"></div>
-        <div class="smp-cap">${ico('home')}<span id="smpHomeCap">Home page</span></div>
-        <div class="smp-tilt" id="smpTilt"><article class="sec-card smp-card" id="smpCard">
-          <svg class="sec-trace" viewBox="0 0 132 76" aria-hidden="true"><path class="t-base" d="M132 22H98L82 38H58V60"/><path class="t-draw" d="M132 22H98L82 38H58V60"/><circle cx="58" cy="60" r="3.6"/></svg>
-          <span class="smp-shine" aria-hidden="true"></span>
-          <div class="sec-card-top"><span class="sec-ico" id="smpIco"></span><span class="smp-new">${edit ? 'Saved' : 'New'}</span></div>
-          <h3 class="sec-name" id="smpName"></h3>
-          <p class="sec-desc" id="smpDesc"></p>
-          <div class="sec-foot"><span id="smpDocs"></span><span id="smpMods"></span><span class="smp-when">${edit ? 'Edited just now' : 'Created just now'}</span></div>
-        </article></div>
-        <div class="smp-crumb" id="smpCrumb"></div>
+    title: edit ? `Customize ${kind(parent)}` : `New ${kind(parent)}`,
+    sub: edit ? 'Name, icon, description and color.' : 'Sections hold modules, and modules hold sub-modules.',
+    size: 'sm-dlg',
+    body: `${edit ? '' : `<div class="field"><span class="label" id="inLbl">Create inside</span>${secPickerHTML({ id: 'sParent', value: parent, root: true, maxDepth: MAX_DEPTH - 1, labelId: 'inLbl' })}</div>`}
+      <div class="sm-ident">
+        <button type="button" class="sm-ib" id="icoBtn" aria-expanded="false" aria-controls="icoPanel" aria-label="Choose an icon" title="Choose an icon"><span class="sm-ib-i" id="icoNow">${ico(icon)}</span><span class="sm-ib-b" aria-hidden="true">${ico('pencilSm')}</span></button>
+        <div class="field" id="fName"><label for="sName">Name <span class="cnt-hint" id="nmCount"></span></label><input class="input" id="sName" maxlength="60" value="${esc(startName)}" placeholder="e.g. Power Electronics" autocomplete="off" autofocus><div class="err-msg" hidden></div></div>
       </div>
-    </aside></div>`,
-    foot: `<button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="sSave">${edit ? 'Save changes' : `${ico('plus')}Create ${kind(parent)}`}</button>`,
+      <div class="icon-panel" id="icoPanel" inert><div class="ip-in"><div class="ip-head"><span>Choose an icon</span><span class="ip-name" id="iconName"></span></div>
+        <div class="icon-grid" role="radiogroup" aria-label="Icon">${CHOICES.map(([n, label], i) => `<button type="button" class="icon-opt" role="radio" aria-checked="${n === icon}" data-icon="${n}" aria-label="${label}" data-tip="${label}" style="--i:${i}">${ico(n)}</button>`).join('')}</div></div></div>
+      <div class="field"><label for="sDesc">Description <span class="opt">Optional</span></label><textarea class="textarea" id="sDesc" maxlength="140" rows="2" placeholder="What belongs here?">${esc(startDesc)}</textarea></div>
+      <div class="field" style="margin-bottom:0"><span class="label" id="colLbl">Color</span><div class="swatches" role="radiogroup" aria-labelledby="colLbl">${Object.keys(COLORS).map(c => `<button type="button" class="swatch" role="radio" aria-checked="${c === color}" data-color="${c}" style="--c:${COLORS[c][0]}" aria-label="${c}" title="${c[0].toUpperCase() + c.slice(1)}"></button>`).join('')}</div></div>`,
+    foot: `${edit ? '' : `<button type="button" class="txt-btn left st-link" id="toStarters"${parent ? ' hidden' : ''}>${ico('layers')}Starter sections</button>`}<button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="sSave">${edit ? 'Save changes' : `${ico('plus')}Create ${kind(parent)}`}</button>`,
     onMount(el, close) {
       const nm = el.querySelector('#sName'), ds = el.querySelector('#sDesc'), dlg = el.querySelector('.dialog');
-      const P = id => el.querySelector('#' + id);
-      const docsN = edit ? deepDocs(sec.id).length : 0, modsN = edit ? kids(sec.id).length : 0;
-      let lastIcon = '';
-      const paintSide = () => {
-        const nameTxt = esc(nm.value.trim() || `Untitled ${kind(parent)}`);
-        const chain = parent ? pathOf(parent) : [];
-        let h = ghost(62);
-        chain.forEach((p, i) => { h += `<div class="smp-row parent" style="--d:${i};${secVars(p)}"><span class="sec-dot">${ico(p.icon)}</span><span class="r-name">${esc(p.name)}</span>${ico('chevD')}</div>`; });
-        h += `<div class="smp-row live" style="--d:${chain.length}"><span class="sec-dot">${ico(icon)}</span><span class="r-name${nm.value.trim() ? '' : ' is-empty'}">${nameTxt}</span><span class="r-count">${docsN || ''}</span></div>` + ghost(46);
-        P('smpSide').innerHTML = h;
-        P('smpSideCap').textContent = parent ? `Sidebar, inside ${secById(parent).name}` : 'Sidebar';
-        P('smpHomeCap').textContent = parent ? `${secById(parent).name} page` : 'Home page';
-        P('smpCrumb').innerHTML = parent ? [...chain.map(p => esc(p.name)), `<b>${nameTxt}</b>`].join(ico('chevR')) : '';
-      };
+      const P = id => el.querySelector('#' + id), panel = P('icoPanel'), ib = P('icoBtn');
+      let lastIcon = icon;
+      const showPanel = o => { panel.classList.toggle('open', o); o ? panel.removeAttribute('inert') : panel.setAttribute('inert', ''); ib.setAttribute('aria-expanded', o); ib.classList.toggle('on', o); if (o) setTimeout(() => { const c = panel.querySelector('[aria-checked=true]'); c && c.focus({ preventScroll: true }); }, 60); };
       const paint = () => {
         const [c, soft] = COLORS[color] || COLORS.blue;
         dlg.style.setProperty('--c', c); dlg.style.setProperty('--soft', soft);
         $$('.icon-opt', el).forEach(b => b.setAttribute('aria-checked', b.dataset.icon === icon));
-        $$('.swatch', el).forEach(b => { b.setAttribute('aria-checked', b.dataset.color === color); b.style.setProperty('--c', COLORS[b.dataset.color][0]); });
-        const label = (SEC_ICON_SET.find(x => x[0] === icon) || [, 'Custom'])[1];
-        P('iconName').innerHTML = `${ico(icon)}<span>${esc(label)}</span>`;
-        if (icon !== lastIcon) {
-          const ic = P('smpIco'); ic.innerHTML = ico(icon);
-          if (lastIcon) { ic.classList.remove('pop'); void ic.offsetWidth; ic.classList.add('pop'); }
-          lastIcon = icon;
-        }
-        const n = nm.value.trim(), d = ds.value.trim();
-        P('smpName').textContent = n || `Untitled ${kind(parent)}`; P('smpName').classList.toggle('is-empty', !n);
-        P('smpDesc').textContent = d || 'Your description appears here.'; P('smpDesc').classList.toggle('is-empty', !d);
-        P('smpDocs').innerHTML = `<b>${docsN}</b> ${docsN === 1 ? 'doc' : 'docs'}`;
-        P('smpMods').innerHTML = modsN ? `<b>${modsN}</b> ${modsN === 1 ? 'module' : 'modules'}` : '';
-        P('nmCount').textContent = n.length > 40 ? `${n.length}/60` : '';
-        paintSide();
+        $$('.swatch', el).forEach(b => b.setAttribute('aria-checked', b.dataset.color === color));
+        P('iconName').textContent = (CHOICES.find(x => x[0] === icon) || [, 'Custom'])[1];
+        if (icon !== lastIcon) { const n = P('icoNow'); n.innerHTML = ico(icon); n.classList.remove('pop'); void n.offsetWidth; n.classList.add('pop'); lastIcon = icon; }
+        P('nmCount').textContent = nm.value.trim().length > 40 ? `${nm.value.trim().length}/60` : '';
       };
-      el.querySelector('.icon-grid').addEventListener('click', e => { const b = e.target.closest('.icon-opt'); if (b) { icon = b.dataset.icon; paint(); } });
+      ib.addEventListener('click', () => showPanel(!panel.classList.contains('open')));
+      const grid = el.querySelector('.icon-grid'), nameOf = n => (CHOICES.find(x => x[0] === n) || [, 'Custom'])[1];
+      grid.addEventListener('pointerover', e => { const b = e.target.closest('.icon-opt'); if (b) P('iconName').textContent = nameOf(b.dataset.icon); });
+      grid.addEventListener('pointerleave', () => { P('iconName').textContent = nameOf(icon); });
+      el.querySelector('.icon-grid').addEventListener('click', e => { const b = e.target.closest('.icon-opt'); if (b) { icon = b.dataset.icon; paint(); setTimeout(() => { showPanel(false); nm.focus({ preventScroll: true }); }, 140); } });
       el.querySelector('.swatches').addEventListener('click', e => { const b = e.target.closest('.swatch'); if (b) { color = b.dataset.color; paint(); } });
       $$('[role=radiogroup]', el).forEach(g => g.addEventListener('keydown', e => {
         if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(e.key)) return;
         e.preventDefault(); const bs = $$('[role=radio]', g), i = bs.indexOf(document.activeElement), k = (i + (e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1) + bs.length) % bs.length;
-        bs[k].focus(); bs[k].click();
+        bs[k].focus(); if (g.classList.contains('swatches')) bs[k].click(); else { icon = bs[k].dataset.icon; paint(); }
       }));
-      nm.addEventListener('input', () => { el.querySelector('#fName').classList.remove('err'); el.querySelector('#fName .err-msg').hidden = true; paint(); });
-      ds.addEventListener('input', paint);
-      /* card follows the pointer: gentle 3D tilt and spotlight */
-      const stage = P('smpStage'), tilt = P('smpTilt'), card = P('smpCard');
-      stage.addEventListener('pointermove', e => {
-        if (!effectsOn()) return;
-        const r = stage.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
-        tilt.style.transform = `perspective(900px) rotateY(${(px * 10).toFixed(2)}deg) rotateX(${(-py * 8).toFixed(2)}deg)`;
-        const cr = card.getBoundingClientRect(); card.style.setProperty('--mx', (e.clientX - cr.left) + 'px'); card.style.setProperty('--my', (e.clientY - cr.top) + 'px');
-        card.classList.add('hot');
-      });
-      stage.addEventListener('pointerleave', () => { tilt.style.transform = ''; card.classList.remove('hot'); });
-      const ts = el.querySelector('#toStarters');
+      nm.addEventListener('input', () => { P('fName').classList.remove('err'); P('fName').querySelector('.err-msg').hidden = true; paint(); });
+      const ts = P('toStarters');
       if (ts) ts.addEventListener('click', () => {
         const keep = { name: nm.value, desc: ds.value, icon, color, parent };
         close(); setTimeout(() => starterModal({ back: () => sectionModal(null, { draft: keep }) }), 200);
       });
-      const ps = el.querySelector('#sParent');
-      if (ps) ps.addEventListener('change', () => {
-        parent = ps.value || null;
-        el.querySelector('#dlgT').textContent = `Create new ${kind(parent)}`;
-        el.querySelector('#sSave').innerHTML = `${ico('plus')}Create ${kind(parent)}`;
+      mountPicker(el, 'sParent', v => {
+        parent = v;
+        P('dlgT').textContent = `New ${kind(parent)}`;
+        P('sSave').innerHTML = `${ico('plus')}Create ${kind(parent)}`;
+        if (ts) ts.hidden = !!parent;
         const p = parent && secById(parent); if (p) color = p.color;
         paint();
       });
@@ -3996,11 +4389,11 @@ function sectionModal(sec, opts = {}) {
         if (busy) return;
         const name = nm.value.trim();
         const err = !name ? 'Enter a name.' : nameTaken(name, sec && sec.id, parent) ? 'Something with this name already exists at this level.' : '';
-        if (err) { const f = el.querySelector('#fName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + esc(err); nm.focus(); return; }
+        if (err) { const f = P('fName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + esc(err); nm.focus(); return; }
         const t = now(), fields = { name, description: ds.value.trim(), icon, color, updatedAt: t };
         const id = edit ? sec.id : newId();
         const row = edit ? null : { id, ...fields, parentId: parent, order: siblingsOf(parent).length, createdAt: t };
-        busy = true; const btn = el.querySelector('#sSave'); btn.classList.add('loading');
+        busy = true; const btn = P('sSave'); btn.classList.add('loading');
         const res = await persist(() => edit ? api.updSec(id, fields) : api.insSec(row), { error: edit ? `The ${kind(parent)} was not updated.` : `The ${kind(parent)} was not created.`, quiet: true });
         busy = false; btn.classList.remove('loading');
         if (res === FAIL) return;
@@ -4011,7 +4404,7 @@ function sectionModal(sec, opts = {}) {
         close(); toast(edit ? 'Saved' : `${Kind(parent)} created`, edit ? {} : { action: 'Open', onAction: () => go('/section/' + encodeURIComponent(id)) });
         refresh(); flashSection(id);
       };
-      el.querySelector('#sSave').addEventListener('click', submit);
+      P('sSave').addEventListener('click', submit);
       nm.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
       paint();
       if (startName) setTimeout(() => { nm.focus(); nm.setSelectionRange(nm.value.length, nm.value.length); }, 60);
@@ -4407,16 +4800,12 @@ function batchUploadModal(fileList, opts = {}) {
   });
 }
 
-const TEMPLATES = {
-  html: n => `<h1>${esc(n)}</h1>\n<p class="lead">One-line summary of what this document covers.</p>\n\n<h2>Overview</h2>\n<p>Start writing here. Headings become the outline on the right.</p>\n\n<h2>Specifications</h2>\n<table>\n  <tr><th>Parameter</th><th>Value</th></tr>\n  <tr><td>Supply</td><td>12 V</td></tr>\n</table>\n`,
-  md: n => `# ${n}\n\nOne-line summary of what this document covers.\n\n## Overview\nStart writing here. Headings become the outline on the right.\n\n## Notes\n- First point\n- Second point\n`
-};
 
 function uploadModal({ sectionId, tab = 'upload', file } = {}) {
   if (!state.sections.length) { toast('Create a section first, then add documents to it.', { type: 'info' }); sectionModal(); return; }
   const sel = sectionId && secById(sectionId) ? sectionId : roots()[0].id;
   let vis = state.settings.defaultVisibility === 'public' ? 'public' : 'private';
-  let picked = null, mode = tab, fmt = 'html', nameAuto = true;
+  let picked = null, mode = tab, nameAuto = true;
   const tags = [];
   modal({
     title: 'Add document', sub: 'Upload a file or start writing a new one.', wide: true,
@@ -4426,16 +4815,17 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
           <svg class="drop-ico" viewBox="0 0 52 52" aria-hidden="true"><rect x="9" y="6" width="34" height="40" rx="7" fill="#fff" stroke="#C8CFDA" stroke-width="1.5"/><path d="M16 38h20" stroke="#E4E7EC" stroke-width="3" stroke-linecap="round"/><g class="arrow"><circle cx="26" cy="22" r="10" fill="#EEF2FF"/><path d="M26 27V17M21.5 21.5 26 17l4.5 4.5" fill="none" stroke="#2E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
           <strong>Drop one or more files here</strong><span>or click to browse. Pick several to upload them together</span><span class="drop-types">HTML • PDF • MD • TXT • images • code, up to ${CFG.maxFileMB} MB</span></label>
         <div id="pickedBox"></div><div class="err-msg" hidden></div></div></div>
-      <div data-pane="write"${mode !== 'write' ? ' hidden' : ''}><div class="field"><span class="label" id="fmtLbl">Format</span><div class="seg" role="radiogroup" aria-labelledby="fmtLbl"><button type="button" role="radio" data-fmt="html" aria-checked="true" aria-pressed="true">HTML</button><button type="button" role="radio" data-fmt="md" aria-checked="false" aria-pressed="false">Markdown</button></div></div></div>
+      <div data-pane="write"${mode !== 'write' ? ' hidden' : ''}><p class="wc-lead">Choose a format. You will name it and pick where it goes when you save.</p>${writeCards()}</div>
+      <div class="up-fields"${mode === 'write' ? ' hidden' : ''}>
       <div class="two" style="margin-top:0">
-        <div class="field" id="fDocName"><label for="dName">Document name</label><input class="input" id="dName" maxlength="120" placeholder="${mode === 'write' ? 'e.g. Gate Driver Notes' : 'Filled in from the file'}"><div class="err-msg" hidden></div></div>
-        <div class="field"><label for="dSec">Save in</label><select class="select" id="dSec">${treeSelect(sel)}</select></div>
+        <div class="field" id="fDocName"><label for="dName">Document name</label><input class="input" id="dName" maxlength="120" placeholder="Filled in from the file"><div class="err-msg" hidden></div></div>
+        <div class="field"><span class="label" id="saveInLbl">Save in</span>${secPickerHTML({ id: 'dSec', value: sel, labelId: 'saveInLbl' })}</div>
       </div>
       <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
       <div class="field"><label for="dDesc">Description</label><input class="input" id="dDesc" maxlength="200" placeholder="One line on what this covers"></div>
       ${tagsField()}
-      <div class="progress" id="upProg" hidden><i></i></div>`,
-    foot: `<span class="left hide-m">Tip: drop a file anywhere on the page</span><button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="upGo">${mode === 'write' ? 'Create and edit' : 'Upload'}</button>`,
+      <div class="progress" id="upProg" hidden><i></i></div></div>`,
+    foot: `<span class="left hide-m" id="upTip"${mode === 'write' ? ' hidden' : ''}>Tip: drop a file anywhere on the page</span><button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="upGo"${mode === 'write' ? ' hidden' : ''}>Upload</button>`,
     onMount(el, close) {
       const drop = el.querySelector('#drop'), fin = el.querySelector('#fileIn'), box = el.querySelector('#pickedBox');
       const nameIn = el.querySelector('#dName'), descIn = el.querySelector('#dDesc'), secSel = el.querySelector('#dSec'), go_ = el.querySelector('#upGo');
@@ -4446,12 +4836,12 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
         mode = t;
         $$('[data-tab]', el).forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t));
         $$('[data-pane]', el).forEach(p => p.hidden = p.dataset.pane !== t);
-        go_.textContent = t === 'write' ? 'Create and edit' : 'Upload';
-        nameIn.placeholder = t === 'write' ? 'e.g. Gate Driver Notes' : 'Filled in from the file';
-        if (t === 'write') nameIn.focus();
+        el.querySelector('.up-fields').hidden = t === 'write'; go_.hidden = t === 'write'; el.querySelector('#upTip').hidden = t === 'write';
+        if (t === 'write') setTimeout(() => el.querySelector('.wcard').focus(), 30); else drop.focus();
       };
       $$('[data-tab]', el).forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
-      $$('[data-fmt]', el).forEach(b => b.addEventListener('click', () => { fmt = b.dataset.fmt; $$('[data-fmt]', el).forEach(x => { x.setAttribute('aria-checked', x === b); x.setAttribute('aria-pressed', x === b); }); }));
+      el.querySelector('.wc-grid').addEventListener('click', e => { const b = e.target.closest('.wcard'); if (!b) return; const s_ = secSel.value; close(); setTimeout(() => startWrite(b.dataset.fmt, s_), 160); });
+      mountPicker(el, 'dSec');
       nameIn.addEventListener('input', () => { nameAuto = false; el.querySelector('#fDocName').classList.remove('err'); el.querySelector('#fDocName .err-msg').hidden = true; });
       const fail = msg => { fField.classList.add('err'); fErr.hidden = false; fErr.innerHTML = ico('info') + esc(msg); picked = null; box.innerHTML = ''; drop.hidden = false; };
       const showSuggest = list => {
@@ -4507,8 +4897,9 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
       if (file) handleFile(file);
 
       const submit = async () => {
-        let name = nameIn.value.trim(), ok = true;
-        if (mode === 'upload' && !picked) { fail('Choose a file to upload.'); ok = false; }
+        const name = nameIn.value.trim(); let ok = true;
+        if (mode !== 'upload') return;
+        if (!picked) { fail('Choose a file to upload.'); ok = false; }
         if (!name) { const f = el.querySelector('#fDocName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + 'Enter a document name.'; ok = false; }
         if (!ok) return;
         if (el.querySelector('#tagIn').value.trim()) { chips.add(el.querySelector('#tagIn').value); el.querySelector('#tagIn').value = ''; }
@@ -4517,15 +4908,11 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
         prog.hidden = false; requestAnimationFrame(() => bar.style.width = '35%');
         const crawl = setInterval(() => { const w = parseFloat(bar.style.width) || 0; if (w < 90) bar.style.width = (w + (90 - w) * .12) + '%'; }, 300);
         const secId = secSel.value, id = newId(), t = now();
-        let type, body, content = null, blob = null;
-        if (mode === 'upload') { type = picked.type; body = picked.file; if (isText({ type })) content = picked.content; else blob = picked.file; }
-        else {
-          if (!/\.(html?|md|markdown)$/i.test(name)) name += fmt === 'md' ? '.md' : '.html';
-          type = fmt; content = TEMPLATES[fmt](name.replace(/\.[a-z]+$/i, ''));
-          body = new Blob([content], { type: mimeFor(type, name) });
-        }
+        let content = null, blob = null;
+        const type = picked.type, body = picked.file;
+        if (isText({ type })) content = picked.content; else blob = picked.file;
         const mime = (body.type && !/^application\/octet-stream$/.test(body.type)) ? body.type : mimeFor(type, name);
-        const doc = { id, name, type, mime, visibility: vis, sectionId: secId, description: descIn.value.trim(), tags: [...tags], favorite: false, favAt: 0, size: body.size, path: storagePath(id, mode === 'upload' ? picked.name : name), allowScripts: false, searchText: '', createdAt: t, updatedAt: t, openedAt: 0, deletedAt: 0, content, blob };
+        const doc = { id, name, type, mime, visibility: vis, sectionId: secId, description: descIn.value.trim(), tags: [...tags], favorite: false, favAt: 0, size: body.size, path: storagePath(id, picked.name), allowScripts: false, searchText: '', createdAt: t, updatedAt: t, openedAt: 0, deletedAt: 0, content, blob };
         doc.searchText = searchTextFor(doc);
         const res = await persist(async () => {
           await api.upload(doc.path, body, mime);
@@ -4536,11 +4923,10 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
         bar.style.width = '100%'; await wait(effectsOn() ? 220 : 0);
         state.documents.unshift(doc);
         const s = secById(secId); if (s) s.updatedAt = t;
-        log(mode === 'upload' ? `Uploaded ${doc.name}` : `Created ${doc.name}`, mode === 'upload' ? 'upload' : 'plus', secId);
+        log(`Uploaded ${doc.name}`, 'upload', secId);
         close();
         if (vis === 'public') community.at = 0;
-        if (mode === 'upload') { toast(vis === 'public' ? 'Uploaded and shared in Community' : 'Document uploaded', { action: 'Open', onAction: () => go('/doc/' + doc.id) }); refresh(); }
-        else { toast('Document created'); go('/edit/' + doc.id); }
+        toast(vis === 'public' ? 'Uploaded and shared in Community' : 'Document uploaded', { action: 'Open', onAction: () => go('/doc/' + doc.id) }); refresh();
       };
       go_.addEventListener('click', submit);
       el.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(); });
@@ -4587,13 +4973,14 @@ function detailsModal(id) {
   modal({
     title: 'Edit details', sub: 'Name, location, visibility, description and tags.',
     body: `<div class="field" id="fDocName"><label for="dName">Document name</label><input class="input" id="dName" maxlength="120" value="${esc(d.name)}"><div class="err-msg" hidden></div></div>
-      <div class="field"><label for="dSec">Saved in</label><select class="select" id="dSec">${treeSelect(d.sectionId)}</select></div>
+      <div class="field"><span class="label" id="savedInLbl">Saved in</span>${secPickerHTML({ id: 'dSec', value: d.sectionId, labelId: 'savedInLbl' })}</div>
       <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${dvis === 'private'}" aria-pressed="${dvis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${dvis === 'public'}" aria-pressed="${dvis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${dvis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
       <div class="field"><label for="dDesc">Description</label><textarea class="textarea" id="dDesc" rows="2" maxlength="200">${esc(d.description)}</textarea></div>${tagsField()}`,
     foot: `<button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="dtGo">Save details</button>`,
     onMount(el, close) {
       mountChips(el, tags);
       mountVisSeg(el, v => { dvis = v; });
+      mountPicker(el, 'dSec');
       el.querySelector('#dtGo').addEventListener('click', async () => {
         const name = el.querySelector('#dName').value.trim();
         if (!name) { const f = el.querySelector('#fDocName'); f.classList.add('err'); const m = f.querySelector('.err-msg'); m.hidden = false; m.innerHTML = ico('info') + 'Enter a document name.'; return; }
@@ -4643,14 +5030,18 @@ function notifPanel(anchor) {
   if (c) c.addEventListener('click', () => { state.activity = []; save(); closeMenus(); toast('Activity cleared'); });
 }
 function userMenu(anchor) {
-  const st = state.settings;
+  const st = state.settings, prof = state.profile || {};
+  const title = prof.title || '';
   openMenu(anchor, [
-    { icon: 'settings', label: 'Settings', run: () => go('/settings') },
+    { icon: 'userCog', label: 'Profile and settings', run: () => go('/settings') },
     { icon: 'keyboard', label: 'Keyboard shortcuts', kbd: '?', run: shortcutsModal },
     { icon: 'download', label: 'Export library index', run: exportLib },
     '-',
-    { icon: 'logout', label: 'Sign out', run: signOut }
-  ], { html: `<div class="menu-head"><span class="avatar">${esc(initials(st.user))}</span><div><b>${esc(st.user || 'Guest')}</b><span>${esc(session ? session.email : st.workspace)}</span><span>${session ? 'Signed in with ' + esc(PROVIDERS[session.provider] || session.provider) : ''}</span></div></div><hr>` });
+    { icon: 'logout', label: 'Log out', danger: true, run: confirmLogout }
+  ], { cls: 'acct-menu', html: `<div class="menu-head"><span class="avatar lg">${esc(initials(st.user))}</span><div class="mh-t"><b>${esc(st.user || 'Guest')}</b><span>${esc(session ? session.email : st.workspace)}</span>${title ? `<span class="mh-role">${esc(title)}</span>` : ''}</div></div><div class="mh-plan">${ico('db')}<span>${fmtSize(usedBytes())} of ${CAP_LABEL} used</span><i style="--p:${Math.max(2, Math.min(100, usedBytes() / CAP * 100)).toFixed(1)}%"></i></div><hr>` });
+}
+async function confirmLogout() {
+  if (await confirmBox({ title: 'Log out of DocBox?', text: 'You will need your email and password to sign in again. Everything in your library stays saved.', ok: 'Log out' })) signOut();
 }
 
 /* =========================================================
@@ -4722,7 +5113,7 @@ const focusSearch = () => { qIn.focus(); qIn.select(); };
    ========================================================= */
 const ACTS = {
   'open-doc': el => { const d = docById(el.dataset.id) || community.docs.find(x => x.id === el.dataset.id); go(d && isFile(d) && d.userId && d.userId !== session.uid ? '/pdoc/' + d.id : d ? hrefOf(d) : '/doc/' + el.dataset.id); },
-  'space': el => { const sp = el.dataset.space; if (sp === currentSpace()) return; state.settings.space = sp; save(); if (route.name === 'section') go(secHref(route.id, sp).slice(1)); else go(sp === 'files' ? '/files' : '/home'); },
+  'mode': el => setMode(el.dataset.mode),
   'upload-files': el => pickFiles({ sectionId: el.dataset.section || currentSectionId() }),
   'file-sort': el => { const k = el.dataset.k; if (fileFilters.sort === k) fileFilters.dir = fileFilters.dir === 'asc' ? 'desc' : 'asc'; else { fileFilters.sort = k; fileFilters.dir = k === 'name' || k === 'type' ? 'asc' : 'desc'; } renderFileList(false); },
   'file-cat': el => { fileFilters.cat = el.dataset.cat; renderFileList(false); },
@@ -4731,11 +5122,12 @@ const ACTS = {
   'file-move': el => moveModal(el.dataset.id),
   'fp-wrap': el => { const on = el.getAttribute('aria-pressed') !== 'true'; el.setAttribute('aria-pressed', on); const c = el.closest('.fprev, .paper').querySelector('.fp-code'); if (c) c.classList.toggle('wrap', on); },
   'fp-copy': el => { const s = el.closest('.fprev, .paper').querySelector('.fp-src'); if (!s) return; const t = s.textContent; (navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('Copied to clipboard'), () => toast('Copy is not available here. Select the text instead.', { type: 'info' })); },
-  'file-tab': el => go(secHref(el.dataset.id, el.dataset.tab).slice(1)),
-  'open-section': el => go(secHref(el.dataset.id, currentSpace()).slice(1)),
+  'open-section': el => go('/section/' + encodeURIComponent(el.dataset.id)),
   'add-section': () => sectionModal(),
   'upload': el => { if (!el.dataset.section && el.closest('.topbar') && currentSpace() === 'files') pickFiles({ sectionId: currentSectionId() }); else uploadModal({ sectionId: el.dataset.section || currentSectionId() }); },
-  'write': el => uploadModal({ tab: 'write', sectionId: el.dataset.section || currentSectionId() }),
+  'write': el => writeChooser(el.dataset.section || currentSectionId()),
+  'write-save': () => writeSaveModal(),
+  'write-cancel': () => go((writeBack || '#/documents').replace(/^#/, '')),
   'fav': el => toggleFav(el.dataset.id, el),
   'doc-menu': el => docMenu(el.dataset.id, el),
   'sec-menu': el => secMenu(el.dataset.id, el),
@@ -4748,7 +5140,12 @@ const ACTS = {
   'download': el => downloadDoc(el.dataset.id),
   'pdownload': el => downloadDoc(el.dataset.id, community.docs.find(d => d.id === el.dataset.id)),
   'go': el => { location.hash = el.dataset.href.replace(/^#/, ''); },
-  'toggle-node': el => { const row = el.closest('.sec-row'), isOpen = row.getAttribute('aria-expanded') === 'true'; state.settings.open = Object.assign({}, state.settings.open, { [el.dataset.id]: !isOpen }); save(); renderSidebar(); },
+  'toggle-node': el => {
+    const n = el.closest('.tree-node'), o = !n.classList.contains('open'), row = n.querySelector('.sec-row');
+    n.classList.toggle('open', o); row.setAttribute('aria-expanded', o);
+    if (o) { n.classList.add('opening'); setTimeout(() => n.classList.remove('opening'), 700); } el.setAttribute('aria-label', (o ? 'Collapse ' : 'Expand ') + row.querySelector('.lbl').textContent); el.title = o ? 'Collapse' : 'Expand';
+    state.settings.open = Object.assign({}, state.settings.open, { [el.dataset.id]: o }); save();
+  },
   'add-module': el => sectionModal(null, { parentId: el.dataset.parent }),
   'vis-menu': el => visMenu(el.dataset.id, el),
   'copy-link': el => copyLink(el.dataset.id),
@@ -4778,8 +5175,7 @@ const ACTS = {
   'toggle-scripts': el => toggleScripts(el.dataset.id),
   'clear-filters': () => go('/documents'),
   'export': exportLib, 'erase': eraseAll, 'starter-sections': () => starterModal(), 'retry-open': () => render(false), 'retry-load': () => loadLibrary(),
-  'sign-out': () => signOut(),
-  'hero-mode': el => { state.settings.heroMode = el.dataset.mode; save(); const h = $('#heroArt'); if (h) { h.innerHTML = heroArt(); mountHero(); } },
+  'sign-out': () => confirmLogout(),
   'set-toggle': el => {
     const k = el.dataset.key; state.settings[k] = !state.settings[k]; el.setAttribute('aria-checked', state.settings[k]); save();
     applyMotionPrefs(); cursor.sync(); bg.start(); toast('Settings saved');
@@ -4802,6 +5198,7 @@ document.addEventListener('keydown', e => {
   const t = e.target, typing = /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable;
   const mod = e.metaKey || e.ctrlKey;
   if (mod && e.key.toLowerCase() === 's' && route.name === 'edit') { e.preventDefault(); saveEditor(); return; }
+  if (mod && e.key.toLowerCase() === 's' && route.name === 'write') { e.preventDefault(); if (!$('#modalRoot').children.length) writeSaveModal(); return; }
   if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); focusSearch(); return; }
   if (e.key === 'Escape') {
     if (openMenuEl) { const a = openMenuAnchor; closeMenus(); a && a.focus && a.focus(); return; }
@@ -5005,12 +5402,12 @@ function lock() {
 }
 function showApp() { clearInterval(rotTimer); document.body.classList.remove('locked', 'booting'); const a = $('#auth'); a.hidden = true; a.innerHTML = ''; }
 async function signOut() {
-  log('Signed out', 'logout'); saveNow();
+  log('Logged out', 'logout'); saveNow();
   try { localStorage.removeItem('docbox.ephemeral'); } catch (e) { /* noop */ }
   const { error } = await sb.auth.signOut();
   if (error) { await sb.auth.signOut({ scope: 'local' }); }
   authMode = 'signin'; authNotice = null;
-  toast('Signed out', { type: 'info' });
+  toast('Logged out', { type: 'info' });
 }
 
 function authCardHTML() {
@@ -5278,7 +5675,7 @@ async function loadLibrary(greet) {
   catch (e) {
     console.error(e);
     const missing = /relation .* does not exist|schema cache|could not find the table/i.test(String(e && e.message));
-    $('#view').innerHTML = empty({ kind: 'search', title: 'Unable to load your library', text: missing ? 'The DocBox tables were not found. Run setup.sql in the Supabase SQL Editor, then try again.' : esc(friendly(e) || 'The DocBox database did not respond.'), actions: `<button class="btn btn-primary" data-act="retry-load">${ico('restore')}Try again</button><button class="btn" data-act="sign-out">${ico('logout')}Sign out</button>` });
+    $('#view').innerHTML = empty({ kind: 'search', title: 'Unable to load your library', text: missing ? 'The DocBox tables were not found. Run setup.sql in the Supabase SQL Editor, then try again.' : esc(friendly(e) || 'The DocBox database did not respond.'), actions: `<button class="btn btn-primary" data-act="retry-load">${ico('restore')}Try again</button><button class="btn" data-act="sign-out">${ico('logout')}Log out</button>` });
     observeReveal($('#view'), true);
     loadingLib = false; return;
   }
