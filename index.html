@@ -52,7 +52,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 -->
-<title>DocBox | Online document storage</title>
+<title>DocBox | Documents and files, online</title>
 <script>
 /* =================================================================
    DocBox configuration. Edit these values, then save and reload.
@@ -63,8 +63,8 @@ SOFTWARE.
 window.DOCBOX_CONFIG = {
   supabaseUrl: 'https://pqfzxkzyzyvkoytbvpog.supabase.co',  // Supabase > Project Settings > API
   supabaseKey: 'sb_publishable_ya7Llv53bDVLY68_3bFHHA_9gJv1riE',                    // publishable key (sb_publishable_...) or legacy anon key
-  googleSignIn: false,       // later: set true (and add googleClientId) to show Google sign-in
-  googleClientId: '',        // later: Google OAuth Web client ID, shows Google's official button
+  googleSignIn: true,       // later: set true (and add googleClientId) to show Google sign-in
+  googleClientId: '486931338571-d4c08dm5gm5t19dn7a2mg4va1aq8t1tg.apps.googleusercontent.com',        // later: Google OAuth Web client ID, shows Google's official button
   bucket: 'documents',       // Storage bucket created by setup.sql
   storageQuotaMB: 1024,      // shown in the storage meters (Supabase Free plan: 1 GB)
   maxFileMB: 50,             // largest upload (Supabase Free plan: 50 MB)
@@ -620,6 +620,7 @@ body.locked .sidebar,body.locked .shell,body.locked .scrim{display:none}
 .sso-btn{height:46px;justify-content:flex-start;padding:0 16px;gap:12px;border-radius:12px;font-weight:600}
 .sso-btn .s-ico{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--sunk);color:var(--ink2)}
 .sso-btn .s-ico .ico{width:16px;height:16px}
+.sso-btn .s-ico.g-mark{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
 .sso-btn .s-go{margin-left:auto;color:var(--faint);transition:transform .25s var(--ease)}
 .sso-btn:hover .s-go{transform:translateX(3px);color:var(--ink)}
 .or{display:flex;align-items:center;gap:12px;color:var(--faint);font-size:12.5px;margin:22px 0}
@@ -3917,6 +3918,8 @@ async function duplicateDoc(id) {
 }
 async function deleteDoc(id) {
   const d = docById(id); if (!d) return;
+  const word = isFile(d) ? 'file' : 'document';
+  if (!await confirmBox({ title: `Delete this ${word}?`, text: `<b>${esc(d.name)}</b> will move to Trash. You can restore it from Trash later.`, ok: 'Move to Trash', danger: true })) return;
   d.deletedAt = now();
   if ((route.name === 'doc' || route.name === 'edit' || route.name === 'file') && route.id === id) { editorDirty = false; go(secById(d.sectionId) ? secHref(d.sectionId, isFile(d) ? 'files' : 'docs').slice(1) : (isFile(d) ? '/files' : '/home')); }
   else refresh();
@@ -5119,7 +5122,7 @@ function notifPanel(anchor) {
   if (!m) return;
   state.settings.seenAt = now(); save(); updateBell();
   const c = m.querySelector('[data-clear]');
-  if (c) c.addEventListener('click', () => { state.activity = []; save(); closeMenus(); toast('Activity cleared'); });
+  if (c) c.addEventListener('click', async () => { closeMenus(); if (!await confirmBox({ title: 'Clear activity?', text: 'Your recent activity list will be emptied. Your documents and files are not affected.', ok: 'Clear', danger: true })) return; state.activity = []; save(); updateBell(); toast('Activity cleared'); });
 }
 function userMenu(anchor) {
   const st = state.settings, prof = state.profile || {};
@@ -5355,8 +5358,9 @@ addEventListener('drop', e => {
 
 
 const ROT_LINES = [
-  'The place where your team\u2019s engineering documents are stored.',
-  'Datasheets, reports and drawings in one secure library.',
+  'Your team\u2019s documents and engineering files, in one secure place.',
+  'Reports and notes beside CAD models, Gerbers and firmware.',
+  'Preview PDFs, images, tables and code right in the browser.',
   'Upload once at your desk. Open it on site.',
   'No more hunting through shared drives and email threads.'
 ];
@@ -5365,9 +5369,9 @@ const bez = (p0, p1, p2, p3, t) => { const u = 1 - t; return [0, 1].map(i => u *
 function flowSVG() {
   const anim = effectsOn();
   const cx = 320, cy = 196, ys = [72, 196, 320], D = 2.4;
-  const src = [['upload', 'Upload files', 'From your desk', '#2E5BFF', '#EEF2FF'], ['move', 'Drag and drop', 'Many files at once', '#7357FF', '#F2EFFF'], ['pen', 'Write online', 'Notes and reports', '#0B9DB5', '#E6F7FA']];
+  const src = [['upload', 'Upload documents', 'Reports, PDFs, notes', '#2E5BFF', '#EEF2FF'], ['folderOpen', 'Store any file', 'CAD, PCB, firmware', '#7357FF', '#F2EFFF'], ['pen', 'Write online', 'Markdown or text', '#0B9DB5', '#E6F7FA']];
   const dst = [['monitor', 'Desktop', 'Office and home', '#2E5BFF', '#EEF2FF'], ['phone', 'Mobile', 'Out on site', '#0E9F5E', '#E7F6EE'], ['users', 'Your team', 'One shared library', '#D97F06', '#FFF4E2']];
-  const pk = [['PDF', '#D92D20'], ['HTML', '#2E5BFF'], ['MD', '#7357FF']];
+  const pk = [['PDF', '#D92D20'], ['STEP', '#7357FF'], ['MD', '#0B9DB5']], outL = ['DOC', 'FILE', 'DOC'];
   const card = (x, y, [ic, t, sub, c, soft], flash) => `
     <rect x="${x}" y="${y - 28}" width="180" height="56" rx="15" fill="#fff" stroke="#E4E8EF" filter="url(#fl-sh)"/>
     <rect x="${x}" y="${y - 28}" width="180" height="56" rx="15" fill="${soft}" fill-opacity=".55" stroke="${c}" stroke-width="1.6" opacity="0">${flash}</rect>
@@ -5386,16 +5390,16 @@ function flowSVG() {
     const motion = (d, b) => `<animateMotion dur="${D}s" begin="${b}s" repeatCount="indefinite" path="${d}" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".45 0 .3 1"/><animate attributeName="opacity" dur="${D}s" begin="${b}s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;.1;.88;1"/>`;
     if (anim) {
       packets += `<g opacity="0">${doc(pk[i][0], pk[i][1])}${motion(dIn, bIn)}</g>`;
-      packets += `<g opacity="0">${doc('DOC', dst[i][3])}${motion(dOut, bOut)}</g>`;
+      packets += `<g opacity="0">${doc(outL[i], dst[i][3])}${motion(dOut, bOut)}</g>`;
     } else {
       const a = bez(...pin, .55), b2 = bez(...pout, .45);
-      packets += `<g transform="translate(${a[0].toFixed(1)} ${a[1].toFixed(1)})">${doc(pk[i][0], pk[i][1])}</g><g transform="translate(${b2[0].toFixed(1)} ${b2[1].toFixed(1)})">${doc('DOC', dst[i][3])}</g>`;
+      packets += `<g transform="translate(${a[0].toFixed(1)} ${a[1].toFixed(1)})">${doc(pk[i][0], pk[i][1])}</g><g transform="translate(${b2[0].toFixed(1)} ${b2[1].toFixed(1)})">${doc(outL[i], dst[i][3])}</g>`;
     }
     cards += card(0, y, src[i], anim ? `<animate attributeName="opacity" dur="${D}s" begin="${bIn}s" repeatCount="indefinite" values="0;1;0;0" keyTimes="0;.05;.3;1"/>` : '');
     cards += card(460, y, dst[i], anim ? `<animate attributeName="opacity" dur="${D}s" begin="${bOut}s" repeatCount="indefinite" values="0;0;1;0" keyTimes="0;.86;.93;1"/>` : '');
   });
   const pts = Array.from({ length: 10 }, (_, i) => `<circle class="fl-pt" cx="${200 + (i * 37) % 240}" cy="${60 + (i * 61) % 290}" r="${1.4 + (i % 3) * .6}" fill="${['#2E5BFF', '#7357FF', '#0B9DB5'][i % 3]}" style="animation-delay:${(i * .7).toFixed(1)}s"/>`).join('');
-  return `<svg class="flow" viewBox="0 0 640 400" role="img" aria-label="Upload or write documents, DocBox stores them securely online, and you open them on desktop, phone or with your team" font-family="Inter,ui-sans-serif,system-ui,sans-serif">
+  return `<svg class="flow" viewBox="0 0 640 400" role="img" aria-label="Upload documents, store any work file or write online. DocBox keeps them securely online, and you open them on desktop, phone or with your team" font-family="Inter,ui-sans-serif,system-ui,sans-serif">
   <defs>
     <filter id="fl-sh" x="-20%" y="-30%" width="140%" height="190%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#101828" flood-opacity=".07"/></filter>
     <filter id="fl-vsh" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#2E5BFF" flood-opacity=".35"/></filter>
@@ -5416,7 +5420,7 @@ function flowSVG() {
   <circle cx="${cx + 48}" cy="${cy - 48}" r="15" fill="#fff" filter="url(#fl-sh)"/><svg x="${cx + 40}" y="${cy - 56}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E9F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS.lock}</svg>
   <rect x="${cx - 70}" y="${cy + 70}" width="140" height="46" rx="14" fill="#fff" stroke="#E4E8EF" filter="url(#fl-sh)"/>
   <text x="${cx}" y="${cy + 90}" text-anchor="middle" font-size="13" font-weight="700" fill="#1F2937">DocBox cloud</text>
-  <text x="${cx}" y="${cy + 106}" text-anchor="middle" font-size="11" fill="#667085">Secure online storage</text>
+  <text x="${cx}" y="${cy + 106}" text-anchor="middle" font-size="11" fill="#667085">Documents and files</text>
   ${packets}
   ${cards}
   </svg>`;
@@ -5424,18 +5428,18 @@ function flowSVG() {
 function authShowcase() {
   return `<aside class="auth-show" aria-label="What DocBox does">
     <div class="as-head">
-      <h2>Store your documents here.<br>Open them anywhere.</h2>
+      <h2>All your documents and files.<br>Open them anywhere.</h2>
       <p class="rot"><span id="rotLine">${esc(ROT_LINES[0])}</span></p>
     </div>
     <div class="flow-host" id="flowHost"><div class="flow-wrap" id="flowWrap">${flowSVG()}
       <div class="float-card fc1">${ico('lock')}Private to your account</div>
-      <div class="float-card fc2">${ico('search')}Search inside every file</div>
-      <div class="float-card fc3">${ico('tag')}Sections and tags</div>
+      <div class="float-card fc2">${ico('search')}Search names, tags and text</div>
+      <div class="float-card fc3">${ico('mcad')}CAD, PCB, firmware and more</div>
     </div></div>
     <ol class="steps3">
-      <li><span class="n">1</span><div><b>Store</b><p>Upload datasheets, reports and drawings in seconds.</p></div></li>
-      <li><span class="n">2</span><div><b>Organise</b><p>File them by section and tag in one shared structure.</p></div></li>
-      <li><span class="n">3</span><div><b>Access</b><p>Open and search from the office, at home or on site.</p></div></li>
+      <li><span class="n">1</span><div><b>Store</b><p>Upload reports, CAD models, Gerbers, firmware and more.</p></div></li>
+      <li><span class="n">2</span><div><b>Organise</b><p>Keep documents and files together in sections, modules and tags.</p></div></li>
+      <li><span class="n">3</span><div><b>Access</b><p>Preview, search and download from the office, at home or on site.</p></div></li>
     </ol>
   </aside>`;
 }
@@ -5502,6 +5506,7 @@ async function signOut() {
   toast('Logged out', { type: 'info' });
 }
 
+const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2A11.9 11.9 0 0 1 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3a12 12 0 0 1-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>';
 function authCardHTML() {
   if (!configured()) return `
       <h1>Connect DocBox</h1>
@@ -5518,11 +5523,11 @@ function authCardHTML() {
   const up = authMode === 'signup';
   return `
       <h1>${up ? 'Create your work account' : 'Sign in to DocBox'}</h1>
-      <p class="sub">${up ? 'Store your documents online and open them from any device.' : 'Use your work account to reach your team\u2019s documents.'}</p>
+      <p class="sub">${up ? 'Store your documents and work files online and open them from any device.' : 'Use your work account to reach your documents and files.'}</p>
       <div class="auth-alert error" id="authAlert" hidden></div>
       ${googleOn() ? `<div class="sso">
         <div class="gsi-slot" id="gsiSlot" ${CFG.googleClientId ? '' : 'hidden'}><div class="gsi-ph sk"></div></div>
-        <button type="button" class="btn sso-btn" id="gFallback" data-auth="google" ${CFG.googleClientId ? 'hidden' : ''}><span class="s-ico">${ico('account')}</span>${up ? 'Sign up with Google' : 'Sign in with Google'}<span class="s-go">${ico('arrow')}</span></button>
+        <button type="button" class="btn sso-btn" id="gFallback" data-auth="google" ${CFG.googleClientId ? 'hidden' : ''}><span class="s-ico g-mark">${GOOGLE_G}</span>${up ? 'Sign up with Google' : 'Sign in with Google'}<span class="s-go">${ico('arrow')}</span></button>
       </div>
       <div class="or">or with email and password</div>` : ''}
       <form id="authForm" novalidate>
@@ -5536,7 +5541,7 @@ function authCardHTML() {
 }
 function authView() {
   return `<section class="auth-form">
-    <span class="auth-brand">${LOGO()}<span>DocBox<small>Online document storage</small></span></span>
+    <span class="auth-brand">${LOGO()}<span>DocBox<small>Documents and files, online</small></span></span>
     <div class="auth-card">${authCardHTML()}</div>
   </section>
   ${authShowcase()}`;
