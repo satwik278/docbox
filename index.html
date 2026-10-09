@@ -63,8 +63,8 @@ SOFTWARE.
 window.DOCBOX_CONFIG = {
   supabaseUrl: 'https://pqfzxkzyzyvkoytbvpog.supabase.co',  // Supabase > Project Settings > API
   supabaseKey: 'sb_publishable_ya7Llv53bDVLY68_3bFHHA_9gJv1riE',                    // publishable key (sb_publishable_...) or legacy anon key
-  googleSignIn: true,       // later: set true (and add googleClientId) to show Google sign-in
-  googleClientId: '486931338571-d4c08dm5gm5t19dn7a2mg4va1aq8t1tg.apps.googleusercontent.com',        // later: Google OAuth Web client ID, shows Google's official button
+  googleSignIn: false,       // later: set true (and add googleClientId) to show Google sign-in
+  googleClientId: '',        // later: Google OAuth Web client ID, shows Google's official button
   bucket: 'documents',       // Storage bucket created by setup.sql
   storageQuotaMB: 1024,      // shown in the storage meters (Supabase Free plan: 1 GB)
   maxFileMB: 50,             // largest upload (Supabase Free plan: 50 MB)
@@ -1517,6 +1517,53 @@ img,video,iframe{max-width:100%}
   .icon-panel .icon-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
 }
 
+
+/* export / import */
+.ex-chips{display:flex;gap:8px;flex-wrap:wrap}
+.ex-chip[aria-pressed=true]{border-color:#A9B9FF;color:var(--blue);background:var(--blue-soft)}
+.ex-chip[aria-pressed=true] .ico{fill:none}
+.ex-chip .ex-n{font-size:11px;font-weight:600;line-height:18px;padding:0 7px;border-radius:99px;background:rgba(16,24,40,.06);color:var(--muted);font-variant-numeric:tabular-nums}
+.ex-chip[aria-pressed=true] .ex-n{background:#fff;color:var(--blue)}
+.ex-chip:disabled{opacity:.6;cursor:default}
+.ex-sum{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:12px 14px;border-radius:12px;background:var(--sunk);font-size:13px;color:var(--muted);margin-bottom:12px}
+.ex-sum b{color:var(--ink);font-size:14px}
+.ex-sum em{flex-basis:100%;display:flex;align-items:center;gap:6px;font-style:normal;color:#A65F00}
+.ex-sum em .ico{width:15px;height:15px}
+.ex-note{display:flex;gap:10px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.ex-note .ico{width:16px;height:16px;flex:none;margin-top:2px;color:var(--blue)}
+.ex-run{margin-top:16px;animation:fadeUp .3s var(--ease)}
+.ex-run .progress{display:block}
+.ex-status{font-size:12.5px;color:var(--muted);margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.im-reading{display:flex;align-items:center;gap:10px;padding:22px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:13.5px}
+.im-head{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:linear-gradient(135deg,#F5F7FF,#F9F6FF);border:1px solid #E3E8FF;animation:fadeUp .35s var(--ease)}
+.im-head>.ico{width:34px;height:34px;padding:8px;border-radius:10px;background:#fff;color:var(--blue);box-shadow:var(--sh-1);flex:none}
+.im-head div{flex:1;min-width:0;display:flex;flex-direction:column}
+.im-head b{font-size:14.5px}.im-head span{font-size:12.5px;color:var(--muted)}
+.im-stats{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.im-stats span{padding:5px 11px;border-radius:99px;background:var(--sunk);font-size:12.5px;color:var(--muted)}
+.im-stats b{color:var(--ink)}
+.im-stats .warn{background:#FFF7EA;color:#A65F00}.im-stats .warn b{color:#A65F00}
+.im-tree{border:1px solid var(--line);border-radius:14px;padding:6px;max-height:220px;overflow:auto}
+.im-f{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:9px;animation:fadeUp .35s var(--ease) both}
+.im-f+.im-f{border-top:1px solid var(--line2)}
+.im-f .sec-dot{width:26px;height:26px;border-radius:8px}
+.im-f b{font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.im-f small{color:var(--muted);font-size:12px;white-space:nowrap}
+.im-f em{margin-left:auto;font-style:normal;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:#E7F6EE;color:#0B7A4B;white-space:nowrap}
+.im-f em.old{background:var(--blue-soft);color:var(--blue)}
+.im-more{font-size:12px;color:var(--muted);padding:6px 10px}
+.im-skip{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.im-skip summary{cursor:pointer;color:#A65F00;font-weight:600}
+.im-skip div{display:flex;justify-content:space-between;gap:12px;padding:5px 2px;border-bottom:1px solid var(--line2)}
+.im-skip div span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
+.im-vis{display:flex;flex-wrap:wrap;margin:2px 0 6px;font-size:13.5px}
+.im-vis span{flex-basis:100%;margin-left:24px;font-size:12px;color:var(--muted)}
+.im-done{text-align:center;padding:18px 8px 4px;animation:fadeUp .4s var(--ease)}
+.im-ok{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:#E7F6EE;color:var(--green);animation:icoPop .6s var(--ease)}
+.im-ok .ico{width:28px;height:28px;stroke-width:2.4}
+.im-done h3{font-size:18px}.im-done p{color:var(--muted);margin-top:6px}.im-done .bad{color:var(--red)}
+.im-done .im-skip{text-align:left}
+.hint .ico{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:5px}
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
@@ -3199,7 +3246,7 @@ function viewSettings() {
       <div class="storage-big"><div class="bar">${segs.map(x => `<span style="${secVars(x.s)};flex:${x.b}" title="${esc(x.s.name)}: ${fmtSize(x.b)}"></span>`).join('')}<span style="flex:${Math.max(1, CAP - used)};background:transparent;animation:none"></span></div>
       <div class="nums"><span>${fmtSize(used)} used</span><span>${CAP_LABEL} storage plan</span></div>
       <div class="comp-legend" style="margin-top:10px">${segs.map(x => `<a href="#/section/${encodeURIComponent(x.s.id)}" style="${secVars(x.s)}"><i></i>${esc(x.s.name)} ${fmtSize(x.b)}</a>`).join('')}</div></div>
-      <div class="page-actions" style="margin-top:18px"><button class="btn" data-act="export">${ico('download')}Export library index</button><button class="btn" data-act="starter-sections">${ico('plus')}Add starter sections</button><button class="btn btn-ghost" style="color:var(--red)" data-act="erase">${ico('trash')}Delete my whole library</button></div></section>
+      <div class="page-actions" style="margin-top:18px"><button class="btn" data-act="export">${ico('download')}Export library</button><button class="btn" data-act="import">${ico('upload')}Import</button><button class="btn" data-act="starter-sections">${ico('plus')}Add starter sections</button><button class="btn btn-ghost" style="color:var(--red)" data-act="erase">${ico('trash')}Delete my whole library</button></div></section>
     <section class="card rv" style="--d:240ms"><h2>Keyboard shortcuts</h2>${kbTable()}</section>
     <section class="card danger-card rv" style="--d:280ms"><h2>Delete account</h2><p>Permanently deletes your account, every section and module, every document and file, and removes anything you shared from Community. This cannot be undone.</p>
       <div class="page-actions" style="margin-top:14px"><button class="btn btn-danger" data-act="delete-account">${ico('trash')}Delete my account</button></div></section>
@@ -4045,6 +4092,9 @@ function secMenu(id, anchor) {
     { icon: 'copy', label: 'Duplicate', run: () => duplicateSection(id) },
     i > 0 && { icon: 'chevU', label: 'Move up', run: () => moveSection(id, -1) },
     i < sib.length - 1 && { icon: 'chevD', label: 'Move down', run: () => moveSection(id, 1) },
+    '-',
+    all.length && { icon: 'download', label: 'Export this section', run: () => exportModal({ sectionId: id }) },
+    { icon: 'upload', label: 'Import into this section', run: () => importModal({ sectionId: id }) },
     all.length && '-',
     all.length && pub < all.length && { icon: 'globe', label: 'Make everything inside public', run: () => setSubtreeVisibility(id, 'public') },
     pub > 0 && { icon: 'lock', label: 'Make everything inside private', run: () => setSubtreeVisibility(id, 'private') },
@@ -4271,15 +4321,15 @@ function deleteAccountModal() {
    Location picker: a tidy tree dropdown used wherever a section is chosen
    ========================================================= */
 const ROOT_LABEL = 'Root';
-const pickFace = s => s
+const pickFace = (s, rl = ROOT_LABEL, rs = 'Top of your library') => s
   ? `<span class="pick-face" style="${secVars(s)}"><span class="sec-dot">${ico(s.icon)}</span><span class="pf-t"><b>${esc(s.name)}</b>${depthOf(s.id) ? `<small>in ${esc(pathLabel(s.parentId, 2))}</small>` : ''}</span></span>`
-  : `<span class="pick-face"><span class="sec-dot root">${ico('layers')}</span><span class="pf-t"><b>${ROOT_LABEL}</b><small>Top of your library</small></span></span>`;
-function secPickerHTML({ id, value = null, root = false, maxDepth = MAX_DEPTH, labelId = '' }) {
+  : `<span class="pick-face"><span class="sec-dot root">${ico('layers')}</span><span class="pf-t"><b>${esc(rl)}</b><small>${esc(rs)}</small></span></span>`;
+function secPickerHTML({ id, value = null, root = false, maxDepth = MAX_DEPTH, labelId = '', rootLabel = ROOT_LABEL, rootSub = 'Top of your library' }) {
   const opts = treeOptions().filter(o => o.depth < maxDepth), cur = value && secById(value);
-  return `<div class="pick" data-pick="${id}"><input type="hidden" id="${id}" value="${esc(cur ? cur.id : '')}">
-    <button type="button" class="pick-btn" aria-haspopup="listbox" aria-expanded="false"${labelId ? ` aria-labelledby="${labelId}"` : ''}>${pickFace(cur)}<span class="pick-chev">${ico('chevUD')}</span></button>
+  return `<div class="pick" data-pick="${id}" data-rl="${esc(rootLabel)}" data-rs="${esc(rootSub)}"><input type="hidden" id="${id}" value="${esc(cur ? cur.id : '')}">
+    <button type="button" class="pick-btn" aria-haspopup="listbox" aria-expanded="false"${labelId ? ` aria-labelledby="${labelId}"` : ''}>${pickFace(cur, rootLabel, rootSub)}<span class="pick-chev">${ico('chevUD')}</span></button>
     <div class="pick-list" role="listbox" hidden>
-      ${root ? `<button type="button" role="option" class="po po-root" data-v="" aria-selected="${!cur}"><span class="sec-dot root">${ico('layers')}</span><span class="po-t"><b>${ROOT_LABEL}</b><small>Top of your library</small></span><span class="po-ok">${ico('check')}</span></button>${opts.length ? '<div class="po-sep">Inside</div>' : ''}` : ''}
+      ${root ? `<button type="button" role="option" class="po po-root" data-v="" aria-selected="${!cur}"><span class="sec-dot root">${ico('layers')}</span><span class="po-t"><b>${esc(rootLabel)}</b><small>${esc(rootSub)}</small></span><span class="po-ok">${ico('check')}</span></button>${opts.length ? '<div class="po-sep">Inside</div>' : ''}` : ''}
       ${opts.map(({ s, depth }) => `<button type="button" role="option" class="po" data-v="${esc(s.id)}" aria-selected="${!!cur && cur.id === s.id}" style="${secVars(s)};--depth:${depth}">${depth ? '<span class="po-elbow" aria-hidden="true"></span>' : ''}<span class="sec-dot">${ico(s.icon)}</span><span class="po-t"><b>${esc(s.name)}</b></span><span class="po-ok">${ico('check')}</span></button>`).join('')}
     </div></div>`;
 }
@@ -4311,7 +4361,7 @@ function mountPicker(root, id, onChange) {
   };
   const pick = b => {
     inp.value = b.dataset.v; opts().forEach(x => x.setAttribute('aria-selected', x === b));
-    btn.querySelector('.pick-face').outerHTML = pickFace(secById(b.dataset.v));
+    btn.querySelector('.pick-face').outerHTML = pickFace(secById(b.dataset.v), box.dataset.rl, box.dataset.rs);
     open(false); btn.focus(); btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop');
     if (onChange) onChange(b.dataset.v || null);
   };
@@ -5102,10 +5152,323 @@ function shortcutsModal() { modal({ title: 'Keyboard shortcuts', body: kbTable()
 /* =========================================================
    Library data: export / import / reset
    ========================================================= */
-function exportLib() {
-  const meta = { exportedAt: new Date().toISOString(), account: session && session.email, sections: state.sections, documents: state.documents.map(({ content, blob, ...d }) => d) };
-  downloadBlob(new Blob([JSON.stringify(meta, null, 1)], { type: 'application/json' }), `docbox-index-${new Date().toISOString().slice(0, 10)}.json`);
-  toast('Library index exported. The files themselves stay in storage.', { ms: 4200 });
+/* ---------- ZIP, written and read in the browser (no outside library) ---------- */
+const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u8) { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC_T[(c ^ u8[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+const CAN_DEFLATE = typeof CompressionStream !== 'undefined', CAN_INFLATE = typeof DecompressionStream !== 'undefined';
+const deflateRaw = async u8 => new Uint8Array(await new Response(new Blob([u8]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer());
+const inflateRaw = blob => new Response(blob.stream().pipeThrough(new DecompressionStream('deflate-raw'))).blob();
+const NO_SQUEEZE = /\.(zip|7z|rar|gz|tgz|bz2|xz|zst|png|jpe?g|gif|webp|avif|heic|mp4|webm|mov|mkv|mp3|m4a|aac|ogg|flac|pdf|docx|xlsx|pptx|odt|ods|odp|3mf|f3z)$/i;
+function zipWriter() {
+  const parts = [], central = [], enc = new TextEncoder(); let offset = 0, count = 0;
+  return {
+    async add(name, body, when = new Date()) {
+      const raw = body instanceof Uint8Array ? body : typeof body === 'string' ? enc.encode(body) : new Uint8Array(await body.arrayBuffer());
+      const crc = crc32(raw); let data = raw, method = 0;
+      if (CAN_DEFLATE && raw.length > 128 && !NO_SQUEEZE.test(name)) { try { const c = await deflateRaw(raw); if (c.length < raw.length * .97) { data = c; method = 8; } } catch (e) { /* store instead */ } }
+      if (offset + data.length + 1e6 > 0xFFFFFFFF || count >= 65000) throw new Error('This export is too large for one ZIP. Export one section at a time.');
+      const nm = enc.encode(name), d = when instanceof Date && !isNaN(when) ? when : new Date();
+      const tm = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1), dt = ((Math.max(1980, d.getFullYear()) - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+      const lh = new DataView(new ArrayBuffer(30)), ch = new DataView(new ArrayBuffer(46));
+      [[0, 0x04034b50, 4], [4, 20, 2], [6, 0x0800, 2], [8, method, 2], [10, tm, 2], [12, dt, 2], [14, crc, 4], [18, data.length, 4], [22, raw.length, 4], [26, nm.length, 2], [28, 0, 2]].forEach(([o, v, s]) => s === 4 ? lh.setUint32(o, v, true) : lh.setUint16(o, v, true));
+      [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [8, 0x0800, 2], [10, method, 2], [12, tm, 2], [14, dt, 2], [16, crc, 4], [20, data.length, 4], [24, raw.length, 4], [28, nm.length, 2], [42, offset, 4]].forEach(([o, v, s]) => s === 4 ? ch.setUint32(o, v, true) : ch.setUint16(o, v, true));
+      parts.push(lh.buffer, nm, data); central.push(ch.buffer, nm);
+      offset += 30 + nm.length + data.length; count++;
+    },
+    blob() {
+      const size = central.reduce((a, p) => a + p.byteLength, 0), e = new DataView(new ArrayBuffer(22));
+      e.setUint32(0, 0x06054b50, true); e.setUint16(8, count, true); e.setUint16(10, count, true); e.setUint32(12, size, true); e.setUint32(16, offset, true);
+      return new Blob([...parts, ...central, e.buffer], { type: 'application/zip' });
+    }
+  };
+}
+async function zipEntries(blob) {
+  const tl = Math.min(blob.size, 65557), tail = new DataView(await blob.slice(blob.size - tl).arrayBuffer());
+  let e = -1; for (let i = tl - 22; i >= 0; i--) if (tail.getUint32(i, true) === 0x06054b50) { e = i; break; }
+  if (e < 0) throw new Error('This is not a ZIP file, or it is damaged.');
+  const n = tail.getUint16(e + 10, true), cdSize = tail.getUint32(e + 12, true), cdOff = tail.getUint32(e + 16, true);
+  if (n === 0xFFFF || cdOff === 0xFFFFFFFF) throw new Error('ZIP files over 4 GB are not supported.');
+  const cd = new DataView(await blob.slice(cdOff, cdOff + cdSize).arrayBuffer()), utf8 = new TextDecoder('utf-8', { fatal: true }), win = new TextDecoder('windows-1252'), out = [];
+  for (let i = 0, p = 0; i < n && p + 46 <= cd.byteLength; i++) {
+    if (cd.getUint32(p, true) !== 0x02014b50) break;
+    const flags = cd.getUint16(p + 8, true), nl = cd.getUint16(p + 28, true), xl = cd.getUint16(p + 30, true), cl = cd.getUint16(p + 32, true);
+    const nb = new Uint8Array(cd.buffer, cd.byteOffset + p + 46, nl); let name; try { name = utf8.decode(nb); } catch (x) { name = win.decode(nb); }
+    const en = { name: name.replace(/\\/g, '/'), method: cd.getUint16(p + 10, true), csize: cd.getUint32(p + 20, true), size: cd.getUint32(p + 24, true), lho: cd.getUint32(p + 42, true), encrypted: !!(flags & 1), mtime: cd.getUint16(p + 12, true), mdate: cd.getUint16(p + 14, true) };
+    en.blob = async () => {
+      const h = new DataView(await blob.slice(en.lho, en.lho + 30).arrayBuffer());
+      if (h.getUint32(0, true) !== 0x04034b50) throw new Error('This part of the ZIP is damaged.');
+      const start = en.lho + 30 + h.getUint16(26, true) + h.getUint16(28, true), data = blob.slice(start, start + en.csize);
+      if (en.method === 0) return data;
+      if (en.method === 8 && CAN_INFLATE) return inflateRaw(data);
+      throw new Error('This ZIP uses a compression type the browser cannot open.');
+    };
+    out.push(en); p += 46 + nl + xl + cl;
+  }
+  return out;
+}
+const zipSafe = s => String(s || '').replace(/[\\/:*?"<>|\u0000-\u001f]+/g, '_').replace(/^\.+$/, '_').trim().slice(0, 120) || 'untitled';
+const uniqueIn = (set, name) => { if (!set.has(name.toLowerCase())) { set.add(name.toLowerCase()); return name; } const m = /^(.*?)(\.[^.]{1,12})?$/.exec(name); let i = 2, n; do { n = `${m[1]} (${i++})${m[2] || ''}`; } while (set.has(n.toLowerCase())); set.add(n.toLowerCase()); return n; };
+const dayStamp = () => new Date().toISOString().slice(0, 10);
+
+/* ---------- Export: documents and files as one ZIP, folders mirror sections ---------- */
+function exportModal({ sectionId } = {}) {
+  let scope = sectionId && secById(sectionId) ? sectionId : null, busy = false, stop = false;
+  const inc = { docs: true, files: true, trash: false };
+  const pick = () => {
+    let L = inc.trash ? state.documents : liveAll();
+    if (scope) { const set = new Set(subtreeIds(scope)); L = L.filter(d => set.has(d.sectionId)); }
+    return L.filter(d => isFile(d) ? inc.files : inc.docs);
+  };
+  const chip = (k, icon, label) => `<button type="button" class="toggle-chip ex-chip" data-k="${k}" aria-pressed="${inc[k]}">${ico(icon)}${label}<span class="ex-n" data-n="${k}"></span></button>`;
+  modal({
+    title: 'Export', sub: 'Download documents and files as one ZIP. Folders inside it match your sections and modules.',
+    body: `<div class="field"><span class="label">Include</span><div class="ex-chips">${chip('docs', 'docs', 'Documents')}${chip('files', 'folderOpen', 'Files')}${chip('trash', 'trash', 'Trash')}</div></div>
+      <div class="field"><span class="label" id="exFromL">From</span>${secPickerHTML({ id: 'exSec', value: scope, root: true, labelId: 'exFromL', rootLabel: 'Whole library', rootSub: 'Every section and module' })}</div>
+      <div class="ex-sum" id="exSum"></div>
+      <div class="ex-note">${ico('info')}<span>The ZIP also holds <b>docbox.json</b> with names, tags, descriptions and your section structure, so it can be imported back into DocBox later. Open any file in the ZIP with your usual apps.</span></div>
+      <div class="ex-run" id="exRun" hidden><div class="progress"><i id="exBar"></i></div><div class="ex-status" id="exStatus"></div></div>`,
+    foot: `<button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="exGo">${ico('download')}Export</button>`,
+    onMount(el, close) {
+      const go_ = el.querySelector('#exGo'), sum = el.querySelector('#exSum');
+      new MutationObserver((_, ob) => { if (!document.contains(el)) { stop = true; ob.disconnect(); } }).observe($('#modalRoot'), { childList: true });
+      const paint = () => {
+        const all = scope ? (() => { const set = new Set(subtreeIds(scope)); return state.documents.filter(d => set.has(d.sectionId)); })() : state.documents;
+        el.querySelector('[data-n=docs]').textContent = all.filter(d => !isFile(d) && !d.deletedAt).length;
+        el.querySelector('[data-n=files]').textContent = all.filter(d => isFile(d) && !d.deletedAt).length;
+        el.querySelector('[data-n=trash]').textContent = all.filter(d => d.deletedAt && (isFile(d) ? inc.files : inc.docs)).length;
+        const L = pick(), bytes = L.reduce((a, d) => a + (d.size || 0), 0);
+        sum.innerHTML = L.length ? `<b>${plural(L.length, 'item')}</b><span>${fmtSize(bytes)} before compression</span>${bytes > 400 * 1048576 ? `<em>${ico('alert')}Large export. If your browser struggles, export one section at a time.</em>` : ''}` : `<span class="muted">Nothing to export with these choices.</span>`;
+        go_.disabled = !L.length;
+      };
+      $$('.ex-chip', el).forEach(b => b.addEventListener('click', () => { if (busy) return; inc[b.dataset.k] = !inc[b.dataset.k]; b.setAttribute('aria-pressed', inc[b.dataset.k]); paint(); }));
+      mountPicker(el, 'exSec', v => { scope = v; paint(); });
+      paint();
+      go_.addEventListener('click', async () => {
+        if (busy) return;
+        const L = pick(); if (!L.length) return;
+        busy = true; go_.classList.add('loading'); el.querySelector('#exRun').hidden = false;
+        $$('.ex-chip, .pick-btn', el).forEach(b => b.disabled = true);
+        const bar = el.querySelector('#exBar'), status = el.querySelector('#exStatus');
+        const root = zipSafe(scope ? `DocBox - ${secById(scope).name} - ${dayStamp()}` : `DocBox export ${dayStamp()}`);
+        const top = scope ? (secById(scope).parentId || null) : null;
+        const folderOf = id => { if (!id || !secById(id)) return 'Unsorted'; const p = pathOf(id); const i = top ? p.findIndex(s => s.id === scope) : 0; return p.slice(Math.max(0, i)).map(s => zipSafe(s.name)).join('/'); };
+        const zip = zipWriter(), used = new Map(), items = [], failed = [];
+        let done = 0;
+        const fetchOne = async d => {
+          if (isFile(d)) return d.blob || api.download(d.path);
+          await ensureContent(d);
+          return isText(d) ? new Blob([d.content || '']) : d.blob;
+        };
+        for (let i = 0; i < L.length && !stop; i += 4) {
+          const chunk = L.slice(i, i + 4);
+          const got = await Promise.all(chunk.map(d => fetchOne(d).then(b => ({ d, b }), e => ({ d, e }))));
+          for (const { d, b, e } of got) {
+            if (stop) break;
+            status.textContent = `Adding ${done + 1} of ${L.length}: ${d.name}`;
+            if (e || !b) { failed.push(d.name); done++; continue; }
+            const folder = (d.deletedAt ? 'Trash/' : '') + folderOf(d.sectionId);
+            if (!used.has(folder)) used.set(folder, new Set());
+            const want = isFile(d) && d.ext && fileExt(d.name) !== d.ext ? `${d.name}.${d.ext}` : d.name;
+            const fname = uniqueIn(used.get(folder), zipSafe(want));
+            try {
+              await zip.add(`${root}/${folder}/${fname}`, b, new Date(d.updatedAt || Date.now()));
+              items.push({ file: `${folder}/${fname}`, name: d.name, kind: isFile(d) ? 'file' : 'doc', type: d.type, category: d.category || '', ext: d.ext || '', description: d.description || '', tags: d.tags || [], visibility: d.visibility || 'private', favorite: !!d.favorite, sectionId: d.sectionId || null, createdAt: new Date(d.createdAt || Date.now()).toISOString(), updatedAt: new Date(d.updatedAt || Date.now()).toISOString(), inTrash: !!d.deletedAt });
+            } catch (x) { if (/too large/.test(x.message)) { failed.push(x.message); stop = true; break; } failed.push(d.name); }
+            done++; bar.style.width = (done / L.length * 92).toFixed(1) + '%';
+          }
+        }
+        if (stop && done < L.length) { if (document.contains(el)) { busy = false; go_.classList.remove('loading'); } return; }
+        const secIds = scope ? subtreeIds(scope) : state.sections.map(s => s.id);
+        const manifest = { app: 'DocBox', format: 1, exportedAt: new Date().toISOString(), by: session ? session.email : '', scope: scope ? { id: scope, name: secById(scope).name } : null, sections: secIds.map(secById).filter(Boolean).map(s => ({ id: s.id, parentId: s.id === scope ? null : s.parentId, name: s.name, description: s.description || '', icon: s.icon, color: s.color, order: s.order, folder: folderOf(s.id) })), items };
+        await zip.add(`${root}/docbox.json`, JSON.stringify(manifest, null, 1));
+        bar.style.width = '100%'; status.textContent = 'Preparing the download…';
+        downloadBlob(zip.blob(), root + '.zip');
+        log(`Exported ${plural(items.length, 'item')}`, 'download', scope);
+        close();
+        toast(failed.length ? `Exported ${plural(items.length, 'item')}. ${plural(failed.length, 'item')} could not be read.` : `Exported ${plural(items.length, 'item')}`, { type: failed.length ? 'info' : 'ok', ms: 5200 });
+      });
+    }
+  });
+}
+
+/* ---------- Import: a DocBox export, or any ZIP of folders ---------- */
+const JUNK = /(^|\/)(__MACOSX|\.DS_Store|Thumbs\.db|desktop\.ini|\._[^/]*)(\/|$)/i;
+function importModal({ sectionId } = {}) {
+  let dest = sectionId && secById(sectionId) ? sectionId : null, plan = null, busy = false, stop = false, dup = 'skip', keepVis = false;
+  modal({
+    title: 'Import', sub: 'Bring in a DocBox export, or any ZIP of folders. Folders become sections and modules.', wide: true,
+    body: `<div class="field" id="imFileF"><label class="drop" id="imDrop" tabindex="0" for="imIn"><input type="file" id="imIn" accept=".zip,application/zip" hidden>
+        <svg class="drop-ico" viewBox="0 0 52 52" aria-hidden="true"><rect x="9" y="6" width="34" height="40" rx="7" fill="#fff" stroke="#C8CFDA" stroke-width="1.5"/><path d="M22 6v6h4v4h-4v4h4v4h-4" fill="none" stroke="#A9B4C4" stroke-width="1.6"/><g class="arrow"><circle cx="26" cy="33" r="9" fill="#EEF2FF"/><path d="M26 29v8M22.5 33.5 26 37l3.5-3.5" fill="none" stroke="#2E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+        <strong>Drop a ZIP file here</strong><span>or click to choose one</span></label><div class="err-msg" hidden></div></div>
+      <div id="imPlan" hidden></div>
+      <div class="ex-run" id="imRun" hidden><div class="progress"><i id="imBar"></i></div><div class="ex-status" id="imStatus"></div></div>`,
+    foot: `<span class="left hide-m" id="imTip">Tip: export from DocBox to move a library between accounts.</span><button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="imGo" disabled>${ico('upload')}Import</button>`,
+    onMount(el, close) {
+      const drop = el.querySelector('#imDrop'), inp = el.querySelector('#imIn'), err = el.querySelector('#imFileF .err-msg'), box = el.querySelector('#imPlan'), go_ = el.querySelector('#imGo');
+      new MutationObserver((_, ob) => { if (!document.contains(el)) { stop = true; ob.disconnect(); } }).observe($('#modalRoot'), { childList: true });
+      const fail = msg => { el.querySelector('#imFileF').classList.add('err'); err.hidden = false; err.innerHTML = ico('info') + esc(msg); drop.hidden = false; box.hidden = true; go_.disabled = true; plan = null; };
+      async function read(f) {
+        el.querySelector('#imFileF').classList.remove('err'); err.hidden = true;
+        if (!/\.zip$/i.test(f.name) && f.type !== 'application/zip' && f.type !== 'application/x-zip-compressed') return fail('Choose a .zip file. To bring in single files, use Upload instead.');
+        drop.hidden = true; box.hidden = false; box.innerHTML = `<div class="im-reading"><span class="bu-spin up">${ico('loader')}</span>Reading ${esc(f.name)}…</div>`;
+        let ents;
+        try { ents = await zipEntries(f); } catch (e) { return fail(e.message); }
+        ents = ents.filter(e => !e.name.endsWith('/') && !JUNK.test(e.name));
+        if (!ents.length) return fail('This ZIP is empty.');
+        const man = ents.filter(e => /(^|\/)docbox\.json$/i.test(e.name)).sort((a, b) => a.name.split('/').length - b.name.split('/').length)[0];
+        let manifest = null;
+        if (man) { try { const j = JSON.parse(await (await man.blob()).text()); if (j && j.app === 'DocBox' && Array.isArray(j.items)) manifest = j; } catch (e) { /* treat as a plain ZIP */ } }
+        plan = buildPlan(ents, manifest, man);
+        render();
+      }
+      function buildPlan(ents, manifest, man) {
+        const P = { manifest: !!manifest, folders: new Map(), items: [], skipped: [] };
+        const addFolder = (path, meta) => { if (!path) return; const segs = path.split('/'); for (let i = 1; i <= segs.length; i++) { const k = segs.slice(0, i).join('/'); if (!P.folders.has(k)) P.folders.set(k, { path: k, name: segs[i - 1], parent: i > 1 ? segs.slice(0, i - 1).join('/') : '', meta: null }); } if (meta) P.folders.get(path).meta = meta; };
+        const classify = (name, size) => {
+          const ext = fileExt(name);
+          if (isBlockedName(name)) return { skip: `Programs (.${ext}) cannot be stored` };
+          if (!size) return { skip: 'The file is empty' };
+          if (size > MAX_FILE) return { skip: `Larger than ${CFG.maxFileMB} MB` };
+          return { kind: EXT[extOf(name)] ? 'doc' : 'file' };
+        };
+        if (manifest) {
+          const base = man.name.slice(0, man.name.length - 'docbox.json'.length), byName = new Map(ents.map(e => [e.name, e]));
+          const secById_ = new Map((manifest.sections || []).map(s => [s.id, s]));
+          (manifest.sections || []).forEach(s => addFolder(s.folder, s));
+          manifest.items.forEach(it => {
+            const en = byName.get(base + it.file); if (!en) { P.skipped.push({ name: it.name, why: 'Missing from the ZIP' }); return; }
+            if (en.encrypted) { P.skipped.push({ name: it.name, why: 'Password-protected' }); return; }
+            const folder = it.file.split('/').slice(0, -1).join('/').replace(/^Trash\//, '');
+            const c = classify(it.name, en.size); if (c.skip) { P.skipped.push({ name: it.name, why: c.skip }); return; }
+            const kind = it.kind === 'doc' && EXT[extOf(it.name)] ? 'doc' : 'file';
+            if (folder && folder !== 'Unsorted') addFolder(folder, secById_.get(it.sectionId) || null);
+            P.items.push({ en, name: it.name, kind, folder: folder === 'Unsorted' ? '' : folder, meta: it });
+          });
+        } else {
+          ents.forEach(en => {
+            const segs = en.name.split('/').filter(s => s && s !== '.' && s !== '..'), name = segs.pop() || en.name;
+            if (en.encrypted) { P.skipped.push({ name, why: 'Password-protected' }); return; }
+            const c = classify(name, en.size); if (c.skip) { P.skipped.push({ name, why: c.skip }); return; }
+            const folder = segs.map(zipSafe).join('/'); addFolder(folder);
+            P.items.push({ en, name, kind: c.kind, folder, meta: null });
+          });
+        }
+        return P;
+      }
+      function render() {
+        if (!plan) return;
+        const D = plan.items.filter(x => x.kind === 'doc').length, F = plan.items.length - D, bytes = plan.items.reduce((a, x) => a + x.en.size, 0);
+        const roots = [...plan.folders.values()].filter(f => !f.parent), deep = [...plan.folders.values()];
+        const loose = plan.items.some(x => !x.folder);
+        const exists = f => { const parent = f.parent ? null : dest; return !f.parent && siblingsOf(parent).some(s => s.name.toLowerCase() === f.name.toLowerCase()); };
+        const over = usedBytes() + bytes > CAP;
+        box.innerHTML = `<div class="im-head">${ico(plan.manifest ? 'layers' : 'archive')}<div><b>${plan.manifest ? 'DocBox export found' : 'ZIP of folders'}</b><span>${plan.manifest ? 'Sections, names, tags and descriptions will be restored.' : 'Each folder becomes a section or module.'}</span></div><button type="button" class="txt-btn" id="imOther">Choose another</button></div>
+          <div class="im-stats"><span><b>${D}</b> ${D === 1 ? 'document' : 'documents'}</span><span><b>${F}</b> ${F === 1 ? 'file' : 'files'}</span><span><b>${deep.length}</b> ${deep.length === 1 ? 'folder' : 'folders'}</span><span><b>${fmtSize(bytes)}</b></span>${plan.skipped.length ? `<span class="warn"><b>${plan.skipped.length}</b> skipped</span>` : ''}</div>
+          ${roots.length ? `<div class="im-tree">${roots.slice(0, 8).map(f => `<div class="im-f"><span class="sec-dot" style="${f.meta ? secVars({ color: f.meta.color }) : secVars({ color: 'blue' })}">${ico(f.meta && f.meta.icon ? f.meta.icon : 'folder')}</span><b>${esc(f.name)}</b><small>${plural(plan.items.filter(x => x.folder === f.path || x.folder.startsWith(f.path + '/')).length, 'item')}</small>${exists(f) ? '<em class="old">Adds to existing</em>' : '<em>New</em>'}</div>`).join('')}${roots.length > 8 ? `<div class="im-more">and ${roots.length - 8} more</div>` : ''}</div>` : ''}
+          ${plan.skipped.length ? `<details class="im-skip"><summary>${plural(plan.skipped.length, 'item')} will be skipped</summary>${plan.skipped.slice(0, 40).map(s => `<div><span>${esc(s.name)}</span><small>${esc(s.why)}</small></div>`).join('')}</details>` : ''}
+          <div class="two" style="margin-top:14px">
+            <div class="field"><span class="label" id="imToL">Import into</span>${secPickerHTML({ id: 'imDest', value: dest, root: true, labelId: 'imToL', rootLabel: 'Root', rootSub: 'Folders become new sections' })}</div>
+            <div class="field"><span class="label" id="imDupL">If a name already exists</span><div class="seg" role="radiogroup" aria-labelledby="imDupL"><button type="button" role="radio" data-dup="skip" aria-checked="${dup === 'skip'}" aria-pressed="${dup === 'skip'}">Skip it</button><button type="button" role="radio" data-dup="both" aria-checked="${dup === 'both'}" aria-pressed="${dup === 'both'}">Keep both</button></div></div>
+          </div>
+          ${plan.manifest ? `<label class="check im-vis"><input type="checkbox" id="imVis"${keepVis ? ' checked' : ''}>Keep public and private settings from the export<span>Off: everything comes in as Private</span></label>` : ''}
+          ${loose && !dest ? `<p class="hint">${ico('info')}Items not inside a folder go into a new section called “Imported ${dayStamp()}”.</p>` : ''}
+          ${over ? `<div class="auth-alert error">${ico('alert')}<span>Not enough storage: this needs ${fmtSize(bytes)}, and ${fmtSize(Math.max(0, CAP - usedBytes()))} is free.</span></div>` : ''}`;
+        go_.disabled = !plan.items.length || over;
+        go_.innerHTML = `${ico('upload')}Import ${plural(plan.items.length, 'item')}`;
+        el.querySelector('#imOther').addEventListener('click', () => { plan = null; box.hidden = true; drop.hidden = false; go_.disabled = true; go_.innerHTML = `${ico('upload')}Import`; inp.value = ''; drop.focus(); });
+        mountPicker(el, 'imDest', v => { dest = v; render(); });
+        $$('[data-dup]', el).forEach(b => b.addEventListener('click', () => { dup = b.dataset.dup; $$('[data-dup]', el).forEach(x => { x.setAttribute('aria-checked', x === b); x.setAttribute('aria-pressed', x === b); }); }));
+        const vi = el.querySelector('#imVis'); if (vi) vi.addEventListener('change', () => { keepVis = vi.checked; });
+      }
+      inp.addEventListener('change', () => { if (inp.files[0]) read(inp.files[0]); });
+      drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.click(); } });
+      let depth = 0;
+      drop.addEventListener('dragenter', e => { e.preventDefault(); depth++; drop.classList.add('drag'); });
+      drop.addEventListener('dragover', e => { e.preventDefault(); });
+      drop.addEventListener('dragleave', () => { if (--depth <= 0) { depth = 0; drop.classList.remove('drag'); } });
+      drop.addEventListener('drop', e => { e.preventDefault(); depth = 0; drop.classList.remove('drag'); if (e.dataTransfer.files[0]) read(e.dataTransfer.files[0]); });
+      setTimeout(() => drop.focus(), 40);
+
+      go_.addEventListener('click', async () => {
+        if (busy || !plan || !plan.items.length) return;
+        busy = true; go_.classList.add('loading'); box.querySelectorAll('button,input').forEach(b => { b.disabled = true; });
+        el.querySelector('#imRun').hidden = false; el.querySelector('#imTip').hidden = true;
+        const bar = el.querySelector('#imBar'), status = el.querySelector('#imStatus'), t0 = now();
+        let made = 0, ok = 0, skipped = plan.skipped.length; const failed = [];
+        /* 1. sections: reuse a same-named section at the same level, otherwise create it */
+        const map = new Map(), colors = ['blue', 'violet', 'cyan', 'green', 'amber', 'rose'];
+        let fallback = dest;
+        const ensure = async folder => {
+          if (!folder) return null;
+          if (map.has(folder)) return map.get(folder);
+          const f = plan.folders.get(folder) || { name: folder.split('/').pop(), parent: folder.split('/').slice(0, -1).join('/'), meta: null };
+          const parentId = f.parent ? await ensure(f.parent) : dest;
+          if (parentId && depthOf(parentId) >= MAX_DEPTH - 1) { map.set(folder, parentId); return parentId; }
+          const name = f.name.slice(0, 60);
+          let s = siblingsOf(parentId).find(x => x.name.toLowerCase() === name.toLowerCase());
+          if (!s) {
+            const m = f.meta || {}, t = now();
+            s = { id: newId(), parentId, name, description: m.description || '', icon: m.icon || 'folder', color: m.color || (parentId && secById(parentId) ? secById(parentId).color : colors[state.sections.length % 6]), order: siblingsOf(parentId).length, createdAt: t, updatedAt: t };
+            await api.insSec(s); state.sections.push(s); made++;
+          }
+          map.set(folder, s.id); return s.id;
+        };
+        try {
+          for (const f of [...plan.folders.keys()].sort((a, b) => a.split('/').length - b.split('/').length)) { if (stop) break; status.textContent = 'Creating sections…'; await ensure(f); }
+          if (!dest && plan.items.some(x => !x.folder)) fallback = await ensure(`Imported ${dayStamp()}`);
+        } catch (e) { busy = false; go_.classList.remove('loading'); status.textContent = 'Sections could not be created. ' + friendly(e); return; }
+        /* 2. items, three at a time */
+        const names = new Map();
+        const namesIn = (secId, kind) => { const k = secId + ':' + kind; if (!names.has(k)) names.set(k, new Set(liveAll().filter(d => d.sectionId === secId && (kind === 'file') === isFile(d)).map(d => d.name.toLowerCase()))); return names.get(k); };
+        let i = 0, done = 0, anyPublic = false;
+        const one = async x => {
+          const secId = x.folder ? map.get(x.folder) : fallback, pool = namesIn(secId, x.kind);
+          let name = x.name.slice(0, 120);
+          if (pool.has(name.toLowerCase())) { if (dup === 'skip') { skipped++; return; } name = uniqueIn(pool, name); } else pool.add(name.toLowerCase());
+          const blob = await x.en.blob(), m = x.meta || {}, t = now(), id = newId();
+          const vis = plan.manifest && keepVis && m.visibility === 'public' ? 'public' : 'private';
+          const created = m.createdAt ? Date.parse(m.createdAt) || t : t;
+          let doc;
+          if (x.kind === 'doc') {
+            const type = EXT[extOf(name)] || 'txt', text = isText({ type }) ? await blob.text() : null, meta = text != null && !m.description ? readMeta(text, type) : { desc: '', tags: [] };
+            const body = new Blob([text != null ? text : blob], { type: mimeFor(type, name) });
+            doc = { id, name, type, mime: body.type, visibility: vis, sectionId: secId, description: m.description || meta.desc || '', tags: (m.tags || meta.tags || []).slice(0, 12), favorite: !!m.favorite, favAt: m.favorite ? t : 0, size: body.size, path: storagePath(id, name), allowScripts: false, searchText: '', createdAt: created, updatedAt: t, openedAt: 0, deletedAt: 0, content: text, blob: text != null ? null : body };
+            doc.searchText = searchTextFor(doc);
+            await api.upload(doc.path, body, body.type);
+          } else {
+            const it = await readFileItem(new File([blob], name));
+            if (it.status === 'skip') { failed.push(`${name}: ${it.error}`); return; }
+            const mime = safeFileMime(it.file, it.ext);
+            doc = { id, name, type: it.type, mime, visibility: vis, sectionId: secId, description: m.description || it.desc || '', tags: (m.tags || it.tags || []).slice(0, 12), favorite: !!m.favorite, favAt: m.favorite ? t : 0, size: blob.size, path: storagePath(id, name), allowScripts: false, searchText: (it.content || '').replace(/\s+/g, ' ').trim().slice(0, 20000), createdAt: created, updatedAt: t, openedAt: 0, deletedAt: 0, content: it.content, blob: it.file, kind: 'file', category: it.category, ext: it.ext };
+            await api.upload(doc.path, it.file, mime);
+          }
+          try { await api.insDoc(doc); } catch (e) { api.remove([doc.path]).catch(() => {}); throw e; }
+          state.documents.unshift(doc); ok++; if (vis === 'public') anyPublic = true;
+        };
+        const worker = async () => {
+          while (i < plan.items.length && !stop) {
+            const x = plan.items[i++];
+            status.textContent = `Importing ${Math.min(done + 1, plan.items.length)} of ${plan.items.length}: ${x.name}`;
+            try { await one(x); } catch (e) { console.error(e); failed.push(`${x.name}: ${friendly(e) || 'upload failed'}`); }
+            done++; bar.style.width = (done / plan.items.length * 100).toFixed(1) + '%';
+          }
+        };
+        setSync(1);
+        await Promise.all([worker(), worker(), worker()]);
+        setSync(-1);
+        if (anyPublic) community.at = 0;
+        log(`Imported ${plural(ok, 'item')}${made ? ` and ${plural(made, 'section')}` : ''}`, 'upload', dest);
+        busy = false; go_.classList.remove('loading');
+        if (!document.contains(el)) { refresh(); return; }
+        el.querySelector('#imRun').hidden = true;
+        box.innerHTML = `<div class="im-done"><span class="im-ok">${ico('check')}</span><h3>Import finished</h3><p><b>${plural(ok, 'item')}</b> imported${made ? `, <b>${plural(made, 'section')}</b> created` : ''}${skipped ? `, ${skipped} skipped` : ''}${failed.length ? `, <span class="bad">${failed.length} failed</span>` : ''}. Took ${Math.max(1, Math.round((now() - t0) / 1000))} s.</p>
+          ${failed.length ? `<details class="im-skip" open><summary>What failed</summary>${failed.slice(0, 30).map(f => `<div><span>${esc(f)}</span></div>`).join('')}</details>` : ''}</div>`;
+        go_.innerHTML = 'Done'; go_.disabled = false; go_.onclick = null; const cx = el.querySelector('.dlg-foot [data-close]'); if (cx) cx.hidden = true;
+        const doneBtn = go_.cloneNode(true); go_.replaceWith(doneBtn); doneBtn.focus(); doneBtn.addEventListener('click', () => { close(); const target = dest || (plan.folders.size ? map.get([...plan.folders.keys()][0]) : fallback); if (target && secById(target)) go('/section/' + encodeURIComponent(target)); else refresh(); });
+        refresh();
+      });
+    }
+  });
 }
 async function eraseAll() {
   const n = state.documents.length;
@@ -5137,7 +5500,8 @@ function userMenu(anchor) {
   openMenu(anchor, [
     { icon: 'userCog', label: 'Profile and settings', run: () => go('/settings') },
     { icon: 'keyboard', label: 'Keyboard shortcuts', kbd: '?', run: shortcutsModal },
-    { icon: 'download', label: 'Export library index', run: exportLib },
+    { icon: 'download', label: 'Export library', run: () => exportModal() },
+    { icon: 'upload', label: 'Import', run: () => importModal() },
     '-',
     { icon: 'logout', label: 'Log out', danger: true, run: confirmLogout }
   ], { cls: 'acct-menu', html: `<div class="menu-head"><span class="avatar lg">${esc(initials(st.user))}</span><div class="mh-t"><b>${esc(st.user || 'Guest')}</b><span>${esc(session ? session.email : st.workspace)}</span>${title ? `<span class="mh-role">${esc(title)}</span>` : ''}</div></div><div class="mh-plan">${ico('db')}<span>${fmtSize(usedBytes())} of ${CAP_LABEL} used</span><i style="--p:${Math.max(2, Math.min(100, usedBytes() / CAP * 100)).toFixed(1)}%"></i></div><hr>` });
@@ -5276,7 +5640,7 @@ const ACTS = {
   'ed-tab': el => { const p = el.dataset.tab === 'prev'; $('#editor').classList.toggle('show-prev', p); $$('[data-act=ed-tab]').forEach(b => b.setAttribute('aria-selected', b === el)); },
   'toggle-scripts': el => toggleScripts(el.dataset.id),
   'clear-filters': () => go('/documents'),
-  'export': exportLib, 'erase': eraseAll, 'starter-sections': () => starterModal(), 'retry-open': () => render(false), 'retry-load': () => loadLibrary(),
+  'export': () => exportModal(), 'import': () => importModal(), 'erase': eraseAll, 'starter-sections': () => starterModal(), 'retry-open': () => render(false), 'retry-load': () => loadLibrary(),
   'sign-out': () => confirmLogout(),
   'set-toggle': el => {
     const k = el.dataset.key; state.settings[k] = !state.settings[k]; el.setAttribute('aria-checked', state.settings[k]); save();
@@ -5303,6 +5667,8 @@ document.addEventListener('keydown', e => {
   if (mod && e.key.toLowerCase() === 's' && route.name === 'write') { e.preventDefault(); if (!$('#modalRoot').children.length) writeSaveModal(); return; }
   if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); focusSearch(); return; }
   if (e.key === 'Escape') {
+    const ovs = $$('#modalRoot > .overlay:not(.out)'), top = ovs[ovs.length - 1];
+    if (top && !top.contains(e.target) && !(openMenuEl && openMenuEl.contains(e.target)) && !e.target.closest('.pick-list')) { const c = top.querySelector('[data-close]'); if (c) { c.click(); return; } }
     if (openMenuEl) { const a = openMenuAnchor; closeMenus(); a && a.focus && a.focus(); return; }
     if (document.body.classList.contains('drawer')) { document.body.classList.remove('drawer'); return; }
     if (document.fullscreenElement) return;
