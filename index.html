@@ -63,8 +63,8 @@ SOFTWARE.
 window.DOCBOX_CONFIG = {
   supabaseUrl: 'https://pqfzxkzyzyvkoytbvpog.supabase.co',  // Supabase > Project Settings > API
   supabaseKey: 'sb_publishable_ya7Llv53bDVLY68_3bFHHA_9gJv1riE',                    // publishable key (sb_publishable_...) or legacy anon key
-  googleSignIn: true,       // later: set true (and add googleClientId) to show Google sign-in
-  googleClientId: '486931338571-d4c08dm5gm5t19dn7a2mg4va1aq8t1tg.apps.googleusercontent.com',        // later: Google OAuth Web client ID, shows Google's official button
+  googleSignIn: false,       // later: set true (and add googleClientId) to show Google sign-in
+  googleClientId: '',        // later: Google OAuth Web client ID, shows Google's official button
   bucket: 'documents',       // Storage bucket created by setup.sql
   storageQuotaMB: 1024,      // shown in the storage meters (Supabase Free plan: 1 GB)
   maxFileMB: 50,             // largest upload (Supabase Free plan: 50 MB)
@@ -624,6 +624,13 @@ body.locked .sidebar,body.locked .shell,body.locked .scrim{display:none}
 .sso-btn .s-go{margin-left:auto;color:var(--faint);transition:transform .25s var(--ease)}
 .sso-btn:hover .s-go{transform:translateX(3px);color:var(--ink)}
 .or{display:flex;align-items:center;gap:12px;color:var(--faint);font-size:12.5px;margin:22px 0}
+.g-btn{position:relative;width:100%;height:48px;justify-content:center;gap:12px;padding:0 18px;border-radius:12px;font-weight:600;font-size:14.5px;background:#fff;border:1px solid #DADCE0;color:#1F2937;box-shadow:0 1px 2px rgba(16,24,40,.05);transition:background .2s,border-color .2s,box-shadow .25s,transform .15s var(--ease)}
+.g-btn:hover{background:#F8FAFF;border-color:#C6CFE0;box-shadow:0 8px 20px -12px rgba(46,91,255,.45)}
+.g-btn:active{transform:scale(.985)}
+.g-btn .g-mark{width:22px;height:22px;display:grid;place-items:center;transition:transform .35s var(--ease)}
+.g-btn .g-mark svg{width:20px;height:20px}
+.g-btn:hover .g-mark{transform:rotate(-12deg) scale(1.08)}
+.g-btn.loading .g-mark{animation:spin 1s linear infinite}
 .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
 .pw{position:relative}
 .pw .input{padding-right:44px}
@@ -5525,11 +5532,6 @@ function authCardHTML() {
       <h1>${up ? 'Create your work account' : 'Sign in to DocBox'}</h1>
       <p class="sub">${up ? 'Store your documents and work files online and open them from any device.' : 'Use your work account to reach your documents and files.'}</p>
       <div class="auth-alert error" id="authAlert" hidden></div>
-      ${googleOn() ? `<div class="sso">
-        <div class="gsi-slot" id="gsiSlot" ${CFG.googleClientId ? '' : 'hidden'}><div class="gsi-ph sk"></div></div>
-        <button type="button" class="btn sso-btn" id="gFallback" data-auth="google" ${CFG.googleClientId ? 'hidden' : ''}><span class="s-ico g-mark">${GOOGLE_G}</span>${up ? 'Sign up with Google' : 'Sign in with Google'}<span class="s-go">${ico('arrow')}</span></button>
-      </div>
-      <div class="or">or with email and password</div>` : ''}
       <form id="authForm" novalidate>
         ${up ? `<div class="field" id="afName"><label for="aName">Full name</label><input class="input" id="aName" autocomplete="name" placeholder="Your name"><div class="err-msg" hidden></div></div>` : ''}
         <div class="field" id="afEmail"><label for="aEmail">Work email</label><input class="input" id="aEmail" type="email" autocomplete="email" placeholder="${domains().length ? 'you' + esc(domainHint().split(' or ')[0]) : 'you@company.com'}"><div class="err-msg" hidden></div></div>
@@ -5537,6 +5539,8 @@ function authCardHTML() {
         <div class="auth-row"><label class="check"><input type="checkbox" id="aRemember" checked>Keep me signed in</label>${up ? '' : '<button type="button" class="txt-btn" data-auth="forgot">Forgot password?</button>'}</div>
         <button class="btn btn-primary btn-lg w100" type="submit" id="aSubmit">${up ? 'Create account' : 'Sign in'}</button>
       </form>
+      ${googleOn() ? `<div class="or">or</div>
+      <div class="sso"><button type="button" class="btn sso-btn g-btn" id="gFallback" data-auth="google"><span class="g-mark">${GOOGLE_G}</span><span class="g-txt">${up ? 'Sign up with Google' : 'Continue with Google'}</span></button></div>` : ''}
       ${CFG.allowSignups === false && !up ? '<p class="auth-switch">Need an account? Ask your DocBox administrator.</p>' : `<p class="auth-switch">${up ? 'Already have an account?' : 'New to DocBox?'} <button type="button" class="txt-btn" data-auth="${up ? 'to-signin' : 'to-signup'}">${up ? 'Sign in' : 'Create an account'}</button></p>`}`;
 }
 function authView() {
@@ -5603,7 +5607,7 @@ function loadGsi() {
 }
 async function sha256hex(str) { const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)); return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join(''); }
 async function mountGoogle() {
-  const slot = $('#gsiSlot'), fb = $('#gFallback'); if (!slot || !fb) return;
+  const slot = $('#gsiSlot'), fb = $('#gFallback'); if (!slot || !fb) return;   // own button is always used now
   if (!CFG.googleClientId) return;
   try {
     await Promise.race([loadGsi(), wait(7000).then(() => { throw new Error('Google sign-in timed out'); })]);
