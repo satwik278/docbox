@@ -1599,10 +1599,6 @@ img,video,iframe{max-width:100%}
 .auth-brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:7px;cursor:pointer}
 .auth-wm{width:150px}
 .auth-brand small{margin-top:0}
-.splash-wm{width:210px}
-.splash-wm .wm-l{animation:wmRise .7s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(var(--i) * 60ms)}
-.splash-wm .wm-x{animation:wmX .8s .25s cubic-bezier(.2,1.25,.3,1) backwards}
-.splash-wm .wm-dot{animation:wmDrop .9s .5s cubic-bezier(.3,1.4,.5,1) backwards}
 .fl-mono .wm-dot{animation:wmPulse 2.4s 1s ease-in-out infinite}
 @keyframes wmRise{from{opacity:0;transform:translateY(55%);filter:blur(6px)}}
 @keyframes wmX{from{opacity:0;transform:rotate(-180deg) scale(.4)}}
@@ -1610,30 +1606,30 @@ img,video,iframe{max-width:100%}
 @keyframes wmPulse{0%,100%{transform:none}50%{transform:scale(1.18)}}
 @media (max-width:1100px) and (min-width:761px){.brand{padding:4px 0 16px;justify-content:center}.brand .brand-mark{display:block}}
 
-/* intro screen after signing in */
-.intro{position:fixed;inset:0;z-index:400;display:grid;place-items:center;background:var(--bg);overflow:hidden;transition:opacity .6s cubic-bezier(.22,1,.36,1),visibility .6s}
+/* intro screen: after signing in, or when MIDOX is opened in a new tab */
+.intro{position:fixed;inset:0;z-index:400;display:grid;place-items:center;background:var(--bg);overflow:hidden;transition:opacity .45s cubic-bezier(.22,1,.36,1),visibility .45s}
 .intro.out{opacity:0;visibility:hidden}
-.intro.out .in-core{transform:scale(1.04);filter:blur(4px)}
-.in-grid{position:absolute;inset:0;background-image:radial-gradient(circle,#D5DBE5 1px,transparent 1.4px);background-size:24px 24px;-webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000,transparent);mask-image:radial-gradient(closest-side at 50% 50%,#000,transparent);opacity:.7;animation:inFade 1.2s ease both}
-.in-glow{position:absolute;width:760px;height:760px;left:50%;top:50%;margin:-380px 0 0 -380px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,95,232,.16),rgba(115,87,255,.06) 55%,transparent 72%);animation:inGlow 3.2s ease-in-out infinite}
-.in-core{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .6s}
-.intro-wm{width:min(340px,72vw)}
-.intro-wm .wm-l{animation:wmRise .85s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(.15s + var(--i) * 110ms)}
-.intro-wm .wm-x{animation:wmX 1.1s .62s cubic-bezier(.2,1.2,.3,1) backwards}
-.intro-wm .wm-dot{animation:wmDrop 1s 1.05s cubic-bezier(.3,1.4,.5,1) backwards,wmPulse 1.8s 2.3s ease-in-out infinite}
-.in-line{width:min(340px,72vw);height:2px;margin-top:22px;border-radius:2px;background:linear-gradient(90deg,transparent,#2F5FE8 30%,#7357FF 70%,transparent);transform:scaleX(0);animation:inLine 1s 1.3s cubic-bezier(.22,1,.36,1) forwards}
-.in-cap{margin-top:18px;font:600 15px var(--f-body);color:var(--ink2);letter-spacing:.32em;text-transform:uppercase;animation:inTrack 1.4s 1.45s cubic-bezier(.22,1,.36,1) both}
-.in-cap span{display:inline-block;opacity:0;transform:translateY(10px);filter:blur(4px);animation:inWord .7s cubic-bezier(.22,1,.36,1) forwards;animation-delay:calc(1.5s + var(--i) * 120ms)}
-.in-sub{margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:13px;color:var(--muted);opacity:0;animation:inFade .6s 2.05s ease forwards}
-.in-bar{width:140px;height:3px;border-radius:3px;background:#E3E8F0;overflow:hidden}
-.in-bar i{display:block;height:100%;width:100%;border-radius:3px;background:linear-gradient(90deg,#2F5FE8,#7357FF);transform-origin:left;transform:scaleX(0);animation:inBar var(--dur,3s) cubic-bezier(.4,0,.2,1) forwards}
-@keyframes inLine{0%{transform:scaleX(0);opacity:1}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:.35}}
-@keyframes inTrack{from{letter-spacing:.6em}to{letter-spacing:.32em}}
-@keyframes inWord{to{opacity:1;transform:none;filter:none}}
+.in-glow{position:absolute;width:640px;height:640px;left:50%;top:50%;margin:-320px 0 0 -320px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,95,232,.12),rgba(115,87,255,.05) 55%,transparent 72%);animation:inFade .8s ease both}
+.in-core{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.intro.out .in-core{transform:translateY(-8px) scale(.985)}
+.intro-wm{width:min(300px,68vw)}
+.intro-wm .wm-l{animation:wmRise .6s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(.05s + var(--i) * 50ms)}
+.intro-wm .wm-x{animation:wmRiseX .65s .25s cubic-bezier(.22,1,.36,1) backwards}
+.intro-wm .wm-dot{animation:wmPop .55s .5s cubic-bezier(.34,1.56,.64,1) backwards}
+.in-track{width:120px;height:2px;margin-top:24px;border-radius:2px;background:#E3E8F0;overflow:hidden;opacity:0;animation:inFade .3s .3s ease forwards}
+.in-track i{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,#2F5FE8,#7357FF);transform-origin:left;transform:scaleX(0);animation:inBar var(--dur,1.8s) .3s cubic-bezier(.4,0,.2,1) forwards}
+.in-cap{margin-top:14px;font:500 14px var(--f-body);color:var(--muted);letter-spacing:.01em;opacity:0;animation:inUp .5s .55s cubic-bezier(.22,1,.36,1) forwards}
+.in-cap b{color:var(--ink);font-weight:600}
+@keyframes wmRiseX{from{opacity:0;transform:translateY(40%) rotate(-45deg)}}
+@keyframes wmPop{from{opacity:0;transform:scale(0)}}
+@keyframes inUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes inFade{from{opacity:0}to{opacity:1}}
-@keyframes inBar{0%{transform:scaleX(0)}60%{transform:scaleX(.7)}100%{transform:scaleX(1)}}
-@keyframes inGlow{50%{transform:scale(1.08);opacity:.8}}
-@media (max-width:520px){.in-cap{font-size:12px;letter-spacing:.24em}@keyframes inTrack{from{letter-spacing:.45em}to{letter-spacing:.24em}}}
+@keyframes inBar{0%{transform:scaleX(0)}70%{transform:scaleX(.85)}100%{transform:scaleX(1)}}
+/* boot: a quiet loader while MIDOX starts (appears only if starting takes a moment) */
+.sp-dots{display:flex;gap:7px;opacity:0;animation:inFade .3s .35s ease forwards}
+.sp-dots i{width:7px;height:7px;border-radius:50%;background:#2F5FE8;animation:spDot 1s ease-in-out infinite}
+.sp-dots i:nth-child(2){animation-delay:.15s;background:#5A5FEC}.sp-dots i:nth-child(3){animation-delay:.3s;background:#7357FF}
+@keyframes spDot{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
 
 /* Google button: calm, no spinning logo */
 .g-btn .g-mark{transition:transform .35s cubic-bezier(.22,1,.36,1)}
@@ -1661,7 +1657,7 @@ html.reduce .rv{opacity:1;transform:none}
 </style>
 </head>
 <body class="booting">
-<div class="splash" id="splash" aria-live="polite"><div id="splashLogo"></div><p>Opening MIDOX</p></div>
+<div class="splash" id="splash" aria-live="polite" aria-label="Opening MIDOX"><div class="sp-dots" aria-hidden="true"><i></i><i></i><i></i></div></div>
 <a class="sr-only" href="#view">Skip to content</a>
 <canvas id="bg" aria-hidden="true"></canvas>
 <div class="c-dot" aria-hidden="true"></div>
@@ -1884,22 +1880,22 @@ function WORDMARK(cls = '') {
   return `<svg class="wm ${cls}" viewBox="40 -740 4040 770" role="img" aria-label="MIDOX"><g class="wm-letters">${WM_L.map((d, i) => `<path class="wm-ink wm-l" style="--i:${i}" d="${d}"/>`).join('')}</g><g class="wm-xo"><g class="wm-xc"><path class="wm-x" d="${WM_X}"/></g></g><g class="wm-do"><g class="wm-dc"><path class="wm-dot" d="${WM_DOT}"/></g></g></svg>`;
 }
 /* intro shown while the library opens after signing in */
-let activeIntro = null;
+let activeIntro = null, introPlayed = false;
+const markSignIn = () => { try { sessionStorage.setItem('midox.signin', '1'); } catch (e) { /* noop */ } };
 function playIntro({ min = 3000, sub = '' } = {}) {
   if (activeIntro) return activeIntro;
   if (!effectsOn()) min = Math.min(min, 700);
   let el = $('#intro');
   if (!el) { el = document.createElement('div'); el.id = 'intro'; el.className = 'intro'; el.setAttribute('role', 'status'); el.setAttribute('aria-live', 'polite'); document.body.appendChild(el); }
-  const words = ['Documents', 'and', 'files,', 'online'];
   el.style.setProperty('--dur', min + 'ms');
-  el.innerHTML = `<div class="in-grid"></div><div class="in-glow"></div><div class="in-core">${WORDMARK('intro-wm')}<div class="in-line"></div><p class="in-cap">${words.map((w, i) => `<span style="--i:${i}">${w}</span>`).join(' ')}</p><div class="in-sub"><span class="in-bar"><i></i></span><span>${esc(sub || 'Opening your library')}</span></div></div>`;
+  el.innerHTML = `<div class="in-glow"></div><div class="in-core">${WORDMARK('intro-wm')}<div class="in-track"><i></i></div><p class="in-cap">${sub || 'Documents and files, online'}</p></div>`;
   el.classList.remove('out'); el.hidden = false;
   const t0 = performance.now();
   const me = {
     async done() {
       const left = min - (performance.now() - t0); if (left > 0) await wait(left);
       el.classList.add('out'); if (activeIntro === me) activeIntro = null;
-      setTimeout(() => { if (!activeIntro) { el.hidden = true; el.innerHTML = ''; } }, 650);
+      setTimeout(() => { if (!activeIntro) { el.hidden = true; el.innerHTML = ''; } }, 480);
     }
   };
   activeIntro = me;
@@ -6068,6 +6064,7 @@ function mountAuth() {
     try {
       if (remember) { localStorage.removeItem('docbox.ephemeral'); } else { localStorage.setItem('docbox.ephemeral', '1'); sessionStorage.setItem('docbox.alive', '1'); }
     } catch (x) { /* noop */ }
+    markSignIn();
     if (up) {
       const { data, error } = await sb.auth.signUp({ email, password: pass, options: { data: { full_name: nm.value.trim() } } });
       if (error) { btn.classList.remove('loading'); authAlert(/already registered/i.test(error.message) ? 'An account with this email already exists. <button type="button" class="txt-btn" data-auth="to-signin">Sign in instead</button>' : esc(authErr(error))); return; }
@@ -6113,6 +6110,7 @@ async function mountGoogle() {
 }
 async function onGoogleCredential(resp) {
   authAlert('');
+  markSignIn();
   const { error } = await sb.auth.signInWithIdToken({ provider: 'google', token: resp.credential, nonce: googleNonce });
   if (error) { authAlert(esc(authErr(error))); mountGoogle(); }
 }
@@ -6120,6 +6118,7 @@ async function googleRedirect(btn) {
   const tx = btn.querySelector('.g-txt'), was = tx ? tx.textContent : '';
   btn.classList.add('loading'); btn.setAttribute('aria-busy', 'true');
   if (tx) tx.textContent = 'Connecting to Google…';
+  markSignIn();
   if (!btn.querySelector('.g-spin')) btn.insertAdjacentHTML('beforeend', '<span class="g-spin" aria-hidden="true"></span>');
   const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: APP_URL, queryParams: { prompt: 'select_account' } } });
   if (error) { btn.classList.remove('loading'); btn.removeAttribute('aria-busy'); if (tx) tx.textContent = was; const sp = btn.querySelector('.g-spin'); if (sp) sp.remove(); authAlert(esc(authErr(error))); }
@@ -6158,6 +6157,7 @@ function otpFlow() {
         const fail = msg => { setFieldErr(el, 'hfOtp', msg); otp.classList.remove('err'); void otp.offsetWidth; otp.classList.add('err'); boxes.forEach(b => b.value = ''); boxes[0].focus(); };
         if (v.length < 6) { setFieldErr(el, 'hfOtp', 'Enter all 6 digits.'); return; }
         go_.classList.add('loading');
+        markSignIn();
         const { error } = await sb.auth.verifyOtp({ email, token: v, type: 'email' });
         go_.classList.remove('loading');
         if (error) return fail(esc(authErr(error)));
@@ -6243,7 +6243,7 @@ async function onAuth(event, s) {
     if ($('#auth').hidden || document.body.classList.contains('booting')) lock();
     return;
   }
-  if (session && session.uid === next.uid) { Object.assign(session, next); if (loaded || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') return; }
+  if (session && session.uid === next.uid) { Object.assign(session, next); if (loaded || loadingLib || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') return; }
   if (!domainOk(next.email)) {
     pendingAuthError = `This account (${next.email}) is not a work email. Sign in with ${domainHint()}.`;
     await sb.auth.signOut({ scope: 'local' }); return;
@@ -6254,11 +6254,12 @@ async function onAuth(event, s) {
   applyMotionPrefs(); cursor.sync(); bg.start();
   if (event === 'SIGNED_IN') log(`Signed in with ${PROVIDERS[session.provider] || session.provider}`, 'lock');
   saveNow();
-  let firstOpen = false;
-  try { firstOpen = !sessionStorage.getItem('midox.intro'); sessionStorage.setItem('midox.intro', '1'); } catch (e) { /* noop */ }
-  if (event === 'SIGNED_IN' || firstOpen) {
+  let fresh = false, newTab = false;
+  try { fresh = sessionStorage.getItem('midox.signin') === '1'; newTab = !sessionStorage.getItem('midox.seen'); sessionStorage.removeItem('midox.signin'); sessionStorage.setItem('midox.seen', '1'); } catch (e) { /* noop */ }
+  if ((fresh || newTab) && !introPlayed) {
+    introPlayed = true;
     const first = String(state.settings.user || session.name || '').trim().split(/\s+/)[0];
-    playIntro({ min: event === 'SIGNED_IN' ? 3400 : 2600, sub: first ? `Welcome back, ${first}` : 'Opening your library' });
+    playIntro({ min: fresh ? 1900 : 1500, sub: first ? `Welcome back, <b>${esc(first)}</b>` : '' });
   }
   await loadLibrary(event === 'SIGNED_IN');
 }
@@ -6289,7 +6290,6 @@ async function loadLibrary(greet) {
    Boot
    ========================================================= */
 $('.brand').insertAdjacentHTML('afterbegin', LOGO());
-$('#splashLogo').innerHTML = WORDMARK('splash-wm');
 $('#brandName').innerHTML = WORDMARK('brand-wm');
 try { $('#favicon').href = 'data:image/svg+xml,' + encodeURIComponent(LOGO('m', true).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')); } catch (e) { /* noop */ }
 mqReduce.addEventListener && mqReduce.addEventListener('change', () => { bg.start(); cursor.sync(); });
