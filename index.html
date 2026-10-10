@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="DocBox: store engineering documents online and open them from anywhere.">
+<meta name="description" content="MIDOX: store engineering documents online and open them from anywhere.">
 <link rel="icon" id="favicon" href="data:,">
 <!--
 Third-party icons: Lucide (https://lucide.dev), lucide-static v1.52.0
@@ -52,10 +52,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 -->
-<title>DocBox | Documents and files, online</title>
+<title>MIDOX | Documents and files, online</title>
 <script>
 /* =================================================================
-   DocBox configuration. Edit these values, then save and reload.
+   MIDOX configuration. Edit these values, then save and reload.
    The publishable (anon) key is meant to be public: your data is
    protected by the Row Level Security policies in setup.sql.
    Never put the service_role / secret key in this file.
@@ -1564,6 +1564,48 @@ img,video,iframe{max-width:100%}
 .im-done h3{font-size:18px}.im-done p{color:var(--muted);margin-top:6px}.im-done .bad{color:var(--red)}
 .im-done .im-skip{text-align:left}
 .hint .ico{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:5px}
+
+/* MIDOX brand */
+.wm{display:block;height:auto;overflow:visible}
+.wm .wm-ink{fill:#0B0B0F}.wm .wm-x,.wm .wm-dot{fill:#2F5FE8}
+.wm .wm-ink,.wm .wm-x,.wm .wm-dot,.brand-mark .wm-dot,.fl-mono .wm-dot{transform-box:fill-box}
+.wm .wm-x{transform-origin:50% 50%;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.wm .wm-dot,.brand-mark .wm-dot,.fl-mono .wm-dot{transform-origin:50% 100%}
+.brand{display:flex;align-items:center;gap:11px;padding:6px 10px 18px}
+.brand .brand-mark{display:none}
+.brand-name{display:block;line-height:0}
+.brand-wm{width:116px}
+.brand-sub{margin-top:7px}
+.brand:hover .wm-x,.auth-brand:hover .wm-x{transform:rotate(-14deg) scale(1.06)}
+.brand:hover .wm-dot,.auth-brand:hover .wm-dot,.brand:hover .brand-mark .wm-dot{animation:wmHop .75s var(--ease)}
+.brand-wm .wm-x{animation:wmX .8s .2s cubic-bezier(.2,1.3,.3,1) both}
+.brand-wm .wm-dot{animation:wmDrop .9s .5s cubic-bezier(.3,1.5,.5,1) both}
+.auth-brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:7px}
+.auth-wm{width:150px}
+.auth-wm .wm-x{animation:wmX .8s .25s cubic-bezier(.2,1.3,.3,1) both}
+.auth-wm .wm-dot{animation:wmDrop .9s .55s cubic-bezier(.3,1.5,.5,1) both}
+.auth-brand small{margin-top:0}
+.splash-wm{width:210px}
+.splash-wm .wm-ink{animation:wmIn .7s var(--ease) both}
+.splash-wm .wm-x{animation:wmX .8s .15s cubic-bezier(.2,1.3,.3,1) both}
+.splash-wm .wm-dot{animation:wmDrop .9s .45s cubic-bezier(.3,1.5,.5,1) both,wmPulse 1.4s 1.4s ease-in-out infinite}
+.fl-mono .wm-dot{animation:wmPulse 2.4s 1s ease-in-out infinite}
+@keyframes wmIn{from{opacity:0;transform:translateY(18%)}}
+@keyframes wmX{from{opacity:0;transform:translateX(35%) rotate(90deg) scale(.55)}}
+@keyframes wmDrop{0%{opacity:0;transform:translateY(-320%)}55%{opacity:1;transform:translateY(0) scale(1.22,.78)}75%{transform:translateY(-38%)}90%{transform:translateY(0) scale(1.06,.94)}100%{transform:none}}
+@keyframes wmHop{0%,100%{transform:none}30%{transform:translateY(-70%) scale(.92,1.1)}55%{transform:translateY(0) scale(1.2,.8)}75%{transform:translateY(-18%)}}
+@keyframes wmPulse{0%,100%{transform:none}50%{transform:scale(1.18)}}
+@media (max-width:1100px) and (min-width:761px){.brand{padding:4px 0 16px;justify-content:center}.brand .brand-mark{display:block}}
+
+/* login diagram centre: floating storage layers */
+.flow .st-slab{transition:transform .4s var(--ease)}
+.flow .st-1{animation:stFloat 4.8s ease-in-out infinite}
+.flow .st-2{animation:stFloat2 4.8s ease-in-out infinite}
+.flow .st-orbit{animation:flDash 6s linear infinite}
+.flow .st-lock{animation:stBob 4.8s ease-in-out .6s infinite}
+@keyframes stFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes stFloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes stBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
@@ -1574,15 +1616,15 @@ html.reduce .rv{opacity:1;transform:none}
 </style>
 </head>
 <body class="booting">
-<div class="splash" id="splash" aria-live="polite"><div id="splashLogo"></div><p>Opening DocBox</p></div>
+<div class="splash" id="splash" aria-live="polite"><div id="splashLogo"></div><p>Opening MIDOX</p></div>
 <a class="sr-only" href="#view">Skip to content</a>
 <canvas id="bg" aria-hidden="true"></canvas>
 <div class="c-dot" aria-hidden="true"></div>
 <div class="c-ring" aria-hidden="true"><i></i></div>
 
 <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-  <a class="brand" href="#/home" aria-label="DocBox home">
-    <span class="brand-text"><span class="brand-name">DocBox</span><span class="brand-sub" id="brandSub">Documentation hub</span></span>
+  <a class="brand" href="#/home" aria-label="MIDOX home">
+    <span class="brand-text"><span class="brand-name" id="brandName">MIDOX</span><span class="brand-sub" id="brandSub">Documentation hub</span></span>
   </a>
   <nav class="nav" id="nav"></nav>
   <div class="sb-foot" id="sbFoot"></div>
@@ -1783,14 +1825,18 @@ const ICONS = {
   mechanical: '<path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" />',
   computer: '<path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z" /><path d="M20.054 15.987H3.946" />',
 };
-const LOGO_INNER = `<path class="lg-back" d="M12.5 9.5a1.6 1.6 0 0 1 1.6-1.6h7.8a1.6 1.6 0 0 1 1.6 1.6v12h-11z" fill="#fff" fill-opacity=".42"/>
-<g class="lg-page"><rect x="14.5" y="10" width="11" height="14" rx="1.6" fill="#fff"/><path d="M17 13.5h6M17 16h6M17 18.5h3.5" stroke="#3D63FF" stroke-width="1.3" stroke-linecap="round"/></g>
-<path d="M8.5 21.5h6.2l1.6 2.6h7.4l1.6-2.6h6.2v8a2.5 2.5 0 0 1-2.5 2.5h-18a2.5 2.5 0 0 1-2.5-2.5z" fill="#F4F6FF"/><path d="M8.5 21.5h6.2l1.6 2.6h7.4l1.6-2.6h6.2" fill="none" stroke="#AEBFFF" stroke-width="1" stroke-linejoin="round"/><path d="M12 27.2h5M23 27.2h5" stroke="#D3DCFF" stroke-width="1" stroke-linecap="round"/>
-<circle class="lg-led" cx="20" cy="28.2" r="1.25" fill="#9DB0FF"/>`;
-let logoN = 0;
+const WM_INK = 'M70 0V-700H233L523 -224H437L719 -700H882L884 0H702L700 -423H731L520 -69H432L215 -423H253V0ZM1042 0V-700H1240V0ZM1399 0V-700H1730Q1846 -700 1934 -657Q2022 -614 2072 -536Q2121 -458 2121 -350Q2121 -243 2072 -164Q2022 -86 1934 -43Q1846 0 1730 0ZM1597 -158H1722Q1782 -158 1826 -180Q1871 -203 1896 -246Q1921 -290 1921 -350Q1921 -411 1896 -454Q1871 -497 1826 -520Q1782 -542 1722 -542H1597ZM2596 14Q2512 14 2441 -13Q2370 -40 2318 -90Q2265 -139 2236 -205Q2207 -271 2207 -350Q2207 -429 2236 -495Q2265 -561 2318 -610Q2370 -660 2441 -687Q2512 -714 2596 -714Q2681 -714 2752 -687Q2822 -660 2874 -610Q2926 -561 2956 -495Q2985 -429 2985 -350Q2985 -271 2956 -204Q2926 -138 2874 -89Q2822 -40 2752 -13Q2681 14 2596 14ZM2596 -150Q2636 -150 2670 -164Q2705 -178 2730 -204Q2756 -231 2770 -268Q2785 -305 2785 -350Q2785 -396 2770 -432Q2756 -469 2730 -496Q2705 -522 2670 -536Q2636 -550 2596 -550Q2556 -550 2522 -536Q2487 -522 2462 -496Q2436 -469 2422 -432Q2407 -396 2407 -350Q2407 -305 2422 -268Q2436 -231 2462 -204Q2487 -178 2522 -164Q2556 -150 2596 -150Z';
+const WM_X = 'M3035 0 3341 -425 3340 -284 3046 -700H3269L3457 -429L3362 -428L3547 -700H3761L3467 -292V-432L3777 0H3549L3358 -285H3449L3261 0Z';
+const WM_DOT = 'M3933 9Q3885 9 3852 -23Q3819 -55 3819 -104Q3819 -155 3852 -186Q3885 -216 3933 -216Q3981 -216 4014 -186Q4047 -155 4047 -104Q4047 -55 4014 -23Q3981 9 3933 9Z';
+const WM_M = 'M70 0V-700H233L523 -224H437L719 -700H882L884 0H702L700 -423H731L520 -69H432L215 -423H253V0Z';
+const WM_MB = [70,-700,884,0];
+/* MIDOX brand: the wordmark, and an "M." monogram for small spaces (collapsed sidebar, browser tab) */
+const MONO_INNER = (ink = '#fff', dot = '#3D6CFF') => `<path d="${WM_M}" fill="${ink}" transform="translate(${(6 - WM_MB[0] * .028).toFixed(2)} 30) scale(.028)"/><circle class="wm-dot" cx="32.4" cy="27.3" r="2.9" fill="${dot}"/>`;
 function LOGO(cls = 'brand-mark', still = false) {
-  const n = ++logoN;
-  return `<svg class="${cls}${still ? '' : ' lg-anim'}" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lgT${n}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D63FF"/><stop offset="1" stop-color="#5A3FE6"/></linearGradient><clipPath id="lgC${n}"><rect width="40" height="40" rx="12"/></clipPath></defs><rect width="40" height="40" rx="12" fill="url(#lgT${n})"/><rect x=".5" y=".5" width="39" height="39" rx="11.5" fill="none" stroke="#fff" stroke-opacity=".18"/><g clip-path="url(#lgC${n})"><g transform="rotate(24 20 20)"><rect class="lg-shine" x="-26" y="-12" width="9" height="64" fill="#fff" fill-opacity=".24"/></g></g>${LOGO_INNER}</svg>`;
+  return `<svg class="${cls}${still ? '' : ' mono-anim'}" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10.5" fill="#0B0B0F"/>${MONO_INNER()}</svg>`;
+}
+function WORDMARK(cls = '') {
+  return `<svg class="wm ${cls}" viewBox="40 -740 4040 770" role="img" aria-label="MIDOX"><path class="wm-ink" d="${WM_INK}"/><path class="wm-x" d="${WM_X}"/><path class="wm-dot" d="${WM_DOT}"/></svg>`;
 }
 const ico = (n, cls = '') => `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ICONS.folder}</svg>`;
 const SEC_ICON_SET = [['project', 'Project'], ['code', 'Code'], ['vlsi', 'VLSI'], ['embedded', 'Embedded'], ['pcb', 'PCB design'], ['ems', 'EMS'], ['iot', 'IoT'], ['ai', 'AI'], ['web', 'Web dev'], ['robot', 'Robotics'], ['print3d', '3D printing'], ['mcad', 'MCAD'], ['electrical', 'Electrical'], ['electronics', 'Electronics'], ['mechanical', 'Mechanical'], ['computer', 'Computers']];
@@ -1851,7 +1897,7 @@ Object.entries(FILE_CATS).forEach(([k, v]) => v.ext.split(' ').filter(Boolean).f
 const fileExt = n => { const s = String(n || '').toLowerCase(); if (/\.kicad_[a-z]+$/.test(s)) return s.slice(s.lastIndexOf('.') + 1); const m = /\.(tar\.gz|tar\.bz2|tar\.xz)$/.exec(s) || /\.([a-z0-9_]{1,12})$/.exec(s); return m ? m[1] : ''; };
 const fileCat = ext => CAT_OF[ext] || CAT_OF[ext.split('.').pop()] || (/^(g[tbmk][lospbx0-9]|gm\d+|g\d+)$/.test(ext) ? 'pcb' : 'other');
 const catOf = d => FILE_CATS[d.category] || FILE_CATS.other;
-/* programs are refused (DocBox stores data, not things that run on a PC) */
+/* programs are refused (MIDOX stores data, not things that run on a PC) */
 const BLOCKED_EXT = 'exe msi msp com scr pif bat cmd ps1 psc1 vbs vbe js_ jse wsf wsh hta cpl msc jar apk aab ipa app dmg pkg deb rpm reg lnk inf sys drv dll ocx gadget appx appxbundle msix'.split(' ');
 const BLOCKED_RX = new RegExp('\\.(' + BLOCKED_EXT.join('|') + ')$', 'i');
 const isBlockedName = n => BLOCKED_RX.test(String(n || '').trim());
@@ -2102,8 +2148,8 @@ function friendly(e) {
   if (/payload too large|exceeded the maximum|413/i.test(m)) return `The file is larger than the ${CFG.maxFileMB} MB limit.`;
   if (/already exists|duplicate/i.test(m)) return 'A file with this name already exists.';
   if (/jwt|session|expired/i.test(m)) return 'Your session expired. Sign in again.';
-  if (/column .*(does not exist|schema cache)|documents_kind_check|documents_type_check|could not find the '(kind|category|ext)'/i.test(m)) return 'The DocBox database needs an update. Run the latest setup.sql in Supabase, then try again.';
-  if (/documents_no_programs|docbox_files_insert/i.test(m)) return 'Programs (such as .exe) cannot be stored in DocBox.';
+  if (/column .*(does not exist|schema cache)|documents_kind_check|documents_type_check|could not find the '(kind|category|ext)'/i.test(m)) return 'The MIDOX database needs an update. Run the latest setup.sql in Supabase, then try again.';
+  if (/documents_no_programs|docbox_files_insert/i.test(m)) return 'Programs (such as .exe) cannot be stored in MIDOX.';
   return m.length < 160 ? m : '';
 }
 /* sync indicator + optimistic-update helper */
@@ -2623,7 +2669,7 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
     <ellipse cx="${cx}" cy="${topY + 2}" rx="${rx - 27}" ry="${ry - 10}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1"/>
     <path d="M${cx - 66} ${topY - 4}v4a13 4.5 0 0 0 26 0v-4z" fill="#8E98A9"/><ellipse cx="${cx - 53}" cy="${topY - 4}" rx="13" ry="4.5" fill="#E8ECF2" stroke="#9AA4B4" stroke-width=".8"/>
     <path d="M${cx + 50} ${topY + 5}v3a8 3 0 0 0 16 0v-3z" fill="#8E98A9"/><ellipse cx="${cx + 58}" cy="${topY + 5}" rx="8" ry="3" fill="#E8ECF2" stroke="#9AA4B4" stroke-width=".8"/>
-    <text transform="translate(${cx} ${topY + 6}) scale(1 .34)" text-anchor="middle" font-family="Space Grotesk,Inter,sans-serif" font-size="24" font-weight="700" fill="#A3ADBC" letter-spacing="1">DocBox</text>
+    <text transform="translate(${cx} ${topY + 6}) scale(1 .34)" text-anchor="middle" font-family="Space Grotesk,Inter,sans-serif" font-size="24" font-weight="700" fill="#A3ADBC" letter-spacing="1">MIDOX</text>
   </g>
   <g class="callouts">${callouts}</g>
   <g class="readout" pointer-events="none">
@@ -3169,7 +3215,7 @@ function writeSaveModal() {
     title: 'Save document', sub: `Name your ${F.label.toLowerCase()} document and choose where it lives.`,
     body: `<div class="field" id="fDocName"><label for="dName">Document name</label><div class="name-ext"><input class="input" id="dName" maxlength="120" value="${esc((meta.title || first).replace(/[\\/:*?"<>|]+/g, ' ').trim())}" placeholder="e.g. Gate Driver Notes" autofocus><span>.${F.ext}</span></div><div class="err-msg" hidden></div></div>
       <div class="field"><span class="label" id="saveInLbl">Save in</span>${secPickerHTML({ id: 'dSec', value: sel, labelId: 'saveInLbl' })}</div>
-      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
+      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to MIDOX can find it in Community.' : 'Only you can see it.'}</div></div>
       <div class="field"><label for="dDesc">Description <span class="opt">Optional</span></label><input class="input" id="dDesc" maxlength="200" value="${esc(meta.desc)}" placeholder="One line on what this covers"></div>
       ${tagsField()}`,
     foot: `<button class="btn" data-close>Back to editing</button><button class="btn btn-primary" id="wsGo">${ico('check')}Save document</button>`,
@@ -3226,13 +3272,13 @@ function viewSettings() {
   const tw = (key, title, text) => `<div class="set-row"><div class="s-main"><b id="lb-${key}">${title}</b><span>${text}</span></div><button class="switch" role="switch" aria-checked="${!!st[key]}" aria-labelledby="lb-${key}" data-act="set-toggle" data-key="${key}"></button></div>`;
   return `<div class="page-head"><div><h1 class="page-title">Settings</h1><p class="page-sub">Profile, interface and data for this browser.</p></div></div>
   <div class="settings">
-    ${session ? `<section class="card rv"><h2>Account</h2><p>Signed in as <b>${esc(session.email)}</b> with ${esc(PROVIDERS[session.provider] || session.provider)}. Your documents are stored in your private DocBox cloud folder.</p><div class="page-actions" style="margin-top:14px"><button class="btn" data-act="sign-out">${ico('logout')}Log out</button></div></section>` : ''}
+    ${session ? `<section class="card rv"><h2>Account</h2><p>Signed in as <b>${esc(session.email)}</b> with ${esc(PROVIDERS[session.provider] || session.provider)}. Your documents are stored in your private MIDOX cloud folder.</p><div class="page-actions" style="margin-top:14px"><button class="btn" data-act="sign-out">${ico('logout')}Log out</button></div></section>` : ''}
     <section class="card rv" style="--d:40ms"><h2>Profile</h2><p>Your name and job title appear next to anything you share in Community.</p>
       <div class="two"><div class="field"><label for="setUser">Your name</label><input class="input" id="setUser" value="${esc(prof.name || st.user)}" maxlength="60"></div>
       <div class="field"><label for="setTitle">Job title</label><input class="input" id="setTitle" value="${esc(prof.title)}" maxlength="80" placeholder="e.g. Embedded Engineer"></div>
       <div class="field"><label for="setWs">Workspace name</label><input class="input" id="setWs" value="${esc(st.workspace)}" maxlength="60"></div>
       <div class="field"><label for="setGoal">Library goal</label><input class="input" id="setGoal" type="number" min="1" max="10000" value="${esc(st.goal || 50)}"><div class="hint">Number of documents that fills the barrel on Home.</div></div></div></section>
-    <section class="card rv" style="--d:60ms"><h2>Sharing</h2><p>Private documents are visible only to you. Public documents appear in Community for everyone signed in to DocBox.</p>
+    <section class="card rv" style="--d:60ms"><h2>Sharing</h2><p>Private documents are visible only to you. Public documents appear in Community for everyone signed in to MIDOX.</p>
       <div class="set-row"><div class="s-main"><b>Default for new documents</b><span>Applies to uploads and new documents you write. You can change any document later.</span></div>
         <div class="seg" role="radiogroup" aria-label="Default visibility"><button role="radio" data-act="default-vis" data-vis="private" aria-checked="${dv === 'private'}" aria-pressed="${dv === 'private'}">${ico('lock')}Private</button><button role="radio" data-act="default-vis" data-vis="public" aria-checked="${dv === 'public'}" aria-pressed="${dv === 'public'}">${ico('globe')}Public</button></div></div>
       <div class="set-row"><div class="s-main"><b>${plural(pubN, 'document')} shared publicly</b><span>${pubN ? 'Review them, or make everything private in one step.' : 'Nothing of yours is visible in Community right now.'}</span></div>
@@ -3242,7 +3288,7 @@ function viewSettings() {
       ${tw('clicks', 'Click effects', 'A small spark at each click.')}
       ${tw('bg', 'Animated background', 'Slowly drifting nodes behind the interface.')}
       ${tw('reduceMotion', 'Reduce motion', 'Turn off most animation in this app.')}</section>
-    <section class="card rv" style="--d:160ms"><h2>Data</h2><p>Documents are stored in your private DocBox cloud storage. Preferences and the activity list stay in this browser.</p>
+    <section class="card rv" style="--d:160ms"><h2>Data</h2><p>Documents are stored in your private MIDOX cloud storage. Preferences and the activity list stay in this browser.</p>
       <div class="storage-big"><div class="bar">${segs.map(x => `<span style="${secVars(x.s)};flex:${x.b}" title="${esc(x.s.name)}: ${fmtSize(x.b)}"></span>`).join('')}<span style="flex:${Math.max(1, CAP - used)};background:transparent;animation:none"></span></div>
       <div class="nums"><span>${fmtSize(used)} used</span><span>${CAP_LABEL} storage plan</span></div>
       <div class="comp-legend" style="margin-top:10px">${segs.map(x => `<a href="#/section/${encodeURIComponent(x.s.id)}" style="${secVars(x.s)}"><i></i>${esc(x.s.name)} ${fmtSize(x.b)}</a>`).join('')}</div></div>
@@ -3286,7 +3332,7 @@ function loadCommunity(force) {
     const A = new Map();
     D.forEach(d => {
       let a = A.get(d.userId);
-      if (!a) { const p = P.get(d.userId) || {}; a = { id: d.userId, name: p.display_name || 'DocBox user', title: p.job_title || '', count: 0, last: 0 }; A.set(d.userId, a); }
+      if (!a) { const p = P.get(d.userId) || {}; a = { id: d.userId, name: p.display_name || 'MIDOX user', title: p.job_title || '', count: 0, last: 0 }; A.set(d.userId, a); }
       a.count++; a.last = Math.max(a.last, d.updatedAt);
     });
     A.forEach(a => { a.sections = S.filter(s => s.userId === a.id && isRoot(s, S)).length; });
@@ -3302,7 +3348,7 @@ function commMode(c, sp = currentSpace()) {
   const docs = c.docs.filter(d => ofMode(d, sp)), A = new Map();
   docs.forEach(d => {
     let a = A.get(d.userId);
-    if (!a) { const b = c.authors.find(x => x.id === d.userId) || { id: d.userId, name: 'DocBox user', title: '' }; a = { ...b, count: 0, last: 0 }; A.set(d.userId, a); }
+    if (!a) { const b = c.authors.find(x => x.id === d.userId) || { id: d.userId, name: 'MIDOX user', title: '' }; a = { ...b, count: 0, last: 0 }; A.set(d.userId, a); }
     a.count++; a.last = Math.max(a.last, d.updatedAt);
   });
   A.forEach(a => { a.sections = c.secs.filter(s => s.userId === a.id && isRoot(s, c.secs) && docs.some(d => subtreeIds(s.id, c.secs).includes(d.sectionId))).length; });
@@ -3324,7 +3370,7 @@ function pubCard(d, i, c, showAuthor) {
 function authorCard(a, i) {
   const me = session && a.id === session.uid, mm = MM();
   return `<button class="author-card rv" style="${stagger(i)}" data-act="go" data-href="#/community/${a.id}">
-    <span class="a-top">${avatar(a)}<span><b>${esc(a.name)}${me ? '<span class="you">You</span>' : ''}</b><span>${esc(a.title || 'DocBox member')}</span></span></span>
+    <span class="a-top">${avatar(a)}<span><b>${esc(a.name)}${me ? '<span class="you">You</span>' : ''}</b><span>${esc(a.title || 'MIDOX member')}</span></span></span>
     <span class="a-stats"><span><b>${a.count}</b> ${a.count === 1 ? mm.one : mm.many}</span><span><b>${a.sections}</b> ${a.sections === 1 ? 'section' : 'sections'}</span><span>${ago(a.last)}</span></span>
   </button>`;
 }
@@ -3360,7 +3406,7 @@ function communityAuthor(all, uid, secId) {
   const me = session && uid === session.uid;
   const trail = [{ href: '#/community', label: 'Community' }, { href: '#/community/' + uid, label: a.name }, ...(node ? pathOf(node.id, S).map(p => ({ href: `#/community/${uid}/${p.id}`, label: p.name })) : [])];
   return `<div class="crumb-bar">${crumbs(trail)}${modeSwitch()}</div>
-  <header class="author-hero rv">${avatar(a, 'lg')}<div><h1>${esc(node ? node.name : a.name)}${!node && me ? '<span class="you">You</span>' : ''}</h1><p>${node ? `Shared by ${esc(a.name)}${node.description ? '. ' + esc(node.description) : ''}` : esc(a.title || 'DocBox member')}</p>
+  <header class="author-hero rv">${avatar(a, 'lg')}<div><h1>${esc(node ? node.name : a.name)}${!node && me ? '<span class="you">You</span>' : ''}</h1><p>${node ? `Shared by ${esc(a.name)}${node.description ? '. ' + esc(node.description) : ''}` : esc(a.title || 'MIDOX member')}</p>
     <p class="sec-stats"><span>${plural(node ? deep(node.id).length : a.count, 'public ' + mm.one)}</span>${node ? '' : `<span>${plural(a.sections, 'section')}</span>`}<span>Updated ${ago(node ? Math.max(0, ...deep(node.id).map(d => d.updatedAt)) : a.last)}</span></p></div>
     ${me ? `<div class="page-actions"><a class="btn" href="${mm.all}?vis=public">${ico('globe')}Manage what I share</a></div>` : ''}</header>
   ${children.length ? `<section class="block" style="margin-top:8px"><div class="block-head"><h2 class="block-title">${node ? 'Modules' : 'Sections'}</h2></div><div class="grid grid-sections">${children.map((s, i) => secCard(s, i, { docs: deep(s.id), space: c.sp, kids: S.filter(x => x.parentId === s.id && deep(x.id).length).length, readonly: true, href: `#/community/${uid}/${s.id}` })).join('')}</div></section>` : ''}
@@ -3387,7 +3433,7 @@ async function mountCommunity(r, nav) {
 /* ---------- read-only viewer for shared documents ---------- */
 function viewPublicDoc() { return `<div id="pdocView"><div class="sk" style="height:40px;width:50%;margin-bottom:18px"></div><div class="sk" style="height:60vh;border-radius:18px"></div></div>`; }
 function pdocHTML(d, c) {
-  const a = c.authors.find(x => x.id === d.userId) || { id: d.userId, name: 'DocBox user', title: '' };
+  const a = c.authors.find(x => x.id === d.userId) || { id: d.userId, name: 'MIDOX user', title: '' };
   const s = c.secs.find(x => x.id === d.sectionId), mine = session && d.userId === session.uid;
   const frame = isFile(d) ? '' : d.type === 'image' ? `<div class="img-stage"><img alt="${esc(d.description || d.name)}"></div>`
     : d.type === 'pdf' ? `<iframe id="docFrame" title="${esc(d.name)}" style="height:82vh"></iframe>`
@@ -3424,7 +3470,7 @@ async function mountPdoc(r) {
   const box = $('#pdocView');
   if (!d) { box.innerHTML = empty({ kind: 'search', title: 'This is not shared', text: 'Its author may have made it private or deleted it.', actions: `<a class="btn btn-primary" href="#/community">${ico('users')}Back to Community</a>` }); observeReveal(box, true); return; }
   box.innerHTML = pdocHTML(d, c);
-  document.title = d.name + ' | DocBox';
+  document.title = d.name + ' | MIDOX';
   if (isFile(d)) { const p = $('#paper'); p.classList.add('fprev'); renderPreview(p, d, { pub: true }); return; }
   const sk = $('.frame-sk'), doneSk = () => sk && sk.classList.add('gone');
   try { await ensureContent(d); }
@@ -3726,7 +3772,7 @@ function render(nav = true) {
   observeReveal(v, !nav);
   try { MOUNTS[route.name] && MOUNTS[route.name](route, nav); } catch (e) { console.error(e); }
   animateModeSwitch(v); morphWords(v);
-  document.title = titleFor(route) + ' | DocBox';
+  document.title = titleFor(route) + ' | MIDOX';
 }
 function refresh() { const y = scrollY; render(false); scrollTo(0, y); }
 addEventListener('hashchange', () => {
@@ -4234,7 +4280,7 @@ function starterModal(opts = {}) {
    ========================================================= */
 function copyLink(id) {
   const url = APP_URL + '#/pdoc/' + id;
-  const done = () => toast('Link copied. Anyone signed in to DocBox can open it.');
+  const done = () => toast('Link copied. Anyone signed in to MIDOX can open it.');
   if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, () => promptBox({ title: 'Share link', label: 'Copy this link', value: url, ok: 'Done' }));
   else promptBox({ title: 'Share link', label: 'Copy this link', value: url, ok: 'Done' });
 }
@@ -4586,7 +4632,7 @@ const MAX_BATCH = 50, BATCH_PARALLEL = 3;
 async function readItem(f) {
   const ext = extOf(f.name), type = EXT[ext];
   const it = { k: uid('f'), file: f, type, name: f.name, desc: '', descFrom: '', tags: [], content: null, status: 'ready', error: '' };
-  if (!type) return isBlockedName(f.name) ? Object.assign(it, { status: 'skip', error: `Programs (.${ext}) cannot be stored in DocBox` }) : Object.assign(it, { status: 'skip', toFiles: true, error: `Not a document type${ext ? ` (.${ext})` : ''}. Store it in Files instead` });
+  if (!type) return isBlockedName(f.name) ? Object.assign(it, { status: 'skip', error: `Programs (.${ext}) cannot be stored in MIDOX` }) : Object.assign(it, { status: 'skip', toFiles: true, error: `Not a document type${ext ? ` (.${ext})` : ''}. Store it in Files instead` });
   if (f.size > MAX_FILE) return Object.assign(it, { status: 'skip', error: `Larger than the ${CFG.maxFileMB} MB limit (${fmtSize(f.size)})` });
   if (!f.size) return Object.assign(it, { status: 'skip', error: 'The file is empty' });
   try {
@@ -4612,7 +4658,7 @@ async function readFileItem(f) {
   const ext = fileExt(f.name), category = fileCat(ext);
   let type = previewType(ext);
   const it = { k: uid('f'), file: f, kind: 'file', ext, category, type, name: f.name, desc: '', descFrom: '', tags: [], content: null, status: 'ready', error: '' };
-  if (isBlockedName(f.name)) return Object.assign(it, { status: 'skip', error: `Programs (.${ext}) cannot be stored in DocBox` });
+  if (isBlockedName(f.name)) return Object.assign(it, { status: 'skip', error: `Programs (.${ext}) cannot be stored in MIDOX` });
   if (f.size > MAX_FILE) return Object.assign(it, { status: 'skip', error: `Larger than the ${CFG.maxFileMB} MB limit (${fmtSize(f.size)})` });
   if (!f.size) return Object.assign(it, { status: 'skip', error: 'The file is empty' });
   try {
@@ -4665,7 +4711,7 @@ function fileUploadModal({ sectionId, file } = {}) {
         <div class="field" id="fDocName"><label for="dName">File name</label><input class="input" id="dName" maxlength="120" placeholder="Filled in from the file"><div class="err-msg" hidden></div></div>
         <div class="field"><span class="label" id="saveInLbl">Save in</span>${secPickerHTML({ id: 'dSec', value: sel, labelId: 'saveInLbl' })}</div>
       </div>
-      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
+      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to MIDOX can find it in Community.' : 'Only you can see it.'}</div></div>
       <div class="field"><label for="dDesc">Description</label><input class="input" id="dDesc" maxlength="200" placeholder="One line on what this file is"></div>
       ${tagsField()}
       <div class="progress" id="upProg" hidden><i></i></div>`,
@@ -4752,10 +4798,10 @@ function batchUploadModal(fileList, opts = {}) {
   const FILE_ICON = { html: 'fileCode', code: 'fileCode', md: 'fileText', txt: 'fileText', pdf: 'fileType', image: 'fileImage' };
   modal({
     title: `Upload ${plural(incoming.length, 'file')}`, size: 'xwide',
-    sub: isF ? 'Store any file related to your work. Each file keeps its own name, and a description is filled in where DocBox can read one. Click any name or description to edit it.' : 'Each file keeps its own name, and its description is read from inside the document. Click any name or description to edit it.',
+    sub: isF ? 'Store any file related to your work. Each file keeps its own name, and a description is filled in where MIDOX can read one. Click any name or description to edit it.' : 'Each file keeps its own name, and its description is read from inside the document. Click any name or description to edit it.',
     body: `<div class="bu-shared">
         <div class="bu-cell"><label for="buSec">${ico('folder')}Save in</label><select class="select" id="buSec">${treeSelect(secId)}</select></div>
-        <div class="bu-cell"><span class="lbl" id="visLbl">${ico('lock')}Visibility</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}" title="Only you can see them">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}" title="Everyone signed in to DocBox can find them in Community">${ico('globe')}Public</button></div></div>
+        <div class="bu-cell"><span class="lbl" id="visLbl">${ico('lock')}Visibility</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}" title="Only you can see them">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}" title="Everyone signed in to MIDOX can find them in Community">${ico('globe')}Public</button></div></div>
         <div class="bu-cell bu-tagf"><label for="tagIn">${ico('tag')}Tags for all <span class="opt">Optional</span></label><div class="chips-input" id="chips"><input id="tagIn" list="tagList" autocomplete="off" placeholder="Add a tag, press Enter"></div><datalist id="tagList">${allTags().map(([t]) => `<option value="${esc(t)}">`).join('')}</datalist></div>
       </div>
       <div class="bu-bar"><div class="bu-sum" id="buSum"></div><button type="button" class="btn btn-sm bu-tofiles" id="buToFiles" hidden>${ico('folderOpen')}<span></span></button><button type="button" class="btn btn-sm btn-ghost" id="buMoreB">${ico('plus')}Add files</button><input type="file" id="buMore" multiple${isF ? '' : ` accept="${ACCEPT}"`} hidden></div>
@@ -4973,7 +5019,7 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
         <div class="field" id="fDocName"><label for="dName">Document name</label><input class="input" id="dName" maxlength="120" placeholder="Filled in from the file"><div class="err-msg" hidden></div></div>
         <div class="field"><span class="label" id="saveInLbl">Save in</span>${secPickerHTML({ id: 'dSec', value: sel, labelId: 'saveInLbl' })}</div>
       </div>
-      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
+      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${vis === 'private'}" aria-pressed="${vis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${vis === 'public'}" aria-pressed="${vis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${vis === 'public' ? 'Everyone signed in to MIDOX can find it in Community.' : 'Only you can see it.'}</div></div>
       <div class="field"><label for="dDesc">Description</label><input class="input" id="dDesc" maxlength="200" placeholder="One line on what this covers"></div>
       ${tagsField()}
       <div class="progress" id="upProg" hidden><i></i></div></div>`,
@@ -5006,7 +5052,7 @@ function uploadModal({ sectionId, tab = 'upload', file } = {}) {
         fField.classList.remove('err'); fErr.hidden = true;
         const ext = extOf(f.name), type = EXT[ext];
         if (!type) {
-          if (isBlockedName(f.name)) return fail(`Programs (.${ext}) cannot be stored in DocBox.`);
+          if (isBlockedName(f.name)) return fail(`Programs (.${ext}) cannot be stored in MIDOX.`);
           fail(`${ext ? `.${ext} is` : 'This is'} not a document type. You can store it in Files instead.`);
           fErr.insertAdjacentHTML('beforeend', `<button type="button" class="txt-btn" id="toFilesBtn" style="margin-left:6px">Store in Files</button>`);
           fErr.querySelector('#toFilesBtn').addEventListener('click', () => { const s_ = secSel.value; close(); setTimeout(() => fileUploadModal({ sectionId: s_, file: f }), 240); });
@@ -5114,7 +5160,7 @@ function mountVisSeg(el, onChange) {
   const btns = $$('.vis-seg [data-vis]', el), hint = el.querySelector('#visHint');
   btns.forEach(b => b.addEventListener('click', () => {
     btns.forEach(x => { x.setAttribute('aria-checked', x === b); x.setAttribute('aria-pressed', x === b); });
-    if (hint) hint.textContent = b.dataset.vis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.';
+    if (hint) hint.textContent = b.dataset.vis === 'public' ? 'Everyone signed in to MIDOX can find it in Community.' : 'Only you can see it.';
     onChange(b.dataset.vis);
   }));
 }
@@ -5126,7 +5172,7 @@ function detailsModal(id) {
     title: 'Edit details', sub: 'Name, location, visibility, description and tags.',
     body: `<div class="field" id="fDocName"><label for="dName">Document name</label><input class="input" id="dName" maxlength="120" value="${esc(d.name)}"><div class="err-msg" hidden></div></div>
       <div class="field"><span class="label" id="savedInLbl">Saved in</span>${secPickerHTML({ id: 'dSec', value: d.sectionId, labelId: 'savedInLbl' })}</div>
-      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${dvis === 'private'}" aria-pressed="${dvis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${dvis === 'public'}" aria-pressed="${dvis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${dvis === 'public' ? 'Everyone signed in to DocBox can find it in Community.' : 'Only you can see it.'}</div></div>
+      <div class="field"><span class="label" id="visLbl">Who can see it</span><div class="seg vis-seg" role="radiogroup" aria-labelledby="visLbl"><button type="button" role="radio" data-vis="private" aria-checked="${dvis === 'private'}" aria-pressed="${dvis === 'private'}">${ico('lock')}Private</button><button type="button" role="radio" data-vis="public" aria-checked="${dvis === 'public'}" aria-pressed="${dvis === 'public'}">${ico('globe')}Public</button></div><div class="hint" id="visHint">${dvis === 'public' ? 'Everyone signed in to MIDOX can find it in Community.' : 'Only you can see it.'}</div></div>
       <div class="field"><label for="dDesc">Description</label><textarea class="textarea" id="dDesc" rows="2" maxlength="200">${esc(d.description)}</textarea></div>${tagsField()}`,
     foot: `<button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="dtGo">Save details</button>`,
     onMount(el, close) {
@@ -5225,7 +5271,7 @@ function exportModal({ sectionId } = {}) {
     body: `<div class="field"><span class="label">Include</span><div class="ex-chips">${chip('docs', 'docs', 'Documents')}${chip('files', 'folderOpen', 'Files')}${chip('trash', 'trash', 'Trash')}</div></div>
       <div class="field"><span class="label" id="exFromL">From</span>${secPickerHTML({ id: 'exSec', value: scope, root: true, labelId: 'exFromL', rootLabel: 'Whole library', rootSub: 'Every section and module' })}</div>
       <div class="ex-sum" id="exSum"></div>
-      <div class="ex-note">${ico('info')}<span>The ZIP also holds <b>docbox.json</b> with names, tags, descriptions and your section structure, so it can be imported back into DocBox later. Open any file in the ZIP with your usual apps.</span></div>
+      <div class="ex-note">${ico('info')}<span>The ZIP also holds <b>midox.json</b> with names, tags, descriptions and your section structure, so it can be imported back into MIDOX later. Open any file in the ZIP with your usual apps.</span></div>
       <div class="ex-run" id="exRun" hidden><div class="progress"><i id="exBar"></i></div><div class="ex-status" id="exStatus"></div></div>`,
     foot: `<button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="exGo">${ico('download')}Export</button>`,
     onMount(el, close) {
@@ -5249,7 +5295,7 @@ function exportModal({ sectionId } = {}) {
         busy = true; go_.classList.add('loading'); el.querySelector('#exRun').hidden = false;
         $$('.ex-chip, .pick-btn', el).forEach(b => b.disabled = true);
         const bar = el.querySelector('#exBar'), status = el.querySelector('#exStatus');
-        const root = zipSafe(scope ? `DocBox - ${secById(scope).name} - ${dayStamp()}` : `DocBox export ${dayStamp()}`);
+        const root = zipSafe(scope ? `MIDOX - ${secById(scope).name} - ${dayStamp()}` : `MIDOX export ${dayStamp()}`);
         const top = scope ? (secById(scope).parentId || null) : null;
         const folderOf = id => { if (!id || !secById(id)) return 'Unsorted'; const p = pathOf(id); const i = top ? p.findIndex(s => s.id === scope) : 0; return p.slice(Math.max(0, i)).map(s => zipSafe(s.name)).join('/'); };
         const zip = zipWriter(), used = new Map(), items = [], failed = [];
@@ -5279,8 +5325,8 @@ function exportModal({ sectionId } = {}) {
         }
         if (stop && done < L.length) { if (document.contains(el)) { busy = false; go_.classList.remove('loading'); } return; }
         const secIds = scope ? subtreeIds(scope) : state.sections.map(s => s.id);
-        const manifest = { app: 'DocBox', format: 1, exportedAt: new Date().toISOString(), by: session ? session.email : '', scope: scope ? { id: scope, name: secById(scope).name } : null, sections: secIds.map(secById).filter(Boolean).map(s => ({ id: s.id, parentId: s.id === scope ? null : s.parentId, name: s.name, description: s.description || '', icon: s.icon, color: s.color, order: s.order, folder: folderOf(s.id) })), items };
-        await zip.add(`${root}/docbox.json`, JSON.stringify(manifest, null, 1));
+        const manifest = { app: 'MIDOX', format: 1, exportedAt: new Date().toISOString(), by: session ? session.email : '', scope: scope ? { id: scope, name: secById(scope).name } : null, sections: secIds.map(secById).filter(Boolean).map(s => ({ id: s.id, parentId: s.id === scope ? null : s.parentId, name: s.name, description: s.description || '', icon: s.icon, color: s.color, order: s.order, folder: folderOf(s.id) })), items };
+        await zip.add(`${root}/midox.json`, JSON.stringify(manifest, null, 1));
         bar.style.width = '100%'; status.textContent = 'Preparing the download…';
         downloadBlob(zip.blob(), root + '.zip');
         log(`Exported ${plural(items.length, 'item')}`, 'download', scope);
@@ -5291,18 +5337,18 @@ function exportModal({ sectionId } = {}) {
   });
 }
 
-/* ---------- Import: a DocBox export, or any ZIP of folders ---------- */
+/* ---------- Import: a MIDOX export, or any ZIP of folders ---------- */
 const JUNK = /(^|\/)(__MACOSX|\.DS_Store|Thumbs\.db|desktop\.ini|\._[^/]*)(\/|$)/i;
 function importModal({ sectionId } = {}) {
   let dest = sectionId && secById(sectionId) ? sectionId : null, plan = null, busy = false, stop = false, dup = 'skip', keepVis = false;
   modal({
-    title: 'Import', sub: 'Bring in a DocBox export, or any ZIP of folders. Folders become sections and modules.', wide: true,
+    title: 'Import', sub: 'Bring in a MIDOX export, or any ZIP of folders. Folders become sections and modules.', wide: true,
     body: `<div class="field" id="imFileF"><label class="drop" id="imDrop" tabindex="0" for="imIn"><input type="file" id="imIn" accept=".zip,application/zip" hidden>
         <svg class="drop-ico" viewBox="0 0 52 52" aria-hidden="true"><rect x="9" y="6" width="34" height="40" rx="7" fill="#fff" stroke="#C8CFDA" stroke-width="1.5"/><path d="M22 6v6h4v4h-4v4h4v4h-4" fill="none" stroke="#A9B4C4" stroke-width="1.6"/><g class="arrow"><circle cx="26" cy="33" r="9" fill="#EEF2FF"/><path d="M26 29v8M22.5 33.5 26 37l3.5-3.5" fill="none" stroke="#2E5BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
         <strong>Drop a ZIP file here</strong><span>or click to choose one</span></label><div class="err-msg" hidden></div></div>
       <div id="imPlan" hidden></div>
       <div class="ex-run" id="imRun" hidden><div class="progress"><i id="imBar"></i></div><div class="ex-status" id="imStatus"></div></div>`,
-    foot: `<span class="left hide-m" id="imTip">Tip: export from DocBox to move a library between accounts.</span><button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="imGo" disabled>${ico('upload')}Import</button>`,
+    foot: `<span class="left hide-m" id="imTip">Tip: export from MIDOX to move a library between accounts.</span><button class="btn" data-close>Cancel</button><button class="btn btn-primary" id="imGo" disabled>${ico('upload')}Import</button>`,
     onMount(el, close) {
       const drop = el.querySelector('#imDrop'), inp = el.querySelector('#imIn'), err = el.querySelector('#imFileF .err-msg'), box = el.querySelector('#imPlan'), go_ = el.querySelector('#imGo');
       new MutationObserver((_, ob) => { if (!document.contains(el)) { stop = true; ob.disconnect(); } }).observe($('#modalRoot'), { childList: true });
@@ -5315,9 +5361,9 @@ function importModal({ sectionId } = {}) {
         try { ents = await zipEntries(f); } catch (e) { return fail(e.message); }
         ents = ents.filter(e => !e.name.endsWith('/') && !JUNK.test(e.name));
         if (!ents.length) return fail('This ZIP is empty.');
-        const man = ents.filter(e => /(^|\/)docbox\.json$/i.test(e.name)).sort((a, b) => a.name.split('/').length - b.name.split('/').length)[0];
+        const man = ents.filter(e => /(^|\/)(midox|docbox)\.json$/i.test(e.name)).sort((a, b) => a.name.split('/').length - b.name.split('/').length)[0];
         let manifest = null;
-        if (man) { try { const j = JSON.parse(await (await man.blob()).text()); if (j && j.app === 'DocBox' && Array.isArray(j.items)) manifest = j; } catch (e) { /* treat as a plain ZIP */ } }
+        if (man) { try { const j = JSON.parse(await (await man.blob()).text()); if (j && /^(midox|docbox)$/i.test(j.app) && Array.isArray(j.items)) manifest = j; } catch (e) { /* treat as a plain ZIP */ } }
         plan = buildPlan(ents, manifest, man);
         render();
       }
@@ -5332,7 +5378,7 @@ function importModal({ sectionId } = {}) {
           return { kind: EXT[extOf(name)] ? 'doc' : 'file' };
         };
         if (manifest) {
-          const base = man.name.slice(0, man.name.length - 'docbox.json'.length), byName = new Map(ents.map(e => [e.name, e]));
+          const base = man.name.slice(0, man.name.lastIndexOf('/') + 1), byName = new Map(ents.map(e => [e.name, e]));
           const secById_ = new Map((manifest.sections || []).map(s => [s.id, s]));
           (manifest.sections || []).forEach(s => addFolder(s.folder, s));
           manifest.items.forEach(it => {
@@ -5362,7 +5408,7 @@ function importModal({ sectionId } = {}) {
         const loose = plan.items.some(x => !x.folder);
         const exists = f => { const parent = f.parent ? null : dest; return !f.parent && siblingsOf(parent).some(s => s.name.toLowerCase() === f.name.toLowerCase()); };
         const over = usedBytes() + bytes > CAP;
-        box.innerHTML = `<div class="im-head">${ico(plan.manifest ? 'layers' : 'archive')}<div><b>${plan.manifest ? 'DocBox export found' : 'ZIP of folders'}</b><span>${plan.manifest ? 'Sections, names, tags and descriptions will be restored.' : 'Each folder becomes a section or module.'}</span></div><button type="button" class="txt-btn" id="imOther">Choose another</button></div>
+        box.innerHTML = `<div class="im-head">${ico(plan.manifest ? 'layers' : 'archive')}<div><b>${plan.manifest ? 'MIDOX export found' : 'ZIP of folders'}</b><span>${plan.manifest ? 'Sections, names, tags and descriptions will be restored.' : 'Each folder becomes a section or module.'}</span></div><button type="button" class="txt-btn" id="imOther">Choose another</button></div>
           <div class="im-stats"><span><b>${D}</b> ${D === 1 ? 'document' : 'documents'}</span><span><b>${F}</b> ${F === 1 ? 'file' : 'files'}</span><span><b>${deep.length}</b> ${deep.length === 1 ? 'folder' : 'folders'}</span><span><b>${fmtSize(bytes)}</b></span>${plan.skipped.length ? `<span class="warn"><b>${plan.skipped.length}</b> skipped</span>` : ''}</div>
           ${roots.length ? `<div class="im-tree">${roots.slice(0, 8).map(f => `<div class="im-f"><span class="sec-dot" style="${f.meta ? secVars({ color: f.meta.color }) : secVars({ color: 'blue' })}">${ico(f.meta && f.meta.icon ? f.meta.icon : 'folder')}</span><b>${esc(f.name)}</b><small>${plural(plan.items.filter(x => x.folder === f.path || x.folder.startsWith(f.path + '/')).length, 'item')}</small>${exists(f) ? '<em class="old">Adds to existing</em>' : '<em>New</em>'}</div>`).join('')}${roots.length > 8 ? `<div class="im-more">and ${roots.length - 8} more</div>` : ''}</div>` : ''}
           ${plan.skipped.length ? `<details class="im-skip"><summary>${plural(plan.skipped.length, 'item')} will be skipped</summary>${plan.skipped.slice(0, 40).map(s => `<div><span>${esc(s.name)}</span><small>${esc(s.why)}</small></div>`).join('')}</details>` : ''}
@@ -5507,7 +5553,7 @@ function userMenu(anchor) {
   ], { cls: 'acct-menu', html: `<div class="menu-head"><span class="avatar lg">${esc(initials(st.user))}</span><div class="mh-t"><b>${esc(st.user || 'Guest')}</b><span>${esc(session ? session.email : st.workspace)}</span>${title ? `<span class="mh-role">${esc(title)}</span>` : ''}</div></div><div class="mh-plan">${ico('db')}<span>${fmtSize(usedBytes())} of ${CAP_LABEL} used</span><i style="--p:${Math.max(2, Math.min(100, usedBytes() / CAP * 100)).toFixed(1)}%"></i></div><hr>` });
 }
 async function confirmLogout() {
-  if (await confirmBox({ title: 'Log out of DocBox?', text: 'You will need your email and password to sign in again. Everything in your library stays saved.', ok: 'Log out' })) signOut();
+  if (await confirmBox({ title: 'Log out of MIDOX?', text: 'You will need your email and password to sign in again. Everything in your library stays saved.', ok: 'Log out' })) signOut();
 }
 
 /* =========================================================
@@ -5771,35 +5817,40 @@ function flowSVG() {
     cards += card(0, y, src[i], anim ? `<animate attributeName="opacity" dur="${D}s" begin="${bIn}s" repeatCount="indefinite" values="0;1;0;0" keyTimes="0;.05;.3;1"/>` : '');
     cards += card(460, y, dst[i], anim ? `<animate attributeName="opacity" dur="${D}s" begin="${bOut}s" repeatCount="indefinite" values="0;0;1;0" keyTimes="0;.86;.93;1"/>` : '');
   });
+  /* centre: three floating storage layers, the top one carries the M. mark */
+  const W2 = 54, H2 = 27, TH = 9;
+  const slab = (y, top, l, r, cls, extra = '') => `<g class="st-slab ${cls}">
+    <path d="M${cx - W2} ${y}L${cx} ${y + H2}v${TH}L${cx - W2} ${y + TH}z" fill="${l}"/><path d="M${cx + W2} ${y}L${cx} ${y + H2}v${TH}L${cx + W2} ${y + TH}z" fill="${r}"/>
+    <path d="M${cx} ${y - H2}L${cx + W2} ${y}L${cx} ${y + H2}L${cx - W2} ${y}z" fill="${top}"/><path d="M${cx} ${y - H2}L${cx + W2} ${y}L${cx} ${y + H2}L${cx - W2} ${y}z" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1"/>${extra}</g>`;
+  /* four storage cells on the top layer light up in turn as items arrive */
+  const cells = [[-23, -23, 0], [2, -23, 1], [2, 2, 2], [-23, 2, 3]].map(([x, y, i]) => `<rect x="${x}" y="${y}" width="21" height="21" rx="4" fill="#fff" fill-opacity="${anim ? .16 : (i === 1 ? .7 : .16)}">${anim ? `<animate attributeName="fill-opacity" values=".16;.85;.16;.16" keyTimes="0;.12;.45;1" dur="3.2s" begin="${(2.05 + i * .8).toFixed(2)}s" repeatCount="indefinite"/>` : ''}</rect>`).join('');
+  const mark = `<g transform="translate(${cx} ${cy - 30}) matrix(1 .5 -1 .5 0 0)">${cells}</g>`;
+  const ping = anim ? `<g transform="translate(${cx} ${cy - 30})"><path d="M0 ${-H2}L${W2} 0L0 ${H2}L${-W2} 0z" fill="none" stroke="#9DB4FF" stroke-width="1.6" opacity="0"><animateTransform attributeName="transform" type="scale" values="1;1.4" dur=".8s" begin="2.05s" repeatCount="indefinite"/><animate attributeName="opacity" values=".75;0" dur=".8s" begin="2.05s" repeatCount="indefinite"/></path></g>` : '';
+  const stack = slab(cy + 30, '#EEF1F6', '#CDD5E2', '#DCE2EB', 'st-3') + slab(cy, '#E0E8FF', '#B7C7FF', '#CAD6FF', 'st-2') + slab(cy - 30, 'url(#st-top)', '#2547C8', '#3355DE', 'st-1', mark + ping);
   const pts = Array.from({ length: 10 }, (_, i) => `<circle class="fl-pt" cx="${200 + (i * 37) % 240}" cy="${60 + (i * 61) % 290}" r="${1.4 + (i % 3) * .6}" fill="${['#2E5BFF', '#7357FF', '#0B9DB5'][i % 3]}" style="animation-delay:${(i * .7).toFixed(1)}s"/>`).join('');
-  return `<svg class="flow" viewBox="0 0 640 400" role="img" aria-label="Upload documents, store any work file or write online. DocBox keeps them securely online, and you open them on desktop, phone or with your team" font-family="Inter,ui-sans-serif,system-ui,sans-serif">
+  return `<svg class="flow" viewBox="0 0 640 400" role="img" aria-label="Upload documents, store any work file or write online. MIDOX keeps them securely online, and you open them on desktop, phone or with your team" font-family="Inter,ui-sans-serif,system-ui,sans-serif">
   <defs>
     <filter id="fl-sh" x="-20%" y="-30%" width="140%" height="190%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#101828" flood-opacity=".07"/></filter>
-    <filter id="fl-vsh" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#2E5BFF" flood-opacity=".35"/></filter>
-    <linearGradient id="fl-vt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D63FF"/><stop offset="1" stop-color="#5A3FE6"/></linearGradient>
     <radialGradient id="fl-halo"><stop offset="0" stop-color="#5B7BFF" stop-opacity=".22"/><stop offset=".6" stop-color="#7357FF" stop-opacity=".07"/><stop offset="1" stop-color="#7357FF" stop-opacity="0"/></radialGradient>
-    <clipPath id="fl-vc"><rect x="${cx - 52}" y="${cy - 52}" width="104" height="104" rx="30"/></clipPath>
+    <linearGradient id="st-top" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B6BFF"/><stop offset="1" stop-color="#5C3FE8"/></linearGradient>
+    <radialGradient id="st-floor"><stop offset="0" stop-color="#2E5BFF" stop-opacity=".22"/><stop offset="1" stop-color="#2E5BFF" stop-opacity="0"/></radialGradient>
   </defs>
   <g class="hs-layer" data-depth="12">${pts}</g>
-  <circle class="fl-halo" cx="${cx}" cy="${cy}" r="132" fill="url(#fl-halo)"/>
-  <g class="fl-spin"><circle cx="${cx}" cy="${cy}" r="108" fill="none" stroke="#D3DBEA" stroke-width="1.2" stroke-dasharray="3 7"/></g>
-  <g class="fl-spin rev"><circle cx="${cx}" cy="${cy}" r="86" fill="none" stroke="#E2E7F0" stroke-width="1.1"/><circle cx="${cx}" cy="${cy - 86}" r="4" fill="#7357FF"/><circle cx="${cx + 86}" cy="${cy}" r="3" fill="#0B9DB5"/><circle cx="${cx - 61}" cy="${cy + 61}" r="3.5" fill="#2E5BFF"/></g>
+  <circle class="fl-halo" cx="${cx}" cy="${cy + 4}" r="128" fill="url(#fl-halo)"/>
+  <ellipse cx="${cx}" cy="${cy + 10}" rx="104" ry="52" fill="none" stroke="#DCE2EC" stroke-width="1.2" stroke-dasharray="2 7" stroke-linecap="round" class="st-orbit"/>
+  ${anim ? `<circle r="3.4" fill="#7357FF"><animateMotion dur="9s" repeatCount="indefinite" path="M${cx + 104} ${cy + 10}a104 52 0 1 1 -208 0a104 52 0 1 1 208 0"/></circle><circle r="2.6" fill="#0B9DB5"><animateMotion dur="9s" begin="-4.5s" repeatCount="indefinite" path="M${cx + 104} ${cy + 10}a104 52 0 1 1 -208 0a104 52 0 1 1 208 0"/></circle>` : ''}
   ${paths}
-  ${anim ? `<circle cx="${cx}" cy="${cy}" r="58" fill="none" stroke="#3D63FF" stroke-width="2" opacity="0"><animate attributeName="r" values="56;92" dur=".8s" begin="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".55;0" dur=".8s" begin="2.4s" repeatCount="indefinite"/></circle>` : ''}
-  <rect x="${cx - 52}" y="${cy - 52}" width="104" height="104" rx="30" fill="url(#fl-vt)" filter="url(#fl-vsh)"/>
-  <rect x="${cx - 51.5}" y="${cy - 51.5}" width="103" height="103" rx="29.5" fill="none" stroke="#fff" stroke-opacity=".2"/>
-  <g clip-path="url(#fl-vc)"><g transform="rotate(24 ${cx} ${cy})"><rect class="fl-shine" x="${cx - 120}" y="${cy - 110}" width="22" height="220" fill="#fff" fill-opacity=".18"/></g></g>
-  <g class="lg-anim" transform="translate(${cx - 52} ${cy - 52}) scale(2.6)">${LOGO_INNER}</g>
-  <circle cx="${cx + 48}" cy="${cy - 48}" r="15" fill="#fff" filter="url(#fl-sh)"/><svg x="${cx + 40}" y="${cy - 56}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E9F5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS.lock}</svg>
-  <rect x="${cx - 70}" y="${cy + 70}" width="140" height="46" rx="14" fill="#fff" stroke="#E4E8EF" filter="url(#fl-sh)"/>
-  <text x="${cx}" y="${cy + 90}" text-anchor="middle" font-size="13" font-weight="700" fill="#1F2937">DocBox cloud</text>
-  <text x="${cx}" y="${cy + 106}" text-anchor="middle" font-size="11" fill="#667085">Documents and files</text>
+  <ellipse cx="${cx}" cy="${cy + 72}" rx="78" ry="15" fill="url(#st-floor)"/>
+  ${stack}
+  <g class="st-lock"><circle cx="${cx + 60}" cy="${cy - 66}" r="14" fill="#fff" filter="url(#fl-sh)"/><svg x="${cx + 52.5}" y="${cy - 73.5}" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0E9F5E" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">${ICONS.lock}</svg></g>
+  <g transform="translate(${cx - 76} ${cy + 86})"><rect width="152" height="40" rx="12" fill="#fff" stroke="#E4E8EF" filter="url(#fl-sh)"/><circle cx="17" cy="20" r="4" fill="#12B76A"/>${anim ? '<circle cx="17" cy="20" r="4" fill="none" stroke="#12B76A" stroke-width="1.5"><animate attributeName="r" values="4;9" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0" dur="2s" repeatCount="indefinite"/></circle>' : ''}
+    <text x="30" y="17" font-size="12" font-weight="700" fill="#1F2937">MIDOX cloud</text><text x="30" y="31" font-size="10.5" fill="#667085">Documents and files</text></g>
   ${packets}
   ${cards}
   </svg>`;
 }
 function authShowcase() {
-  return `<aside class="auth-show" aria-label="What DocBox does">
+  return `<aside class="auth-show" aria-label="What MIDOX does">
     <div class="as-head">
       <h2>All your documents and files.<br>Open them anywhere.</h2>
       <p class="rot"><span id="rotLine">${esc(ROT_LINES[0])}</span></p>
@@ -5865,7 +5916,7 @@ function lock() {
   document.body.classList.add('locked'); document.body.classList.remove('booting');
   closeMenus(); closeResults();
   const a = $('#auth'); a.hidden = false; a.innerHTML = authView(); mountAuth();
-  document.title = (!configured() ? 'Connect' : authMode === 'signup' ? 'Create account' : 'Sign in') + ' | DocBox';
+  document.title = (!configured() ? 'Connect' : authMode === 'signup' ? 'Create account' : 'Sign in') + ' | MIDOX';
   if (pendingAuthError) { authAlert(esc(pendingAuthError)); pendingAuthError = ''; }
   scrollTo(0, 0);
 }
@@ -5882,8 +5933,8 @@ async function signOut() {
 const GOOGLE_G = '<svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2A11.9 11.9 0 0 1 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3a12 12 0 0 1-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>';
 function authCardHTML() {
   if (!configured()) return `
-      <h1>Connect DocBox</h1>
-      <p class="sub">This copy of DocBox is not connected to its online storage yet.</p>
+      <h1>Connect MIDOX</h1>
+      <p class="sub">This copy of MIDOX is not connected to its online storage yet.</p>
       ${setupError ? `<div class="auth-alert error">${ico('info')}<span>${esc(setupError)}</span></div>` : ''}
       <ol class="setup-steps"><li>Open <code>index.html</code> in a text editor.</li><li>Find <code>DOCBOX_CONFIG</code> near the top of the file.</li><li>Paste your Supabase Project URL and publishable key, save, and reload this page.</li></ol>`;
   if (authNotice && authNotice.kind === 'inbox') return `
@@ -5895,7 +5946,7 @@ function authCardHTML() {
       <p class="auth-switch">Already confirmed? <button type="button" class="txt-btn" data-auth="to-signin">Sign in</button></p>`;
   const up = authMode === 'signup';
   return `
-      <h1>${up ? 'Create your work account' : 'Sign in to DocBox'}</h1>
+      <h1>${up ? 'Create your work account' : 'Sign in to MIDOX'}</h1>
       <p class="sub">${up ? 'Store your documents and work files online and open them from any device.' : 'Use your work account to reach your documents and files.'}</p>
       <div class="auth-alert error" id="authAlert" hidden></div>
       <form id="authForm" novalidate>
@@ -5907,11 +5958,11 @@ function authCardHTML() {
       </form>
       ${googleOn() ? `<div class="or">or</div>
       <div class="sso"><button type="button" class="btn sso-btn g-btn" id="gFallback" data-auth="google"><span class="g-mark">${GOOGLE_G}</span><span class="g-txt">${up ? 'Sign up with Google' : 'Continue with Google'}</span></button></div>` : ''}
-      ${CFG.allowSignups === false && !up ? '<p class="auth-switch">Need an account? Ask your DocBox administrator.</p>' : `<p class="auth-switch">${up ? 'Already have an account?' : 'New to DocBox?'} <button type="button" class="txt-btn" data-auth="${up ? 'to-signin' : 'to-signup'}">${up ? 'Sign in' : 'Create an account'}</button></p>`}`;
+      ${CFG.allowSignups === false && !up ? '<p class="auth-switch">Need an account? Ask your MIDOX administrator.</p>' : `<p class="auth-switch">${up ? 'Already have an account?' : 'New to MIDOX?'} <button type="button" class="txt-btn" data-auth="${up ? 'to-signin' : 'to-signup'}">${up ? 'Sign in' : 'Create an account'}</button></p>`}`;
 }
 function authView() {
   return `<section class="auth-form">
-    <span class="auth-brand">${LOGO()}<span>DocBox<small>Documents and files, online</small></span></span>
+    <span class="auth-brand">${WORDMARK('auth-wm')}<small>Documents and files, online</small></span>
     <div class="auth-card">${authCardHTML()}</div>
   </section>
   ${authShowcase()}`;
@@ -6061,8 +6112,8 @@ function otpFlow() {
 /* ---------- Password reset ---------- */
 function forgotFlow() {
   modal({
-    title: 'Forgot your password?', sub: 'DocBox does not send emails, so passwords are reset by your administrator.',
-    body: `<p style="color:var(--ink2);line-height:1.6">Ask your DocBox administrator to set a new password for your account. They can do it from the Supabase dashboard in under a minute. Then sign in with the new password and change it in Settings.</p>`,
+    title: 'Forgot your password?', sub: 'MIDOX does not send emails, so passwords are reset by your administrator.',
+    body: `<p style="color:var(--ink2);line-height:1.6">Ask your MIDOX administrator to set a new password for your account. They can do it from the Supabase dashboard in under a minute. Then sign in with the new password and change it in Settings.</p>`,
     foot: `<button class="btn btn-primary" data-close>OK</button>`
   });
 }
@@ -6142,7 +6193,7 @@ async function loadLibrary(greet) {
   catch (e) {
     console.error(e);
     const missing = /relation .* does not exist|schema cache|could not find the table/i.test(String(e && e.message));
-    $('#view').innerHTML = empty({ kind: 'search', title: 'Unable to load your library', text: missing ? 'The DocBox tables were not found. Run setup.sql in the Supabase SQL Editor, then try again.' : esc(friendly(e) || 'The DocBox database did not respond.'), actions: `<button class="btn btn-primary" data-act="retry-load">${ico('restore')}Try again</button><button class="btn" data-act="sign-out">${ico('logout')}Log out</button>` });
+    $('#view').innerHTML = empty({ kind: 'search', title: 'Unable to load your library', text: missing ? 'The MIDOX tables were not found. Run setup.sql in the Supabase SQL Editor, then try again.' : esc(friendly(e) || 'The MIDOX database did not respond.'), actions: `<button class="btn btn-primary" data-act="retry-load">${ico('restore')}Try again</button><button class="btn" data-act="sign-out">${ico('logout')}Log out</button>` });
     observeReveal($('#view'), true);
     loadingLib = false; return;
   }
@@ -6155,7 +6206,8 @@ async function loadLibrary(greet) {
    Boot
    ========================================================= */
 $('.brand').insertAdjacentHTML('afterbegin', LOGO());
-$('#splashLogo').innerHTML = LOGO('splash-mark');
+$('#splashLogo').innerHTML = WORDMARK('splash-wm');
+$('#brandName').innerHTML = WORDMARK('brand-wm');
 try { $('#favicon').href = 'data:image/svg+xml,' + encodeURIComponent(LOGO('m', true).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')); } catch (e) { /* noop */ }
 mqReduce.addEventListener && mqReduce.addEventListener('change', () => { bg.start(); cursor.sync(); });
 applyMotionPrefs(); bg.start(); updateBell();
@@ -6169,7 +6221,7 @@ route = parseHash();
   if (err || /access_token|error=/.test(location.hash)) history.replaceState(null, '', location.pathname + '#/home');
   try { if (localStorage.getItem('docbox.ephemeral') && !sessionStorage.getItem('docbox.alive')) { localStorage.removeItem('docbox.ephemeral'); await sb.auth.signOut({ scope: 'local' }); } } catch (x) { /* noop */ }
   sb.auth.onAuthStateChange((ev, s) => { setTimeout(() => onAuth(ev, s), 0); });
-  setTimeout(() => { if (document.body.classList.contains('booting')) { setupError = 'DocBox could not reach Supabase. Check the Project URL and your connection.'; lock(); } }, 15000);
+  setTimeout(() => { if (document.body.classList.contains('booting')) { setupError = 'MIDOX could not reach Supabase. Check the Project URL and your connection.'; lock(); } }, 15000);
 })();
 })();
 </script>
