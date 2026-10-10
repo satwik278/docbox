@@ -1600,7 +1600,7 @@ img,video,iframe{max-width:100%}
 .auth-wm{width:150px}
 .auth-brand small{margin-top:0}
 .fl-mono .wm-dot{animation:wmPulse 2.4s 1s ease-in-out infinite}
-@keyframes wmRise{from{opacity:0;transform:translateY(55%);filter:blur(6px)}}
+@keyframes wmRise{from{opacity:0;transform:translateY(55%) scale(.97)}}
 @keyframes wmX{from{opacity:0;transform:rotate(-180deg) scale(.4)}}
 @keyframes wmDrop{0%{opacity:0;transform:translateY(-360%)}55%{opacity:1;transform:translateY(0) scale(1.22,.78)}75%{transform:translateY(-38%)}90%{transform:translateY(0) scale(1.06,.94)}100%{transform:none}}
 @keyframes wmPulse{0%,100%{transform:none}50%{transform:scale(1.18)}}
@@ -1647,6 +1647,108 @@ img,video,iframe{max-width:100%}
 @keyframes stFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes stFloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @keyframes stBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+body.intro-on #view *,body.intro-on #view *::before,body.intro-on #view *::after{animation-play-state:paused!important}
+/* ---------- barrel opening ---------- */
+.brl-hit{cursor:pointer;outline:none}
+.brl-lid{transform-box:fill-box;transform-origin:3% 85%;transition:transform .55s cubic-bezier(.34,1.35,.5,1),filter .3s}
+.brl-hit:hover .brl-lid,.brl-hit:focus-visible .brl-lid{transform:translateY(-6px) rotate(-2deg);filter:drop-shadow(0 6px 6px rgba(16,24,40,.18))}
+.brl.open .brl-hit .brl-lid{transform:translate(-8px,-30px) rotate(-16deg);filter:drop-shadow(0 14px 12px rgba(16,24,40,.22))}
+.brl-hit:focus-visible .bd{filter:brightness(1.06)}
+.brl-tip{animation:tipIn .5s 1.6s var(--ease) both,tipBob 2.4s 2.1s ease-in-out infinite}
+@keyframes tipIn{from{opacity:0;transform:translateY(6px)}}
+@keyframes tipBob{50%{transform:translateY(-3px)}}
+.brl-tip .t-tap{display:none}
+@media (hover:none){.brl-tip .t-tap{display:inline}.brl-tip .t-click{display:none}}
+body.bx-lock{overflow:hidden}
+html.bx-gutter{scrollbar-gutter:stable}
+.bx{position:fixed;inset:0;z-index:180;outline:none;-webkit-tap-highlight-color:transparent}
+.bx-bg{position:absolute;inset:0;background:rgba(244,246,250,.8);backdrop-filter:blur(12px) saturate(1.15);-webkit-backdrop-filter:blur(12px) saturate(1.15);opacity:0;transition:opacity .5s .12s}
+.bx.in .bx-bg{opacity:1}
+.bx.sealing .bx-bg{opacity:0;transition:opacity .42s}
+.bx-ghost{position:fixed;z-index:1;pointer-events:none;overflow:visible;transition:opacity .35s}
+.bx-ghost *{animation:none!important}
+.bx-ghost .brl-hit{transform-box:fill-box;transform-origin:50% 100%}
+.bx-ghost .callouts,.bx-ghost .readout,.bx-ghost .ruler,.bx-ghost .hs-layer{transition:opacity .35s;opacity:0}
+.bx-ghost.gone{opacity:0;transition-duration:.5s}
+.bx.sealing .bx-ghost .callouts,.bx.sealing .bx-ghost .readout,.bx.sealing .bx-ghost .ruler,.bx.sealing .bx-ghost .hs-layer{opacity:1}
+.bx-ghost.no-tr,.bx-ghost.no-tr *{transition:none!important}
+.bx.picking .bx-ghost{opacity:0}
+.bx-fx{position:fixed;left:0;top:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
+.bx-scroll{position:absolute;inset:0;z-index:3;overflow:auto;padding:76px 28px 48px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.bx-spray{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.bx-drop{position:absolute;left:0;top:0;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 36% 30%,var(--hl) 0 15%,var(--c) 17% 60%,var(--sh) 100%);will-change:transform,opacity}
+.bx-head{max-width:1000px;margin:0 auto 22px;padding:0 44px;text-align:center;opacity:0;transform:translateY(-8px);transition:opacity .5s .45s,transform .5s .45s var(--ease)}
+.bx.in .bx-head{opacity:1;transform:none}
+.bx.closing .bx-head,.bx.picking .bx-head{opacity:0;transition-delay:0s;transition-duration:.25s}
+.bx-head h2{font-family:"Space Grotesk",Inter,sans-serif;font-size:26px;letter-spacing:-.6px;margin:0 0 6px;color:var(--ink)}
+.bx-head p{margin:0;color:var(--muted);font-size:14.5px}
+.bx-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,262px));justify-content:center;gap:18px}
+.bx-card{all:unset;box-sizing:border-box;display:block;min-width:0;cursor:pointer;position:relative;transform-origin:50% 50%;border-radius:18px}
+.bx-float{position:relative;display:block;overflow:hidden;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:0 18px 40px -18px rgba(16,24,40,.28),0 2px 6px rgba(16,24,40,.05);transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+.bx.landed .bx-float{animation:bxFloat 5.6s ease-in-out infinite;animation-delay:calc(var(--i) * -.9s)}
+.bx.closing .bx-float,.bx.picking .bx-float{animation:none}
+@keyframes bxFloat{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@media (hover:hover){.bx-card:hover .bx-float{transform:translateY(-4px) scale(1.02);border-color:var(--c);box-shadow:0 26px 50px -20px color-mix(in srgb,var(--c) 55%,transparent),0 2px 6px rgba(16,24,40,.06)}.bx-card:hover .sec-ico{transform:rotate(-6deg) scale(1.05)}.bx-card:hover .bx-go svg{transform:translateX(3px)}}
+.bx-card:active .bx-float{transform:scale(.985)}
+.bx-card:focus-visible .bx-float{outline:2px solid var(--c);outline-offset:2px;border-color:var(--c)}
+.bx-goo{position:absolute;inset:-1px;background:radial-gradient(ellipse 30% 22% at 30% 24%,color-mix(in srgb,var(--c) 40%,#fff),transparent 100%),linear-gradient(165deg,color-mix(in srgb,var(--c) 82%,#fff),var(--c) 55%,color-mix(in srgb,var(--c) 80%,#0B1220));opacity:0;pointer-events:none;z-index:2}
+.bx-in{position:relative;display:flex;flex-direction:column;gap:8px;padding:16px 16px 14px;text-align:left;min-width:0}
+.bx-in::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--c);opacity:.85}
+.bx-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bx-top .sec-ico{width:40px;height:40px;border-radius:11px;flex:none}
+.bx-n{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
+.bx-n b{font-family:"Space Grotesk",Inter,sans-serif;font-size:26px;letter-spacing:-.8px;color:var(--ink)}
+.bx-n small{font-size:11.5px;color:var(--muted);margin-top:3px}
+.bx-name{font-weight:650;font-size:15.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bx-desc{font-size:12.5px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em;line-height:1.35}
+.bx-bar{height:6px;border-radius:6px;background:var(--soft);overflow:hidden}
+.bx-bar i{display:block;height:100%;border-radius:6px;background:var(--c);transform-origin:left;transform:scaleX(0);transition:transform .9s .1s var(--ease)}
+.bx.landed .bx-bar i,.bx.still .bx-bar i{transform:none}
+.bx-share{display:flex;justify-content:space-between;align-items:baseline;font-size:11.5px;color:var(--muted);margin-bottom:-3px}
+.bx-share b{font-weight:650;color:var(--ink2)}
+.bx-meta{display:flex;flex-wrap:nowrap;overflow:hidden;gap:0 8px;font-size:11.5px;color:var(--muted);min-height:1.4em}
+.bx-meta span{white-space:nowrap}
+.bx-meta span+span::before{content:"";display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.5;margin-right:8px;vertical-align:middle}
+.bx-go{display:inline-flex;align-items:center;gap:2px;font-size:12.5px;font-weight:600;color:var(--c);margin-top:2px}
+.bx-go svg{width:14px;height:14px;transition:transform .25s}
+.bx-card.picked .bx-float{border-color:var(--c)}
+.bx-x{position:fixed;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:var(--sh-2);opacity:0;transform:scale(.6) rotate(-90deg);transition:opacity .3s .4s,transform .5s .4s cubic-bezier(.34,1.5,.5,1),background .2s,color .2s}
+.bx.in .bx-x{opacity:1;transform:none}
+.bx.closing .bx-x,.bx.picking .bx-x{opacity:0;transform:scale(.6) rotate(90deg);transition-delay:0s}
+.bx-x svg{width:20px;height:20px;transition:transform .3s var(--ease)}
+@media (hover:hover){.bx-x:hover{background:var(--ink);color:#fff}.bx-x:hover svg{transform:rotate(90deg)}}
+.bx-x:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.bx-empty{max-width:360px;margin:6px auto 0;padding:24px 22px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 40px -20px rgba(16,24,40,.25);opacity:0;transform:translateY(8px);transition:opacity .4s .45s,transform .45s .45s var(--ease)}
+.bx.in .bx-empty{transform:none}
+.bx-empty-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#EEF2FF;color:var(--blue);margin-bottom:6px}
+.bx-empty-ico .ico{width:22px;height:22px}
+.bx-empty b{font-size:15.5px;color:var(--ink);font-weight:650}
+.bx-empty p{margin:0 0 10px;font-size:13px;color:var(--muted);line-height:1.45}
+.bx-empty-act{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.bx-empty-act .btn{height:36px;padding:0 14px;font-size:13px}
+.bx.in .bx-empty{opacity:1}
+.bx.closing .bx-empty{opacity:0;transition-delay:0s}
+.bx.picking .bx-card.chosen .bx-float{transform:scale(1.04);border-color:var(--c);box-shadow:0 30px 60px -24px color-mix(in srgb,var(--c) 60%,transparent)}
+.bx.picking .bx-bg{opacity:0;transition:opacity .35s .05s}
+.bx.still .bx-bg,.bx.still .bx-head,.bx.still .bx-x,.bx.still .bx-empty{transition:none}
+@media (max-width:760px){
+  .bx-scroll{padding:70px 14px max(28px,env(safe-area-inset-bottom))}
+  .bx-head{margin-bottom:16px}
+  .bx-head h2{font-size:21px}
+  .bx-head p{font-size:13.5px}
+  .bx-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .bx-in{padding:12px 12px 11px;gap:6px}
+  .bx-top .sec-ico{width:34px;height:34px;border-radius:10px}
+  .bx-n b{font-size:21px}
+  .bx-name{font-size:14px}
+  .bx-desc{font-size:12px}
+  .bx-meta span:nth-child(n+3){display:none}
+  .bx-share span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bx-x{width:40px;height:40px}
+}
+@media (max-height:500px) and (orientation:landscape){.bx-scroll{padding-top:58px}.bx-head{margin-bottom:12px}.bx-head h2{font-size:19px}.bx-grid{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
+@media (max-width:340px){.bx-grid{grid-template-columns:minmax(0,1fr)}}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
@@ -1880,7 +1982,8 @@ function WORDMARK(cls = '') {
   return `<svg class="wm ${cls}" viewBox="40 -740 4040 770" role="img" aria-label="MIDOX"><g class="wm-letters">${WM_L.map((d, i) => `<path class="wm-ink wm-l" style="--i:${i}" d="${d}"/>`).join('')}</g><g class="wm-xo"><g class="wm-xc"><path class="wm-x" d="${WM_X}"/></g></g><g class="wm-do"><g class="wm-dc"><path class="wm-dot" d="${WM_DOT}"/></g></g></svg>`;
 }
 /* intro shown while the library opens after signing in */
-let activeIntro = null, introPlayed = false;
+let activeIntro = null, introPlayed = false, introAfter = [];
+const afterIntro = fn => { if (activeIntro) introAfter.push(fn); else fn(); };
 const markSignIn = () => { try { sessionStorage.setItem('midox.signin', '1'); } catch (e) { /* noop */ } };
 function playIntro({ min = 3000, sub = '' } = {}) {
   if (activeIntro) return activeIntro;
@@ -1890,11 +1993,16 @@ function playIntro({ min = 3000, sub = '' } = {}) {
   el.style.setProperty('--dur', min + 'ms');
   el.innerHTML = `<div class="in-glow"></div><div class="in-core">${WORDMARK('intro-wm')}<div class="in-track"><i></i></div><p class="in-cap">${sub || 'Documents and files, online'}</p></div>`;
   el.classList.remove('out'); el.hidden = false;
+  document.body.classList.add('intro-on');
   const t0 = performance.now();
   const me = {
+    // resolves once the logo has finished drawing, so heavy work does not stutter it
+    settle() { const left = Math.min(1150, min - 300) - (performance.now() - t0); return left > 0 ? wait(left) : Promise.resolve(); },
     async done() {
       const left = min - (performance.now() - t0); if (left > 0) await wait(left);
       el.classList.add('out'); if (activeIntro === me) activeIntro = null;
+      document.body.classList.remove('intro-on');
+      const q = introAfter; introAfter = []; requestAnimationFrame(() => q.forEach(fn => bxSafe(fn)));
       setTimeout(() => { if (!activeIntro) { el.hidden = true; el.innerHTML = ''; } }, 480);
     }
   };
@@ -2584,6 +2692,7 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries =
   });
 }, { threshold: .1, rootMargin: '0px 0px -30px 0px' }) : null;
 function observeReveal(root, instant) {
+  if (activeIntro && !instant) { afterIntro(() => { if (root.isConnected) observeReveal(root); }); return; }
   $$('.rv', root).forEach(el => {
     if (instant || !io || !effectsOn()) { el.classList.add('in'); $$('[data-count]', el).forEach(n => { n.textContent = n.dataset.final; }); }
     else io.observe(el);
@@ -2626,6 +2735,7 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
   const back = (t, b) => `M${L} ${t}L${L} ${b}A${rx} ${ry} 0 0 0 ${R} ${b}L${R} ${t}A${rx} ${ry} 0 0 0 ${L} ${t}Z`;
   const per = 64;
   const wave = (y0, amp) => { let d = `M${L - 2 * per} ${y0.toFixed(1)}`, s = 1; for (let x = L - 2 * per; x < R + 2 * per; x += per / 2) { d += `q${per / 4} ${s * amp * 2} ${per / 2} 0`; s = -s; } return d; };
+  const bact = (b) => ` data-sec="${esc(b.id || b.label)}"`;
   const act = (b) => interactive && b.id ? ` data-act="open-section" data-id="${esc(b.id)}" data-sec="${esc(b.id)}" tabindex="0" role="link" aria-label="Open ${esc(b.label)}, ${esc(b.sub)}"` : ` data-sec="${esc(b.id || b.label)}"`;
 
   // defs
@@ -2634,6 +2744,7 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
     <linearGradient id="${I('backw')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F8FB"/><stop offset="1" stop-color="#E3E8F0"/></linearGradient>
     <linearGradient id="${I('steel')}" x1="0" x2="1"><stop offset="0" stop-color="#5D6778"/><stop offset=".12" stop-color="#A9B2C1"/><stop offset=".3" stop-color="#F2F4F8"/><stop offset=".45" stop-color="#C3CAD6"/><stop offset=".7" stop-color="#9AA4B5"/><stop offset=".88" stop-color="#D5DBE4"/><stop offset="1" stop-color="#576173"/></linearGradient>
     <linearGradient id="${I('steelD')}" x1="0" x2="1"><stop offset="0" stop-color="#3F4859"/><stop offset=".3" stop-color="#A6AFBE"/><stop offset=".5" stop-color="#7D8798"/><stop offset=".85" stop-color="#9AA3B3"/><stop offset="1" stop-color="#394252"/></linearGradient>
+    <linearGradient id="${I('mouth')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1220" stop-opacity=".22"/><stop offset="1" stop-color="#0B1220" stop-opacity=".04"/></linearGradient>
     <radialGradient id="${I('lid')}" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="#FBFCFE"/><stop offset=".55" stop-color="#DCE2EA"/><stop offset="1" stop-color="#AEB8C7"/></radialGradient>
     <linearGradient id="${I('shade')}" x1="0" x2="1"><stop offset="0" stop-color="#0B1220" stop-opacity=".42"/><stop offset=".16" stop-color="#0B1220" stop-opacity=".08"/><stop offset=".3" stop-color="#fff" stop-opacity=".22"/><stop offset=".44" stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#0B1220" stop-opacity=".1"/><stop offset="1" stop-color="#0B1220" stop-opacity=".45"/></linearGradient>
     <linearGradient id="${I('spec')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".25" stop-color="#fff" stop-opacity=".85"/><stop offset=".8" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
@@ -2665,7 +2776,7 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
   // liquid
   let liquid = '';
   if (fillH > 0) {
-    geo.forEach((b, i) => { liquid += `<path class="bd" d="${band(b.y1, b.y2 + (i === 0 ? 0 : .6))}" fill="url(#${I('g' + i)})"${act(b)}/>`; });
+    geo.forEach((b, i) => { liquid += `<path class="bd" d="${band(b.y1, b.y2 + (i === 0 ? 0 : .6))}" fill="url(#${I('g' + i)})"${bact(b)}/>`; });
     geo.slice(1).forEach(b => { liquid += `<path d="M${L} ${b.y2.toFixed(1)}A${rx} ${ry} 0 0 0 ${R} ${b.y2.toFixed(1)}" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2" pointer-events="none"/>`; });
     liquid += `<rect x="${L}" y="${levelY.toFixed(1)}" width="${rx * 2}" height="${(fillH + ry).toFixed(1)}" fill="url(#${I('shade')})" pointer-events="none"/>`;
     liquid += `<ellipse cx="${cx}" cy="${levelY.toFixed(1)}" rx="${rx}" ry="${ry}" fill="${mix(topC, '#ffffff', .42)}" pointer-events="none"/>`;
@@ -2717,7 +2828,9 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
       <path d="M${rx0 + 14} ${levelY.toFixed(1)}H${L - 6}" stroke="${topC}" stroke-width="1.2" stroke-dasharray="3 4"/>` : ''}
     </g>
   </g>
+  <g class="brl-hit"${interactive ? ` data-act="barrel-open" tabindex="0" role="button" aria-label="Open the barrel to see your sections"` : ''}>
   <path d="${back(topY, botY)}" fill="url(#${I('backw')})"/>
+  <ellipse cx="${cx}" cy="${topY}" rx="${rx}" ry="${ry}" fill="url(#${I('mouth')})" pointer-events="none"/>
   <ellipse cx="${cx}" cy="${botY}" rx="${rx}" ry="${ry}" fill="#D9E0EA"/>
   ${hoopBack(yA)}${hoopBack(yB)}
   <g clip-path="url(#${I('inner')})"><g class="liq" style="--drop:${fillH.toFixed(1)}px">${liquid}</g></g>
@@ -2731,6 +2844,10 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
     ${hoop(yA)}${hoop(yB)}
     <path d="M${L - 3} ${botY - 2}A${rx + 3} ${ry + 1} 0 0 0 ${R + 3} ${botY - 2}L${R + 3} ${botY + 9}A${rx + 3} ${ry + 1} 0 0 1 ${L - 3} ${botY + 9}Z" fill="url(#${I('steelD')})"/>
     <path d="M${L - 3} ${botY - 2}A${rx + 3} ${ry + 1} 0 0 0 ${R + 3} ${botY - 2}" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>
+    <ellipse cx="${cx}" cy="${topY}" rx="${rx + 1}" ry="${ry + .5}" fill="none" stroke="url(#${I('steel')})" stroke-width="4"/>
+    <path d="M${L + 2} ${topY + 1.5}A${rx - 1} ${ry - 1} 0 0 0 ${R - 2} ${topY + 1.5}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1"/>
+  </g>
+  <g class="brl-lid">
     <path d="M${L - 5} ${topY}A${rx + 5} ${ry + 3} 0 0 0 ${R + 5} ${topY}L${R + 5} ${topY + 8}A${rx + 5} ${ry + 3} 0 0 1 ${L - 5} ${topY + 8}Z" fill="url(#${I('steelD')})"/>
     <ellipse cx="${cx}" cy="${topY}" rx="${rx + 5}" ry="${ry + 3}" fill="url(#${I('steel')})"/>
     <ellipse cx="${cx}" cy="${topY + 1}" rx="${rx - 5}" ry="${ry - 3}" fill="url(#${I('lid')})"/>
@@ -2740,6 +2857,8 @@ function barrelSVG({ fill, bands, big, small, k = 'hb', interactive = true }) {
     <path d="M${cx + 50} ${topY + 5}v3a8 3 0 0 0 16 0v-3z" fill="#8E98A9"/><ellipse cx="${cx + 58}" cy="${topY + 5}" rx="8" ry="3" fill="#E8ECF2" stroke="#9AA4B4" stroke-width=".8"/>
     <text transform="translate(${cx} ${topY + 6}) scale(1 .34)" text-anchor="middle" font-family="Space Grotesk,Inter,sans-serif" font-size="24" font-weight="700" fill="#A3ADBC" letter-spacing="1">MIDOX</text>
   </g>
+  </g>
+  ${interactive && !barrelTried() ? `<g class="brl-tip" pointer-events="none"><rect x="${cx - 50}" y="24" width="100" height="24" rx="12" fill="#0B1220" fill-opacity=".88"/><path d="M${cx - 5} 47.5l5 5 5-5z" fill="#0B1220" fill-opacity=".88"/><text x="${cx}" y="40" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff"><tspan class="t-click">Click to open</tspan><tspan class="t-tap">Tap to open</tspan></text></g>` : ''}
   <g class="callouts">${callouts}</g>
   <g class="readout" pointer-events="none">
     <text x="${R + 48}" y="66" font-family="Space Grotesk,Inter,sans-serif" font-size="40" font-weight="700" fill="#1F2937" letter-spacing="-1.5">${esc(big)}</text>
@@ -2777,6 +2896,284 @@ function mountBarrelFocus(svgHost) {
 function mountHero() {
   const hero = $('#hero'), wrap = $('#barrelWrap'); if (!hero || !wrap) return;
   mountTilt(hero, '#barrelWrap'); mountBarrelFocus(wrap);
+}
+
+/* ---------- barrel: the lid pops, the colours splash out and land as section cards ---------- */
+const barrelTried = () => { try { return localStorage.getItem('midox.barrel') === '1'; } catch (e) { return false; } };
+let barrelOv = null;
+const BX_NS = 'http://www.w3.org/2000/svg';
+const barrelSvgEl = () => $('#barrelWrap .brl');
+const bxEaseIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const bxInv = (f, y) => { let lo = 0, hi = 1; for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (f(m) < y) lo = m; else hi = m; } return (lo + hi) / 2; };
+const bxSafe = fn => { try { fn(); } catch (e) { /* noop */ } };
+// where the barrel is on screen right now (null when it is not visible)
+function barrelGeom() {
+  const svg = barrelSvgEl(); if (!svg || !svg.getScreenCTM) return null;
+  const r = svg.getBoundingClientRect(), m = svg.getScreenCTM();
+  if (!m || r.width < 60 || r.bottom < 60 || r.top > innerHeight - 60) return null;
+  const k = r.width / 600;
+  return { svg, rect: r, k, rx: 116 * k, mouth: { x: m.a * 290 + m.c * 92 + m.e, y: m.b * 290 + m.d * 92 + m.f } };
+}
+function bxGhost(geo) {
+  // a crisp copy of the barrel that sits above the blurred backdrop (own ids: hidden clip paths would clip everything)
+  const tpl = document.createElement('template');
+  tpl.innerHTML = geo.svg.outerHTML.replace(/(id="|url\(#)hb-/g, '$1hbx-');
+  const g = tpl.content.firstElementChild;
+  g.classList.remove('open', 'focus'); g.classList.add('bx-ghost'); g.removeAttribute('aria-label'); g.setAttribute('aria-hidden', 'true');
+  g.style.visibility = '';
+  $$('[tabindex]', g).forEach(n => n.removeAttribute('tabindex')); $$('.brl-tip', g).forEach(n => n.remove());
+  bxPlace(g, geo.rect);
+  return g;
+}
+const bxPlace = (g, r) => Object.assign(g.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+const bxLiq = g => g ? g.querySelector('g[clip-path] > .liq') : null;
+const bxDrop = el => parseFloat(el && el.style.getPropertyValue('--drop')) || 0;
+// the arc a stream follows: up out of the barrel, over, and down into its card
+function bxPath(a, b) {
+  const dx = b.x - a.x, H = Math.min(190, 70 + Math.abs(dx) * .22 + Math.abs(b.y - a.y) * .1);
+  const top = Math.max(14, Math.min(a.y, b.y) - H);
+  return `M${a.x.toFixed(1)} ${a.y.toFixed(1)}C${(a.x + dx * .06).toFixed(1)} ${top.toFixed(1)} ${(b.x - dx * .14).toFixed(1)} ${top.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+}
+// one glossy, tapered ribbon of liquid that travels along a path (head thick, tail thin, a light streak on top)
+function bxStream(fx, d, col, W, { delay = 0, dur = 1000, ease = bxEaseIO }) {
+  const g = document.createElementNS(BX_NS, 'g'); fx.appendChild(g);
+  const dark = mix(col, '#0B1220', .24), light = mix(col, '#ffffff', .62);
+  const mk = (stroke, w, off = 0) => {
+    const p = document.createElementNS(BX_NS, 'path');
+    p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke); p.setAttribute('stroke-width', w.toFixed(1));
+    p.setAttribute('stroke-linecap', 'round'); p.setAttribute('stroke-linejoin', 'round');
+    if (off) p.setAttribute('transform', `translate(${off.toFixed(1)} ${off.toFixed(1)})`);
+    g.appendChild(p); return p;
+  };
+  const tailS = mk(dark, W * .55), headS = mk(dark, W), tailB = mk(col, W * .42, -W * .07), headB = mk(col, W * .8, -W * .1), hl = mk(light, W * .2, -W * .26), hl2 = mk(light, W * .12, -W * .14);
+  const L = headS.getTotalLength() || 1;
+  const Dh = Math.min(150, L * .32), Dt = Math.min(420, L * .85), end = L + Dt + 12;
+  const segs = [[tailS, Dt, 0], [tailB, Dt, 0], [headS, Dh, 0], [headB, Dh, 0], [hl, Dh * .45, 7], [hl2, Dt * .35, Dh * .9]];
+  const N = 22, anims = segs.map(([p, D, lag]) => {
+    p.style.strokeDasharray = `${D.toFixed(1)} ${(L + Dt + 600).toFixed(1)}`;
+    const fr = Array.from({ length: N + 1 }, (_, i) => ({ offset: i / N, strokeDashoffset: (D + lag - ease(i / N) * end).toFixed(1) + 'px' }));
+    return p.animate(fr, { duration: dur, delay, easing: 'linear', fill: 'both' });
+  });
+  return { g, anims, L, land: delay + dur * bxInv(ease, L / end), end: delay + dur };
+}
+// glossy droplets that fly on a gravity arc and fade
+function bxSpray(host, at, cols, n, { spread = [-150, -30], speed = [260, 520], size = [6, 13], delay = 0, life = 760 } = {}) {
+  const anims = [];
+  for (let i = 0; i < n; i++) {
+    const col = cols[i % cols.length], s = size[0] + Math.random() * (size[1] - size[0]);
+    const a = (spread[0] + Math.random() * (spread[1] - spread[0])) * Math.PI / 180, v = speed[0] + Math.random() * (speed[1] - speed[0]);
+    const vx = Math.cos(a) * v, vy = Math.sin(a) * v, G = 1500, T = life / 1000 * (.75 + Math.random() * .4);
+    const el = document.createElement('i'); el.className = 'bx-drop';
+    el.style.cssText = `width:${s.toFixed(1)}px;height:${(s * 1.18).toFixed(1)}px;--c:${col};--hl:${mix(col, '#ffffff', .7)};--sh:${mix(col, '#0B1220', .25)}`;
+    host.appendChild(el);
+    const fr = Array.from({ length: 11 }, (_, k) => {
+      const t = T * k / 10, x = at.x + vx * t - s / 2, y = at.y + vy * t + G * t * t / 2 - s / 2, ang = Math.atan2(vy + G * t, vx) * 180 / Math.PI + 90;
+      return { offset: k / 10, transform: `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${ang.toFixed(0)}deg) scale(${k === 10 ? .35 : 1})`, opacity: k === 0 ? 0 : k > 7 ? (10 - k) / 3 : 1 };
+    });
+    const an = el.animate(fr, { duration: T * 1000, delay: delay + i * 14, easing: 'linear', fill: 'both' });
+    an.onfinish = () => el.remove(); anims.push(an);
+  }
+  return anims;
+}
+function barrelCardHTML(b, i, total, sp, pick) {
+  const s = secById(b.id), mm = MODE[sp]; if (!s) return '';
+  const items = modeDeep(s.id, sp), sub = kids(s.id).length, bytes = items.reduce((a, d) => a + (d.size || 0), 0);
+  const last = items.reduce((a, d) => Math.max(a, +new Date(d.updatedAt || 0) || 0), 0);
+  const pct = Math.max(1, Math.round(b.v / total * 100));
+  return `<button type="button" class="bx-card${pick === s.id ? ' picked' : ''}" data-id="${esc(s.id)}" data-c="${esc(b.c)}" style="${secVars(s)};--i:${i}" aria-label="Open ${esc(s.name)}, ${plural(items.length, mm.one, mm.many)}">
+    <span class="bx-float"><span class="bx-goo" aria-hidden="true"></span><span class="bx-in">
+      <span class="bx-top"><span class="sec-ico">${ico(s.icon)}</span><span class="bx-n"><b>${items.length}</b><small>${items.length === 1 ? mm.short : mm.shorts}</small></span></span>
+      <span class="bx-name">${esc(s.name)}</span>
+      <span class="bx-desc">${esc(s.description || 'No description yet.')}</span>
+      <span class="bx-share"><span>Share of barrel</span><b>${pct}%</b></span>
+      <span class="bx-bar" aria-hidden="true"><i style="width:${pct}%"></i></span>
+      <span class="bx-meta">${sub ? `<span>${plural(sub, 'module')}</span>` : ''}${bytes ? `<span>${fmtSize(bytes)}</span>` : ''}${last ? `<span>${ago(last)}</span>` : ''}</span>
+      <span class="bx-go" aria-hidden="true">Open ${ico('chevR')}</span>
+    </span></span></button>`;
+}
+function openBarrel(pick) {
+  if (barrelOv || activeIntro) return;
+  try { localStorage.setItem('midox.barrel', '1'); } catch (e) { /* noop */ }
+  $$('#barrelWrap .brl-tip').forEach(n => n.remove());
+  const sp = currentSpace(), mm = MODE[sp], bands = heroData().bands, total = bands.reduce((a, b) => a + b.v, 0) || 1;
+  const wrap = $('#barrelWrap');
+  if (wrap) { wrap.style.transition = 'none'; wrap.style.transform = ''; $$('.hs-layer', wrap).forEach(l => { l.style.transition = 'none'; l.style.transform = ''; }); void wrap.offsetWidth; }
+  const fx = effectsOn(), geo = fx ? barrelGeom() : null;
+  const ov = document.createElement('div');
+  ov.className = 'bx' + (fx ? '' : ' still');
+  ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-labelledby', 'bxTitle');
+  ov.innerHTML = `<div class="bx-bg" aria-hidden="true"></div>
+    <div class="bx-scroll"><div class="bx-head"><h2 id="bxTitle">Inside your library</h2><p>${bands.length ? `${plural(bands.length, 'section')} holding ${plural(total, mm.one, mm.many)}. Pick one to open it.` : 'Nothing here yet.'}</p></div>
+    ${bands.length ? `<div class="bx-grid">${bands.map((b, i) => barrelCardHTML(b, i, total, sp, pick)).join('')}</div>`
+      : `<div class="bx-empty"><span class="bx-empty-ico" aria-hidden="true">${ico(mm.icon)}</span><b>No ${mm.many} yet</b><p>Upload your first ${mm.one} and it will show up here, sorted by section.</p><div class="bx-empty-act"><button type="button" class="btn btn-primary" data-bx="upload">${ico('upload')}Upload ${mm.one}</button><button type="button" class="btn" data-bx="section">${ico('plus')}Add section</button></div></div>`}</div>
+    <div class="bx-spray" aria-hidden="true"></div>
+    <button type="button" class="bx-x" aria-label="Close" title="Close (Esc)">${ico('x')}</button>`;
+  const sbw = innerWidth - document.documentElement.clientWidth;
+  document.body.classList.add('bx-lock'); if (sbw > 0) document.documentElement.classList.add('bx-gutter');
+  document.body.appendChild(ov);
+  ov.tabIndex = -1; ov.focus({ preventScroll: true });
+  const st = barrelOv = { ov, back: document.activeElement, busy: true, anims: [], timers: [], ghost: null, fxEl: null, bands };
+  st.onResize = () => { if (st.busy) bxLand(st); };
+  addEventListener('resize', st.onResize);
+
+  ov.addEventListener('click', e => {
+    const a = e.target.closest('[data-bx]');
+    if (a) { const k = a.dataset.bx; killBarrel(); if (k === 'section') sectionModal(); else if (sp === 'files') pickFiles({}); else uploadModal({}); return; }
+    const c = e.target.closest('.bx-card');
+    if (c) { pickBarrelCard(c); return; }
+    if (e.target.closest('.bx-x') || !e.target.closest('.bx-card,.bx-head,.bx-empty')) closeBarrel();
+  });
+  ov.addEventListener('keydown', e => {
+    e.stopPropagation();
+    if (e.key === 'Escape') { e.preventDefault(); closeBarrel(); return; }
+    if (e.key === 'Tab') {
+      const f = $$('button,a[href]', ov), first = f[0], lastEl = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); first.focus(); }
+    }
+  });
+  if (!fx) { requestAnimationFrame(() => { ov.classList.add('in'); bxLand(st); }); return; }
+
+  // 1. the lid pops off the barrel
+  let mouth = { x: innerWidth / 2, y: innerHeight + 30 }, rx = 90;
+  if (geo) {
+    const g = st.ghost = bxGhost(geo); ov.insertBefore(g, ov.children[1]);
+    geo.svg.style.visibility = 'hidden'; mouth = geo.mouth; rx = geo.rx;
+    requestAnimationFrame(() => requestAnimationFrame(() => g.classList.add('open')));
+    const hit = g.querySelector('.brl-hit');
+    if (hit) st.anims.push(hit.animate([{ transform: 'none' }, { transform: 'scale(1.03,.95)', offset: .25 }, { transform: 'scale(.985,1.03)', offset: .55 }, { transform: 'none' }], { duration: 560, easing: 'ease-out' }));
+  }
+  requestAnimationFrame(() => ov.classList.add('in'));
+  const cols = bands.length ? bands.map(b => b.c) : ['#98A2B3'];
+  // 2. a crown of colour bursts out, with spray
+  const fxEl = st.fxEl = document.createElementNS(BX_NS, 'svg');
+  fxEl.setAttribute('class', 'bx-fx'); fxEl.setAttribute('aria-hidden', 'true');
+  fxEl.setAttribute('viewBox', `0 0 ${innerWidth} ${innerHeight}`); fxEl.setAttribute('preserveAspectRatio', 'none');
+  ov.insertBefore(fxEl, ov.querySelector('.bx-scroll'));
+  const spray = ov.querySelector('.bx-spray');
+  if (geo) {
+    st.anims.push(...bxSpray(spray, { x: mouth.x, y: mouth.y - rx * .1 }, cols, Math.min(16, 7 + cols.length * 2), { delay: 280, speed: [300, 560], size: [5, 12] }));
+  }
+  // 3. one stream per section flows to its card, and the card blooms where it lands
+  const cards = $$('.bx-card', ov), W = Math.max(9, Math.min(18, rx * .14));
+  let lastEnd = 700;
+  cards.forEach((card, i) => {
+    const r = card.getBoundingClientRect(), to = { x: r.left + r.width / 2, y: r.top + r.height / 2 }, col = card.dataset.c || cols[i % cols.length];
+    const onScreen = to.y < innerHeight - 30 && i < 12;
+    let landAt = 380 + i * 90;
+    if (onScreen) {
+      const from = { x: mouth.x + (i - (cards.length - 1) / 2) * Math.min(14, rx * .5 / Math.max(1, cards.length)), y: mouth.y - 2 };
+      const d = bxPath(from, to), len = Math.hypot(to.x - from.x, to.y - from.y);
+      const s = bxStream(fxEl, d, col, W, { delay: 360 + i * 95, dur: Math.max(900, Math.min(1500, 760 + len * .5)) });
+      st.anims.push(...s.anims); landAt = s.land - 40; lastEnd = Math.max(lastEnd, s.end);
+    }
+    const d0 = W * 1.5, sx = d0 / r.width, sy = d0 / r.height, opts = { delay: landAt, fill: 'both' };
+    const fl = card.querySelector('.bx-float'), goo = card.querySelector('.bx-goo'), inn = card.querySelector('.bx-in');
+    st.anims.push(
+      card.animate([{ transform: `scale(${sx.toFixed(4)},${sy.toFixed(4)})`, opacity: 0 }, { opacity: 1, offset: .06 }, { transform: 'scale(1.035)', offset: .58 }, { transform: 'scale(.992)', offset: .8 }, { transform: 'none', opacity: 1 }], { ...opts, duration: 600, easing: 'cubic-bezier(.3,.75,.35,1)' }),
+      fl.animate([{ borderRadius: '50%' }, { borderRadius: '38%', offset: .14 }, { borderRadius: '26px', offset: .4 }, { borderRadius: '18px' }], { ...opts, duration: 600, easing: 'ease-out' }),
+      goo.animate([{ opacity: 1 }, { opacity: .92, offset: .3 }, { opacity: 0, offset: .72 }, { opacity: 0 }], { ...opts, duration: 600, easing: 'ease-out' }),
+      inn.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { delay: landAt + 300, duration: 360, easing: 'ease-out', fill: 'both' })
+    );
+    if (onScreen) st.timers.push(setTimeout(() => { if (barrelOv === st && st.busy) st.anims.push(...bxSpray(spray, { x: to.x, y: r.top + Math.min(30, r.height * .2) }, [col], 5, { spread: [-165, -15], speed: [180, 340], size: [4, 9], life: 600 })); }, landAt + 60));
+    lastEnd = Math.max(lastEnd, landAt + 680);
+  });
+  // the barrel drains while it pours
+  const liq = bxLiq(st.ghost);
+  if (liq) st.anims.push(liq.animate([{ transform: 'none' }, { transform: `translateY(${(bxDrop(liq) * .55).toFixed(1)}px)` }], { delay: 340, duration: Math.max(600, lastEnd - 500), easing: 'ease-in-out', fill: 'both' }));
+  const allDone = st.anims.filter(a => a.effect && a.effect.target && a.effect.target.classList && a.effect.target.classList.contains('bx-in')).map(a => a.finished);
+  if (allDone.length) Promise.all(allDone).then(() => bxLand(st), () => {});
+  st.timers.push(setTimeout(() => bxLand(st), allDone.length ? lastEnd + 900 : 1300));
+}
+// everything settles: cards are static, effects are removed, the real barrel shows again behind the backdrop
+function bxLand(st) {
+  if (!st || barrelOv !== st || !st.busy) return;
+  st.busy = false;
+  st.timers.forEach(clearTimeout); st.timers = [];
+  st.anims.forEach(a => bxSafe(() => a.cancel())); st.anims = [];
+  if (st.fxEl) { st.fxEl.remove(); st.fxEl = null; }
+  $$('.bx-drop', st.ov).forEach(d => d.remove());
+  if (st.ghost) { st.ghost.classList.add('gone'); }
+  const svg = barrelSvgEl(); if (svg) svg.style.visibility = '';
+  st.ov.classList.add('landed');
+  const f = st.ov.querySelector('.bx-card.picked') || st.ov.querySelector('.bx-card') || st.ov.querySelector('.bx-x');
+  if (f) f.focus({ preventScroll: true });
+}
+function pickBarrelCard(card) {
+  const st = barrelOv; if (!st || st.closing) return;
+  bxLand(st); st.closing = true;
+  const id = card.dataset.id, { ov } = st;
+  const go2 = () => { killBarrel(); go('/section/' + encodeURIComponent(id)); };
+  if (!effectsOn()) { go2(); return; }
+  ov.classList.add('picking'); card.classList.add('chosen');
+  // the other cards turn back into drops and fall away
+  $$('.bx-card', ov).forEach((c, i) => {
+    if (c === card) return;
+    const r = c.getBoundingClientRect(), d0 = 22, sx = d0 / r.width, sy = d0 / r.height;
+    c.querySelector('.bx-in').animate([{ opacity: 1 }, { opacity: 0, offset: .3 }, { opacity: 0 }], { duration: 420, fill: 'both' });
+    c.querySelector('.bx-goo').animate([{ opacity: 0 }, { opacity: 1, offset: .35 }, { opacity: 1 }], { duration: 420, fill: 'both' });
+    c.querySelector('.bx-float').animate([{ borderRadius: '18px' }, { borderRadius: '50%', offset: .4 }, { borderRadius: '50%' }], { duration: 420, fill: 'both' });
+    c.animate([{ transform: 'none', opacity: 1 }, { transform: `scale(${sx.toFixed(4)},${sy.toFixed(4)})`, opacity: 1, offset: .5 }, { transform: `translateY(160px) scale(${sx.toFixed(4)},${(sy * 1.3).toFixed(4)})`, opacity: 0 }], { duration: 460, delay: i * 18, easing: 'cubic-bezier(.5,0,.75,.4)', fill: 'both' });
+  });
+  setTimeout(go2, 380);
+}
+function closeBarrel() {
+  const st = barrelOv; if (!st || st.closing) return;
+  bxLand(st); st.closing = true;
+  const { ov } = st;
+  if (!effectsOn()) { killBarrel(); return; }
+  ov.classList.add('closing');
+  const geo = barrelGeom(), cards = $$('.bx-card', ov);
+  let mouth = { x: innerWidth / 2, y: innerHeight + 40 }, rx = 90, g = st.ghost;
+  if (geo) {
+    mouth = geo.mouth; rx = geo.rx;
+    if (!g) { g = st.ghost = bxGhost(geo); ov.insertBefore(g, ov.children[1]); }
+    bxPlace(g, geo.rect);
+    g.classList.add('no-tr', 'open'); void g.getBoundingClientRect(); g.classList.remove('no-tr', 'gone');
+    geo.svg.style.visibility = 'hidden';
+    const liq = bxLiq(g);
+    if (liq) liq.style.transform = `translateY(${(bxDrop(liq) * .55).toFixed(1)}px)`;
+  } else if (g) { g.remove(); g = st.ghost = null; }
+  const fxEl = st.fxEl = document.createElementNS(BX_NS, 'svg');
+  fxEl.setAttribute('class', 'bx-fx'); fxEl.setAttribute('aria-hidden', 'true'); fxEl.setAttribute('viewBox', `0 0 ${innerWidth} ${innerHeight}`); fxEl.setAttribute('preserveAspectRatio', 'none');
+  ov.insertBefore(fxEl, ov.querySelector('.bx-scroll'));
+  const W = Math.max(8, Math.min(16, rx * .12)), waits = [];
+  let lastEnd = 300;
+  // each card shrinks into a drop of its colour, then flows back into the barrel
+  cards.forEach((card, i) => {
+    const r = card.getBoundingClientRect(), to = { x: r.left + r.width / 2, y: r.top + r.height / 2 }, col = card.dataset.c || '#2E5BFF';
+    const vis = r.bottom > 0 && r.top < innerHeight, d0 = W * 1.5, sx = d0 / r.width, sy = d0 / r.height, delay = i * 45;
+    const o = { delay, duration: 300, easing: 'cubic-bezier(.5,0,.6,1)', fill: 'both' };
+    card.querySelector('.bx-in').animate([{ opacity: 1 }, { opacity: 0, offset: .4 }, { opacity: 0 }], o);
+    card.querySelector('.bx-goo').animate([{ opacity: 0 }, { opacity: 1, offset: .45 }, { opacity: 1 }], o);
+    card.querySelector('.bx-float').animate([{ borderRadius: '18px' }, { borderRadius: '50%', offset: .5 }, { borderRadius: '50%' }], o);
+    waits.push(card.animate([{ transform: 'none', opacity: 1 }, { transform: `scale(${sx.toFixed(4)},${sy.toFixed(4)})`, opacity: 1, offset: .92 }, { transform: `scale(${sx.toFixed(4)},${sy.toFixed(4)})`, opacity: 0 }], o).finished);
+    if (vis && i < 12 && geo) {
+      const s = bxStream(fxEl, bxPath(to, { x: mouth.x, y: mouth.y + 4 }), col, W, { delay: delay + 270, dur: Math.max(560, Math.min(820, 460 + Math.hypot(to.x - mouth.x, to.y - mouth.y) * .3)), ease: t => t * t * (3 - 2 * t) });
+      lastEnd = Math.max(lastEnd, s.end); waits.push(...s.anims.map(a => a.finished));
+    } else lastEnd = Math.max(lastEnd, delay + 320);
+  });
+  const liq = bxLiq(g);
+  if (liq) liq.animate([{ transform: liq.style.transform }, { transform: 'none' }], { delay: 360, duration: Math.max(400, lastEnd - 300), easing: 'ease-in-out', fill: 'both' });
+  // the lid drops back on once every stream is back inside
+  let sealed = false;
+  const seal = () => {
+    if (sealed || barrelOv !== st) return; sealed = true;
+    if (g) g.classList.remove('open'); ov.classList.add('sealing');
+    setTimeout(() => { if (barrelOv === st) killBarrel(); }, g ? 460 : 200);
+  };
+  Promise.all(waits).then(seal, seal);
+  setTimeout(seal, lastEnd + 900);
+}
+function killBarrel() {
+  const st = barrelOv; if (!st) return;
+  barrelOv = null;
+  st.timers.forEach(clearTimeout); st.anims.forEach(a => bxSafe(() => a.cancel()));
+  removeEventListener('resize', st.onResize);
+  st.ov.remove(); document.body.classList.remove('bx-lock'); document.documentElement.classList.remove('bx-gutter');
+  const svg = barrelSvgEl(); if (svg) { svg.classList.remove('open'); svg.style.visibility = ''; }
+  const wrap = $('#barrelWrap'); if (wrap) { wrap.style.transition = ''; $$('.hs-layer', wrap).forEach(l => l.style.transition = ''); }
+  if (st.back && st.back.isConnected && st.back.focus) st.back.focus({ preventScroll: true });
 }
 
 function emptyArt(kind = 'doc') {
@@ -3848,6 +4245,7 @@ addEventListener('hashchange', () => {
   if (suppressHash) { suppressHash = false; return; }
   if (editorDirty && !confirm('You have unsaved changes. Leave without saving?')) { suppressHash = true; location.hash = lastHash; return; }
   if (route.name === 'write') { try { sessionStorage.removeItem('docbox.draft.md'); sessionStorage.removeItem('docbox.draft.txt'); } catch (e) { /* noop */ } }
+  if (barrelOv) killBarrel();
   editorDirty = false; lastHash = location.hash; navCount++; render(true);
 });
 addEventListener('beforeunload', e => { if (editorDirty) { e.preventDefault(); e.returnValue = ''; } });
@@ -5703,6 +6101,7 @@ const ACTS = {
   'file-move': el => moveModal(el.dataset.id),
   'fp-wrap': el => { const on = el.getAttribute('aria-pressed') !== 'true'; el.setAttribute('aria-pressed', on); const c = el.closest('.fprev, .paper').querySelector('.fp-code'); if (c) c.classList.toggle('wrap', on); },
   'fp-copy': el => { const s = el.closest('.fprev, .paper').querySelector('.fp-src'); if (!s) return; const t = s.textContent; (navigator.clipboard && window.isSecureContext ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('Copied to clipboard'), () => toast('Copy is not available here. Select the text instead.', { type: 'info' })); },
+  'barrel-open': (el, e) => { const t = e && e.target && e.target.closest && e.target.closest('.bd[data-sec]'); openBarrel(t ? t.dataset.sec : null); },
   'open-section': el => go('/section/' + encodeURIComponent(el.dataset.id)),
   'add-section': () => sectionModal(),
   'upload': el => { if (!el.dataset.section && el.closest('.topbar') && currentSpace() === 'files') pickFiles({ sectionId: currentSectionId() }); else uploadModal({ sectionId: el.dataset.section || currentSectionId() }); },
@@ -5781,6 +6180,7 @@ document.addEventListener('keydown', e => {
   if (mod && e.key.toLowerCase() === 's' && route.name === 'edit') { e.preventDefault(); saveEditor(); return; }
   if (mod && e.key.toLowerCase() === 's' && route.name === 'write') { e.preventDefault(); if (!$('#modalRoot').children.length) writeSaveModal(); return; }
   if (mod && e.key.toLowerCase() === 'k') { e.preventDefault(); focusSearch(); return; }
+  if (e.key === 'Escape' && barrelOv) { closeBarrel(); return; }
   if (e.key === 'Escape') {
     const ovs = $$('#modalRoot > .overlay:not(.out)'), top = ovs[ovs.length - 1];
     if (top && !top.contains(e.target) && !(openMenuEl && openMenuEl.contains(e.target)) && !e.target.closest('.pick-list')) { const c = top.querySelector('[data-close]'); if (c) { c.click(); return; } }
@@ -6281,6 +6681,7 @@ async function loadLibrary(greet) {
     observeReveal($('#view'), true);
     loadingLib = false; finishIntro(); return;
   }
+  if (activeIntro) await activeIntro.settle();
   loadingLib = false;
   render(true);
   finishIntro().then(() => { if (greet && session) toast(`Signed in as ${session.email}`); });
