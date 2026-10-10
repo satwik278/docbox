@@ -627,10 +627,9 @@ body.locked .sidebar,body.locked .shell,body.locked .scrim{display:none}
 .g-btn{position:relative;width:100%;height:48px;justify-content:center;gap:12px;padding:0 18px;border-radius:12px;font-weight:600;font-size:14.5px;background:#fff;border:1px solid #DADCE0;color:#1F2937;box-shadow:0 1px 2px rgba(16,24,40,.05);transition:background .2s,border-color .2s,box-shadow .25s,transform .15s var(--ease)}
 .g-btn:hover{background:#F8FAFF;border-color:#C6CFE0;box-shadow:0 8px 20px -12px rgba(46,91,255,.45)}
 .g-btn:active{transform:scale(.985)}
-.g-btn .g-mark{width:22px;height:22px;display:grid;place-items:center;transition:transform .35s var(--ease)}
+.g-btn .g-mark{width:22px;height:22px;display:grid;place-items:center}
 .g-btn .g-mark svg{width:20px;height:20px}
-.g-btn:hover .g-mark{transform:rotate(-12deg) scale(1.08)}
-.g-btn.loading .g-mark{animation:spin 1s linear infinite}
+
 .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
 .pw{position:relative}
 .pw .input{padding-right:44px}
@@ -1568,34 +1567,80 @@ img,video,iframe{max-width:100%}
 /* MIDOX brand */
 .wm{display:block;height:auto;overflow:visible}
 .wm .wm-ink{fill:#0B0B0F}.wm .wm-x,.wm .wm-dot{fill:#2F5FE8}
-.wm .wm-ink,.wm .wm-x,.wm .wm-dot,.brand-mark .wm-dot,.fl-mono .wm-dot{transform-box:fill-box}
-.wm .wm-x{transform-origin:50% 50%;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
-.wm .wm-dot,.brand-mark .wm-dot,.fl-mono .wm-dot{transform-origin:50% 100%}
+.wm path,.wm g,.brand-mark .wm-dot,.fl-mono .wm-dot{transform-box:fill-box;transform-origin:50% 50%}
+.wm .wm-do,.wm .wm-dc,.wm .wm-dot,.brand-mark .wm-dot,.fl-mono .wm-dot{transform-origin:50% 100%}
+/* hover: smooth, eased both ways (transitions, no restarting keyframes) */
+.wm .wm-xo,.wm .wm-do{transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.wm .wm-l{transition:transform .55s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i) * 25ms)}
+.brand:hover .wm-xo,.auth-brand:hover .wm-xo{transform:rotate(180deg)}
+.brand:hover .wm-do,.auth-brand:hover .wm-do{transform:translateY(-18%) scale(1.12)}
+.brand:hover .wm-l,.auth-brand:hover .wm-l{transform:translateY(-4%)}
+.brand-mark .wm-dot{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.brand:hover .brand-mark .wm-dot{transform:translateY(-22%) scale(1.15)}
+/* click: the X spins once, the dot bounces, the mark gives a soft press */
+.brand,.auth-brand{-webkit-tap-highlight-color:transparent}
+.wm{transition:transform .25s cubic-bezier(.22,1,.36,1)}
+.brand:active .wm,.auth-brand:active .wm{transform:scale(.96)}
+.wm.wm-pop .wm-xc{animation:wmSpin .9s cubic-bezier(.22,1,.36,1)}
+.wm.wm-pop .wm-dc{animation:wmBounce .9s cubic-bezier(.3,1.4,.5,1)}
+.brand-mark.wm-pop{animation:monoPress .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes wmSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes wmBounce{0%{transform:none}25%{transform:translateY(-120%) scale(.9,1.1)}50%{transform:translateY(0) scale(1.25,.75)}70%{transform:translateY(-30%)}85%{transform:translateY(0) scale(1.06,.94)}100%{transform:none}}
+@keyframes monoPress{40%{transform:scale(.88)}100%{transform:none}}
+/* entrance (runs once, then hands over to the hover transitions) */
+.brand-wm .wm-l,.auth-wm .wm-l{animation:wmRise .7s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(.1s + var(--i) * 70ms)}
+.brand-wm .wm-x,.auth-wm .wm-x{animation:wmX .9s .38s cubic-bezier(.2,1.25,.3,1) backwards}
+.brand-wm .wm-dot,.auth-wm .wm-dot{animation:wmDrop .9s .7s cubic-bezier(.3,1.4,.5,1) backwards}
 .brand{display:flex;align-items:center;gap:11px;padding:6px 10px 18px}
 .brand .brand-mark{display:none}
 .brand-name{display:block;line-height:0}
 .brand-wm{width:116px}
 .brand-sub{margin-top:7px}
-.brand:hover .wm-x,.auth-brand:hover .wm-x{transform:rotate(-14deg) scale(1.06)}
-.brand:hover .wm-dot,.auth-brand:hover .wm-dot,.brand:hover .brand-mark .wm-dot{animation:wmHop .75s var(--ease)}
-.brand-wm .wm-x{animation:wmX .8s .2s cubic-bezier(.2,1.3,.3,1) both}
-.brand-wm .wm-dot{animation:wmDrop .9s .5s cubic-bezier(.3,1.5,.5,1) both}
-.auth-brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:7px}
+.auth-brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:7px;cursor:pointer}
 .auth-wm{width:150px}
-.auth-wm .wm-x{animation:wmX .8s .25s cubic-bezier(.2,1.3,.3,1) both}
-.auth-wm .wm-dot{animation:wmDrop .9s .55s cubic-bezier(.3,1.5,.5,1) both}
 .auth-brand small{margin-top:0}
 .splash-wm{width:210px}
-.splash-wm .wm-ink{animation:wmIn .7s var(--ease) both}
-.splash-wm .wm-x{animation:wmX .8s .15s cubic-bezier(.2,1.3,.3,1) both}
-.splash-wm .wm-dot{animation:wmDrop .9s .45s cubic-bezier(.3,1.5,.5,1) both,wmPulse 1.4s 1.4s ease-in-out infinite}
+.splash-wm .wm-l{animation:wmRise .7s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(var(--i) * 60ms)}
+.splash-wm .wm-x{animation:wmX .8s .25s cubic-bezier(.2,1.25,.3,1) backwards}
+.splash-wm .wm-dot{animation:wmDrop .9s .5s cubic-bezier(.3,1.4,.5,1) backwards}
 .fl-mono .wm-dot{animation:wmPulse 2.4s 1s ease-in-out infinite}
-@keyframes wmIn{from{opacity:0;transform:translateY(18%)}}
-@keyframes wmX{from{opacity:0;transform:translateX(35%) rotate(90deg) scale(.55)}}
-@keyframes wmDrop{0%{opacity:0;transform:translateY(-320%)}55%{opacity:1;transform:translateY(0) scale(1.22,.78)}75%{transform:translateY(-38%)}90%{transform:translateY(0) scale(1.06,.94)}100%{transform:none}}
-@keyframes wmHop{0%,100%{transform:none}30%{transform:translateY(-70%) scale(.92,1.1)}55%{transform:translateY(0) scale(1.2,.8)}75%{transform:translateY(-18%)}}
+@keyframes wmRise{from{opacity:0;transform:translateY(55%);filter:blur(6px)}}
+@keyframes wmX{from{opacity:0;transform:rotate(-180deg) scale(.4)}}
+@keyframes wmDrop{0%{opacity:0;transform:translateY(-360%)}55%{opacity:1;transform:translateY(0) scale(1.22,.78)}75%{transform:translateY(-38%)}90%{transform:translateY(0) scale(1.06,.94)}100%{transform:none}}
 @keyframes wmPulse{0%,100%{transform:none}50%{transform:scale(1.18)}}
 @media (max-width:1100px) and (min-width:761px){.brand{padding:4px 0 16px;justify-content:center}.brand .brand-mark{display:block}}
+
+/* intro screen after signing in */
+.intro{position:fixed;inset:0;z-index:400;display:grid;place-items:center;background:var(--bg);overflow:hidden;transition:opacity .6s cubic-bezier(.22,1,.36,1),visibility .6s}
+.intro.out{opacity:0;visibility:hidden}
+.intro.out .in-core{transform:scale(1.04);filter:blur(4px)}
+.in-grid{position:absolute;inset:0;background-image:radial-gradient(circle,#D5DBE5 1px,transparent 1.4px);background-size:24px 24px;-webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000,transparent);mask-image:radial-gradient(closest-side at 50% 50%,#000,transparent);opacity:.7;animation:inFade 1.2s ease both}
+.in-glow{position:absolute;width:760px;height:760px;left:50%;top:50%;margin:-380px 0 0 -380px;border-radius:50%;background:radial-gradient(closest-side,rgba(47,95,232,.16),rgba(115,87,255,.06) 55%,transparent 72%);animation:inGlow 3.2s ease-in-out infinite}
+.in-core{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .6s cubic-bezier(.22,1,.36,1),filter .6s}
+.intro-wm{width:min(340px,72vw)}
+.intro-wm .wm-l{animation:wmRise .85s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(.15s + var(--i) * 110ms)}
+.intro-wm .wm-x{animation:wmX 1.1s .62s cubic-bezier(.2,1.2,.3,1) backwards}
+.intro-wm .wm-dot{animation:wmDrop 1s 1.05s cubic-bezier(.3,1.4,.5,1) backwards,wmPulse 1.8s 2.3s ease-in-out infinite}
+.in-line{width:min(340px,72vw);height:2px;margin-top:22px;border-radius:2px;background:linear-gradient(90deg,transparent,#2F5FE8 30%,#7357FF 70%,transparent);transform:scaleX(0);animation:inLine 1s 1.3s cubic-bezier(.22,1,.36,1) forwards}
+.in-cap{margin-top:18px;font:600 15px var(--f-body);color:var(--ink2);letter-spacing:.32em;text-transform:uppercase;animation:inTrack 1.4s 1.45s cubic-bezier(.22,1,.36,1) both}
+.in-cap span{display:inline-block;opacity:0;transform:translateY(10px);filter:blur(4px);animation:inWord .7s cubic-bezier(.22,1,.36,1) forwards;animation-delay:calc(1.5s + var(--i) * 120ms)}
+.in-sub{margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:13px;color:var(--muted);opacity:0;animation:inFade .6s 2.05s ease forwards}
+.in-bar{width:140px;height:3px;border-radius:3px;background:#E3E8F0;overflow:hidden}
+.in-bar i{display:block;height:100%;width:100%;border-radius:3px;background:linear-gradient(90deg,#2F5FE8,#7357FF);transform-origin:left;transform:scaleX(0);animation:inBar var(--dur,3s) cubic-bezier(.4,0,.2,1) forwards}
+@keyframes inLine{0%{transform:scaleX(0);opacity:1}70%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:.35}}
+@keyframes inTrack{from{letter-spacing:.6em}to{letter-spacing:.32em}}
+@keyframes inWord{to{opacity:1;transform:none;filter:none}}
+@keyframes inFade{from{opacity:0}to{opacity:1}}
+@keyframes inBar{0%{transform:scaleX(0)}60%{transform:scaleX(.7)}100%{transform:scaleX(1)}}
+@keyframes inGlow{50%{transform:scale(1.08);opacity:.8}}
+@media (max-width:520px){.in-cap{font-size:12px;letter-spacing:.24em}@keyframes inTrack{from{letter-spacing:.45em}to{letter-spacing:.24em}}}
+
+/* Google button: calm, no spinning logo */
+.g-btn .g-mark{transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.g-btn:hover .g-mark{transform:scale(1.08)}
+.g-btn.loading{color:#1F2937!important;pointer-events:none}
+.g-btn.loading::after{display:none}
+.g-btn .g-spin{width:16px;height:16px;border-radius:50%;border:2px solid #DCE3F5;border-top-color:#2F5FE8;animation:spin .8s linear infinite;margin-left:2px}
 
 /* login diagram centre: floating storage layers */
 .flow .st-slab{transition:transform .4s var(--ease)}
@@ -1825,7 +1870,7 @@ const ICONS = {
   mechanical: '<path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" />',
   computer: '<path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z" /><path d="M20.054 15.987H3.946" />',
 };
-const WM_INK = 'M70 0V-700H233L523 -224H437L719 -700H882L884 0H702L700 -423H731L520 -69H432L215 -423H253V0ZM1042 0V-700H1240V0ZM1399 0V-700H1730Q1846 -700 1934 -657Q2022 -614 2072 -536Q2121 -458 2121 -350Q2121 -243 2072 -164Q2022 -86 1934 -43Q1846 0 1730 0ZM1597 -158H1722Q1782 -158 1826 -180Q1871 -203 1896 -246Q1921 -290 1921 -350Q1921 -411 1896 -454Q1871 -497 1826 -520Q1782 -542 1722 -542H1597ZM2596 14Q2512 14 2441 -13Q2370 -40 2318 -90Q2265 -139 2236 -205Q2207 -271 2207 -350Q2207 -429 2236 -495Q2265 -561 2318 -610Q2370 -660 2441 -687Q2512 -714 2596 -714Q2681 -714 2752 -687Q2822 -660 2874 -610Q2926 -561 2956 -495Q2985 -429 2985 -350Q2985 -271 2956 -204Q2926 -138 2874 -89Q2822 -40 2752 -13Q2681 14 2596 14ZM2596 -150Q2636 -150 2670 -164Q2705 -178 2730 -204Q2756 -231 2770 -268Q2785 -305 2785 -350Q2785 -396 2770 -432Q2756 -469 2730 -496Q2705 -522 2670 -536Q2636 -550 2596 -550Q2556 -550 2522 -536Q2487 -522 2462 -496Q2436 -469 2422 -432Q2407 -396 2407 -350Q2407 -305 2422 -268Q2436 -231 2462 -204Q2487 -178 2522 -164Q2556 -150 2596 -150Z';
+const WM_L = ['M70 0V-700H233L523 -224H437L719 -700H882L884 0H702L700 -423H731L520 -69H432L215 -423H253V0Z', 'M1042 0V-700H1240V0Z', 'M1399 0V-700H1730Q1846 -700 1934 -657Q2022 -614 2072 -536Q2121 -458 2121 -350Q2121 -243 2072 -164Q2022 -86 1934 -43Q1846 0 1730 0ZM1597 -158H1722Q1782 -158 1826 -180Q1871 -203 1896 -246Q1921 -290 1921 -350Q1921 -411 1896 -454Q1871 -497 1826 -520Q1782 -542 1722 -542H1597Z', 'M2596 14Q2512 14 2441 -13Q2370 -40 2318 -90Q2265 -139 2236 -205Q2207 -271 2207 -350Q2207 -429 2236 -495Q2265 -561 2318 -610Q2370 -660 2441 -687Q2512 -714 2596 -714Q2681 -714 2752 -687Q2822 -660 2874 -610Q2926 -561 2956 -495Q2985 -429 2985 -350Q2985 -271 2956 -204Q2926 -138 2874 -89Q2822 -40 2752 -13Q2681 14 2596 14ZM2596 -150Q2636 -150 2670 -164Q2705 -178 2730 -204Q2756 -231 2770 -268Q2785 -305 2785 -350Q2785 -396 2770 -432Q2756 -469 2730 -496Q2705 -522 2670 -536Q2636 -550 2596 -550Q2556 -550 2522 -536Q2487 -522 2462 -496Q2436 -469 2422 -432Q2407 -396 2407 -350Q2407 -305 2422 -268Q2436 -231 2462 -204Q2487 -178 2522 -164Q2556 -150 2596 -150Z'];
 const WM_X = 'M3035 0 3341 -425 3340 -284 3046 -700H3269L3457 -429L3362 -428L3547 -700H3761L3467 -292V-432L3777 0H3549L3358 -285H3449L3261 0Z';
 const WM_DOT = 'M3933 9Q3885 9 3852 -23Q3819 -55 3819 -104Q3819 -155 3852 -186Q3885 -216 3933 -216Q3981 -216 4014 -186Q4047 -155 4047 -104Q4047 -55 4014 -23Q3981 9 3933 9Z';
 const WM_M = 'M70 0V-700H233L523 -224H437L719 -700H882L884 0H702L700 -423H731L520 -69H432L215 -423H253V0Z';
@@ -1836,8 +1881,36 @@ function LOGO(cls = 'brand-mark', still = false) {
   return `<svg class="${cls}${still ? '' : ' mono-anim'}" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10.5" fill="#0B0B0F"/>${MONO_INNER()}</svg>`;
 }
 function WORDMARK(cls = '') {
-  return `<svg class="wm ${cls}" viewBox="40 -740 4040 770" role="img" aria-label="MIDOX"><path class="wm-ink" d="${WM_INK}"/><path class="wm-x" d="${WM_X}"/><path class="wm-dot" d="${WM_DOT}"/></svg>`;
+  return `<svg class="wm ${cls}" viewBox="40 -740 4040 770" role="img" aria-label="MIDOX"><g class="wm-letters">${WM_L.map((d, i) => `<path class="wm-ink wm-l" style="--i:${i}" d="${d}"/>`).join('')}</g><g class="wm-xo"><g class="wm-xc"><path class="wm-x" d="${WM_X}"/></g></g><g class="wm-do"><g class="wm-dc"><path class="wm-dot" d="${WM_DOT}"/></g></g></svg>`;
 }
+/* intro shown while the library opens after signing in */
+let activeIntro = null;
+function playIntro({ min = 3000, sub = '' } = {}) {
+  if (activeIntro) return activeIntro;
+  if (!effectsOn()) min = Math.min(min, 700);
+  let el = $('#intro');
+  if (!el) { el = document.createElement('div'); el.id = 'intro'; el.className = 'intro'; el.setAttribute('role', 'status'); el.setAttribute('aria-live', 'polite'); document.body.appendChild(el); }
+  const words = ['Documents', 'and', 'files,', 'online'];
+  el.style.setProperty('--dur', min + 'ms');
+  el.innerHTML = `<div class="in-grid"></div><div class="in-glow"></div><div class="in-core">${WORDMARK('intro-wm')}<div class="in-line"></div><p class="in-cap">${words.map((w, i) => `<span style="--i:${i}">${w}</span>`).join(' ')}</p><div class="in-sub"><span class="in-bar"><i></i></span><span>${esc(sub || 'Opening your library')}</span></div></div>`;
+  el.classList.remove('out'); el.hidden = false;
+  const t0 = performance.now();
+  const me = {
+    async done() {
+      const left = min - (performance.now() - t0); if (left > 0) await wait(left);
+      el.classList.add('out'); if (activeIntro === me) activeIntro = null;
+      setTimeout(() => { if (!activeIntro) { el.hidden = true; el.innerHTML = ''; } }, 650);
+    }
+  };
+  activeIntro = me;
+  return me;
+}
+const finishIntro = () => (activeIntro ? activeIntro.done() : Promise.resolve());
+/* click on the logo: the X spins once and the dot bounces */
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('.brand, .auth-brand'); if (!b) return;
+  $$('.wm, .brand-mark', b).forEach(w => { w.classList.remove('wm-pop'); void w.getBoundingClientRect(); w.classList.add('wm-pop'); clearTimeout(w._pt); w._pt = setTimeout(() => w.classList.remove('wm-pop'), 950); });
+}, true);
 const ico = (n, cls = '') => `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ICONS.folder}</svg>`;
 const SEC_ICON_SET = [['project', 'Project'], ['code', 'Code'], ['vlsi', 'VLSI'], ['embedded', 'Embedded'], ['pcb', 'PCB design'], ['ems', 'EMS'], ['iot', 'IoT'], ['ai', 'AI'], ['web', 'Web dev'], ['robot', 'Robotics'], ['print3d', '3D printing'], ['mcad', 'MCAD'], ['electrical', 'Electrical'], ['electronics', 'Electronics'], ['mechanical', 'Mechanical'], ['computer', 'Computers']];
 const SEC_ICONS = SEC_ICON_SET.map(x => x[0]);
@@ -5913,6 +5986,7 @@ function authAlert(msg, kind = 'error') {
   el.hidden = !msg; el.className = 'auth-alert ' + kind; el.innerHTML = msg ? ico(kind === 'error' ? 'info' : 'check') + '<span>' + msg + '</span>' : '';
 }
 function lock() {
+  finishIntro();
   document.body.classList.add('locked'); document.body.classList.remove('booting');
   closeMenus(); closeResults();
   const a = $('#auth'); a.hidden = false; a.innerHTML = authView(); mountAuth();
@@ -6043,9 +6117,12 @@ async function onGoogleCredential(resp) {
   if (error) { authAlert(esc(authErr(error))); mountGoogle(); }
 }
 async function googleRedirect(btn) {
-  btn.classList.add('loading');
+  const tx = btn.querySelector('.g-txt'), was = tx ? tx.textContent : '';
+  btn.classList.add('loading'); btn.setAttribute('aria-busy', 'true');
+  if (tx) tx.textContent = 'Connecting to Google…';
+  if (!btn.querySelector('.g-spin')) btn.insertAdjacentHTML('beforeend', '<span class="g-spin" aria-hidden="true"></span>');
   const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: APP_URL, queryParams: { prompt: 'select_account' } } });
-  if (error) { btn.classList.remove('loading'); authAlert(esc(authErr(error))); }
+  if (error) { btn.classList.remove('loading'); btn.removeAttribute('aria-busy'); if (tx) tx.textContent = was; const sp = btn.querySelector('.g-spin'); if (sp) sp.remove(); authAlert(esc(authErr(error))); }
 }
 
 /* ---------- One-time code by email (works with any mailbox, including company mail on Hostinger) ---------- */
@@ -6177,6 +6254,12 @@ async function onAuth(event, s) {
   applyMotionPrefs(); cursor.sync(); bg.start();
   if (event === 'SIGNED_IN') log(`Signed in with ${PROVIDERS[session.provider] || session.provider}`, 'lock');
   saveNow();
+  let firstOpen = false;
+  try { firstOpen = !sessionStorage.getItem('midox.intro'); sessionStorage.setItem('midox.intro', '1'); } catch (e) { /* noop */ }
+  if (event === 'SIGNED_IN' || firstOpen) {
+    const first = String(state.settings.user || session.name || '').trim().split(/\s+/)[0];
+    playIntro({ min: event === 'SIGNED_IN' ? 3400 : 2600, sub: first ? `Welcome back, ${first}` : 'Opening your library' });
+  }
   await loadLibrary(event === 'SIGNED_IN');
 }
 let loadingLib = false;
@@ -6195,11 +6278,11 @@ async function loadLibrary(greet) {
     const missing = /relation .* does not exist|schema cache|could not find the table/i.test(String(e && e.message));
     $('#view').innerHTML = empty({ kind: 'search', title: 'Unable to load your library', text: missing ? 'The MIDOX tables were not found. Run setup.sql in the Supabase SQL Editor, then try again.' : esc(friendly(e) || 'The MIDOX database did not respond.'), actions: `<button class="btn btn-primary" data-act="retry-load">${ico('restore')}Try again</button><button class="btn" data-act="sign-out">${ico('logout')}Log out</button>` });
     observeReveal($('#view'), true);
-    loadingLib = false; return;
+    loadingLib = false; finishIntro(); return;
   }
   loadingLib = false;
   render(true);
-  if (greet) toast(`Signed in as ${session.email}`);
+  finishIntro().then(() => { if (greet && session) toast(`Signed in as ${session.email}`); });
 }
 
 /* =========================================================
